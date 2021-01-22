@@ -29,11 +29,11 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-left shadow animated--grow-in"
                         aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="">
+                        <a class="dropdown-item" href="{{route('data-polres')}}">
                             <i class="icon-file text-gray-400"></i>
                             Data Polres
                         </a>
-                        <a class="dropdown-item" href="">
+                        <a class="dropdown-item" href="{{route('data-biro')}}">
                             <i class="icon-file text-gray-400"></i>
                             Data Biro
                         </a>

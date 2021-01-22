@@ -30,4 +30,14 @@ class TestController extends Controller
     {
         return view('backend.report.biro');
     }
+
+    public function inputpolres()
+    {
+        return view('backend.input.polres');
+    }
+
+    public function inputbiro()
+    {
+        return view('backend.input.biro');
+    }
 }
