@@ -7,7 +7,7 @@
             <h3><b>Biro Partner</b></h3>
         </div>
         <div class="float-right col-md-1">
-            <button class="btn btn-sm icon-plus" style="background-color: #019943" onclick="bukaModal()"></button>
+            <button class="btn btn-sm" style="background-color: #019943" onclick="bukaModal()"><i style="color:white" class="icon-plus"></i></button>
         </div>
     </div>
 </center>
@@ -17,6 +17,37 @@
             <div class="card-body">
                 <img src="{{asset('/biro/logo.png')}}" style="width:100%" alt="">
             </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 py-3">
+    <div class="widget">
+        <div class="widget-header">
+            <i class="icon-bar-chart"></i>
+            <h3>Biro Partner</h3>
+        </div>
+        <div class="widget-content">
+            <table id="table" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Biro</th>
+                        <th>Alamat</th>
+                        <th style="text-align: center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Arka Trans Psikologi</td>
+                        <td>-</td>
+                        <td style="text-align: center">
+                            <a class="icon-edit"></a>
+                            <a class="icon-trash"></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

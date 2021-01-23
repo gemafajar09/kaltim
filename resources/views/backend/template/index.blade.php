@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
     <link href="{{asset('/css/font-awesome.css')}}" rel="stylesheet">
     <link href="{{asset('/css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('css/calendar.css')}}" rel="stylesheet">
     <link href="{{asset('/css/pages/dashboard.css')}}" rel="stylesheet">
 
 </head>
