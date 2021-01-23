@@ -15,10 +15,15 @@ class TestController extends Controller
     {
         return view('backend.grafik.index');
     }
+    
+    public function Polres()
+    {
+        return view('backend.biro.polres');
+    }
 
     public function Biro()
     {
-        return view('backend.biro.index');
+        return view('backend.biro.biro');
     }
 
     public function reportpolres()
