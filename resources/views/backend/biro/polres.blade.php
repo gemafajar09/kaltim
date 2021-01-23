@@ -7,19 +7,50 @@
             <h3><b>Polres</b></h3>
         </div>
         <div class="float-right col-md-1">
-            <button class="btn btn-sm icon-plus" style="background-color: #019943" onclick="bukaModal()"></button>
+            <button class="btn btn-sm" style="background-color: #019943" onclick="bukaModal()"><i style="color:white" class="icon-plus"></i></button>
         </div>
     </div>
 </center>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
+        <div class="widget">
+            <div class="widget-header">
+                <i class="icon-bar-chart"></i>
+                <h3>Data Polres</h3>
+            </div>
+            <div class="widget-content">
+                <table id="table" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Polres</th>
+                            <th>Alamat</th>
+                            <th style="text-align: center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Nama Polres</td>
+                            <td>-</td>
+                            <td style="text-align: center">
+                                <a class="icon-edit"></a>
+                                <a class="icon-trash"></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {{-- <div class="col-md-4">
         <div class="card card-outline card-info">
             <div class="card-body">
                 <h4 class="text-center">Kalimantan Timur</h4>
                 <h6>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo laudantium repellendus, eius impedit provident voluptatibus inventore? Voluptate enim nesciunt veritatis neque autem aliquam eius explicabo ad illum modi. Labore, dolorum.</h6>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 <br><br><br><br><br><br><br><br><br><br><br><br>
 
