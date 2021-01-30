@@ -482,9 +482,13 @@ class ComposerStaticInit934408349d8db2c78558104e8d251c11
     public static $classMap = array (
         'App\\BiroModel' => __DIR__ . '/../..' . '/app/BiroModel.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\DataBiroModel' => __DIR__ . '/../..' . '/app/DataBiroModel.php',
+        'App\\DataPolresModel' => __DIR__ . '/../..' . '/app/DataPolresModel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\BiroController' => __DIR__ . '/../..' . '/app/Http/Controllers/BiroController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\DataBiroController' => __DIR__ . '/../..' . '/app/Http/Controllers/DataBiroController.php',
+        'App\\Http\\Controllers\\DataPolresController' => __DIR__ . '/../..' . '/app/Http/Controllers/DataPolresController.php',
         'App\\Http\\Controllers\\PolresController' => __DIR__ . '/../..' . '/app/Http/Controllers/PolresController.php',
         'App\\Http\\Controllers\\TestController' => __DIR__ . '/../..' . '/app/Http/Controllers/TestController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
