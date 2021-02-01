@@ -15,7 +15,7 @@
                 <div style="display:none" id="success" class="alert alert-success">
                     {{session('pesan')}}
                 </div>
-                <table id="table" class="table table-striped">
+                <table id="table" class="table table-striped .table-datatable-ok">
                     <thead>
                         <tr style="font-size:10px">
                             <th>No</th>
@@ -55,7 +55,22 @@
                             <td>{{ $row->data_biro_sim_c_perpanjang }}</td>
                             <td>{{ $row->data_biro_sim_d_perpanjang }}</td>
                             <td style="text-align: center">
-                                <a onclick="edit('{{$row->data_biro_id}}','{{$row->biro_id}}','{{$row->data_biro_tgl}}','{{$row->data_biro_sim_a_baru}}','{{$row->data_biro_sim_a_perpanjang}}','{{$row->data_biro_sim_c_baru}}','{{$row->data_biro_sim_c_perpanjang}}')" class="icon-edit"></a>
+                                <a onclick="edit('{{$row->data_biro_id}}',
+                                '{{$row->cabang_nama}}',
+                                '{{$row->biro_id}}',
+                                '{{$row->data_biro_tgl}}',
+                                '{{$row->data_biro_sim_a_baru}}',
+                                '{{ $row->data_biro_sim_a_umum_baru }}',
+                                '{{ $row->data_biro_sim_b1_baru }}',
+                                '{{ $row->data_biro_sim_b2_baru }}',
+                                '{{ $row->data_biro_sim_c_baru }}',
+                                '{{ $row->data_biro_sim_d_baru }}',
+                                '{{$row->data_biro_sim_a_perpanjang}}',
+                                '{{ $row->data_biro_sim_a_umum_perpanjang }}',
+                                '{{ $row->data_biro_sim_b1_perpanjang }}',
+                                '{{ $row->data_biro_sim_b2_perpanjang }}',
+                                '{{ $row->data_biro_sim_c_perpanjang }}',
+                                '{{$row->data_biro_sim_d_perpanjang}}')" class="icon-edit"></a>
                                 
                                 <a href="{{route('data-biro-delete', encrypt($row->data_biro_id))}}" class="icon-trash"></a>
                             </td>
@@ -80,10 +95,10 @@
         </script>
     @endif
 <div class="modal" id="formModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content ">
         <div class="modal-header">
-            <h5 class="modal-title">Add Biro</h5>
+            <h5 class="modal-title">Edit Biro</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -91,33 +106,69 @@
         <form action="{{ route('data-biro-save') }}" method="post" enctype="multipart/form-data">
         @csrf
             <div class="modal-body">
-                <div class="col-md-12">
-                    <label><b>Tanggal</b></label>
-                    <input type="date" name="data_biro_tgl" id="data_biro_tgl" class="form-control">
-                    <input type="hidden" name="data_biro_id" id="data_biro_id" class="form-control">
-                </div>
-                <div class="col-md-12">
-                    
-                </div>
-                <div class="col-md-12">
-                    <label><b>SIM A Baru</b></label>
-                    <input type="number" name="data_biro_sim_a_baru" id="data_biro_sim_a_baru" class="form-control">
-                </div>
-                <div class="col-md-12">
-                    <label><b>SIM A Perpanjang</b></label>
-                    <input type="number" name="data_biro_sim_a_perpanjang" id="data_biro_sim_a_perpanjang" class="form-control">
-                </div>
-                <div class="col-md-12">
-                    <label><b>SIM C Baru</b></label>
-                    <input type="number" name="data_biro_sim_c_baru" id="data_biro_sim_c_baru" class="form-control">
-                </div>
-                <div class="col-md-12">
-                    <label><b>SIM C Perpanjang</b></label>
-                    <input type="number" name="data_biro_sim_c_perpanjang" id="data_biro_sim_c_perpanjang" class="form-control">
-                </div>
-                <div class="col-md-12">
-                    <label><b>Surat Pengantar</b></label>
-                    <input type="number" name="data_biro_surat_pengantar" id="data_biro_surat_pengantar" class="form-control">
+                <input type="hidden" name="data_biro_id" id="data_biro_id">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><b>Tanggal</b></label>
+                            <input readonly type="date" value="{{date('Y-m-d')}}" name="data_biro_tgl" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label><b>SIM A BARU</b></label>
+                            <input placeholder="0" type="number" name="data_biro_sim_a_baru" id="data_biro_sim_a_baru" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label><b>SIM A UMUM BARU</b></label>
+                            <input placeholder="0" type="number" name="data_biro_sim_a_umum_baru" id="data_biro_sim_a_umum_baru" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label><b>SIM B1 BARU</b></label>
+                            <input placeholder="0" type="number" name="data_biro_sim_b1_baru" id="data_biro_sim_b1_baru" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label><b>SIM B2 BARU</b></label>
+                            <input placeholder="0" type="number" name="data_biro_sim_b2_baru" id="data_biro_sim_b2_baru" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label><b>SIM C BARU</b></label>
+                            <input placeholder="0" type="number" name="data_biro_sim_c_baru" id="data_biro_sim_c_baru" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label><b>SIM D BARU</b></label>
+                            <input placeholder="0" type="number" name="data_biro_sim_d_baru" id="data_biro_sim_d_baru" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><b>Biro</b></label>
+                            <input type="text" readonly class="form-control" id="cabang_nama">
+                            <input type="hidden" readonly class="form-control" name="biro_id" id="biro_id">
+                        </div>
+                        <div class="form-group">
+                            <label><b>SIM A PERPANJANG</b></label>
+                            <input placeholder="0" type="number" name="data_biro_sim_a_perpanjang" id="data_biro_sim_a_perpanjang" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label><b>SIM A UMUM PERPANJANG</b></label>
+                            <input placeholder="0" type="number" name="data_biro_sim_a_umum_perpanjang" id="data_biro_sim_a_umum_perpanjang" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label><b>SIM B1 PERPANJANG</b></label>
+                            <input placeholder="0" type="number" name="data_biro_sim_b1_perpanjang" id="data_biro_sim_b1_perpanjang" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label><b>SIM B2 PERPANJANG</b></label>
+                            <input placeholder="0" type="number" name="data_biro_sim_b2_perpanjang" id="data_biro_sim_b2_perpanjang" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label><b>SIM C PERPANJANG</b></label>
+                            <input placeholder="0" type="number" name="data_biro_sim_c_perpanjang" id="data_biro_sim_c_perpanjang" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label><b>SIM D PERPANJANG</b></label>
+                            <input placeholder="0" type="number" name="data_biro_sim_d_perpanjang" id="data_biro_sim_d_perpanjang" class="form-control">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -130,15 +181,23 @@
 </div>
 
 <script>
-    function edit(data_biro_id, biro_id, data_biro_tgl,data_biro_sim_a_baru, data_biro_sim_a_perpanjang, data_biro_sim_c_baru,data_biro_sim_c_perpanjang,data_biro_surat_pengantar){
+    function edit(data_biro_id,cabang_nama, biro_id, data_biro_tgl,data_biro_sim_a_baru, data_biro_sim_a_umum_baru, data_biro_sim_b1_baru,data_biro_sim_b2_baru,data_biro_sim_c_baru,data_biro_sim_d_baru,data_biro_sim_a_perpanjang,data_biro_sim_a_umum_perpanjang,data_biro_sim_b1_perpanjang,data_biro_sim_b2_perpanjang,data_biro_sim_c_perpanjang,data_biro_sim_d_perpanjang){
         $('#data_biro_id').val(data_biro_id);
-        $('#biro_id').val(biro_id).change();
+        $('#cabang_nama').val(cabang_nama);
+        $('#biro_id').val(biro_id);
         $('#data_biro_tgl').val(data_biro_tgl);
         $('#data_biro_sim_a_baru').val(data_biro_sim_a_baru);
-        $('#data_biro_sim_a_perpanjang').val(data_biro_sim_a_perpanjang);
+        $('#data_biro_sim_a_umum_baru').val(data_biro_sim_a_umum_baru);
+        $('#data_biro_sim_b1_baru').val(data_biro_sim_b1_baru);
+        $('#data_biro_sim_b2_baru').val(data_biro_sim_b2_baru);
         $('#data_biro_sim_c_baru').val(data_biro_sim_c_baru);
+        $('#data_biro_sim_d_baru').val(data_biro_sim_d_baru);
+        $('#data_biro_sim_a_perpanjang').val(data_biro_sim_a_perpanjang);
+        $('#data_biro_sim_a_umum_perpanjang').val(data_biro_sim_a_umum_perpanjang);
+        $('#data_biro_sim_b1_perpanjang').val(data_biro_sim_b1_perpanjang);
+        $('#data_biro_sim_b2_perpanjang').val(data_biro_sim_b2_perpanjang);
         $('#data_biro_sim_c_perpanjang').val(data_biro_sim_c_perpanjang);
-        $('#data_biro_surat_pengantar').val(data_biro_surat_pengantar);
+        $('#data_biro_sim_d_perpanjang').val(data_biro_sim_d_perpanjang);
         $('#formModal').modal('show');
     }
 </script>
