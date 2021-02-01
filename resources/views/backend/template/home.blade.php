@@ -122,7 +122,7 @@
     </div>
 
     {{-- col md 12 --}}
-    <div class="col-md-12">
+    {{-- <div class="col-md-12">
         <div class="widget">
             <div class="widget-header"> <i class="icon-bookmark"></i>
                 <h3>Shortcuts Menu</h3>
@@ -163,7 +163,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 @include('backend.template.chart.chartHome')
