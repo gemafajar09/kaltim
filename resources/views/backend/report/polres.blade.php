@@ -55,6 +55,7 @@
                             <td>{{ $row->data_polres_sim_c_perpanjang }}</td>
                             <td>{{ $row->data_polres_sim_d_perpanjang }}</td>
                             <td style="text-align: center">
+                                @if( Session::get('user_level') == 1)
                                 <a onclick="edit(
                                 '{{$row->data_polres_id}}',
                                 '{{$row->polres_id}}',
@@ -74,6 +75,9 @@
                                 '{{$row->data_polres_sim_d_perpanjang}}'
                                 )" class="icon-edit"></a>
                                 <a href="{{route('data-polres-delete', encrypt($row->data_polres_id))}}" class="icon-trash"></a>
+                                @else
+                                    -
+                                @endif
                             </td>
                         </tr>
                         @endforeach
