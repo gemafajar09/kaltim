@@ -32,7 +32,6 @@
                             <th>No</th>
                             <th>Nama Polres</th>
                             <th>Alamat</th>
-                            <th>Logo</th>
                             <th style="text-align: center">Action</th>
                         </tr>
                     </thead>
@@ -40,12 +39,11 @@
                         @foreach($data as $no => $row)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-                            <td>{{ $row->polres_nama }}</td>
-                            <td>{{ $row->polres_alamat }}</td>
-                            <td><img src="{{asset('polres/'. $row->polres_foto)}}" alt="" style="width: 100px; height: 100px;"></td>
+                            <td>{{ $row->cabang_nama }}</td>
+                            <td>{!! $row->cabang_alamat !!}</td>
                             <td style="text-align: center">
-                                <a onclick="edit('{{$row->polres_id}}','{{$row->polres_nama}}','{{$row->polres_alamat}}')" class="icon-edit"></a>
-                                <a href="{{route('polres-delete', encrypt($row->polres_id))}}" class="icon-trash"></a>
+                                <a onclick="edit('{{$row->cabang_id}}','{{$row->cabang_nama}}','{{$row->cabang_alamat}}')" class="icon-edit"></a>
+                                <a href="{{route('polres-delete', encrypt($row->cabang_id))}}" class="icon-trash"></a>
                             </td>
                         </tr>
                         @endforeach
@@ -54,14 +52,6 @@
             </div>
         </div>
     </div>
-    {{-- <div class="col-md-4">
-        <div class="card card-outline card-info">
-            <div class="card-body">
-                <h4 class="text-center">Kalimantan Timur</h4>
-                <h6>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo laudantium repellendus, eius impedit provident voluptatibus inventore? Voluptate enim nesciunt veritatis neque autem aliquam eius explicabo ad illum modi. Labore, dolorum.</h6>
-            </div>
-        </div>
-    </div> --}}
 </div>
 
 <br><br><br><br><br><br><br><br><br><br><br><br>
@@ -82,16 +72,13 @@
             <div class="modal-body">
                     <div class="col-md-12">
                         <label><b>Nama</b></label>
-                        <input type="hidden" name="polres_id" id="polres_id">
-                        <input type="text" name="polres_nama" id="polres_nama" class="form-control">
+                        <input type="hidden" name="cabang_id" id="cabang_id">
+                        <input type="hidden" name="cabang_kode" id="cabang_kode" value="1">
+                        <input type="text" name="cabang_nama" id="cabang_nama" class="form-control">
                     </div>
                     <div class="col-md-12">
                         <label><b>Alamat</b></label>
-                        <textarea name="polres_alamat" id="polres_alamat" cols="30" rows="3" class="form-control"></textarea>
-                    </div>
-                    <div class="col-md-12">
-                        <label><b>File</b></label>
-                        <input type="file" name="polres_foto" id="polres_foto" class="form-control">
+                        <textarea name="cabang_alamat" id="cabang_alamat" cols="30" rows="3" class="form-control"></textarea>
                     </div>
             </div>
             <div class="modal-footer">

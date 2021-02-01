@@ -39,13 +39,13 @@ class DataPolresController extends Controller
                     'data_polres_sim_b1_baru' => $r->data_polres_sim_b1_baru,
                     'data_polres_sim_b2_baru' => $r->data_polres_sim_b2_baru,
                     'data_polres_sim_c_baru' => $r->data_polres_sim_c_baru,
-                    'data_polres_sim_d_baru' => $r->data_polres_simd1_baru,
+                    'data_polres_sim_d_baru' => $r->data_polres_sim_d_baru,
                     'data_polres_sim_a_perpanjang' => $r->data_polres_sim_a_perpanjang,
                     'data_polres_sim_a_umum_perpanjang' => $r->data_polres_sim_a_umum_perpanjang,
                     'data_polres_sim_b1_perpanjang' => $r->data_polres_sim_b1_perpanjang,
                     'data_polres_sim_b2_perpanjang' => $r->data_polres_sim_b2_perpanjang,
                     'data_polres_sim_c_perpanjang' => $r->data_polres_sim_c_perpanjang,
-                    'data_polres_sim_d_perpanjang' => $r->data_polres_simd1_perpanjang
+                    'data_polres_sim_d_perpanjang' => $r->data_polres_sim_d_perpanjang
                 ]);
                 return back()->with('pesan','Input Data Success');
             }else{
