@@ -15,7 +15,7 @@
                 <div style="display:none" id="success" class="alert alert-success">
                     {{session('pesan')}}
                 </div>
-                <table id="table" class="table table-striped .table-datatable-ok">
+                <table id="table" class="table table-striped table-responsive">
                     <thead>
                         <tr style="font-size:10px">
                             <th>No</th>
@@ -55,6 +55,7 @@
                             <td>{{ $row->data_biro_sim_c_perpanjang }}</td>
                             <td>{{ $row->data_biro_sim_d_perpanjang }}</td>
                             <td style="text-align: center">
+                                @if( Session::get('user_level') == 1)
                                 <a onclick="edit('{{$row->data_biro_id}}',
                                 '{{$row->cabang_nama}}',
                                 '{{$row->biro_id}}',
@@ -73,6 +74,9 @@
                                 '{{$row->data_biro_sim_d_perpanjang}}')" class="icon-edit"></a>
                                 
                                 <a href="{{route('data-biro-delete', encrypt($row->data_biro_id))}}" class="icon-trash"></a>
+                                @else
+                                    -
+                                @endif
                             </td>
                         </tr>
                         @endforeach
