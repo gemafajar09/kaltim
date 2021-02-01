@@ -55,7 +55,24 @@
                             <td>{{ $row->data_polres_sim_c_perpanjang }}</td>
                             <td>{{ $row->data_polres_sim_d_perpanjang }}</td>
                             <td style="text-align: center">
-                                <a onclick="edit('{{$row->data_polres_id}}','{{$row->polres_id}}','{{$row->data_polres_tgl}}','{{$row->data_polres_sim_a_baru}}','{{$row->data_polres_sim_a_perpanjang}}','{{$row->data_polres_sim_c_baru}}','{{$row->data_polres_sim_c_perpanjang}}')" class="icon-edit"></a>
+                                <a onclick="edit(
+                                '{{$row->data_polres_id}}',
+                                '{{$row->polres_id}}',
+                                '{{$row->cabang_nama}}',
+                                '{{$row->data_polres_tgl}}',
+                                '{{$row->data_polres_sim_a_baru}}',
+                                '{{$row->data_polres_sim_a_umum_baru}}',
+                                '{{$row->data_polres_sim_b1_baru}}',
+                                '{{$row->data_polres_sim_b2_baru}}',
+                                '{{$row->data_polres_sim_c_baru}}',
+                                '{{$row->data_polres_sim_d_baru}}',
+                                '{{$row->data_polres_sim_a_perpanjang}}',
+                                '{{$row->data_polres_sim_a_umum_perpanjang}}',
+                                '{{$row->data_polres_sim_b1_perpanjang}}',
+                                '{{$row->data_polres_sim_b2_perpanjang}}',
+                                '{{$row->data_polres_sim_c_perpanjang}}',
+                                '{{$row->data_polres_sim_d_perpanjang}}'
+                                )" class="icon-edit"></a>
                                 <a href="{{route('data-polres-delete', encrypt($row->data_polres_id))}}" class="icon-trash"></a>
                             </td>
                         </tr>
@@ -79,10 +96,10 @@
     </script>
 @endif
 <div class="modal" id="formModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Add polres</h5>
+            <h5 class="modal-title">Data polres</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -90,43 +107,70 @@
         <form action="{{ route('data-polres-save') }}" method="post" enctype="multipart/form-data">
         @csrf
             <div class="modal-body">
-                <div class="col-md-12">
-                    <label><b>Tanggal</b></label>
-                    <input type="date" name="data_polres_tgl" id="data_polres_tgl" class="form-control">
-                    <input type="hidden" name="data_polres_id" id="data_polres_id" class="form-control">
-                </div>
-                <div class="col-md-12">
-                    <label><b>polres</b></label>
-                    @php
-                        $polres = DB::table('tb_polres')->get();
-                    @endphp
-                    <select name="polres_id" id="polres_id" class="form-control select2">
-                        <option value="">-Pilih-</option>
-                        @foreach($polres as $no => $row)
-                        <option value="{{ $row->polres_id }}">{{ $row->polres_nama }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-12">
-                    <label><b>SIM A Baru</b></label>
-                    <input type="number" name="data_polres_sim_a_baru" id="data_polres_sim_a_baru" class="form-control">
-                </div>
-                <div class="col-md-12">
-                    <label><b>SIM A Perpanjang</b></label>
-                    <input type="number" name="data_polres_sim_a_perpanjang" id="data_polres_sim_a_perpanjang" class="form-control">
-                </div>
-                <div class="col-md-12">
-                    <label><b>SIM C Baru</b></label>
-                    <input type="number" name="data_polres_sim_c_baru" id="data_polres_sim_c_baru" class="form-control">
-                </div>
-                <div class="col-md-12">
-                    <label><b>SIM C Perpanjang</b></label>
-                    <input type="number" name="data_polres_sim_c_perpanjang" id="data_polres_sim_c_perpanjang" class="form-control">
-                </div>
-                <div class="col-md-12">
-                    <label><b>Surat Pengantar</b></label>
-                    <input type="number" name="data_polres_surat_pengantar_dari_biro" id="data_polres_surat_pengantar_dari_biro" class="form-control">
-                </div>
+                <input type="hidden" name="data_polres_id" id="data_polres_id">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><b>Tanggal</b></label>
+                                <input readonly type="date" value="{{date('Y-m-d')}}" name="data_polres_tgl" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM A BARU</b></label>
+                                <input placeholder="0" type="number" name="data_polres_sim_a_baru" id="data_polres_sim_a_baru" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM A UMUM BARU</b></label>
+                                <input placeholder="0" type="number" name="data_polres_sim_a_umum_baru" id="data_polres_sim_a_umum_baru" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM B1 BARU</b></label>
+                                <input placeholder="0" type="number" name="data_polres_sim_b1_baru" id="data_polres_sim_b1_baru" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM B2 BARU</b></label>
+                                <input placeholder="0" type="number" name="data_polres_sim_b2_baru" id="data_polres_sim_b2_baru" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM C BARU</b></label>
+                                <input placeholder="0" type="number" name="data_polres_sim_c_baru" id="data_polres_sim_c_baru" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM D BARU</b></label>
+                                <input placeholder="0" type="number" name="data_polres_sim_d_baru" id="data_polres_sim_d_baru" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><b>Polres</b></label>
+                                <input type="text" id="nama_cabang" readonly class="form-control" value="">
+                                <input type="hidden" value="" readonly class="form-control" name="polres_id" id="polres_id">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM A PERPANJANG</b></label>
+                                <input placeholder="0" type="number" name="data_polres_sim_a_perpanjang" id="data_polres_sim_a_perpanjang" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM A UMUM PERPANJANG</b></label>
+                                <input placeholder="0" type="number" name="data_polres_sim_a_umum_perpanjang" id="data_polres_sim_a_umum_perpanjang" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM B1 PERPANJANG</b></label>
+                                <input placeholder="0" type="number" name="data_polres_sim_b1_perpanjang" id="data_polres_sim_b1_perpanjang" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM B2 PERPANJANG</b></label>
+                                <input placeholder="0" type="number" name="data_polres_sim_b2_perpanjang" id="data_polres_sim_b2_perpanjang" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM C PERPANJANG</b></label>
+                                <input placeholder="0" type="number" name="data_polres_sim_c_perpanjang" id="data_polres_sim_c_perpanjang" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM D PERPANJANG</b></label>
+                                <input placeholder="0" type="number" name="data_polres_sim_d_perpanjang" id="data_polres_sim_d_perpanjang" class="form-control">
+                            </div>
+                        </div>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-sm" style="background-color: #019943">Save</button>
@@ -137,15 +181,40 @@
     </div>
 </div>
 <script>
-    function edit(data_polres_id, polres_id, data_polres_tgl,data_polres_sim_a_baru, data_polres_sim_a_perpanjang, data_polres_sim_c_baru,data_polres_sim_c_perpanjang,data_polres_surat_pengantar_dari_biro){
-        $('#data_polres_id').val(data_polres_id);
-        $('#polres_id').val(polres_id).change();
-        $('#data_polres_tgl').val(data_polres_tgl);
-        $('#data_polres_sim_a_baru').val(data_polres_sim_a_baru);
-        $('#data_polres_sim_a_perpanjang').val(data_polres_sim_a_perpanjang);
-        $('#data_polres_sim_c_baru').val(data_polres_sim_c_baru);
-        $('#data_polres_sim_c_perpanjang').val(data_polres_sim_c_perpanjang);
-        $('#data_polres_surat_pengantar_dari_biro').val(data_polres_surat_pengantar_dari_biro);
+    function edit(
+        id_data,
+        polres_id,
+        cabang_nama,
+        tgl,
+        sim_a,
+        sim_a_umum,
+        sim_b1,
+        sim_b2,
+        sim_c,
+        sim_d,
+        sim_ap,
+        sim_a_umump,
+        sim_b1p,
+        sim_b2p,
+        sim_cp,
+        sim_dp,
+    ){
+        $('#data_polres_id').val(id_data);
+        $('#nama_cabang').val(cabang_nama);
+        $('#polres_id').val(polres_id);
+        $('#data_polres_tgl').val(tgl);
+        $('#data_polres_sim_a_baru').val(sim_a);
+        $('#data_polres_sim_a_umum_baru').val(sim_a_umum);
+        $('#data_polres_sim_b1_baru').val(sim_b1);
+        $('#data_polres_sim_b2_baru').val(sim_b2);
+        $('#data_polres_sim_c_baru').val(sim_c);
+        $('#data_polres_sim_d_baru').val(sim_d);
+        $('#data_polres_sim_a_perpanjang').val(sim_ap);
+        $('#data_polres_sim_a_umum_perpanjang').val(sim_a_umump);
+        $('#data_polres_sim_b1_perpanjang').val(sim_b1p);
+        $('#data_polres_sim_b2_perpanjang').val(sim_b2p);
+        $('#data_polres_sim_c_perpanjang').val(sim_cp);
+        $('#data_polres_sim_d_perpanjang').val(sim_dp);
         $('#formModal').modal('show');
     }
 </script>
