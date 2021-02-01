@@ -34,6 +34,10 @@ class ComposerStaticInit934408349d8db2c78558104e8d251c11
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
+        'f9ee7b05fedf5c154501ccffb0018d35' => __DIR__ . '/../..' . '/app/Helpers/TanggalIndonesia.php',
+        'b261a6066eb9bcd73a89a507964b50c2' => __DIR__ . '/../..' . '/app/Helpers/Tanggal.php',
+        '4a6f746c7b675223c3ef8178da88eb7c' => __DIR__ . '/../..' . '/app/Helpers/Formatuang.php',
+        '0f0aa3e01aa4e3a01d284ebf833062c1' => __DIR__ . '/../..' . '/app/Helpers/AngkaTerbilang.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -480,7 +484,7 @@ class ComposerStaticInit934408349d8db2c78558104e8d251c11
     );
 
     public static $classMap = array (
-        'App\\BiroModel' => __DIR__ . '/../..' . '/app/BiroModel.php',
+        'App\\CabangModel' => __DIR__ . '/../..' . '/app/CabangModel.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\DataBiroModel' => __DIR__ . '/../..' . '/app/DataBiroModel.php',
         'App\\DataPolresModel' => __DIR__ . '/../..' . '/app/DataPolresModel.php',
@@ -489,10 +493,12 @@ class ComposerStaticInit934408349d8db2c78558104e8d251c11
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DataBiroController' => __DIR__ . '/../..' . '/app/Http/Controllers/DataBiroController.php',
         'App\\Http\\Controllers\\DataPolresController' => __DIR__ . '/../..' . '/app/Http/Controllers/DataPolresController.php',
+        'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
         'App\\Http\\Controllers\\PolresController' => __DIR__ . '/../..' . '/app/Http/Controllers/PolresController.php',
         'App\\Http\\Controllers\\TestController' => __DIR__ . '/../..' . '/app/Http/Controllers/TestController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
+        'App\\Http\\Middleware\\Ceklogin' => __DIR__ . '/../..' . '/app/Http/Middleware/Ceklogin.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -500,13 +506,13 @@ class ComposerStaticInit934408349d8db2c78558104e8d251c11
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
-        'App\\PolresModel' => __DIR__ . '/../..' . '/app/PolresModel.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\UserModel' => __DIR__ . '/../..' . '/app/UserModel.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/CorsService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',

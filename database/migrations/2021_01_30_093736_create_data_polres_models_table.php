@@ -18,10 +18,18 @@ class CreateDataPolresModelsTable extends Migration
             $table->integer('polres_id');
             $table->date('data_polres_tgl');
             $table->integer('data_polres_sim_a_baru')->nullable();
-            $table->integer('data_polres_sim_a_perpanjang')->nullable();
+            $table->integer('data_polres_sim_a_umum_baru')->nullable();
+            $table->integer('data_polres_sim_b1_baru')->nullable();
+            $table->integer('data_polres_sim_b2_baru')->nullable();
             $table->integer('data_polres_sim_c_baru')->nullable();
+            $table->integer('data_polres_sim_d_baru')->nullable();
+            $table->integer('data_polres_sim_a_perpanjang')->nullable();
+            $table->integer('data_polres_sim_a_umum_perpanjang')->nullable();
+            $table->integer('data_polres_sim_b1_perpanjang')->nullable();
+            $table->integer('data_polres_sim_b2_perpanjang')->nullable();
             $table->integer('data_polres_sim_c_perpanjang')->nullable();
-            $table->integer('data_polres_surat_pengantar_dari_biro')->nullable();
+            $table->integer('data_polres_sim_d_perpanjang')->nullable();
+            $table->timestamps();
         });
     }
 

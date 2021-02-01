@@ -35,10 +35,17 @@ class DataPolresController extends Controller
                     'polres_id' => $r->polres_id,
                     'data_polres_tgl' => $r->data_polres_tgl,
                     'data_polres_sim_a_baru' => $r->data_polres_sim_a_baru,
-                    'data_polres_sim_a_perpanjang' => $r->data_polres_sim_a_perpanjang,
+                    'data_polres_sim_a_umum_baru' => $r->data_polres_sim_a_umum_baru,
+                    'data_polres_sim_b1_baru' => $r->data_polres_sim_b1_baru,
+                    'data_polres_sim_b2_baru' => $r->data_polres_sim_b2_baru,
                     'data_polres_sim_c_baru' => $r->data_polres_sim_c_baru,
+                    'data_polres_sim_d_baru' => $r->data_polres_simd1_baru,
+                    'data_polres_sim_a_perpanjang' => $r->data_polres_sim_a_perpanjang,
+                    'data_polres_sim_a_umum_perpanjang' => $r->data_polres_sim_a_umum_perpanjang,
+                    'data_polres_sim_b1_perpanjang' => $r->data_polres_sim_b1_perpanjang,
+                    'data_polres_sim_b2_perpanjang' => $r->data_polres_sim_b2_perpanjang,
                     'data_polres_sim_c_perpanjang' => $r->data_polres_sim_c_perpanjang,
-                    'data_polres_surat_pengantar_dari_biro' => $r->data_polres_surat_pengantar_dari_biro,
+                    'data_polres_sim_d_perpanjang' => $r->data_polres_simd1_perpanjang
                 ]);
                 return back()->with('pesan','Input Data Success');
             }else{
@@ -48,10 +55,17 @@ class DataPolresController extends Controller
                             'polres_id' => $r->polres_id,
                             'data_polres_tgl' => $r->data_polres_tgl,
                             'data_polres_sim_a_baru' => $r->data_polres_sim_a_baru,
-                            'data_polres_sim_a_perpanjang' => $r->data_polres_sim_a_perpanjang,
+                            'data_polres_sim_a_umum_baru' => $r->data_polres_sim_a_umum_baru,
+                            'data_polres_sim_b1_baru' => $r->data_polres_sim_b1_baru,
+                            'data_polres_sim_b2_baru' => $r->data_polres_sim_b2_baru,
                             'data_polres_sim_c_baru' => $r->data_polres_sim_c_baru,
+                            'data_polres_sim_d_baru' => $r->data_polres_sim_d_baru,
+                            'data_polres_sim_a_perpanjang' => $r->data_polres_sim_a_perpanjang,
+                            'data_polres_sim_a_umum_perpanjang' => $r->data_polres_sim_a_umum_perpanjang,
+                            'data_polres_sim_b1_perpanjang' => $r->data_polres_sim_b1_perpanjang,
+                            'data_polres_sim_b2_perpanjang' => $r->data_polres_sim_b2_perpanjang,
                             'data_polres_sim_c_perpanjang' => $r->data_polres_sim_c_perpanjang,
-                            'data_polres_surat_pengantar_dari_biro' => $r->data_polres_surat_pengantar_dari_biro,
+                            'data_polres_sim_d_perpanjang' => $r->data_polres_sim_d_perpanjang
                         ]);
 
                 if($up == TRUE){
@@ -78,9 +92,11 @@ class DataPolresController extends Controller
 
     public function report_polres()
     {
+        $bulan = date('m');
         $data = DB::table('tb_data_polres')
-                ->join('tb_polres','tb_polres.polres_id','=','tb_data_polres.polres_id')
-                ->select('tb_data_polres.*', 'tb_polres.polres_nama')
+                ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
+                ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
+                ->where(DB::raw('MONTH(tb_data_polres.data_polres_tgl)'),$bulan)
                 ->get();
         return view('backend.report.polres',compact('data'));
     }

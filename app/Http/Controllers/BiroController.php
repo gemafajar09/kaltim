@@ -19,7 +19,7 @@ class BiroController extends Controller
 
     public function index()
     {
-        $data = DB::table('tb_biro')->get();
+        $data = DB::table('tb_cabang')->get();
         return view('backend.biro.biro',compact('data'));
     }
 
@@ -37,16 +37,16 @@ class BiroController extends Controller
                     $filename = $r->biro_foto->getClientOriginalName();
                     $r->file('biro_foto')->move('biro',$r->biro_foto->getClientOriginalName());
                     // simpan
-                    DB::table('tb_biro')->insert([
-                        'biro_nama' => $r->biro_nama,
-                        'biro_alamat' => $r->biro_alamat,
-                        'biro_foto' => $filename,
+                    DB::table('tb_cabang')->insert([
+                        'cabanag_nama' => cabanag_,
+                        'cabang_alamat' => $r->biro_alamat,
+                        'cabang_foto' => $filename,
                     ]);
                 }else{
-                    DB::table('tb_biro')->insert([
-                        'biro_nama' => $r->biro_nama,
-                        'biro_alamat' => $r->biro_alamat,
-                        'biro_foto' => null,
+                    DB::table('tb_cabang')->insert([
+                        'cabang_nama' => $r->biro_nama,
+                        'cabang_alamat' => $r->biro_alamat,
+                        'cabang_foto' => null,
                     ]);
                 }
 
@@ -54,24 +54,24 @@ class BiroController extends Controller
             }else{
                 if($r->file('biro_foto') == NULL)
                 {
-                    $up = DB::table('tb_biro')
+                    $up = DB::table('tb_cabang')
                         ->where('biro_id',$r->biro_id)
                         ->update([
-                            'biro_nama' => $r->biro_nama, 
-                            'biro_alamat' => $r->biro_alamat
+                            'cabang_nama' => $r->biro_nama, 
+                            'cabang_alamat' => $r->biro_alamat
                         ]);
                 }else{
-                    $cek = DB::table('tb_biro')->where('biro_id',$r->biro_id)->first();
+                    $cek = DB::table('tb_cabang')->where('biro_id',$r->biro_id)->first();
                     File::delete('biro/' . $cek->biro_foto);
 
                     $filename = $r->biro_foto->getClientOriginalName();
                     $r->file('biro_foto')->move('biro',$r->biro_foto->getClientOriginalName());
-                    $up = DB::table('tb_biro')
-                            ->where('biro_id',$r->biro_id)
+                    $up = DB::table('tb_cabang')
+                            ->where('cabang_id',$r->biro_id)
                             ->update([
-                                'biro_nama' => $r->biro_nama, 
-                                'biro_alamat' => $r->biro_alamat,
-                                'biro_foto' => $filename,
+                                'cabang_nama' => $r->biro_nama, 
+                                'cabang_alamat' => $r->biro_alamat,
+                                'cabang_foto' => $filename,
                             ]);
                 }
                 if($up == TRUE){

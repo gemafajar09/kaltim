@@ -1,20 +1,28 @@
 <script>
-    var barChartData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September",
-            "October", "November", "December"
+    var datasimbaru = {
+        labels: ["SIM A", "SIM A UMUM", "SIM B1", "SIM B2", "SIM C", "SIM D"
         ],
         datasets: [{
-                fillColor: "rgba(220,220,220,0.5)",
-                strokeColor: "rgba(220,220,220,1)",
-                data: [65, 59, 90, 81, 56, 55, 40]
-            },
-            {
-                fillColor: "rgba(151,187,205,0.5)",
-                strokeColor: "rgba(151,187,205,1)",
-                data: [28, 48, 40, 19, 96, 27, 100]
+                fillColor: "rgba(55,20,220,0.5)",
+                strokeColor: "rgba(110,50,120,1)",
+                data: <?= json_encode($datasimbaru) ?>
             }
         ]
 
     }
-    var myLine = new Chart(document.getElementById("bar-chart").getContext("2d")).Bar(barChartData);
+    // perpanjang
+    var datasimperpanjang = {
+        labels: ["SIM A", "SIM A UMUM", "SIM B1", "SIM B2", "SIM C", "SIM D"
+        ],
+        datasets: [{
+                fillColor: "rgba(55,20,220,0.5)",
+                strokeColor: "rgba(110,50,120,1)",
+                data: <?= json_encode($datasimperpanjang) ?>
+            }
+        ]
+
+    }
+    // element
+    var baru = new Chart(document.getElementById("sim-data-baru").getContext("2d")).Bar(datasimbaru);
+    var perpanjang = new Chart(document.getElementById("sim-data-perpanjang").getContext("2d")).Bar(datasimperpanjang);
 </script>
