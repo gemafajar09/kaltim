@@ -1,3 +1,8 @@
+@if(session('user_id') == '')
+    <script>
+        window.location='/';
+    </script>
+@endif
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +17,7 @@
     <link href="{{asset('/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('css/calendar.css')}}" rel="stylesheet">
     <link href="{{asset('/css/pages/dashboard.css')}}" rel="stylesheet">
-
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body>

@@ -41,6 +41,7 @@
                 </li>
                 <li><a href="{{ route('polres') }}"><i class="icon-user"></i><span>Polres</span> </a></li>
                 <li><a href="biro-partner"><i class="icon-sitemap"></i><span>Biro</span> </a> </li>
+                <li><a href="data-user"><i class="icon-user"></i><span>User</span> </a> </li>
             </ul>
         </div>
     </div>

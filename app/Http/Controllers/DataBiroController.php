@@ -79,8 +79,8 @@ class DataBiroController extends Controller
     public function report_biro()
     {
         $data = DB::table('tb_data_biro')
-                ->join('tb_biro','tb_biro.biro_id','=','tb_data_biro.biro_id')
-                ->select('tb_data_biro.*', 'tb_biro.biro_nama')
+                ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
                 ->get();
         return view('backend.report.biro',compact('data'));
     }
