@@ -15,45 +15,76 @@
             <div style="display:none" id="success" class="alert alert-success">
                 {{session('pesan')}}
             </div>
-                <form action="{{ route('data-polres-save') }}" method="POST">
+                <form action="{{ route('data-biro-save') }}" method="POST">
                     @csrf
-                    <div class="col-md-12">
-                        <label><b>Tanggal</b></label>
-                        <input type="date" name="data_biro_tgl" class="form-control">
-                        <input type="hidden" name="data_biro_id" class="form-control">
+                    <input type="hidden" name="data_biro_id" id="data_biro_id">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><b>Tanggal</b></label>
+                                <input readonly type="date" value="{{date('Y-m-d')}}" name="data_biro_tgl" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM A BARU</b></label>
+                                <input placeholder="0" type="number" name="data_biro_sim_a_baru" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM A UMUM BARU</b></label>
+                                <input placeholder="0" type="number" name="data_biro_sim_a_umum_baru" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM B1 BARU</b></label>
+                                <input placeholder="0" type="number" name="data_biro_sim_b1_baru" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM B2 BARU</b></label>
+                                <input placeholder="0" type="number" name="data_biro_sim_b2_baru" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM C BARU</b></label>
+                                <input placeholder="0" type="number" name="data_biro_sim_c_baru" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM D BARU</b></label>
+                                <input placeholder="0" type="number" name="data_biro_sim_d_baru" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><b>Biro</b></label>
+                                @php
+                                    $biro = DB::table('tb_cabang')->where('cabang_id',session('cabang_id'))->first();
+                                @endphp
+                                <input type="text" readonly class="form-control" value="{{$biro->cabang_nama}}">
+                                <input type="hidden" value="{{session('cabang_id')}}" readonly class="form-control" name="biro_id" id="biro_id">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM A PERPANJANG</b></label>
+                                <input placeholder="0" type="number" name="data_biro_sim_a_perpanjang" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM A UMUM PERPANJANG</b></label>
+                                <input placeholder="0" type="number" name="data_biro_sim_a_umum_perpanjang" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM B1 PERPANJANG</b></label>
+                                <input placeholder="0" type="number" name="data_biro_sim_b1_perpanjang" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM B2 PERPANJANG</b></label>
+                                <input placeholder="0" type="number" name="data_biro_sim_b2_perpanjang" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM C PERPANJANG</b></label>
+                                <input placeholder="0" type="number" name="data_biro_sim_c_perpanjang" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label><b>SIM D PERPANJANG</b></label>
+                                <input placeholder="0" type="number" name="data_biro_sim_d_perpanjang" class="form-control">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-12">
-                        <label><b>Biro</b></label>
-                        @php
-                            $biro = DB::table('tb_biro')->get();
-                        @endphp
-                        <select name="biro_id" id="biro_id" class="form-control select2">
-                            <option value="">-Pilih-</option>
-                            @foreach($biro as $no => $row)
-                            <option value="{{ $row->biro_id }}">{{ $row->biro_nama }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-12">
-                        <label><b>SIM A Baru</b></label>
-                        <input type="number" name="data_biro_sim_a_baru" class="form-control">
-                    </div>
-                    <div class="col-md-12">
-                        <label><b>SIM A Perpanjang</b></label>
-                        <input type="number" name="data_biro_sim_a_perpanjang" class="form-control">
-                    </div>
-                    <div class="col-md-12">
-                        <label><b>SIM C Baru</b></label>
-                        <input type="number" name="data_biro_sim_c_baru" class="form-control">
-                    </div>
-                    <div class="col-md-12">
-                        <label><b>SIM C Perpanjang</b></label>
-                        <input type="number" name="data_biro_sim_c_perpanjang" class="form-control">
-                    </div>
-                    <div class="col-md-12">
-                        <label><b>Surat Pengantar</b></label>
-                        <input type="number" name="data_biro_surat_pengantar" class="form-control">
-                    </div>
+                    
                     <div class="col-md-12 py-3" align="right">
                         <button type="submit" class="btn btn-outline-success">Save</button>
                     </div>

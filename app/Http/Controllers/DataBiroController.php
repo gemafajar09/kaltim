@@ -35,10 +35,17 @@ class DataBiroController extends Controller
                     'biro_id' => $r->biro_id,
                     'data_biro_tgl' => $r->data_biro_tgl,
                     'data_biro_sim_a_baru' => $r->data_biro_sim_a_baru,
-                    'data_biro_sim_a_perpanjang' => $r->data_biro_sim_a_perpanjang,
+                    'data_biro_sim_a_umum_baru' => $r->data_biro_sim_a_umum_baru,
+                    'data_biro_sim_b1_baru' => $r->data_biro_sim_b1_baru,
+                    'data_biro_sim_b2_baru' => $r->data_biro_sim_b2_baru,
                     'data_biro_sim_c_baru' => $r->data_biro_sim_c_baru,
+                    'data_biro_sim_d_baru' => $r->data_biro_sim_d_baru,
+                    'data_biro_sim_a_perpanjang' => $r->data_biro_sim_a_perpanjang,
+                    'data_biro_sim_a_umum_perpanjang' => $r->data_biro_sim_a_umum_perpanjang,
+                    'data_biro_sim_b1_perpanjang' => $r->data_biro_sim_b1_perpanjang,
+                    'data_biro_sim_b2_perpanjang' => $r->data_biro_sim_b2_perpanjang,
                     'data_biro_sim_c_perpanjang' => $r->data_biro_sim_c_perpanjang,
-                    'data_biro_surat_pengantar' => $r->data_biro_surat_pengantar,
+                    'data_biro_sim_d_perpanjang' => $r->data_biro_sim_d_perpanjang
                 ]);
                 return back()->with('pesan','Input Data Success');
             }else{
@@ -48,10 +55,17 @@ class DataBiroController extends Controller
                             'biro_id' => $r->biro_id,
                             'data_biro_tgl' => $r->data_biro_tgl,
                             'data_biro_sim_a_baru' => $r->data_biro_sim_a_baru,
-                            'data_biro_sim_a_perpanjang' => $r->data_biro_sim_a_perpanjang,
+                            'data_biro_sim_a_umum_baru' => $r->data_biro_sim_a_umum_baru,
+                            'data_biro_sim_b1_baru' => $r->data_biro_sim_b1_baru,
+                            'data_biro_sim_b2_baru' => $r->data_biro_sim_b2_baru,
                             'data_biro_sim_c_baru' => $r->data_biro_sim_c_baru,
+                            'data_biro_sim_d_baru' => $r->data_biro_sim_d_baru,
+                            'data_biro_sim_a_perpanjang' => $r->data_biro_sim_a_perpanjang,
+                            'data_biro_sim_a_umum_perpanjang' => $r->data_biro_sim_a_umum_perpanjang,
+                            'data_biro_sim_b1_perpanjang' => $r->data_biro_sim_b1_perpanjang,
+                            'data_biro_sim_b2_perpanjang' => $r->data_biro_sim_b2_perpanjang,
                             'data_biro_sim_c_perpanjang' => $r->data_biro_sim_c_perpanjang,
-                            'data_biro_surat_pengantar' => $r->data_biro_surat_pengantar,
+                            'data_biro_sim_d_perpanjang' => $r->data_biro_sim_d_perpanjang
                         ]);
 
                 if($up == TRUE){
@@ -77,10 +91,12 @@ class DataBiroController extends Controller
     }
 
     public function report_biro()
-    {
+    {           
+        $bulan = date('m');
         $data = DB::table('tb_data_biro')
                 ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
                 ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                ->where(DB::raw('MONTH(tb_data_biro.data_biro_tgl)'),$bulan)
                 ->get();
         return view('backend.report.biro',compact('data'));
     }

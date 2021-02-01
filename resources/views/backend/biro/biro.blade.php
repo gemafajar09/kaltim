@@ -11,17 +11,6 @@
         </div>
     </div>
 </center>
-<div class="row">
-    @foreach($data as $no => $row)
-        <div class="col-md-4">
-            <div class="card card-outline card-info">
-                <div class="card-body">
-                    <img src="{{asset('biro/'. $row->biro_foto)}}" style="width:100%" alt="">
-                </div>
-            </div>
-        </div>
-    @endforeach
-</div>
 
 <div class="col-md-12 py-3">
     <div class="widget">
@@ -49,11 +38,11 @@
                     @foreach($data as $no => $row)
                     <tr>
                         <td>{{ $no + 1 }}</td>
-                        <td>{{ $row->biro_nama }}</td>
-                        <td>{{ $row->biro_alamat }}</td>
+                        <td>{{ $row->cabang_nama }}</td>
+                        <td>{{ $row->cabang_alamat }}</td>
                         <td style="text-align: center">
-                            <a onclick="edit('{{$row->biro_id}}','{{$row->biro_nama}}','{{$row->biro_alamat}}')" class="icon-edit"></a>
-                            <a href="{{route('biro-partner-delete', encrypt($row->biro_id))}}" class="icon-trash"></a>
+                            <a onclick="edit('{{$row->cabang_id }}','{{$row->cabang_nama}}','{{$row->cabang_alamat}}')" class="icon-edit"></a>
+                            <a href="{{route('biro-partner-delete', encrypt($row->cabang_id ))}}" class="icon-trash"></a>
                         </td>
                     </tr>
                     @endforeach
@@ -78,19 +67,15 @@
         <form action="{{route('biro-partner-save')}}" method="post" enctype="multipart/form-data">
         @csrf
             <div class="modal-body">
-                    <div class="col-md-12">
-                        <label><b>Nama</b></label>
-                        <input type="hidden" name="biro_id" id="biro_id">
-                        <input type="text" name="biro_nama" id="biro_nama" class="form-control">
-                    </div>
-                    <div class="col-md-12">
-                        <label><b>Alamat</b></label>
-                        <textarea name="biro_alamat" id="biro_alamat" cols="30" rows="3" class="form-control"></textarea>
-                    </div>
-                    <div class="col-md-12">
-                        <label><b>File</b></label>
-                        <input type="file" name="biro_foto" id="biro_foto" class="form-control">
-                    </div>
+                <div class="col-md-12">
+                    <label><b>Nama</b></label>
+                    <input type="hidden" name="cabang_id" id="cabang_id">
+                    <input type="text" name="cabang_nama" id="cabang_nama" class="form-control">
+                </div>
+                <div class="col-md-12">
+                    <label><b>Alamat</b></label>
+                    <textarea name="cabang_alamat" id="cabang_alamat" cols="30" rows="3" class="form-control"></textarea>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-sm" style="background-color: #019943">Save</button>
@@ -117,12 +102,13 @@
 
 <script>
     function bukaModal(){
+        $('#cabang_id').val('');
         $('#formModal').modal('show');
     }
     function edit(id, nama, alamat){
-        $('#biro_id').val(id);
-        $('#biro_nama').val(nama);
-        $('#biro_alamat').val(alamat);
+        $('#cabang_id').val(id);
+        $('#cabang_nama').val(nama);
+        $('#cabang_alamat').val(alamat);
         $('#formModal').modal('show');
     }
 </script>

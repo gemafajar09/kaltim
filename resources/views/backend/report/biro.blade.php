@@ -17,15 +17,22 @@
                 </div>
                 <table id="table" class="table table-striped">
                     <thead>
-                        <tr>
+                        <tr style="font-size:10px">
                             <th>No</th>
                             <th>Tanggal</th>
                             <th>Biro</th>
                             <th>SIM A BARU</th>
-                            <th>SIM A PERPANJANG</th>
+                            <th>SIM A UMUM BARU</th>
+                            <th>SIM B1 BARU</th>
+                            <th>SIM B2 BARU</th>
                             <th>SIM C BARU</th>
+                            <th>SIM D BARU</th>
+                            <th>SIM A PERPANJANG</th>
+                            <th>SIM A UMUM PERPANJANG</th>
+                            <th>SIM B1 PERPANJANG</th>
+                            <th>SIM B2 PERPANJANG</th>
                             <th>SIM C PERPANJANG</th>
-                            <th>Surat Pengantar Dari Biro</th>
+                            <th>SIM D PERPANJANG</th>
                             <th style="text-align: center">Action</th>
                         </tr>
                     </thead>
@@ -33,15 +40,22 @@
                         @foreach($data as $no => $row)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-                            <td>{{ $row->data_biro_tgl }}</td>
-                            <td>{{ $row->biro_nama }}</td>
+                            <td>{{ bulantahun($row->data_biro_tgl) }}</td>
+                            <td>{{ $row->cabang_nama }}</td>
                             <td>{{ $row->data_biro_sim_a_baru }}</td>
-                            <td>{{ $row->data_biro_sim_a_perpanjang }}</td>
+                            <td>{{ $row->data_biro_sim_a_umum_baru }}</td>
+                            <td>{{ $row->data_biro_sim_b1_baru }}</td>
+                            <td>{{ $row->data_biro_sim_b2_baru }}</td>
                             <td>{{ $row->data_biro_sim_c_baru }}</td>
+                            <td>{{ $row->data_biro_sim_d_baru }}</td>
+                            <td>{{ $row->data_biro_sim_a_perpanjang }}</td>
+                            <td>{{ $row->data_biro_sim_a_umum_perpanjang }}</td>
+                            <td>{{ $row->data_biro_sim_b1_perpanjang }}</td>
+                            <td>{{ $row->data_biro_sim_b2_perpanjang }}</td>
                             <td>{{ $row->data_biro_sim_c_perpanjang }}</td>
-                            <td>{{ $row->data_biro_surat_pengantar }}</td>
+                            <td>{{ $row->data_biro_sim_d_perpanjang }}</td>
                             <td style="text-align: center">
-                                <a onclick="edit('{{$row->data_biro_id}}','{{$row->biro_id}}','{{$row->data_biro_tgl}}','{{$row->data_biro_sim_a_baru}}','{{$row->data_biro_sim_a_perpanjang}}','{{$row->data_biro_sim_c_baru}}','{{$row->data_biro_sim_c_perpanjang}}','{{$row->data_biro_surat_pengantar}}')" class="icon-edit"></a>
+                                <a onclick="edit('{{$row->data_biro_id}}','{{$row->biro_id}}','{{$row->data_biro_tgl}}','{{$row->data_biro_sim_a_baru}}','{{$row->data_biro_sim_a_perpanjang}}','{{$row->data_biro_sim_c_baru}}','{{$row->data_biro_sim_c_perpanjang}}')" class="icon-edit"></a>
                                 
                                 <a href="{{route('data-biro-delete', encrypt($row->data_biro_id))}}" class="icon-trash"></a>
                             </td>
@@ -83,16 +97,7 @@
                     <input type="hidden" name="data_biro_id" id="data_biro_id" class="form-control">
                 </div>
                 <div class="col-md-12">
-                    <label><b>Biro</b></label>
-                    @php
-                        $biro = DB::table('tb_biro')->get();
-                    @endphp
-                    <select name="biro_id" id="biro_id" class="form-control select2">
-                        <option value="">-Pilih-</option>
-                        @foreach($biro as $no => $row)
-                        <option value="{{ $row->biro_id }}">{{ $row->biro_nama }}</option>
-                        @endforeach
-                    </select>
+                    
                 </div>
                 <div class="col-md-12">
                     <label><b>SIM A Baru</b></label>
