@@ -8,13 +8,13 @@
                 <i class="icon-bar-chart"></i>
                 <h3>Data Polres</h3>
             </div>
-            <div class="widget-content">
-            <div style="display:none" id="error" class="alert alert-danger">
-                {{session('error')}}
-            </div>
-            <div style="display:none" id="success" class="alert alert-success">
-                {{session('pesan')}}
-            </div>
+            <div class="widget-content" id="jam_buka" style="display: block;">
+                <div style="display:none" id="error" class="alert alert-danger">
+                    {{session('error')}}
+                </div>
+                <div style="display:none" id="success" class="alert alert-success">
+                    {{session('pesan')}}
+                </div>
                 <form action="{{ route('data-polres-save') }}" method="POST">
                     @csrf
                     <input type="hidden" name="data_polres_id" id="data_polres_id">
@@ -90,6 +90,10 @@
                     </div>
                 </form>
             </div>
+            <div class="widget-content" id="jam_tutup" style="display: none;">
+                <h1>Opps..</h1>
+                <h3>Batas Penginputan Data Biro Sudah Lewat</h3>
+            </div>
         </div>
     </div>
     @if (session('validasi'))
@@ -120,16 +124,24 @@
 
     my_Clock.prototype.update = function () {
         this.updateTime(1);
-        // tutup input jam 5 sore
-        if(this.hours == 17 && this.minutes == 00 && this.seconds == 0){
+        // buka aplikasi jam 8 pagi
+        if(this.hours >= 8 && this.hours <= 16 ){
+            // console.log('buka');
+            if(this.hours <= 16 && this.minutes <= 59){
+                // console.log('buka1');
+                $('#jam_buka').css('display', 'block');
+                $('#jam_tutup').css('display', 'none');
+            }else{
+                // console.log('tutup');
+                $('#jam_buka').css('display', 'none');
+                $('#jam_tutup').css('display', 'block');
+            }
+        }else{
+            // console.log('tutup1');
             $('#jam_buka').css('display', 'none');
             $('#jam_tutup').css('display', 'block');
         }
-        // buka aplikasi jam 8 pagi
-        else if(this.hours == 8 && this.minutes == 00 && this.seconds == 0){
-            $('#jam_buka').css('display', 'block');
-            $('#jam_tutup').css('display', 'none');
-        }
+        // console.log(this.hours + ":" + this.minutes + ":" + this.seconds);
     };
     my_Clock.prototype.updateTime = function (secs) {
         this.seconds += secs;

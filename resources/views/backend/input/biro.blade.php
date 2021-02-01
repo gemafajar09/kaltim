@@ -140,16 +140,24 @@
 
     my_Clock.prototype.update = function () {
         this.updateTime(1);
-        // tutup input jam 5 sore
-        if(this.hours == 17 && this.minutes == 00 && this.seconds == 0){
+        // buka aplikasi jam 8 pagi
+        if(this.hours >= 8 && this.hours <= 16 ){
+            // console.log('buka');
+            if(this.hours <= 16 && this.minutes <= 59){
+                // console.log('buka1');
+                $('#jam_buka').css('display', 'block');
+                $('#jam_tutup').css('display', 'none');
+            }else{
+                // console.log('tutup');
+                $('#jam_buka').css('display', 'none');
+                $('#jam_tutup').css('display', 'block');
+            }
+        }else{
+            // console.log('tutup1');
             $('#jam_buka').css('display', 'none');
             $('#jam_tutup').css('display', 'block');
         }
-        // buka aplikasi jam 8 pagi
-        else if(this.hours == 8 && this.minutes == 00 && this.seconds == 0){
-            $('#jam_buka').css('display', 'block');
-            $('#jam_tutup').css('display', 'none');
-        }
+        // console.log(this.hours + ":" + this.minutes + ":" + this.seconds);
     };
     my_Clock.prototype.updateTime = function (secs) {
         this.seconds += secs;
