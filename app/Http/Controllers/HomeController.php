@@ -45,7 +45,7 @@ class HomeController extends Controller
         }
         $data['datasimbaru'] = [$datasimA,$datasimAumum,$datasimB1,$datasimB2,$datasimC,$datasimD];
         $data['datasimperpanjang'] = [$datasimAP,$datasimAumumP,$datasimB1P,$datasimB2P,$datasimCP,$datasimDP];
-
+        
         return view('backend.template.home',$data);
     }
 
