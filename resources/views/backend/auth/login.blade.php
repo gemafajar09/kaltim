@@ -31,6 +31,9 @@
 	<script src="{{asset('/js/signin.js')}}"></script>
 
 	{{-- content form login  --}}
+	<center>
+		<img src="{{asset('/img/Lambang_Polda_Kaltim.png')}}" style="width:10%; padding-top:50px" alt="">
+	</center>
 	<div class="account-container">
 		<div class="content clearfix">
 			<form action="{{route('data-user-login')}}" method="post">
