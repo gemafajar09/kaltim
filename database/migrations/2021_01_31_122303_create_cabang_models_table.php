@@ -18,7 +18,7 @@ class CreateCabangModelsTable extends Migration
             $table->string('cabang_nama');
             $table->string('cabang_alamat');
             $table->integer('cabang_kode');
-            $table->string('cabanag_foto')->nullable();
+            $table->string('cabang_foto')->nullable();
         });
     }
 

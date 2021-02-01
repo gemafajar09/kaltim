@@ -1,11 +1,11 @@
 <div class="subnavbar">
-    <div class="subnavbar-inner">
+    <div class="subnavbar-inner"  style="background-color: #109DE0;">
         <div class="container">
             <ul class="mainnav">
-                <li><a href="{{route('home')}}"><i class="icon-dashboard"></i><span>Dashboard</span> </a>
+                <li><a style="color:white" href="{{route('home')}}"><i class="icon-dashboard"></i><span>Dashboard</span> </a>
                 </li>
                 <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle" id="userDropdown" role="button"
+                    <a href="javascript:;" style="color:white" class="dropdown-toggle" id="userDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="icon-list-alt"></i><span>Reports</span>
                     </a>
@@ -21,9 +21,9 @@
                         </a>
                     </div>
                 </li>
-                <li><a href="grafik-detail"><i class="icon-bar-chart"></i><span>Grafik</span> </a> </li>
+                <li><a style="color:white" href="grafik-detail"><i class="icon-bar-chart"></i><span>Grafik</span> </a> </li>
                 <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle" id="userDropdown" role="button"
+                    <a style="color:white" href="javascript:;" class="dropdown-toggle" id="userDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="icon-location-arrow"></i><span>Input</span>
                     </a>
@@ -39,9 +39,9 @@
                         </a>
                     </div>
                 </li>
-                <li><a href="{{ route('polres') }}"><i class="icon-user"></i><span>Polres</span> </a></li>
-                <li><a href="biro-partner"><i class="icon-sitemap"></i><span>Biro</span> </a> </li>
-                <li><a href="data-user"><i class="icon-user"></i><span>User</span> </a> </li>
+                <li><a style="color:white" href="{{ route('polres') }}"><i class="icon-user"></i><span>Polres</span> </a></li>
+                <li><a style="color:white" href="biro-partner"><i class="icon-sitemap"></i><span>Biro</span> </a> </li>
+                <li><a style="color:white" href="data-user"><i class="icon-user"></i><span>User</span> </a> </li>
             </ul>
         </div>
     </div>

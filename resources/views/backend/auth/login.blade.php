@@ -16,6 +16,12 @@
 	<link href="{{asset('/css/pages/signin.css')}}" rel="stylesheet" type="text/css">
 
 </head>
+<style>
+	body {
+	background-image: url("{{asset('/img/backkaltim1.jpg')}}");
+	/* background-repeat: repeat-y; */
+	}
+</style>
 
 <body>
 	{{-- script --}}
