@@ -17,7 +17,7 @@
 
 </head>
 <style>
-	body { 
+	body {
 	background-image: url("{{asset('/img/backkaltim1.jpg')}}");
 	/* background-repeat: repeat-y; */
 	}
@@ -32,7 +32,8 @@
 
 	{{-- content form login  --}}
 	<center>
-		<img src="{{asset('/img/Lambang_Polda_Kaltim.png')}}" style="width:10%; padding-top:50px" alt="">
+		<img src="{{asset('/img/Lambang_Polda_Kaltim.png')}}" style="width:130px; padding-top:50px" alt="">
+		<img src="{{asset('/img/LogoDIRLantasPolri.png')}}" style="width:170px; padding-top:50px" alt="">
 	</center>
 	<div class="account-container">
 		<div class="content clearfix">

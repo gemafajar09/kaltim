@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="home">
         <img src="{{asset('/img/korlantas.png')}}" style="width:10%" alt="">
-        <b style="font-size:12px">Sistem Laporan SIM Polda Kaltim</b> 
+        <b style="font-size:25px">Sistem Laporan SIM Polda Kaltim</b> 
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
