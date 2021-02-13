@@ -30,24 +30,11 @@
                                 <input placeholder="0" type="number" name="data_biro_sim_a_baru" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label><b>SIM A UMUM BARU</b></label>
-                                <input placeholder="0" type="number" name="data_biro_sim_a_umum_baru"
-                                    class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label><b>SIM B1 BARU</b></label>
-                                <input placeholder="0" type="number" name="data_biro_sim_b1_baru" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label><b>SIM B2 BARU</b></label>
-                                <input placeholder="0" type="number" name="data_biro_sim_b2_baru" class="form-control">
-                            </div>
-                            <div class="form-group">
                                 <label><b>SIM C BARU</b></label>
                                 <input placeholder="0" type="number" name="data_biro_sim_c_baru" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label><b>SIM D BARU</b></label>
+                                <label><b>SIM A DAN C</b></label>
                                 <input placeholder="0" type="number" name="data_biro_sim_d_baru" class="form-control">
                             </div>
                         </div>
@@ -67,27 +54,12 @@
                                     class="form-control">
                             </div>
                             <div class="form-group">
-                                <label><b>SIM A UMUM PERPANJANG</b></label>
-                                <input placeholder="0" type="number" name="data_biro_sim_a_umum_perpanjang"
-                                    class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label><b>SIM B1 PERPANJANG</b></label>
-                                <input placeholder="0" type="number" name="data_biro_sim_b1_perpanjang"
-                                    class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label><b>SIM B2 PERPANJANG</b></label>
-                                <input placeholder="0" type="number" name="data_biro_sim_b2_perpanjang"
-                                    class="form-control">
-                            </div>
-                            <div class="form-group">
                                 <label><b>SIM C PERPANJANG</b></label>
                                 <input placeholder="0" type="number" name="data_biro_sim_c_perpanjang"
                                     class="form-control">
                             </div>
                             <div class="form-group">
-                                <label><b>SIM D PERPANJANG</b></label>
+                                <label><b>SIM A DAN C PERPANJANG</b></label>
                                 <input placeholder="0" type="number" name="data_biro_sim_d_perpanjang"
                                     class="form-control">
                             </div>

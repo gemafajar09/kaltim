@@ -17,7 +17,7 @@
 
 </head>
 <style>
-	body {
+	body { 
 	background-image: url("{{asset('/img/backkaltim1.jpg')}}");
 	/* background-repeat: repeat-y; */
 	}
