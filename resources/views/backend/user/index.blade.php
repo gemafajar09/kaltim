@@ -48,9 +48,9 @@
                             <td>{{$user->cabang_nama}}</td>
                             <td>
                                 @if($user->user_level == 1)
-                                Kapolda
+                                Dirlantas / Kapolda
                                 @elseif($user->user_level == 2)
-                                Humas
+                                Kapolres / Kasat Lantas
                                 @elseif($user->user_level == 3)
                                 Biro
                                 @endif
