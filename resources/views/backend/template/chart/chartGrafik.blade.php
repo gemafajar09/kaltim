@@ -48,174 +48,276 @@ for($i = 1; $i < 13; $i++)
 }
 @endphp
 <script>
-    var siamabaru = {
-        labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+    var ab = document.getElementsByClassName("barchart")[0].getContext('2d');
+    new Chart(ab, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
             "October", "November", "Desember"
         ],
-        datasets: [{
-                fillColor: "rgba(55,20,220,0.5)",
-                strokeColor: "rgba(110,50,120,1)",
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
                 data: <?= json_encode($datasimA) ?>
-            }
-        ]
+            }]
+        },
 
-    }
+        // Configuration options go here
+        options: {}
+    });
+
     // sim a umum
-    var siamabaruumum = {
-        labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+    var au = document.getElementsByClassName("barchart")[1].getContext('2d');
+    new Chart(au, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
             "October", "November", "Desember"
         ],
-        datasets: [{
-                fillColor: "rgba(55,20,220,0.5)",
-                strokeColor: "rgba(110,50,120,1)",
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
                 data: <?= json_encode($datasimAumum) ?>
-            }
-        ]
+            }]
+        },
 
-    }
+        // Configuration options go here
+        options: {}
+    });
+
     // sim b1
-    var siamb1baru = {
-        labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+    var b1 = document.getElementsByClassName("barchart")[2].getContext('2d');
+    new Chart(b1, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
             "October", "November", "Desember"
         ],
-        datasets: [{
-                fillColor: "rgba(55,20,220,0.5)",
-                strokeColor: "rgba(110,50,120,1)",
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
                 data: <?= json_encode($datasimB1) ?>
-            }
-        ]
+            }]
+        },
 
-    }
+        // Configuration options go here
+        options: {}
+    });
+
     // sim b2
-    var siamb2baru = {
-        labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+    var siamb2baru = document.getElementsByClassName("barchart")[3].getContext('2d');
+    new Chart(siamb2baru, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
             "October", "November", "Desember"
         ],
-        datasets: [{
-                fillColor: "rgba(55,20,220,0.5)",
-                strokeColor: "rgba(110,50,120,1)",
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
                 data: <?= json_encode($datasimB2) ?>
-            }
-        ]
+            }]
+        },
 
-    }
+        // Configuration options go here
+        options: {}
+    });
+
     // sim c
-    var siamcbaru = {
-        labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+    var siamcbaru = document.getElementsByClassName("barchart")[4].getContext('2d');
+    new Chart(siamcbaru, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
             "October", "November", "Desember"
         ],
-        datasets: [{
-                fillColor: "rgba(55,20,220,0.5)",
-                strokeColor: "rgba(110,50,120,1)",
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
                 data: <?= json_encode($datasimC) ?>
-            }
-        ]
+            }]
+        },
 
-    }
+        // Configuration options go here
+        options: {}
+    });
+    
     // sim d
-    var siamdbaru = {
-        labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+    var siamdbaru = document.getElementsByClassName("barchart")[5].getContext('2d');
+    new Chart(siamdbaru, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
             "October", "November", "Desember"
         ],
-        datasets: [{
-                fillColor: "rgba(55,20,220,0.5)",
-                strokeColor: "rgba(110,50,120,1)",
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
                 data: <?= json_encode($datasimD) ?>
-            }
-        ]
+            }]
+        },
 
-    }
-
+        // Configuration options go here
+        options: {}
+    });
+    
     // sim perpanjang
 
-    var siamabarup = {
-        labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+    var abp = document.getElementsByClassName("barchart")[6].getContext('2d');
+    new Chart(abp, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
             "October", "November", "Desember"
         ],
-        datasets: [{
-                fillColor: "rgba(55,20,220,0.5)",
-                strokeColor: "rgba(110,50,120,1)",
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
                 data: <?= json_encode($datasimAP) ?>
-            }
-        ]
+            }]
+        },
 
-    }
+        // Configuration options go here
+        options: {}
+    });
     // sim a umum
-    var siamabaruumump = {
-        labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+    var aup = document.getElementsByClassName("barchart")[7].getContext('2d');
+    new Chart(aup, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
             "October", "November", "Desember"
         ],
-        datasets: [{
-                fillColor: "rgba(55,20,220,0.5)",
-                strokeColor: "rgba(110,50,120,1)",
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
                 data: <?= json_encode($datasimAumumP) ?>
-            }
-        ]
+            }]
+        },
 
-    }
+        // Configuration options go here
+        options: {}
+    });
     // sim b1
-    var siamb1barup = {
-        labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+    var b1p = document.getElementsByClassName("barchart")[8].getContext('2d');
+    new Chart(b1p, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
             "October", "November", "Desember"
         ],
-        datasets: [{
-                fillColor: "rgba(55,20,220,0.5)",
-                strokeColor: "rgba(110,50,120,1)",
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
                 data: <?= json_encode($datasimB1P) ?>
-            }
-        ]
+            }]
+        },
 
-    }
+        // Configuration options go here
+        options: {}
+    });
     // sim b2
-    var siamb2barup = {
-        labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+    var siamb2barup = document.getElementsByClassName("barchart")[9].getContext('2d');
+    new Chart(siamb2barup, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
             "October", "November", "Desember"
         ],
-        datasets: [{
-                fillColor: "rgba(55,20,220,0.5)",
-                strokeColor: "rgba(110,50,120,1)",
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
                 data: <?= json_encode($datasimB2P) ?>
-            }
-        ]
+            }]
+        },
 
-    }
+        // Configuration options go here
+        options: {}
+    });
+
     // sim c
-    var siamcbarup = {
-        labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+    var siamcp = document.getElementsByClassName("barchart")[10].getContext('2d');
+    new Chart(siamcp, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
             "October", "November", "Desember"
         ],
-        datasets: [{
-                fillColor: "rgba(55,20,220,0.5)",
-                strokeColor: "rgba(110,50,120,1)",
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
                 data: <?= json_encode($datasimCP) ?>
-            }
-        ]
+            }]
+        },
 
-    }
+        // Configuration options go here
+        options: {}
+    });
+    
     // sim d
-    var siamdbarup = {
-        labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+    var siamdp = document.getElementsByClassName("barchart")[11].getContext('2d');
+    new Chart(siamdp, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
             "October", "November", "Desember"
         ],
-        datasets: [{
-                fillColor: "rgba(55,20,220,0.5)",
-                strokeColor: "rgba(110,50,120,1)",
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
                 data: <?= json_encode($datasimDP) ?>
-            }
-        ]
+            }]
+        },
 
-    }
-
-    var myLine0 = new Chart(document.getElementsByClassName("barchart")[0].getContext("2d")).Bar(siamabaru);
-    var myLine1 = new Chart(document.getElementsByClassName("barchart")[1].getContext("2d")).Bar(siamabaruumum);
-    var myLine2 = new Chart(document.getElementsByClassName("barchart")[2].getContext("2d")).Bar(siamb1baru);
-    var myLine3 = new Chart(document.getElementsByClassName("barchart")[3].getContext("2d")).Bar(siamb2baru);
-    var myLine4 = new Chart(document.getElementsByClassName("barchart")[4].getContext("2d")).Bar(siamcbaru);
-    var myLine5 = new Chart(document.getElementsByClassName("barchart")[5].getContext("2d")).Bar(siamdbaru);
-    var myLine6 = new Chart(document.getElementsByClassName("barchart")[6].getContext("2d")).Bar(siamabarup);
-    var myLine7 = new Chart(document.getElementsByClassName("barchart")[7].getContext("2d")).Bar(siamabaruumump);
-    var myLine8 = new Chart(document.getElementsByClassName("barchart")[8].getContext("2d")).Bar(siamb1barup);
-    var myLine9 = new Chart(document.getElementsByClassName("barchart")[9].getContext("2d")).Bar(siamb2barup);
-    var myLine10 = new Chart(document.getElementsByClassName("barchart")[10].getContext("2d")).Bar(siamcbarup);
-    var myLine11 = new Chart(document.getElementsByClassName("barchart")[11].getContext("2d")).Bar(siamdbarup);
-</script> 
+        // Configuration options go here
+        options: {}
+    });
+    </script>

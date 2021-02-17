@@ -19,7 +19,7 @@ class DataPolresController extends Controller
     {
         if($r->data_polres_id == '')
         {
-            DB::table('tb_data_polres')->insert([
+            $id = DB::table('tb_data_polres')->insertGetId([
                 'polres_id' => $r->polres_id,
                 'data_polres_tgl' => $r->data_polres_tgl,
                 'data_polres_sim_a_baru' => $r->data_polres_sim_a_baru,
@@ -35,6 +35,21 @@ class DataPolresController extends Controller
                 'data_polres_sim_c_perpanjang' => $r->data_polres_sim_c_perpanjang,
                 'data_polres_sim_d_perpanjang' => $r->data_polres_sim_d_perpanjang
             ]);
+            $id_biro = $r->id_biro;
+            // dd($id_biro);
+            foreach($id_biro as $i => $a)
+            {
+                DB::table('tb_detail')->insert([
+                    'id_data' => $id,
+                    'id_biro' => $id_biro[$i],
+                    'sim_a_baru' => $r->data_biro_sim_a_baru[$i],
+                    'sim_c_baru' => $r->data_biro_sim_c_baru[$i],
+                    'sim_ac_baru' => $r->data_biro_sim_ac_baru[$i],
+                    'sim_a_perpanjang' => $r->data_biro_sim_a_perpanjang[$i],
+                    'sim_c_perpanjang' => $r->data_biro_sim_c_perpanjang[$i],
+                    'sim_ac_perpanjang' => $r->data_biro_sim_ac_perpanjang[$i]
+                    ]);
+            }
             return back()->with('pesan','Input Data Success');
         }else{
             $up = DB::table('tb_data_polres')
@@ -86,5 +101,13 @@ class DataPolresController extends Controller
                 ->where(DB::raw('MONTH(tb_data_polres.data_polres_tgl)'),$bulan)
                 ->get();
         return view('backend.report.polres',compact('data'));
+    }
+
+    public function detail(Request $r)
+    {
+        $id = $r->id;
+        $data['isi'] = DB::table('tb_detail')->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')->where('tb_detail.id_data',$id)->get();
+        // dd($data['isi']);
+        return view('backend.report.polresdetail',$data);
     }
 }

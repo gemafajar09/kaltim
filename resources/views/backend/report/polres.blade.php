@@ -6,7 +6,7 @@
         <div class="widget">
             <div class="widget-header">
                 <i class="icon-bar-chart"></i>
-                <h3>Laporan Polres</h3>
+                <h3 style="color:black">Laporan Polres</h3>
             </div>
             <div class="widget-content">
                 <div style="display:none" id="error" class="alert alert-danger">
@@ -56,6 +56,7 @@
                             <td>{{ $row->data_polres_sim_d_perpanjang }}</td>
                             <td style="text-align: center">
                                 @if( Session::get('user_level') == 1)
+                                <a onclick="detail('{{$row->data_polres_id}}')" class="btn btn-info btn-sm icon-info"></a>
                                 <a onclick="edit(
                                 '{{$row->data_polres_id}}',
                                 '{{$row->polres_id}}',
@@ -73,8 +74,8 @@
                                 '{{$row->data_polres_sim_b2_perpanjang}}',
                                 '{{$row->data_polres_sim_c_perpanjang}}',
                                 '{{$row->data_polres_sim_d_perpanjang}}'
-                                )" class="icon-edit"></a>
-                                <a href="{{route('data-polres-delete', encrypt($row->data_polres_id))}}" class="icon-trash"></a>
+                                )" class="btn btn-warning btn-sm icon-edit"></a>
+                                <a href="{{route('data-polres-delete', encrypt($row->data_polres_id))}}" class="btn btn-danger btn-sm icon-trash"></a>
                                 @else
                                     -
                                 @endif
@@ -184,7 +185,32 @@
         </div>
     </div>
 </div>
+
+<div class="modal" id="detail" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="isidetail"></div>            
+            </div>
+        </div>
+    </div>
+</div>
 <script>
+    function detail(id)
+    {
+        $.ajax({
+            url: '/api/data-polres-detail',
+            type: 'POST',
+            data: {'id':id,"_token": "{{ csrf_token() }}",},
+            dataType: 'HTML',
+            success: function(data)
+            {
+                $('#isidetail').html(data)
+                $('#detail').modal()
+            }
+        })
+    }
+
     function edit(
         id_data,
         polres_id,

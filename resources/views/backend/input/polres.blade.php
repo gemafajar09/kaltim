@@ -6,7 +6,7 @@
         <div class="widget">
             <div class="widget-header">
                 <i class="icon-bar-chart"></i>
-                <h3>Data Polres</h3>
+                <h3 style="color:black">Data Polres</h3>
             </div>
             <div class="widget-content" id="jam_buka" style="display: block;">
                 <div style="display:none" id="error" class="alert alert-danger">
@@ -15,7 +15,7 @@
                 <div style="display:none" id="success" class="alert alert-success">
                     {{session('pesan')}}
                 </div>
-                <form action="{{ route('data-polres-save') }}" method="POST">
+                <form action="{{ route('data-polres-save') }}" method="POST" style="font-size:10px">
                     @csrf
                     <input type="hidden" name="data_polres_id" id="data_polres_id">
                     <div class="row">
@@ -83,6 +83,53 @@
                                 <input placeholder="0" type="number" name="data_polres_sim_d_perpanjang" class="form-control">
                             </div>
                         </div>
+                        <!-- databiro -->
+                        <?php $biros = DB::table('tb_cabang')->where('cabang_kode',2)->get(); ?>
+                        @foreach($biros as $br)
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header" style="font-size:12px">
+                                    {{$br->cabang_nama}}
+                                    <input type="hidden" name="id_biro[]" value="{{$br->cabang_id}}">
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label><b>SURAT KETERANGAN PSIKOLOGI SIM A BARU</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_a_baru[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT KETERANGAN PSIKOLOGI SIM C BARU</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_c_baru[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT KETERANGAN PSIKOLOGI SIM A DAN C</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_ac_baru[]" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label><b>SURAT KETERANGAN PSIKOLOGI SIM A PERPANJANG</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_a_perpanjang[]"
+                                                    class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT KETERANGAN PSIKOLOGI SIM C PERPANJANG</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_c_perpanjang[]"
+                                                    class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT KETERANGAN PSIKOLOGI SIM A DAN C PERPANJANG</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_ac_perpanjang[]"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
                     </div>
                     
                     <div class="col-md-12 py-3" align="right">

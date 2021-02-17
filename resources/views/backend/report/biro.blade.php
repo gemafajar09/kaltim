@@ -6,7 +6,7 @@
         <div class="widget">
             <div class="widget-header">
                 <i class="icon-bar-chart"></i>
-                <h3>Laporan Biro</h3>
+                <h3 style="color:black">Laporan Biro</h3>
             </div>
             <div class="widget-content">
                 <div style="display:none" id="error" class="alert alert-danger">
