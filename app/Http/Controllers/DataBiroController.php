@@ -36,10 +36,10 @@ class DataBiroController extends Controller
                     'data_biro_tgl' => $r->data_biro_tgl,
                     'data_biro_sim_a_baru' => $r->data_biro_sim_a_baru,
                     'data_biro_sim_c_baru' => $r->data_biro_sim_c_baru,
-                    'data_biro_sim_ac_baru' => $r->data_biro_sim_d_baru,
+                    'data_biro_sim_ac_baru' => $r->data_biro_sim_ac_baru,
                     'data_biro_sim_a_perpanjang' => $r->data_biro_sim_a_perpanjang,
                     'data_biro_sim_c_perpanjang' => $r->data_biro_sim_c_perpanjang,
-                    'data_biro_sim_ac_perpanjang' => $r->data_biro_sim_d_perpanjang
+                    'data_biro_sim_ac_perpanjang' => $r->data_biro_sim_ac_perpanjang
                 ]);
                 return back()->with('pesan','Input Data Success');
             }else{
@@ -50,10 +50,10 @@ class DataBiroController extends Controller
                             'data_biro_tgl' => $r->data_biro_tgl,
                             'data_biro_sim_a_baru' => $r->data_biro_sim_a_baru,
                             'data_biro_sim_c_baru' => $r->data_biro_sim_c_baru,
-                            'data_biro_sim_ac_baru' => $r->data_biro_sim_d_baru,
+                            'data_biro_sim_ac_baru' => $r->data_biro_sim_ac_baru,
                             'data_biro_sim_a_perpanjang' => $r->data_biro_sim_a_perpanjang,
                             'data_biro_sim_c_perpanjang' => $r->data_biro_sim_c_perpanjang,
-                            'data_biro_sim_ac_perpanjang' => $r->data_biro_sim_d_perpanjang
+                            'data_biro_sim_ac_perpanjang' => $r->data_biro_sim_ac_perpanjang
                         ]);
 
                 if($up == TRUE){

@@ -6,7 +6,7 @@
         <div class="widget">
             <div class="widget-header">
                 <i class="icon-bar-chart"></i>
-                <h3>Data Biro</h3>
+                <h3 style="color:black">Data Biro</h3>
             </div>
             <div class="widget-content" id="jam_buka" style="display: block;">
                 <div style="display:none" id="error" class="alert alert-danger">
@@ -35,7 +35,7 @@
                             </div>
                             <div class="form-group">
                                 <label><b>SIM A DAN C</b></label>
-                                <input placeholder="0" type="number" name="data_biro_sim_d_baru" class="form-control">
+                                <input placeholder="0" type="number" name="data_biro_sim_ac_baru" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -46,7 +46,7 @@
                                 @endphp
                                 <input type="text" readonly class="form-control" value="{{$biro->cabang_nama}}">
                                 <input type="hidden" value="{{session('cabang_id')}}" readonly class="form-control"
-                                    name="biro_id" id="biro_id">
+                                    name="biro_id[]" id="biro_id">
                             </div>
                             <div class="form-group">
                                 <label><b>SIM A PERPANJANG</b></label>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="form-group">
                                 <label><b>SIM A DAN C PERPANJANG</b></label>
-                                <input placeholder="0" type="number" name="data_biro_sim_d_perpanjang"
+                                <input placeholder="0" type="number" name="data_biro_sim_ac_perpanjang"
                                     class="form-control">
                             </div>
                         </div>

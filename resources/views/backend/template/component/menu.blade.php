@@ -1,5 +1,5 @@
 <div class="subnavbar">
-    <div class="subnavbar-inner"  style="background-color: #109DE0;">
+    <div class="subnavbar-inner"  style="background-color: transparent;">
         <div class="container">
             <!-- jika polres -->
             @if( Session::get('user_level') == 1)

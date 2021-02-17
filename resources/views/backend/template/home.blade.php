@@ -1,7 +1,7 @@
 @extends('backend.template.index')
 
 @section('content')
-<div class="row">
+<div id="das" class="row">
     {{-- Sim BAru --}}
     <div class="col-md-12">
         <div class="widget widget-nopad">

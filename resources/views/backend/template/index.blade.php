@@ -19,7 +19,11 @@
     <link href="{{asset('/css/pages/dashboard.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
-
+<style>
+    body{
+        background-image: url("{{asset('/img/back/homeds.svg')}}");
+    }
+</style>
 <body>
     @include('backend.template.component.script')
     <!-- navbar -->
