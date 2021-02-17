@@ -4,7 +4,7 @@
 <center>
     <div class="row mb-4">
         <div class="float-left col-md-11">
-            <h3 style="color:black"><b>Polres</b></h3>
+            <h3 style="color:white"><b>Polres</b></h3>
         </div>
         <div class="float-right col-md-1">
             <button class="btn btn-sm" style="background-color: #019943" onclick="bukaModal()"><i style="color:white" class="icon-plus"></i></button>

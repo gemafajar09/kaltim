@@ -41,3 +41,5 @@ Route::get('/data-polres', 'DataPolresController@index')->name('data-polres')->m
 Route::get('/report-polres', 'DataPolresController@report_polres')->name('report-polres')->middleware('Ceklogin');
 Route::post('/data-polres-save', 'DataPolresController@save')->name('data-polres-save')->middleware('Ceklogin');
 Route::get('/data-polres-delete/{id}', 'DataPolresController@delete')->name('data-polres-delete')->middleware('Ceklogin');
+Route::get('/datatable/{dari}/{sampai}', 'DataPolresController@datatable');
+Route::get('/exportexcel/{dari}/{sampai}', 'DataPolresController@exportexcel');

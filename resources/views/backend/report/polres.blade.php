@@ -3,10 +3,24 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
+        <div class="float-left">
+            <label for="" style="color:white">Print to:</label>
+            <button type="button" onclick="cetakexcel()" class="btn btn-success"><img src="{{asset('/icon/excel.png')}}" style="width:20px" alt=""></button>
+            <!-- <button type="button" class="btn "><img src="{{asset('/icon/word.png')}}" style="width:20px" alt=""></button> -->
+        </div>
+        <div class="float-right">
+            <label for="" style="color:white">Filter Data dari: </label>
+            <input type="date" id="dari" name="dari" class="from-control">
+            <label for="" style="color:white">Sampai</label>
+            <input type="date" id="sampai" name="sampai" class="from-control">
+            <button type="button" onclick="caridata()" class="btn btn-success btn-sm"><i class="icon-search"></i></button>
+        </div>
         <div class="widget">
-            <div class="widget-header">
-                <i class="icon-bar-chart"></i>
-                <h3 style="color:black">Laporan Polres</h3>
+            <div class="widget-header widget-md">
+                <div class="float-left">
+                    <i class="icon-bar-chart"></i>
+                    <h3 style="color:black">Laporan Polres</h3>
+                </div>
             </div>
             <div class="widget-content">
                 <div style="display:none" id="error" class="alert alert-danger">
@@ -15,75 +29,7 @@
                 <div style="display:none" id="success" class="alert alert-success">
                     {{session('pesan')}}
                 </div>
-                <table id="table" class="table table-striped table-responsive">
-                    <thead>
-                        <tr style="font-size:10px">
-                            <th>No</th>
-                            <th>Tanggal</th>
-                            <th>Polres</th>
-                            <th>SIM A BARU</th>
-                            <th>SIM A UMUM BARU</th>
-                            <th>SIM B1 BARU</th>
-                            <th>SIM B2 BARU</th>
-                            <th>SIM C BARU</th>
-                            <th>SIM D BARU</th>
-                            <th>SIM A PERPANJANG</th>
-                            <th>SIM A UMUM PERPANJANG</th>
-                            <th>SIM B1 PERPANJANG</th>
-                            <th>SIM B2 PERPANJANG</th>
-                            <th>SIM C PERPANJANG</th>
-                            <th>SIM D PERPANJANG</th>
-                            <th style="text-align: center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($data as $no => $row)
-                        <tr>
-                            <td>{{ $no + 1 }}</td>
-                            <td>{{ bulantahun($row->data_polres_tgl) }}</td>
-                            <td>{{ $row->cabang_nama }}</td>
-                            <td>{{ $row->data_polres_sim_a_baru }}</td>
-                            <td>{{ $row->data_polres_sim_a_umum_baru }}</td>
-                            <td>{{ $row->data_polres_sim_b1_baru }}</td>
-                            <td>{{ $row->data_polres_sim_b2_baru }}</td>
-                            <td>{{ $row->data_polres_sim_c_baru }}</td>
-                            <td>{{ $row->data_polres_sim_d_baru }}</td>
-                            <td>{{ $row->data_polres_sim_a_perpanjang }}</td>
-                            <td>{{ $row->data_polres_sim_a_umum_perpanjang }}</td>
-                            <td>{{ $row->data_polres_sim_b1_perpanjang }}</td>
-                            <td>{{ $row->data_polres_sim_b2_perpanjang }}</td>
-                            <td>{{ $row->data_polres_sim_c_perpanjang }}</td>
-                            <td>{{ $row->data_polres_sim_d_perpanjang }}</td>
-                            <td style="text-align: center">
-                                @if( Session::get('user_level') == 1)
-                                <a onclick="detail('{{$row->data_polres_id}}')" class="btn btn-info btn-sm icon-info"></a>
-                                <a onclick="edit(
-                                '{{$row->data_polres_id}}',
-                                '{{$row->polres_id}}',
-                                '{{$row->cabang_nama}}',
-                                '{{$row->data_polres_tgl}}',
-                                '{{$row->data_polres_sim_a_baru}}',
-                                '{{$row->data_polres_sim_a_umum_baru}}',
-                                '{{$row->data_polres_sim_b1_baru}}',
-                                '{{$row->data_polres_sim_b2_baru}}',
-                                '{{$row->data_polres_sim_c_baru}}',
-                                '{{$row->data_polres_sim_d_baru}}',
-                                '{{$row->data_polres_sim_a_perpanjang}}',
-                                '{{$row->data_polres_sim_a_umum_perpanjang}}',
-                                '{{$row->data_polres_sim_b1_perpanjang}}',
-                                '{{$row->data_polres_sim_b2_perpanjang}}',
-                                '{{$row->data_polres_sim_c_perpanjang}}',
-                                '{{$row->data_polres_sim_d_perpanjang}}'
-                                )" class="btn btn-warning btn-sm icon-edit"></a>
-                                <a href="{{route('data-polres-delete', encrypt($row->data_polres_id))}}" class="btn btn-danger btn-sm icon-trash"></a>
-                                @else
-                                    -
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div id="isi"></div>
             </div>
         </div>
     </div>
@@ -196,6 +142,35 @@
     </div>
 </div>
 <script>
+    $(document).ready(function(){
+        var d = $('#dari').val()
+        var s = $('#sampai').val()
+        if(d == '')
+        {
+            var dari = 0;
+            var sampai = 0;
+        }else{
+            var dari = d;
+            var sampai = s;
+        }
+        $('#isi').load("/datatable/"+ dari +"/"+ sampai)
+    })
+
+    function caridata()
+    {
+        var d = $('#dari').val()
+        var s = $('#sampai').val()
+        if(d == '')
+        {
+            var dari = 0;
+            var sampai = 0;
+        }else{
+            var dari = d;
+            var sampai = s;
+        }
+        $('#isi').load("/datatable/"+ dari +"/"+ sampai)
+    }
+
     function detail(id)
     {
         $.ajax({
@@ -209,6 +184,21 @@
                 $('#detail').modal()
             }
         })
+    }
+
+    function cetakexcel()
+    {
+        var d = $('#dari').val()
+        var s = $('#sampai').val()
+        if(d == '')
+        {
+            var dari = 0;
+            var sampai = 0;
+        }else{
+            var dari = d;
+            var sampai = s;
+        }
+        window.open("/exportexcel/"+ dari +"/"+ sampai, '_blank');
     }
 
     function edit(
