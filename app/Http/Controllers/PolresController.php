@@ -13,7 +13,7 @@ class PolresController extends Controller
     public function index()
     {
         $data = DB::table('tb_cabang')->where('cabang_kode',1)->get();
-        return view('backend.polres.polres',compact('data'));
+        return view('backend.polres.polres');
     }
 
     public function save(Request $r)

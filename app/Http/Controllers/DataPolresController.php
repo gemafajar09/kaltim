@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Exports\ReportPolda;
+use Maatwebsite\Excel\Facades\Excel;
 use DB;
 use Illuminate\Support\Facades\Validator;
 use File;
@@ -94,13 +96,27 @@ class DataPolresController extends Controller
 
     public function report_polres()
     {
-        $bulan = date('m');
-        $data = DB::table('tb_data_polres')
-                ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
-                ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
-                ->where(DB::raw('MONTH(tb_data_polres.data_polres_tgl)'),$bulan)
-                ->get();
-        return view('backend.report.polres',compact('data'));
+        return view('backend.report.polres');
+    }
+ 
+    public function datatable($dari, $sampai)
+    {
+        if($dari == 0 && $sampai == 0)
+        {
+            $bulan = date('m');
+            $data = DB::table('tb_data_polres')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
+                    ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
+                    ->where(DB::raw('MONTH(tb_data_polres.data_polres_tgl)'),$bulan)
+                    ->get();
+        }else{
+            $data = DB::table('tb_data_polres')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
+                    ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
+                    ->whereBetween('tb_data_polres.data_polres_tgl',[$dari,$sampai])
+                    ->get();
+        }
+        return view('backend.report.tabelpolres',compact('data'));
     }
 
     public function detail(Request $r)
@@ -109,5 +125,26 @@ class DataPolresController extends Controller
         $data['isi'] = DB::table('tb_detail')->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')->where('tb_detail.id_data',$id)->get();
         // dd($data['isi']);
         return view('backend.report.polresdetail',$data);
+    }
+
+    public function exportexcel($dari, $sampai)
+    {
+        if($dari == 0 && $sampai == 0)
+        {
+            $bulan = date('m');
+            $data['isi'] = DB::table('tb_data_polres')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
+                    ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
+                    ->where(DB::raw('MONTH(tb_data_polres.data_polres_tgl)'),$bulan)
+                    ->get();
+        }else{
+            $data['isi'] = DB::table('tb_data_polres')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
+                    ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
+                    ->whereBetween('tb_data_polres.data_polres_tgl',[$dari,$sampai])
+                    ->get();
+        }
+        $data['biro'] = DB::table('tb_cabang')->where('cabang_kode',2)->get();
+        return view('backend.report.export',$data);
     }
 }
