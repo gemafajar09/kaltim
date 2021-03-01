@@ -102,7 +102,7 @@ class DataPolresController extends Controller
         $polres = DB::table('tb_cabang')->where('cabang_kode', '=', 1)->get();
         return view('backend.report.polres', compact('polres'));
     }
- 
+
     public function datatable($cabang, $dari, $sampai)
     {
         if($cabang == 0 && $dari == 0 && $sampai == 0)
@@ -142,7 +142,15 @@ class DataPolresController extends Controller
     public function detail(Request $r)
     {
         $id = $r->id;
-        $data['isi'] = DB::table('tb_detail')->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')->where('tb_detail.id_data',$id)->get();
+        $data['isi'] = DB::table('tb_detail')
+                        ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
+                        ->where('tb_detail.id_data',$id)
+                        ->get();
+
+        $data['isi_simlink'] = DB::table('tb_simlink')
+                                ->join('tb_data_polres','tb_data_polres.data_polres_id','tb_simlink.id_data')
+                                ->where('tb_simlink.id_data',$id)
+                                ->get();
         // dd($data['isi']);
         return view('backend.report.polresdetail',$data);
     }

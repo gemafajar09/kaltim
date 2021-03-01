@@ -18,6 +18,7 @@ header("Content-Disposition: attachment; filename=Data Mahasiswa.xls");
             </tr>
         </thead>
     </table>
+
     <table border="2">
         <thead>
             <tr>
@@ -56,41 +57,246 @@ header("Content-Disposition: attachment; filename=Data Mahasiswa.xls");
             </tr>
         </thead>
         <tbody>
-        
+            <?php
+                $baru = 0;
+                $perpanjang = 0;
+                $peningkatan = 0;
+                $peningkatan = 0;
+                $rusak = 0;
+                $sim_a =0;
+                $sim_c =0;
+                $sim_d =0;
+
+                $sim_ap =0;
+                $sim_aup =0;
+                $sim_c =0;
+                $sim_d =0;
+                $sim_b1 =0;
+                $sim_b1u =0;
+                $sim_b2 =0;
+                $sim_b2u =0;
+
+                $sim_p_au =0;
+                $sim_p_b1 =0;
+                $sim_p_b1u =0;
+                $sim_p_b2 =0;
+                $sim_p_b2u =0;
+
+                $simlink_total =0;
+            ?>
+
+
+            @foreach($isi as $i => $row)
+            <?php 
+            $cabang =  DB::table('tb_detail')
+                        ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
+                        ->where('tb_detail.id_data',$row->data_polres_id)
+                        ->first();
+
+            $simlink = DB::table('tb_simlink')
+                        ->where('id_data',$row->data_polres_id)
+                        ->first();
+            
+            $baru += ($row->data_polres_sim_a_baru + $row->data_polres_sim_c_baru + $row->data_polres_sim_d_baru);
+
+            $perpanjang += (
+                            $row->data_polres_sim_a_perpanjang + $row->data_polres_sim_a_umum_perpanjang +  $row->data_polres_sim_c_perpanjang + $row->data_polres_sim_d_perpanjang +  $row->data_polres_sim_b1_baru + $row->data_polres_sim_b1_perpanjang + $row->data_polres_sim_b2_baru +  $row->data_polres_sim_b2_perpanjang );
+
+            $peningkatan += (
+                                $row->data_polres_sim_a_umum_baru +
+                                $row->data_polres_sim_b1_umum +
+                                $row->data_polres_sim_b1_umum_perpanjang +
+                                $row->data_polres_sim_b2_umum +
+                                $row->data_polres_sim_b2_umum_perpanjang
+                            );
+
+            $rusak += ($row->rusak); 
+
+            $sim_a += $row->data_polres_sim_a_baru;
+            $sim_c += $row->data_polres_sim_c_baru;
+            $sim_d += $row->data_polres_sim_d_baru;
+
+            $sim_ap += $row->data_polres_sim_a_perpanjang;
+            $sim_aup += $row->data_polres_sim_a_umum_perpanjang;
+            $sim_c += $row->data_polres_sim_c_perpanjang;
+            $sim_d += $row->data_polres_sim_d_perpanjang;
+            $sim_b1 += $row->data_polres_sim_b1_baru;
+            $sim_b1u += $row->data_polres_sim_b1_perpanjang;
+            $sim_b2 += $row->data_polres_sim_b2_baru;
+            $sim_b2u += $row->data_polres_sim_b2_perpanjang;
+
+            $sim_p_au +=$row->data_polres_sim_a_umum_baru;
+            $sim_p_b1 +=$row->data_polres_sim_b1_umum;
+            $sim_p_b1u +=$row->data_polres_sim_b1_umum_perpanjang;
+            $sim_p_b2 +=$row->data_polres_sim_b2_umum;
+            $sim_p_b2u +=$row->data_polres_sim_b2_umum_perpanjang;
+
+            $simlink_total += ($simlink->simlink1 + $simlink->simlink2); 
+            ?>
+            <tr>
+                <td>{{ $i + 1 }}</td>
+                <th>{{ $row->cabang_nama }}</th>
+
+                <th>{{ $row->data_polres_sim_a_baru }}</th>
+                <th>{{ $row->data_polres_sim_c_baru }}</th>
+                <th>{{ $row->data_polres_sim_d_baru }}</th>
+
+                <th>{{ $row->data_polres_sim_a_perpanjang }}</th>
+                <th>{{ $row->data_polres_sim_a_umum_perpanjang }}</th>
+                <th>{{ $row->data_polres_sim_c_perpanjang }}</th>
+                <th>{{ $row->data_polres_sim_d_perpanjang }}</th>
+                <th>{{ $row->data_polres_sim_b1_baru }}</th>
+                <th>{{ $row->data_polres_sim_b1_perpanjang }}</th>
+                <th>{{ $row->data_polres_sim_b2_baru }}</th>
+                <th>{{ $row->data_polres_sim_b2_perpanjang }}</th>
+                
+                <th>{{ $row->data_polres_sim_a_umum_baru }}</th>
+                <th>{{ $row->data_polres_sim_b1_umum }}</th>
+                <th>{{ $row->data_polres_sim_b1_umum_perpanjang }}</th>
+                <th>{{ $row->data_polres_sim_b2_umum }}</th>
+                <th>{{ $row->data_polres_sim_b2_umum_perpanjang }}</th>
+                
+                <th>
+                    {{ 
+                        $row->data_polres_sim_a_baru + 
+                        $row->data_polres_sim_c_baru +
+                        $row->data_polres_sim_d_baru +
+
+                        $row->data_polres_sim_a_perpanjang +
+                        $row->data_polres_sim_a_umum_perpanjang +
+                        $row->data_polres_sim_c_perpanjang +
+                        $row->data_polres_sim_d_perpanjang +
+                        $row->data_polres_sim_b1_baru +
+                        $row->data_polres_sim_b1_perpanjang +
+                        $row->data_polres_sim_b2_baru +
+                        $row->data_polres_sim_b2_perpanjang +
+
+                        $row->data_polres_sim_a_umum_baru +
+                        $row->data_polres_sim_b1_umum +
+                        $row->data_polres_sim_b1_umum_perpanjang +
+                        $row->data_polres_sim_b2_umum +
+                        $row->data_polres_sim_b2_umum_perpanjang 
+                    }}
+                </th>
+                <th>{{ $row->rusak }}</th>
+
+            </tr>
+            
+            <tr>
+                <td></td>
+                <td>SIMLING I</td>
+
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <th>{{ $simlink->simlink1 }}</th>
+                <td></td>
+                
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>SIMLING II</td>
+
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <th>{{ $simlink->simlink2 }}</th>
+                <td></td>
+                
+            </tr>
+            @endforeach
         </tbody>
         <tfoot>
             <tr>
                 <th colspan="2" rowspan="3">JUMLAH</th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-                <th>9</th>
-                <th>10</th>
-                <th>11</th>
-                <th>12</th>
-                <th>13</th>
-                <th>14</th>
-                <th>15</th>
-                <th>16</th>
-                <th>17</th>
-                <th>18</th>
+                <th>{{ $sim_a }}</th>
+                <th>{{ $sim_c }}</th>
+                <th>{{ $sim_d }}</th>
+
+                <th>{{ $sim_ap }}</th>
+                <th>{{ $sim_aup }}</th>
+                <th>{{ $sim_c }}</th>
+                <th>{{ $sim_d }}</th>
+                <th>{{ $sim_b1 }}</th>
+                <th>{{ $sim_b1u }}</th>
+                <th>{{ $sim_b2 }}</th>
+                <th>{{ $sim_b2u }}</th>
+                
+                <th>{{ $sim_p_au }}</th>
+                <th>{{ $sim_p_b1 }}</th>
+                <th>{{ $sim_p_b1u }}</th>
+                <th>{{ $sim_p_b2 }}</th>
+                <th>{{ $sim_p_b2u  }}</th>
+                
+                <th>
+                    {{ 
+                        $baru + $perpanjang + $peningkatan + $simlink_total
+                    }}
+                </th>
+                <th>{{ $rusak }}</th>
             </tr>
             <tr>
-                <th colspan="3">1</th>
-                <th colspan="8">2</th>
-                <th colspan="5">3</th>
+                <th colspan="3">
+                    {{ 
+                        $baru 
+                    }}
+                </th>
+                <th colspan="8">
+                    {{
+                        $perpanjang 
+                    }}
+                </th>
+                <th colspan="5">
+                    {{
+                        $peningkatan 
+                    }}
+                </th>
                 <th colspan="2">&nbsp;</th>
             </tr>
             <tr>
-                <th colspan="16">1</th>
+                <th colspan="16">
+                    {{ 
+                        $baru + $perpanjang + $peningkatan
+                    }}
+                </th>
                 <th colspan="2">&nbsp;</th>
             </tr>
-        </tfoot>
+        </tfoot> 
     </table>
+
+
 </body>
 </html>
