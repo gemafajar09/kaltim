@@ -122,7 +122,6 @@
                                         <label><b>SIM B1 PENINGKATAN</b></label>
                                         <input placeholder="0" type="number" name="data_polres_sim_b1_baru" class="form-control">
                                     </div>
-                                    
                                     <div class="form-group">
                                         <label><b>SIM B1U PENINGKATAN</b></label>
                                         <input placeholder="0" type="number" name="data_polres_sim_b1_umum" class="form-control">
@@ -143,73 +142,134 @@
                             </div>
                         </div>
                     </div>     
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label><b>SIM LINK I A</b></label>
-                            <input placeholder="0" type="number" name="simlink1a" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><b>SIM LINK I AU</b></label>
-                            <input placeholder="0" type="number" name="simlink1au" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><b>SIM LINK I C</b></label>
-                            <input placeholder="0" type="number" name="simlink1c" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><b>SIM LINK I D</b></label>
-                            <input placeholder="0" type="number" name="simlink1d" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><b>RUSAK</b></label>
-                            <input placeholder="0" type="number" name="simlink1rusak" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label><b>SIM LINK II A</b></label>
-                            <input placeholder="0" type="number" name="simlink2a" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><b>SIM LINK II AU</b></label>
-                            <input placeholder="0" type="number" name="simlink2au" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><b>SIM LINK II C</b></label>
-                            <input placeholder="0" type="number" name="simlink2c" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><b>SIM LINK II D</b></label>
-                            <input placeholder="0" type="number" name="simlink2d" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><b>RUSAK</b></label>
-                            <input placeholder="0" type="number" name="simlink2rusak" class="form-control">
+                    <div class="col-md-3 py-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label><b>SIM LINK I A</b></label>
+                                    <input placeholder="0" type="number" name="simlink1_a" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM LINK I AU</b></label>
+                                    <input placeholder="0" type="number" name="simlink1_au" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM LINK I C</b></label>
+                                    <input placeholder="0" type="number" name="simlink1_c" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM LINK I D</b></label>
+                                    <input placeholder="0" type="number" name="simlink1_d" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM LINK I B1</b></label>
+                                    <input placeholder="0" type="number" name="simlink1_b1" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM LINK I B1U</b></label>
+                                    <input placeholder="0" type="number" name="simlink1_b1u" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM LINK I B2</b></label>
+                                    <input placeholder="0" type="number" name="simlink1_b2" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM LINK I B2U</b></label>
+                                    <input placeholder="0" type="number" name="simlink1_b2u" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM LINK I RUSAK</b></label>
+                                    <input placeholder="0" type="number" name="simlink1_rusak" class="form-control">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label><b>BUS MILENIAL A</b></label>
-                            <input placeholder="0" type="number" name="simlinka" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><b>BUS MILENIAL AU</b></label>
-                            <input placeholder="0" type="number" name="simlinkau" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><b>BUS MILENIAL C</b></label>
-                            <input placeholder="0" type="number" name="simlinkc" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><b>BUS MILENIAL D</b></label>
-                            <input placeholder="0" type="number" name="simlinkd" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><b>RUSAK</b></label>
-                            <input placeholder="0" type="number" name="busmilenialrusak" class="form-control">
+                    <div class="col-md-3 py-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label><b>SIM LINK II A</b></label>
+                                    <input placeholder="0" type="number" name="simlink2_a" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM LINK II AU</b></label>
+                                    <input placeholder="0" type="number" name="simlink2_au" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM LINK II C</b></label>
+                                    <input placeholder="0" type="number" name="simlink2_c" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM LINK II D</b></label>
+                                    <input placeholder="0" type="number" name="simlink2_d" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM LINK II B1</b></label>
+                                    <input placeholder="0" type="number" name="simlink2_b1" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM LINK II B1U</b></label>
+                                    <input placeholder="0" type="number" name="simlink2_b1u" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM LINK II B2</b></label>
+                                    <input placeholder="0" type="number" name="simlink2_b2" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM LINK II B2U</b></label>
+                                    <input placeholder="0" type="number" name="simlink2_b2u" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM LINK II RUSAK</b></label>
+                                    <input placeholder="0" type="number" name="simlink2_rusak" class="form-control">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 py-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label><b>BUS MILENIAL A</b></label>
+                                    <input placeholder="0" type="number" name="bus_a" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>BUS MILENIAL AU</b></label>
+                                    <input placeholder="0" type="number" name="bus_au" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>BUS MILENIAL C</b></label>
+                                    <input placeholder="0" type="number" name="bus_c" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>BUS MILENIAL D</b></label>
+                                    <input placeholder="0" type="number" name="bus_d" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>BUS MILENIAL B1</b></label>
+                                    <input placeholder="0" type="number" name="bus_b1" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>BUS MILENIAL B1U</b></label>
+                                    <input placeholder="0" type="number" name="bus_b1u" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>BUS MILENIAL B2</b></label>
+                                    <input placeholder="0" type="number" name="bus_b2" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>BUS MILENIAL B2U</b></label>
+                                    <input placeholder="0" type="number" name="bus_b2u" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>BUS MILENIAL RUSAK</b></label>
+                                    <input placeholder="0" type="number" name="bus_rusak" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 py-2">
                         <div class="form-group">
                             <label><b>DATA RUSAK</b></label>
                             <input placeholder="0" type="number" name="rusak" class="form-control">
@@ -287,9 +347,9 @@
     my_Clock.prototype.update = function () {
         this.updateTime(1);
         // buka aplikasi jam 8 pagi
-        if(this.hours >= 8 && this.hours <= 16 ){
+        if(this.hours >= 8 && this.hours <= 23 ){
             // console.log('buka');
-            if(this.hours <= 16 && this.minutes <= 59){
+            if(this.hours <= 23 && this.minutes <= 59){
                 // console.log('buka1');
                 $('#jam_buka').css('display', 'block');
                 $('#jam_tutup').css('display', 'none');

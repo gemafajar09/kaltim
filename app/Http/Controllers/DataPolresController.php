@@ -21,6 +21,7 @@ class DataPolresController extends Controller
     {
         if($r->data_polres_id == '')
         {
+            // input ke tb_data_polres
             $id = DB::table('tb_data_polres')->insertGetId([
                 'polres_id' => $r->polres_id,
                 'data_polres_tgl' => $r->data_polres_tgl,
@@ -43,11 +44,46 @@ class DataPolresController extends Controller
                 'rusak' => $r->rusak,
             ]);
             $id_biro = $r->id_biro;
+            
             // dd($id_biro);
             DB::table('tb_simlink')->insert([
-                'id_data' => $id, 'simlink1' => $r->simlink1, 
-                'simlink2' => $r->simlink2]
-            );
+                'id_data' => $id, 
+                'simlink1_a' => $r->simlink1_a, 
+                'simlink1_au' => $r->simlink1_au,
+                'simlink1_c' => $r->simlink1_c,
+                'simlink1_d' => $r->simlink1_d,
+                'simlink1_b1' => $r->simlink1_b1,
+                'simlink1_b1u' => $r->simlink1_b1u,
+                'simlink1_b2' => $r->simlink1_b2,
+                'simlink1_b2u' => $r->simlink1_b2u,
+                'simlink1_rusak' => $r->simlink1_rusak,
+                'simlink2_a' => $r->simlink2_a,
+                'simlink2_au' => $r->simlink2_au,
+                'simlink2_c' => $r->simlink2_c,
+                'simlink2_d' => $r->simlink2_d,
+                'simlink2_b1' => $r->simlink2_b1,
+                'simlink2_b1u' => $r->simlink2_b1u,
+                'simlink2_b2' => $r->simlink2_b2,
+                'simlink2_b2u' => $r->simlink2_b2u,
+                'simlink2_rusak' => $r->simlink2_rusak,
+            ]);
+
+            DB::table('tb_bus')->insert([
+                'bus_a' => $r->bus_a,
+                'bus_au' => $r->bus_au,
+                'bus_c' => $r->bus_c,
+                'bus_d' => $r->bus_d,
+                'bus_b1' => $r->bus_b1,
+                'bus_b1u' => $r->bus_b1u,
+                'bus_b2' => $r->bus_b2,
+                'bus_b2u' => $r->bus_b2u,
+                'bus_rusak' => $r->bus_rusak,
+                'id_data' => $id,
+                'tanggal' => date('Y-m-d'),
+                'id_polres' => $r->polres_id,
+
+            ]);
+
             foreach($id_biro as $i => $a)
             {
                 DB::table('tb_detail')->insert([

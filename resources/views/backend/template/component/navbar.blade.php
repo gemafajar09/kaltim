@@ -33,4 +33,44 @@
     </ul>
 </nav>
 
+<!-- modal -->
+<div class="modal" id="formModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Edit Akun</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form action="{{route('data-user-add')}}" method="post" enctype="multipart/form-data">
+        @csrf
+            <div class="modal-body">
+                    <div class="col-md-12">
+                        <label><b>Nama</b></label>
+                        <input type="hidden" name="user_id" id="user_id">
+                        <input type="text" name="user_nama" id="user_nama" placeholder="Nama User" class="form-control">
+                    </div>
+                    <div class="col-md-12">
+                        <label><b>Username</b></label>
+                        <input type="text" name="user_username" id="user_username" placeholder="Username" class="form-control">
+                    </div>
+                    <div class="col-md-12">
+                        <label><b>Password</b></label>
+                        <input type="password" name="user_password" id="user_password" placeholder="Password" class="form-control">
+                    </div>
+                    <div class="col-md-12">
+                        <label><b>Ulangi Password</b></label>
+                        <input type="password" name="user_ulangi_password" id="user_ulangi_password" placeholder="password" class="form-control">
+                    </div>
+                    <div align="right" class="col-md-12 py-1">
+                        <button type="reset" class="btn btn-outline-info">Reset</button>
+                        <button type="submit" class="btn btn-outline-success">Save</button>
+                    </div>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
 
