@@ -51,6 +51,7 @@ class LoginController extends Controller
             {
                 $r->session()->put("user_id", $cek->user_id);
                 $r->session()->put("user_nama", $cek->user_nama);
+                $r->session()->put("user_username", $cek->user_username);
                 $r->session()->put("cabang_id", $cek->cabang_id);
                 $r->session()->put("user_level", $cek->user_level);
                 return redirect('home')->with('pesan','Selamat Datang');
@@ -107,7 +108,7 @@ class LoginController extends Controller
     
                 return back()->with('pesan','Data Berhasil Di Inputkan.');
             }else{
-                return back()->with('pesan','Data Gagal Di Inputkan.');
+                return back()->with('error','Data Gagal Di Inputkan.');
             }
         }
     }
