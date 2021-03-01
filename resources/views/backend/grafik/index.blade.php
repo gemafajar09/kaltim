@@ -147,6 +147,42 @@
             </div>
         </div>
     </div>
+    {{--  --}}
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header">
+                <i class="icon-bar-chart"></i>
+                <h3>Grafik SURAT PENGANTAR PSIKOLOGI A</h3>
+            </div>
+            <div class="widget-content">
+                <canvas class="barchart" class="chart-holder" width="600px" height="300px"></canvas>
+            </div>
+        </div>
+    </div>
+    {{--  --}}
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header">
+                <i class="icon-bar-chart"></i>
+                <h3>Grafik SURAT PENGANTAR PSIKOLOGI C</h3>
+            </div>
+            <div class="widget-content">
+                <canvas class="barchart" class="chart-holder" width="600px" height="300px"></canvas>
+            </div>
+        </div>
+    </div>
+    {{--  --}}
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header">
+                <i class="icon-bar-chart"></i>
+                <h3>Grafik SURAT PENGANTAR PSIKOLOGI A DAN C</h3>
+            </div>
+            <div class="widget-content">
+                <canvas class="barchart" class="chart-holder" width="600px" height="300px"></canvas>
+            </div>
+        </div>
+    </div>
 </div>
 
 @include('backend.template.chart.chartGrafik')

@@ -6,7 +6,7 @@
 
         // The data for our dataset
         data: {
-            labels: ["SIM A", "SIM A UMUM", "SIM B1", "SIM B2", "SIM C", "SIM D"
+            labels: ["SIM A", "SIM A UMUM", "SIM B1", "SIM B2", "SIM C", "SIM D","PENGANTAR SIM A","PENGANTAR SIM C","PENGANTAR SIM A & C"
         ],
             datasets: [{
                 // label: 'My First dataset',
@@ -27,7 +27,7 @@
 
         // The data for our dataset
         data: {
-            labels: ["SIM A", "SIM A UMUM", "SIM B1", "SIM B2", "SIM C", "SIM D"
+            labels: ["SIM A", "SIM A UMUM", "SIM B1", "SIM B2", "SIM C", "SIM D","PENGANTAR SIM A","PENGANTAR SIM C","PENGANTAR SIM A & C"
         ],
             datasets: [{
                 // label: 'My First dataset',

@@ -20,9 +20,6 @@ class CreateDetailModelsTable extends Migration
             $table->integer('sim_a_baru');
             $table->integer('sim_c_baru');
             $table->integer('sim_ac_baru');
-            $table->integer('sim_a_perpanjang');
-            $table->integer('sim_c_perpanjang');
-            $table->integer('sim_ac_perpanjang');
         });
     }
 
