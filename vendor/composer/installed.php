@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '6bb754d63b97e3cf203a03faf80b2bb30f5f9d07',
+    'reference' => 'd846350ad9380f64cdb25e976bdbf8b28f60c9de',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -431,7 +431,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '6bb754d63b97e3cf203a03faf80b2bb30f5f9d07',
+      'reference' => 'd846350ad9380f64cdb25e976bdbf8b28f60c9de',
     ),
     'laravel/tinker' => 
     array (
@@ -471,12 +471,12 @@
     ),
     'maatwebsite/excel' => 
     array (
-      'pretty_version' => '3.1.26',
-      'version' => '3.1.26.0',
+      'pretty_version' => '3.1.27',
+      'version' => '3.1.27.0',
       'aliases' => 
       array (
       ),
-      'reference' => '66f7c9584304ad0b6a267a5d8ffbfa2ff4272e85',
+      'reference' => '584d65427eae4de0ba072297c8fac9b0d63dbc37',
     ),
     'maennchen/zipstream-php' => 
     array (

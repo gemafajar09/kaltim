@@ -21,57 +21,76 @@ header("Content-Disposition: attachment; filename=Data Mahasiswa.xls");
     <table border="2">
         <thead>
             <tr>
-                <th>No</th>
-                <th>TANGGAL</th>
-                <th>POLRES</th>
-                <th>SIM A BARU</th>
-                <th>SIM A UMUM BARU</th>
-                <th>SIM B1 BARU</th>
-                <th>SIM B2 BARU</th>
-                <th>SIM C BARU</th>
-                <th>SIM D BARU</th>
-                <th>SIM A PERPANJANG</th>
-                <th>SIM A UMUM PERPANJANG</th>
-                <th>SIM B1 PERPANJANG</th>
-                <th>SIM B2 PERPANJANG</th>
-                <th>SIM C PERPANJANG</th>
-                <th>SIM D PERPANJANG</th>
-                @foreach($biro as $c)
-                <th>{{$c->cabang_nama}}</th>
-                <th>SURAT KETERANGAN A</th>
-                <th>SURAT KETERANGAN C</th>
-                <th>SURAT KETERANGAN A & C</th>
-                @endforeach
+                <th rowspan="3">NO</th>
+                <th rowspan="3">SATPAS</th>
+                <th colspan="16">JENIS GOLONGAN SIM</th>
+                <th rowspan="2" colspan="2">JUMLAH PRODUKSI TERMASUK SIM RUSAK</th>
+            </tr>
+            <tr>
+                <th colspan="3">BARU</th>
+                <th colspan="8">PERPANJANG</th>
+                <th colspan="5">PENINGKATAN</th>
+            </tr>
+            <tr>
+                <th>A</th>
+                <th>C</th>
+                <th>D</th>
+
+                <th>A</th>
+                <th>AU</th>
+                <th>C</th>
+                <th>D</th>
+                <th>B1</th>
+                <th>B1U</th>
+                <th>B2</th>
+                <th>B2U</th>
+
+                <th>AU</th>
+                <th>B1</th>
+                <th>B1U</th>
+                <th>B2</th>
+                <th>B2U</th>
+
+                <th>PENERBITAN</th>
+                <th>RUSAK</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($isi as $i => $row)
-            <?php $cabang =  DB::table('tb_detail')->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')->where('tb_detail.id_data',$row->data_polres_id)->get(); ?>
-            <tr>
-                <td>{{ $i + 1 }}</td>
-                <td>{{ bulantahun($row->data_polres_tgl) }}</td>
-                <td>{{ $row->cabang_nama }}</td>
-                <td>{{ $row->data_polres_sim_a_baru }}</td>
-                <td>{{ $row->data_polres_sim_a_umum_baru }}</td>
-                <td>{{ $row->data_polres_sim_b1_baru }}</td>
-                <td>{{ $row->data_polres_sim_b2_baru }}</td>
-                <td>{{ $row->data_polres_sim_c_baru }}</td>
-                <td>{{ $row->data_polres_sim_d_baru }}</td>
-                <td>{{ $row->data_polres_sim_a_perpanjang }}</td>
-                <td>{{ $row->data_polres_sim_a_umum_perpanjang }}</td>
-                <td>{{ $row->data_polres_sim_b1_perpanjang }}</td>
-                <td>{{ $row->data_polres_sim_b2_perpanjang }}</td>
-                <td>{{ $row->data_polres_sim_c_perpanjang }}</td>
-                <td>{{ $row->data_polres_sim_d_perpanjang }}</td>
-                @foreach($cabang as $b)
-                <td>{{$b->cabang_nama}}</td>
-                <td>{{$b->sim_a_baru}}</td>
-                <td>{{$b->sim_c_baru}}</td>
-                <td>{{$b->sim_ac_baru}}</td>
-                @endforeach
-            </tr>
-            @endforeach
+        
         </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="2" rowspan="3">JUMLAH</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+                <th>10</th>
+                <th>11</th>
+                <th>12</th>
+                <th>13</th>
+                <th>14</th>
+                <th>15</th>
+                <th>16</th>
+                <th>17</th>
+                <th>18</th>
+            </tr>
+            <tr>
+                <th colspan="3">1</th>
+                <th colspan="8">2</th>
+                <th colspan="5">3</th>
+                <th colspan="2">&nbsp;</th>
+            </tr>
+            <tr>
+                <th colspan="16">1</th>
+                <th colspan="2">&nbsp;</th>
+            </tr>
+        </tfoot>
     </table>
 </body>
 </html>
