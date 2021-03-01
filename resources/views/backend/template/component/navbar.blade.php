@@ -20,7 +20,7 @@
                 <i style="color:white" class="icon-cogs"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="">
+                <a class="dropdown-item" href="" id="ganti_pass">
                     <i class="icon-cogs text-gray-400"></i>
                     Setting
                 </a>
@@ -32,3 +32,5 @@
         </li>
     </ul>
 </nav>
+
+

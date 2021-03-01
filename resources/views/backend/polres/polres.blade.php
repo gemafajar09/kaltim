@@ -109,9 +109,9 @@
         $('#formModal').modal('show');
     }
     function edit(id, nama, alamat){
-        $('#polres_id').val(id);
-        $('#polres_nama').val(nama);
-        $('#polres_alamat').val(alamat);
+        $('#cabang_id').val(id);
+        $('#cabang_nama').val(nama);
+        $('#cabang_alamat').val(alamat);
         $('#formModal').modal('show');
     }
 </script>

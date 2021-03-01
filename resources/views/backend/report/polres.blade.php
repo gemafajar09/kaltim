@@ -10,12 +10,16 @@
         </div>
         <div class="float-right">
             <label for="" style="color:white">Filter Data: </label>
-            <select name="cabang_id" id="cabang_id">
-                <option value="0">--Semua Polres--</option>
-                @foreach($polres as $no => $row)
-                <option value="{{ $row->cabang_id }}">{{ $row->cabang_nama }}</option>
-                @endforeach
-            </select>
+            
+            @if(session()->has('user_level') == 1)
+                <select name="cabang_id" id="cabang_id">
+                    <option value="0">--Semua Polres--</option>
+                    @foreach($polres as $no => $row)
+                    <option value="{{ $row->cabang_id }}">{{ $row->cabang_nama }}</option>
+                    @endforeach
+                </select>
+            @endif
+
             <label for="" style="color:white">Dari:</label>
             <input type="date" id="dari" name="dari" class="from-control">
             <label for="" style="color:white">Sampai</label>
@@ -214,7 +218,7 @@
             var dari = d;
             var sampai = s;
         }
-        window.open("/exportexcel/"+ cabang +"/"+ dari +"/"+ sampai, '_blank');
+        window.open(`{{ url('exportexcel') }}/`+ cabang +"/"+ dari +"/"+ sampai, '_blank');
     }
 
     function edit(
