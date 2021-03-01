@@ -109,11 +109,25 @@ class DataPolresController extends Controller
         if($cabang == 0 && $dari == 0 && $sampai == 0)
         {
             $bulan = date('m');
-            $data = DB::table('tb_data_polres')
+
+            if(session()->get('user_level')  == 1){
+                $data = DB::table('tb_data_polres')
                     ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
                     ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
                     ->where(DB::raw('MONTH(tb_data_polres.data_polres_tgl)'),$bulan)
                     ->get();
+            
+            }else{
+
+                $data = DB::table('tb_data_polres')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
+                    ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
+                    ->where(DB::raw('MONTH(tb_data_polres.data_polres_tgl)'),$bulan)
+                    ->where('tb_data_polres.polres_id','=', session()->get('cabang_id'))
+                    ->get();
+                
+            }
+
 
         }elseif($cabang != 0 && $dari == 0 && $sampai == 0){
             $data = DB::table('tb_data_polres')
@@ -161,11 +175,24 @@ class DataPolresController extends Controller
         if($cabang == 0 && $dari == 0 && $sampai == 0)
         {
             $bulan = date('m');
-            $data['isi'] = DB::table('tb_data_polres')
+
+            if(session()->get('user_level')  == 1){
+                $data['isi'] = DB::table('tb_data_polres')
                     ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
                     ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
                     ->where(DB::raw('MONTH(tb_data_polres.data_polres_tgl)'),$bulan)
                     ->get();
+            
+            }else{
+
+                $data['isi'] = DB::table('tb_data_polres')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
+                    ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
+                    ->where(DB::raw('MONTH(tb_data_polres.data_polres_tgl)'),$bulan)
+                    ->where('tb_data_polres.polres_id','=', session()->get('cabang_id'))
+                    ->get();
+                
+            }
 
         }elseif($cabang != 0 && $dari == 0 && $sampai == 0){
             $data['isi'] = DB::table('tb_data_polres')

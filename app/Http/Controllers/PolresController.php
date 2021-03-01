@@ -18,7 +18,7 @@ class PolresController extends Controller
 
     public function save(Request $r)
     {
-        if($r->polres_id == '')
+        if($r->cabang_id == '')
         {
             // simpan
             DB::table('tb_cabang')->insert([
