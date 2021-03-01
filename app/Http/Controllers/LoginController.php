@@ -33,6 +33,7 @@ class LoginController extends Controller
     {
         $data['user'] = DB::table('tb_data_user')->join('tb_cabang','tb_cabang.cabang_id','tb_data_user.cabang_id')->get();
         $data['cabang'] = DB::table('tb_cabang')->orderBy('cabang_kode','ASC')->get();
+        $data['level'] = DB::table('tb_level')->get();
         return view("backend.user.index",$data);
     }
 
@@ -61,27 +62,53 @@ class LoginController extends Controller
 
     public function register(Request $r)
     {
-        $user_nama = $r->user_nama;
-        $cabang_id = $r->cabang_id;
-        $user_level = $r->user_level;
-        $user_username = $r->user_username;
-        $user_password = $r->user_password;
-        $user_ulangi_password = $r->user_ulangi_password;
-        if($user_password == $user_ulangi_password)
+        if($r->user_id == '')
         {
-            $pass = hash("sha512", md5($r->user_password));
-            $input = new UserModel();
-            $input->user_nama = $user_nama;
-            $input->cabang_id = $cabang_id;
-            $input->user_level = $user_level;
-            $input->user_username = $user_username;
-            $input->user_password = $pass;
-            $input->user_ulangi_password = encrypt($user_password);
-            $input->save();
-
-            return back()->with('pesan','Data Berhasil Di Inputkan.');
+            $user_nama = $r->user_nama;
+            $cabang_id = $r->cabang_id;
+            $user_level = $r->user_level;
+            $user_username = $r->user_username;
+            $user_password = $r->user_password;
+            $user_ulangi_password = $r->user_ulangi_password;
+            if($user_password == $user_ulangi_password)
+            {
+                $pass = hash("sha512", md5($r->user_password));
+                $input = new UserModel();
+                $input->user_nama = $user_nama;
+                $input->cabang_id = $cabang_id;
+                $input->user_level = $user_level;
+                $input->user_username = $user_username;
+                $input->user_password = $pass;
+                $input->user_ulangi_password = $user_password;
+                $input->save();
+    
+                return back()->with('pesan','Data Berhasil Di Inputkan.');
+            }else{
+                return back()->with('pesan','Data Gagal Di Inputkan.');
+            }
         }else{
-            return back()->with('pesan','Data Gagal Di Inputkan.');
+            $user_nama = $r->user_nama;
+            $cabang_id = $r->cabang_id;
+            $user_level = $r->user_level;
+            $user_username = $r->user_username;
+            $user_password = $r->user_password;
+            $user_ulangi_password = $r->user_ulangi_password;
+            if($user_password == $user_ulangi_password)
+            {
+                $pass = hash("sha512", md5($r->user_password));
+                $input = DB::table('tb_data_user')->where('user_id',$r->user_id)->update([
+                    'user_nama' => $user_nama,
+                    'cabang_id' => $cabang_id,
+                    'user_level' => $user_level,
+                    'user_username' => $user_username,
+                    'user_password' => $pass,
+                    'user_ulangi_password' => $user_ulangi_password,
+                ]);
+    
+                return back()->with('pesan','Data Berhasil Di Inputkan.');
+            }else{
+                return back()->with('pesan','Data Gagal Di Inputkan.');
+            }
         }
     }
 
@@ -93,5 +120,17 @@ class LoginController extends Controller
         $r->session()->forget('user_level');
         $r->session()->flush();
     	return redirect("/")->with('pesan', 'Success Logout.');
+    }
+
+    public function deleteuser($ids)
+    {
+        $id = decrypt($ids);
+        $hapus =DB::table('tb_data_user')->where('user_id',$id)->delete();
+        if($hapus == true)
+        {
+            return back()->with('pesan','Data Berhasil Di Hapus.');
+        }else{
+            return back()->with('pesan','Data Gagal Di Hapus.');
+        }
     }
 }

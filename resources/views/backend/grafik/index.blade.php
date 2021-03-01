@@ -195,7 +195,105 @@
             </div>
         </div>
     </div>
+
+    <!-- simling -->
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header">
+                <i class="icon-bar-chart"></i>
+                <h3>Grafik SIMLING A</h3>
+            </div>
+            <div class="widget-content">
+                <canvas class="barchart" class="chart-holder" width="600px" height="300px"></canvas>
+            </div>
+        </div>
+    </div>
     {{--  --}}
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header">
+                <i class="icon-bar-chart"></i>
+                <h3>Grafik SIMLING A UMUM</h3>
+            </div>
+            <div class="widget-content">
+                <canvas class="barchart" class="chart-holder" width="600px" height="300px"></canvas>
+            </div>
+        </div>
+    </div>
+    {{--  --}}
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header">
+                <i class="icon-bar-chart"></i>
+                <h3>Grafik SIMLING C</h3>
+            </div>
+            <div class="widget-content">
+                <canvas class="barchart" class="chart-holder" width="600px" height="300px"></canvas>
+            </div>
+        </div>
+    </div>
+    {{--  --}}
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header">
+                <i class="icon-bar-chart"></i>
+                <h3>Grafik SIMLING D</h3>
+            </div>
+            <div class="widget-content">
+                <canvas class="barchart" class="chart-holder" width="600px" height="300px"></canvas>
+            </div>
+        </div>
+    </div>
+    {{--  --}}
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header">
+                <i class="icon-bar-chart"></i>
+                <h3>Grafik SIMLING B1</h3>
+            </div>
+            <div class="widget-content">
+                <canvas class="barchart" class="chart-holder" width="600px" height="300px"></canvas>
+            </div>
+        </div>
+    </div>
+    {{--  --}}
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header">
+                <i class="icon-bar-chart"></i>
+                <h3>Grafik SIMLING B1 UMUM</h3>
+            </div>
+            <div class="widget-content">
+                <canvas class="barchart" class="chart-holder" width="600px" height="300px"></canvas>
+            </div>
+        </div>
+    </div>
+    {{--  --}}
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header">
+                <i class="icon-bar-chart"></i>
+                <h3>Grafik SIMLING B2</h3>
+            </div>
+            <div class="widget-content">
+                <canvas class="barchart" class="chart-holder" width="600px" height="300px"></canvas>
+            </div>
+        </div>
+    </div>
+    {{--  --}}
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header">
+                <i class="icon-bar-chart"></i>
+                <h3>Grafik SIMLING B2 UMUM</h3>
+            </div>
+            <div class="widget-content">
+                <canvas class="barchart" class="chart-holder" width="600px" height="300px"></canvas>
+            </div>
+        </div>
+    </div>
+
+    {{-- biro --}}
     <div class="col-md-6">
         <div class="widget">
             <div class="widget-header">

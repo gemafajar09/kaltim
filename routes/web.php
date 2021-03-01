@@ -17,7 +17,7 @@ Route::get('real-count','HomeController@realcount');
 // Data User
 Route::get('/data-user','LoginController@datauser')->name('data-user')->middleware('Ceklogin');
 Route::post('/data-user-add','LoginController@register')->name('data-user-add')->middleware('Ceklogin');
-Route::post('/data-user-add','LoginController@register')->name('data-user-edit')->middleware('Ceklogin');
+Route::get('/data-user-hapus/{id}','LoginController@deleteuser')->name('data-user-hapus')->middleware('Ceklogin');
 Route::post('/data-user-login','LoginController@login')->name('data-user-login');
 Route::get('/data-user-logout','LoginController@logout')->name('data-user-logout');
 

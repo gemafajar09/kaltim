@@ -4,7 +4,7 @@
 <center>
     <div class="row mb-4">
         <div class="float-left col-md-11">
-            <h3><b>Data User</b></h3>
+            <h3 style="color:white"><b>Data User</b></h3>
         </div>
         <div class="float-right col-md-1">
             <button class="btn btn-sm" style="background-color: #019943" onclick="bukaModal()"><i style="color:white" class="icon-plus"></i></button>
@@ -56,8 +56,15 @@
                                 @endif
                             </td>
                             <td style="text-align: center">
-                                <a onclick="edit()" class="icon-edit"></a>
-                                <a href="" class="icon-trash"></a>
+                                <a onclick="edit(
+                                    '{{$user->user_id}}',
+                                    '{{$user->user_nama}}',
+                                    '{{$user->cabang_id}}',
+                                    '{{$user->user_level}}',
+                                    '{{$user->user_username}}',
+                                    '{{$user->user_ulangi_password}}',
+                                )" class="icon-edit"></a>
+                                <a href="{{route('data-user-hapus', encrypt($user->user_id))}}" class="icon-trash"></a>
                             </td>
                         </tr>
                         @endforeach
@@ -101,9 +108,9 @@
                         <label><b>Level</b></label>
                         <select name="user_level" id="user_level" class="form-control">
                             <option value="">-SELECT-</option>
-                            <option value="1">Kapolda</option>
-                            <option value="2">Humas</option>
-                            <option value="3">Biro</option>
+                            @foreach($level as $l)
+                            <option value="{{$l->id}}">{!! $l->level !!}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-md-12">
@@ -146,7 +153,14 @@
     function bukaModal(){
         $('#formModal').modal();
     }
-    function edit(){
+    function edit(user_id,user_nama,cabang_id,user_level,user_username,user_password){
+        $('#user_id').val(user_id)
+        $('#user_nama').val(user_nama)
+        $('#cabang_id').val(cabang_id)
+        $('#user_level').val(user_level)
+        $('#user_username').val(user_username)
+        $('#user_password').val(user_password)
+        $('#user_ulangi_password').val(user_password)
         $('#formModal').modal();
     }
 </script>
