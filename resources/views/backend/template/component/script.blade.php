@@ -36,6 +36,10 @@
         $('#aub').html(data.aumumbaru);
         $('#b1b').html(data.b1baru);
         $('#b2b').html(data.b2baru);
+        $('#b1ub').html(data.datasimb1u);
+        $('#b2ub').html(data.datasimb2u);
+        $('#b1up').html(data.datasimb1up);
+        $('#b2up').html(data.datasimb2up);
         $('#cb').html(data.cbaru);
         $('#db').html(data.dbaru);
         // perpanjang
@@ -44,6 +48,7 @@
         $('#b1p').html(data.b1perpanjang);
         $('#b2p').html(data.b2perpanjang);
         $('#cp').html(data.cperpanjang);
+        $('#dp').html(data.dperpanjang);
         $('#dp').html(data.dperpanjang);
 
       }

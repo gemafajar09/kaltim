@@ -52,7 +52,8 @@ class DataPolresController extends Controller
                     'id_biro' => $id_biro[$i],
                     'sim_a_baru' => $r->data_biro_sim_a_baru[$i],
                     'sim_c_baru' => $r->data_biro_sim_c_baru[$i],
-                    'sim_ac_baru' => $r->data_biro_sim_ac_baru[$i]
+                    'sim_ac_baru' => $r->data_biro_sim_ac_baru[$i],
+                    'tanggal' => date('Y-m-d')
                     ]);
             }
             return back()->with('pesan','Input Data Success');
