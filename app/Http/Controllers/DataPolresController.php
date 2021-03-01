@@ -35,10 +35,16 @@ class DataPolresController extends Controller
                 'data_polres_sim_b1_perpanjang' => $r->data_polres_sim_b1_perpanjang,
                 'data_polres_sim_b2_perpanjang' => $r->data_polres_sim_b2_perpanjang,
                 'data_polres_sim_c_perpanjang' => $r->data_polres_sim_c_perpanjang,
-                'data_polres_sim_d_perpanjang' => $r->data_polres_sim_d_perpanjang
+                'data_polres_sim_d_perpanjang' => $r->data_polres_sim_d_perpanjang,
+                'data_polres_sim_b1_umum' => $r->data_polres_sim_b1_umum,
+                'data_polres_sim_b2_umum' => $r->data_polres_sim_b2_umum,
+                'data_polres_sim_b1_umum_perpanjang' => $r->data_polres_sim_b1_umum_perpanjang,
+                'data_polres_sim_b2_umum_perpanjang' => $r->data_polres_sim_b2_umum_perpanjang,
+                'rusak' => $r->rusak,
             ]);
             $id_biro = $r->id_biro;
             // dd($id_biro);
+            DB::table('tb_simlink')->insert(['id_data' => $id, 'simlink1' => $r->simlink1, 'simlink2' => $r->simlink2]);
             foreach($id_biro as $i => $a)
             {
                 DB::table('tb_detail')->insert([
