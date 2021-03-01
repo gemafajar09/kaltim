@@ -44,7 +44,10 @@ class DataPolresController extends Controller
             ]);
             $id_biro = $r->id_biro;
             // dd($id_biro);
-            DB::table('tb_simlink')->insert(['id_data' => $id, 'simlink1' => $r->simlink1, 'simlink2' => $r->simlink2]);
+            DB::table('tb_simlink')->insert([
+                'id_data' => $id, 'simlink1' => $r->simlink1, 
+                'simlink2' => $r->simlink2]
+            );
             foreach($id_biro as $i => $a)
             {
                 DB::table('tb_detail')->insert([
