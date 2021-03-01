@@ -20,3 +20,23 @@
     @endforeach
     </tbody>
 </table>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>SIMLINK 1</th>
+            <th>SIMLINK 2</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach($isi_simlink as $i => $a)
+        <tr>
+            <td>{{$i+1}}</td>
+            <td>{{$a->simlink1}}</td>
+            <td>{{$a->simlink2}}</td>
+        </tr>
+    @endforeach
+    </tbody>
+</table>
