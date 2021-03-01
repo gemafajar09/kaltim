@@ -93,12 +93,13 @@ class DataPolresController extends Controller
 
     public function report_polres()
     {
-        return view('backend.report.polres');
+        $polres = DB::table('tb_cabang')->where('cabang_kode', '=', 1)->get();
+        return view('backend.report.polres', compact('polres'));
     }
  
-    public function datatable($dari, $sampai)
+    public function datatable($cabang, $dari, $sampai)
     {
-        if($dari == 0 && $sampai == 0)
+        if($cabang == 0 && $dari == 0 && $sampai == 0)
         {
             $bulan = date('m');
             $data = DB::table('tb_data_polres')
@@ -106,11 +107,27 @@ class DataPolresController extends Controller
                     ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
                     ->where(DB::raw('MONTH(tb_data_polres.data_polres_tgl)'),$bulan)
                     ->get();
+
+        }elseif($cabang != 0 && $dari == 0 && $sampai == 0){
+            $data = DB::table('tb_data_polres')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
+                    ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
+                    ->where('tb_data_polres.polres_id','=', $cabang)
+                    ->get();
+
+        }elseif($cabang == 0 && $dari != 0 && $sampai != 0){
+            $data = DB::table('tb_data_polres')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
+                    ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
+                    ->whereBetween('tb_data_polres.data_polres_tgl',[$dari,$sampai])
+                    ->get();
+
         }else{
             $data = DB::table('tb_data_polres')
                     ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
                     ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
                     ->whereBetween('tb_data_polres.data_polres_tgl',[$dari,$sampai])
+                    ->where('tb_data_polres.polres_id','=', $cabang)
                     ->get();
         }
         return view('backend.report.tabelpolres',compact('data'));
@@ -124,9 +141,9 @@ class DataPolresController extends Controller
         return view('backend.report.polresdetail',$data);
     }
 
-    public function exportexcel($dari, $sampai)
+    public function exportexcel($cabang, $dari, $sampai)
     {
-        if($dari == 0 && $sampai == 0)
+        if($cabang == 0 && $dari == 0 && $sampai == 0)
         {
             $bulan = date('m');
             $data['isi'] = DB::table('tb_data_polres')
@@ -134,11 +151,27 @@ class DataPolresController extends Controller
                     ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
                     ->where(DB::raw('MONTH(tb_data_polres.data_polres_tgl)'),$bulan)
                     ->get();
+
+        }elseif($cabang != 0 && $dari == 0 && $sampai == 0){
+            $data['isi'] = DB::table('tb_data_polres')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
+                    ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
+                    ->where('tb_data_polres.polres_id','=', $cabang)
+                    ->get();
+
+        }elseif($cabang == 0 && $dari != 0 && $sampai != 0){
+            $data['isi'] = DB::table('tb_data_polres')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
+                    ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
+                    ->whereBetween('tb_data_polres.data_polres_tgl',[$dari,$sampai])
+                    ->get();
+
         }else{
             $data['isi'] = DB::table('tb_data_polres')
                     ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
                     ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
                     ->whereBetween('tb_data_polres.data_polres_tgl',[$dari,$sampai])
+                    ->where('tb_data_polres.polres_id','=', $cabang)
                     ->get();
         }
         $data['biro'] = DB::table('tb_cabang')->where('cabang_kode',2)->get();

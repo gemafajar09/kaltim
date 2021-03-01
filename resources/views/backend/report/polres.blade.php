@@ -9,7 +9,14 @@
             <!-- <button type="button" class="btn "><img src="{{asset('/icon/word.png')}}" style="width:20px" alt=""></button> -->
         </div>
         <div class="float-right">
-            <label for="" style="color:white">Filter Data dari: </label>
+            <label for="" style="color:white">Filter Data: </label>
+            <select name="cabang_id" id="cabang_id">
+                <option value="0">--Semua Polres--</option>
+                @foreach($polres as $no => $row)
+                <option value="{{ $row->cabang_id }}">{{ $row->cabang_nama }}</option>
+                @endforeach
+            </select>
+            <label for="" style="color:white">Dari:</label>
             <input type="date" id="dari" name="dari" class="from-control">
             <label for="" style="color:white">Sampai</label>
             <input type="date" id="sampai" name="sampai" class="from-control">
@@ -143,32 +150,38 @@
 </div>
 <script>
     $(document).ready(function(){
+        var c = $('#cabang').val()
         var d = $('#dari').val()
         var s = $('#sampai').val()
         if(d == '')
         {
+            var cabang = c;
             var dari = 0;
             var sampai = 0;
         }else{
+            var cabang = c;
             var dari = d;
             var sampai = s;
         }
-        $('#isi').load("/datatable/"+ dari +"/"+ sampai)
+        $('#isi').load("/datatable/"+ cabang +"/"+ dari +"/"+ sampai)
     })
 
     function caridata()
     {
+        var c = $('#cabang_id').val()
         var d = $('#dari').val()
         var s = $('#sampai').val()
         if(d == '')
         {
+            var cabang = c;
             var dari = 0;
             var sampai = 0;
         }else{
+            var cabang = c;
             var dari = d;
             var sampai = s;
         }
-        $('#isi').load("/datatable/"+ dari +"/"+ sampai)
+        $('#isi').load("/datatable/"+ cabang +"/"+ dari +"/"+ sampai)
     }
 
     function detail(id)
@@ -188,17 +201,20 @@
 
     function cetakexcel()
     {
+        var c = $('#cabang_id').val()
         var d = $('#dari').val()
         var s = $('#sampai').val()
         if(d == '')
         {
+            var cabang = c;
             var dari = 0;
             var sampai = 0;
         }else{
+            var cabang = c;
             var dari = d;
             var sampai = s;
         }
-        window.open("/exportexcel/"+ dari +"/"+ sampai, '_blank');
+        window.open("/exportexcel/"+ cabang +"/"+ dari +"/"+ sampai, '_blank');
     }
 
     function edit(
