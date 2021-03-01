@@ -12,9 +12,20 @@ $datasimB1P = array();
 $datasimB2P = array();
 $datasimCP = array();
 $datasimDP = array();
+
+$sla = array();
+$slau = array();
+$slc = array();
+$sld = array();
+$slb1 = array();
+$slb1u = array();
+$slb2 = array();
+$slb2u = array();
+
 $pengantara = array();
 $pengantarc = array();
 $pengantarac = array();
+
 for($i = 1; $i < 13; $i++)
 {
     $bulan = str_pad($i, 2 , "0", STR_PAD_LEFT);
@@ -48,6 +59,29 @@ for($i = 1; $i < 13; $i++)
                 DB::raw('SUM(sim_a_baru) as pengantara'),
                 DB::raw('SUM(sim_c_baru) as pengantarc'),
                 DB::raw('SUM(sim_ac_baru) as pengantarac')
+            )
+            ->first();
+
+    $simling = DB::table('tb_simlink')
+            ->where(DB::raw('MONTH(tanggal)'),$bulan)
+            ->where(DB::raw('YEAR(tanggal)'),$tahun)
+            ->select(
+                DB::raw('SUM(simlink1_a) as sl1a'),
+                DB::raw('SUM(simlink2_a) as sl2a'),
+                DB::raw('SUM(simlink1_au) as sl1au'),
+                DB::raw('SUM(simlink2_au) as sl2au'),
+                DB::raw('SUM(simlink1_c) as sl1c'),
+                DB::raw('SUM(simlink2_c) as sl2c'),
+                DB::raw('SUM(simlink1_d) as sl1d'),
+                DB::raw('SUM(simlink2_d) as sl2d'),
+                DB::raw('SUM(simlink1_b1) as sl1b1'),
+                DB::raw('SUM(simlink2_b1) as sl2b1'),
+                DB::raw('SUM(simlink1_b1u) as sl1b1u'),
+                DB::raw('SUM(simlink2_b1u) as sl2b1u'),
+                DB::raw('SUM(simlink1_b2) as sl1b2'),
+                DB::raw('SUM(simlink2_b2) as sl2b2'),
+                DB::raw('SUM(simlink1_b2u) as sl1b2u'),
+                DB::raw('SUM(simlink2_b2u) as sl2b2u'),
             )
             ->first();
 
@@ -95,7 +129,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
 
-    // sim a umum
+    // sim c b
     var cb = document.getElementsByClassName("barchart")[1].getContext('2d');
     new Chart(cb, {
         // The type of chart we want to create
@@ -118,7 +152,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
 
-    // sim b1
+    // sim d b
     var db = document.getElementsByClassName("barchart")[2].getContext('2d');
     new Chart(db, {
         // The type of chart we want to create
@@ -141,7 +175,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
 
-    // sim b2
+    // sim au
     var au = document.getElementsByClassName("barchart")[3].getContext('2d');
     new Chart(au, {
         // The type of chart we want to create
@@ -164,7 +198,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
 
-    // sim c
+    // sim b1
     var b1 = document.getElementsByClassName("barchart")[4].getContext('2d');
     new Chart(b1, {
         // The type of chart we want to create
@@ -187,7 +221,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
     
-    // sim d
+    // sim b1u
     var b1u = document.getElementsByClassName("barchart")[5].getContext('2d');
     new Chart(b1u, {
         // The type of chart we want to create
@@ -210,7 +244,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
     
-    // sim perpanjang
+    // sim b2
     var b2 = document.getElementsByClassName("barchart")[6].getContext('2d');
     new Chart(b2, {
         // The type of chart we want to create
@@ -233,7 +267,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
     
-    // sim perpanjang
+    // sim b2u
     var b2u = document.getElementsByClassName("barchart")[7].getContext('2d');
     new Chart(b2u, {
         // The type of chart we want to create
@@ -256,7 +290,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
 
-    // sim a umum
+    // sim a p
     var ap = document.getElementsByClassName("barchart")[8].getContext('2d');
     new Chart(ap, {
         // The type of chart we want to create
@@ -279,7 +313,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
 
-    // sim b1
+    // sim au p
     var aup = document.getElementsByClassName("barchart")[9].getContext('2d');
     new Chart(aup, {
         // The type of chart we want to create
@@ -302,7 +336,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
     
-    // sim b2
+    // sim c p
     var cp = document.getElementsByClassName("barchart")[10].getContext('2d');
     new Chart(cp, {
         // The type of chart we want to create
@@ -325,7 +359,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
 
-    // sim c
+    // sim d p
     var dp = document.getElementsByClassName("barchart")[11].getContext('2d');
     new Chart(dp, {
         // The type of chart we want to create
@@ -348,7 +382,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
     
-    // sim d
+    // sim b1
     var b1p = document.getElementsByClassName("barchart")[12].getContext('2d');
     new Chart(b1p, {
         // The type of chart we want to create
@@ -371,7 +405,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
 
-    // sim d
+    // sim b1u
     var b1up = document.getElementsByClassName("barchart")[13].getContext('2d');
     new Chart(b1up, {
         // The type of chart we want to create
@@ -394,7 +428,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
     
-    // sim d
+    // sim b2
     var b2p = document.getElementsByClassName("barchart")[14].getContext('2d');
     new Chart(b2p, {
         // The type of chart we want to create
@@ -417,7 +451,191 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
 
-    // sim d
+    // sim b2u
+    var b2up = document.getElementsByClassName("barchart")[15].getContext('2d');
+    new Chart(b2up, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+            "October", "November", "Desember"
+        ],
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: <?= json_encode($datasimB2up) ?>
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+
+    // sim a p
+    var sla = document.getElementsByClassName("barchart")[16].getContext('2d');
+    new Chart(sla, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+            "October", "November", "Desember"
+        ],
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: <?= json_encode($datasimAp) ?>
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+
+    // sim au p
+    var aup = document.getElementsByClassName("barchart")[9].getContext('2d');
+    new Chart(aup, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+            "October", "November", "Desember"
+        ],
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: <?= json_encode($datasimAup) ?>
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+    
+    // sim c p
+    var cp = document.getElementsByClassName("barchart")[10].getContext('2d');
+    new Chart(cp, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+            "October", "November", "Desember"
+        ],
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: <?= json_encode($datasimCp) ?>
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+
+    // sim d p
+    var dp = document.getElementsByClassName("barchart")[11].getContext('2d');
+    new Chart(dp, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+            "October", "November", "Desember"
+        ],
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: <?= json_encode($datasimDp) ?>
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+    
+    // sim b1
+    var b1p = document.getElementsByClassName("barchart")[12].getContext('2d');
+    new Chart(b1p, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+            "October", "November", "Desember"
+        ],
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: <?= json_encode($datasimB1p) ?>
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+
+    // sim b1u
+    var b1up = document.getElementsByClassName("barchart")[13].getContext('2d');
+    new Chart(b1up, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+            "October", "November", "Desember"
+        ],
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: <?= json_encode($datasimB1up) ?>
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+    
+    // sim b2
+    var b2p = document.getElementsByClassName("barchart")[14].getContext('2d');
+    new Chart(b2p, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+            "October", "November", "Desember"
+        ],
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: <?= json_encode($datasimB2p) ?>
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+
+    // sim b2u
     var b2up = document.getElementsByClassName("barchart")[15].getContext('2d');
     new Chart(b2up, {
         // The type of chart we want to create
@@ -440,7 +658,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
     
-    // sim d
+    // BIRO A
     var pengantara = document.getElementsByClassName("barchart")[16].getContext('2d');
     new Chart(pengantara, {
         // The type of chart we want to create
@@ -463,7 +681,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
     
-    // sim d
+    // BIRO C
     var pengantarc = document.getElementsByClassName("barchart")[17].getContext('2d');
     new Chart(pengantarc, {
         // The type of chart we want to create
@@ -486,7 +704,7 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
     
-    // sim d
+    // BIRO AC
     var pengantarac = document.getElementsByClassName("barchart")[18].getContext('2d');
     new Chart(pengantarac, {
         // The type of chart we want to create
@@ -509,26 +727,4 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
     
-    // sim d
-    var pengantarac = document.getElementsByClassName("barchart")[19].getContext('2d');
-    new Chart(pengantarac, {
-        // The type of chart we want to create
-        type: 'line',
-
-        // The data for our dataset
-        data: {
-            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
-            "October", "November", "Desember"
-        ],
-            datasets: [{
-                // label: 'My First dataset',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: <?= json_encode($pengantarac) ?>
-            }]
-        },
-
-        // Configuration options go here
-        options: {}
-    });
     </script>

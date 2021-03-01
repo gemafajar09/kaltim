@@ -1,7 +1,4 @@
-<?php
-header("Content-type: application/vnd-ms-excel");
-header("Content-Disposition: attachment; filename=DataReport.xls");
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,7 +79,9 @@ header("Content-Disposition: attachment; filename=DataReport.xls");
                 $sim_p_b2 =0;
                 $sim_p_b2u =0;
 
-                $simlink_total =0;
+                $simlink1_total =0;
+                $simlink2_total =0;
+                $bus_total =0;
             ?>
 
 
@@ -94,6 +93,10 @@ header("Content-Disposition: attachment; filename=DataReport.xls");
                         ->first();
 
             $simlink = DB::table('tb_simlink')
+                        ->where('id_data',$row->data_polres_id)
+                        ->first();
+            
+            $bus = DB::table('tb_bus')
                         ->where('id_data',$row->data_polres_id)
                         ->first();
             
@@ -131,7 +134,11 @@ header("Content-Disposition: attachment; filename=DataReport.xls");
             $sim_p_b2 +=$row->data_polres_sim_b2_umum;
             $sim_p_b2u +=$row->data_polres_sim_b2_umum_perpanjang;
 
-            $simlink_total += ($simlink->simlink1 + $simlink->simlink2); 
+            $simlink1_total += ($simlink->simlink1_a + $simlink->simlink1_au + $simlink->simlink1_c + $simlink->simlink1_d + $simlink->simlink1_b1 + $simlink->simlink1_b1u + $simlink->simlink1_b2 + $simlink->simlink1_b2u ); 
+
+            $simlink2_total += ($simlink->simlink2_a + $simlink->simlink2_au + $simlink->simlink2_c + $simlink->simlink2_d + $simlink->simlink2_b1 + $simlink->simlink2_b1u + $simlink->simlink2_b2 + $simlink->simlink2_b2u ); 
+
+            $bus_total += ($bus->bus_a + $bus->bus_au + $bus->bus_c + $bus->bus_d + $bus->bus_b1 + $bus->bus_b1u + $bus->bus_b2 + $bus->bus_b2u);
             ?>
             <tr>
                 <td>{{ $i + 1 }}</td>
@@ -184,20 +191,20 @@ header("Content-Disposition: attachment; filename=DataReport.xls");
             
             <tr>
                 <td></td>
-                <td>SIMLING I</td>
+                <th>SIMLING I</th>
 
                 <td></td>
                 <td></td>
                 <td></td>
 
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <th>{{$simlink->simlink1_a}}</th>
+                <th>{{$simlink->simlink1_au}}</th>
+                <th>{{$simlink->simlink1_c}}</th>
+                <th>{{$simlink->simlink1_d}}</th>
+                <th>{{$simlink->simlink1_b1}}</th>
+                <th>{{$simlink->simlink1_b1u}}</th>
+                <th>{{$simlink->simlink1_b2}}</th>
+                <th>{{$simlink->simlink1_b2u}}</th>
 
                 <td></td>
                 <td></td>
@@ -205,27 +212,27 @@ header("Content-Disposition: attachment; filename=DataReport.xls");
                 <td></td>
                 <td></td>
 
-                <th>{{ $simlink->simlink1 }}</th>
-                <td></td>
+                <th>{{ $simlink1_total }}</th>
+                <th>{{$simlink->simlink1_rusak}}</th>
                 
             </tr>
 
             <tr>
                 <td></td>
-                <td>SIMLING II</td>
+                <th>SIMLING II</th>
 
                 <td></td>
                 <td></td>
                 <td></td>
 
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <th>{{$simlink->simlink2_a}}</th>
+                <th>{{$simlink->simlink2_au}}</th>
+                <th>{{$simlink->simlink2_c}}</th>
+                <th>{{$simlink->simlink2_d}}</th>
+                <th>{{$simlink->simlink2_b1}}</th>
+                <th>{{$simlink->simlink2_b1u}}</th>
+                <th>{{$simlink->simlink2_b2}}</th>
+                <th>{{$simlink->simlink2_b2u}}</th>
 
                 <td></td>
                 <td></td>
@@ -233,8 +240,36 @@ header("Content-Disposition: attachment; filename=DataReport.xls");
                 <td></td>
                 <td></td>
 
-                <th>{{ $simlink->simlink2 }}</th>
+                <th>{{ $simlink2_total }}</th>
+                <th>{{$simlink->simlink2_rusak}}</th>
+                
+            </tr>
+
+            <tr>
                 <td></td>
+                <th>BUS MILENIAL</th>
+
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <th>{{$simlink->simlink2_a}}</th>
+                <th>{{$simlink->simlink2_au}}</th>
+                <th>{{$simlink->simlink2_c}}</th>
+                <th>{{$simlink->simlink2_d}}</th>
+                <th>{{$simlink->simlink2_b1}}</th>
+                <th>{{$simlink->simlink2_b1u}}</th>
+                <th>{{$simlink->simlink2_b2}}</th>
+                <th>{{$simlink->simlink2_b2u}}</th>
+
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <th>{{ $bus_total }}</th>
+                <th>{{$simlink->simlink2_rusak}}</th>
                 
             </tr>
             @endforeach
@@ -263,7 +298,7 @@ header("Content-Disposition: attachment; filename=DataReport.xls");
                 
                 <th>
                     {{ 
-                        $baru + $perpanjang + $peningkatan + $simlink_total
+                        $baru + $perpanjang + $peningkatan + $simlink1_total + $simlink2_total
                     }}
                 </th>
                 <th>{{ $rusak }}</th>
