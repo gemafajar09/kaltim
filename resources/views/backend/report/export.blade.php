@@ -38,9 +38,9 @@ header("Content-Disposition: attachment; filename=Data Mahasiswa.xls");
                 <th>SIM D PERPANJANG</th>
                 @foreach($biro as $c)
                 <th>{{$c->cabang_nama}}</th>
-                <th>SURAT KETERANGAN A BARU</th>
-                <th>SURAT KETERANGAN C BARU</th>
-                <th>SURAT KETERANGAN A & C BARU</th>
+                <th>SURAT KETERANGAN A</th>
+                <th>SURAT KETERANGAN C</th>
+                <th>SURAT KETERANGAN A & C</th>
                 @endforeach
             </tr>
         </thead>
@@ -68,9 +68,6 @@ header("Content-Disposition: attachment; filename=Data Mahasiswa.xls");
                 <td>{{$b->sim_a_baru}}</td>
                 <td>{{$b->sim_c_baru}}</td>
                 <td>{{$b->sim_ac_baru}}</td>
-                <td>{{$b->sim_a_perpanjang}}</td>
-                <td>{{$b->sim_c_perpanjang}}</td>
-                <td>{{$b->sim_ac_perpanjang}}</td>
                 @endforeach
             </tr>
             @endforeach

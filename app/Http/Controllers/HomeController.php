@@ -30,6 +30,7 @@ class HomeController extends Controller
                 DB::raw('SUM(data_polres_sim_d_perpanjang) as simdbarup')
             )
             ->first();
+            
             $datasimA = $simAbaru->simabaru != null ? $simAbaru->simabaru : 0;
             $datasimAumum = $simAbaru->simabaruumum != null ? $simAbaru->simabaruumum : 0;
             $datasimB1 = $simAbaru->simb1baru != null ? $simAbaru->simb1baru : 0;
@@ -42,6 +43,7 @@ class HomeController extends Controller
             $datasimB2P = $simAbaru->simb2barup != null ? $simAbaru->simb2barup : 0;
             $datasimCP = $simAbaru->simcbarup != null ? $simAbaru->simcbarup : 0;
             $datasimDP = $simAbaru->simdbarup != null ? $simAbaru->simdbarup : 0;
+            
         }
         $data['datasimbaru'] = [$datasimA,$datasimAumum,$datasimB1,$datasimB2,$datasimC,$datasimD];
         $data['datasimperpanjang'] = [$datasimAP,$datasimAumumP,$datasimB1P,$datasimB2P,$datasimCP,$datasimDP];

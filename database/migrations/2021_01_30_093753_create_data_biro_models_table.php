@@ -18,17 +18,11 @@ class CreateDataBiroModelsTable extends Migration
             $table->integer('biro_id');
             $table->date('data_biro_tgl');
             $table->integer('data_biro_sim_a_baru')->nullable();
-            $table->integer('data_biro_sim_a_umum_baru')->nullable();
-            $table->integer('data_biro_sim_b1_baru')->nullable();
-            $table->integer('data_biro_sim_b2_baru')->nullable();
             $table->integer('data_biro_sim_c_baru')->nullable();
-            $table->integer('data_biro_sim_d_baru')->nullable();
+            $table->integer('data_biro_sim_ac_baru')->nullable();
             $table->integer('data_biro_sim_a_perpanjang')->nullable();
-            $table->integer('data_biro_sim_a_umum_perpanjang')->nullable();
-            $table->integer('data_biro_sim_b1_perpanjang')->nullable();
-            $table->integer('data_biro_sim_b2_perpanjang')->nullable();
             $table->integer('data_biro_sim_c_perpanjang')->nullable();
-            $table->integer('data_biro_sim_d_perpanjang')->nullable();
+            $table->integer('data_biro_sim_ac_perpanjang')->nullable();
             $table->timestamps();
         });
     }

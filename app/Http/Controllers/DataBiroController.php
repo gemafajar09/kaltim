@@ -32,7 +32,7 @@ class DataBiroController extends Controller
             if($r->data_biro_id == '')
             {
                 DB::table('tb_data_biro')->insert([
-                    'biro_id' => $r->biro_id,
+                    'biro_id' => $r->biro_id[0],
                     'data_biro_tgl' => $r->data_biro_tgl,
                     'data_biro_sim_a_baru' => $r->data_biro_sim_a_baru,
                     'data_biro_sim_c_baru' => $r->data_biro_sim_c_baru,
