@@ -13,34 +13,56 @@
                     <div class="widget-content">
                         <div id="big_stats" class="cf">
                             <div class="stat"> 
-                                <i style="font-size: 12px">SIM A BARU</i> <span class="value"><strong id="ab"></strong></span>
+                                <i style="font-size: 12px">SIM A</i> <span class="value"><strong id="ab"></strong></span>
                             </div>
                             <!-- .stat -->
 
                             <div class="stat"> 
-                                <i style="font-size: 12px">SIM A UMUM BARU</i> <span class="value"><strong id="aub"></strong></span>
+                                <i style="font-size: 12px">SIM C</i> <span class="value"><strong id="cb"></strong></span>
                             </div>
                             <!-- .stat -->
 
                             <div class="stat"> 
-                                <i style="font-size: 12px">SIM B1 BARU</i> <span class="value"><strong id="b1b"></strong></span>
+                                <i style="font-size: 12px">SIM D</i> <span class="value"><strong id="db"></strong></span>
+                            </div>
+                            <!-- .stat -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="widget widget-nopad">
+            <div class="widget-header"> <i class="icon-list-alt"></i>
+                <h3>Statistik Pembuatan SIM Peningkatan</h3>
+            </div>
+            <div class="widget-content">
+                <div class="widget big-stats-container">
+                    <div class="widget-content">
+                        <div id="big_stats" class="cf">
+                            <div class="stat"> 
+                                <i style="font-size: 12px">SIM A UMUM</i> <span class="value"><strong id="aub"></strong></span> 
+                            </div>
+
+                            <!-- .stat -->
+                            <div class="stat"> 
+                                <i style="font-size: 12px">SIM B1</i> <span class="value"><strong id="b1b"></strong></span> 
+                            </div>
+                            
+                            <!-- .stat -->
+                            <div class="stat"> 
+                                <i style="font-size: 12px">SIM B1 UMUM</i> <span class="value"><strong id="b1ub"></strong></span> 
+                            </div>
+
+                            <div class="stat"> 
+                                <i style="font-size: 12px">SIM B2</i> <span class="value"><strong id="b2b"></strong></span> 
                             </div>
                             <!-- .stat -->
 
                             <div class="stat"> 
-                                <i style="font-size: 12px">SIM B2 BARU</i> <span class="value"><strong id="b2b"></strong></span> 
+                                <i style="font-size: 12px">SIM B2 UMUM</i> <span class="value"><strong id="b2ub"></strong></span> 
                             </div>
-                            <!-- .stat -->
-
-                            <div class="stat"> 
-                                <i style="font-size: 12px">SIM C BARU</i> <span class="value"><strong id="cb"></strong></span> 
-                            </div>
-                            <!-- .stat -->
-
-                            <div class="stat"> 
-                                <i style="font-size: 12px">SIM D BARU</i> <span class="value"><strong id="db"></strong></span> 
-                            </div>
-                            <!-- .stat -->
                         </div>
                     </div>
                 </div>
@@ -58,34 +80,44 @@
                     <div class="widget-content">
                         <div id="big_stats" class="cf">
                             <div class="stat"> 
-                                <i style="font-size: 12px">SIM A PERPANJANG</i> <span class="value"><strong id="ap"></strong></span>
+                                <i style="font-size: 12px">SIM A</i> <span class="value"><strong id="ap"></strong></span>
                             </div>
                             <!-- .stat -->
 
                             <div class="stat"> 
-                                <i style="font-size: 12px">SIM A UMUM PERPANJANG</i> <span class="value"><strong id="aup"></strong></span>
+                                <i style="font-size: 12px">SIM A UMUM</i> <span class="value"><strong id="aup"></strong></span>
                             </div>
-                            <!-- .stat -->
 
-                            <div class="stat"> 
-                                <i style="font-size: 12px">SIM B1 PERPANJANG</i> <span class="value"><strong id="b1p"></strong></span>
-                            </div>
                             <!-- .stat -->
+                            <div class="stat"> 
+                                <i style="font-size: 12px">SIM C</i> <span class="value"><strong id="cp"></strong></span> 
+                            </div>
 
-                            <div class="stat"> 
-                                <i style="font-size: 12px">SIM B2 PERPANJANG</i> <span class="value"><strong id="b2p"></strong></span> 
-                            </div>
                             <!-- .stat -->
+                            <div class="stat"> 
+                                <i style="font-size: 12px">SIM D</i> <span class="value"><strong id="dp"></strong></span> 
+                            </div>
 
-                            <div class="stat"> 
-                                <i style="font-size: 12px">SIM C PERPANJANG</i> <span class="value"><strong id="cp"></strong></span> 
-                            </div>
                             <!-- .stat -->
+                            <div class="stat"> 
+                                <i style="font-size: 12px">SIM B1</i> <span class="value"><strong id="b1p"></strong></span>
+                            </div>
 
-                            <div class="stat"> 
-                                <i style="font-size: 12px">SIM D PERPANJANG</i> <span class="value"><strong id="dp"></strong></span> 
-                            </div>
                             <!-- .stat -->
+                            <div class="stat"> 
+                                <i style="font-size: 12px">SIM B1 UMUM</i> <span class="value"><strong id="b1up"></strong></span>
+                            </div>
+
+                            <!-- .stat -->
+                            <div class="stat"> 
+                                <i style="font-size: 12px">SIM B2</i> <span class="value"><strong id="b2p"></strong></span> 
+                            </div>
+
+                            <!-- .stat -->
+                            <div class="stat"> 
+                                <i style="font-size: 12px">SIM B2 UMUM</i> <span class="value"><strong id="b2up"></strong></span> 
+                            </div>
+
                         </div>
                     </div>
                     <!-- /widget-content -->
