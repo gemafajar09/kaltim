@@ -97,7 +97,7 @@
         setInterval(function(){ $('#error').hide(); }, 5000);
 	</script>
 @endif
-@if (session('pesan'))
+@if (session('success'))
 	<script>
 		$('#success').show();
         $('#formModalGanti').modal();

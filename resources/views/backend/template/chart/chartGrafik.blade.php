@@ -101,12 +101,23 @@ for($i = 1; $i < 13; $i++)
     $datasimB1up[] = $simAbaru->simb1ubaruumper != null ? $simAbaru->simb1ubaruumper : 0;
     $datasimB2p[] = $simAbaru->simb2barup != null ? $simAbaru->simb2barup : 0;
     $datasimB2up[] = $simAbaru->simb2ubaruumper != null ? $simAbaru->simb2ubaruumper : 0;
+
+    $sla[] = ($simling->sl1a + $simling->sl2a) != null ?  ($simling->sl1a + $simling->sl2a) : 0; 
+    $slau[] = ($simling->sl1au + $simling->sl2au) != null ?  ($simling->sl1au + $simling->sl2au) : 0; 
+    $slc[] = ($simling->sl1c + $simling->sl2c) != null ?  ($simling->sl1c + $simling->sl2c) : 0; 
+    $sld[] = ($simling->sl1d + $simling->sl2d) != null ?  ($simling->sl1d + $simling->sl2d) : 0; 
+    $slb1[] = ($simling->sl1b1 + $simling->sl2b1) != null ?  ($simling->sl1b1 + $simling->sl2b1) : 0; 
+    $slb1u[] = ($simling->sl1b1u + $simling->sl2b1u) != null ?  ($simling->sl1b1u + $simling->sl2b1u) : 0; 
+    $slb2[] = ($simling->sl1b2 + $simling->sl2b2) != null ?  ($simling->sl1b2 + $simling->sl2b2) : 0; 
+    $slb2u[] = ($simling->sl1b2u + $simling->sl2b2u) != null ?  ($simling->sl1b2u + $simling->sl2b2u) : 0; 
+
     $pengantara[] = $pengantar->pengantara != null ? $pengantar->pengantara : 0;
     $pengantarc[] = $pengantar->pengantarc != null ? $pengantar->pengantarc : 0;
     $pengantarac[] = $pengantar->pengantarac != null ? $pengantar->pengantarac : 0;
 }
 @endphp
 <script>
+    // sim a b
     var ab = document.getElementsByClassName("barchart")[0].getContext('2d');
     new Chart(ab, {
         // The type of chart we want to create
@@ -489,7 +500,7 @@ for($i = 1; $i < 13; $i++)
                 // label: 'My First dataset',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: <?= json_encode($datasimAp) ?>
+                data: <?= json_encode($sla) ?>
             }]
         },
 
@@ -498,8 +509,8 @@ for($i = 1; $i < 13; $i++)
     });
 
     // sim au p
-    var aup = document.getElementsByClassName("barchart")[9].getContext('2d');
-    new Chart(aup, {
+    var slau = document.getElementsByClassName("barchart")[17].getContext('2d');
+    new Chart(slau, {
         // The type of chart we want to create
         type: 'line',
 
@@ -512,7 +523,7 @@ for($i = 1; $i < 13; $i++)
                 // label: 'My First dataset',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: <?= json_encode($datasimAup) ?>
+                data: <?= json_encode($slau) ?>
             }]
         },
 
@@ -521,8 +532,8 @@ for($i = 1; $i < 13; $i++)
     });
     
     // sim c p
-    var cp = document.getElementsByClassName("barchart")[10].getContext('2d');
-    new Chart(cp, {
+    var sld = document.getElementsByClassName("barchart")[18].getContext('2d');
+    new Chart(sld, {
         // The type of chart we want to create
         type: 'line',
 
@@ -535,7 +546,7 @@ for($i = 1; $i < 13; $i++)
                 // label: 'My First dataset',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: <?= json_encode($datasimCp) ?>
+                data: <?= json_encode($sld) ?>
             }]
         },
 
@@ -544,8 +555,8 @@ for($i = 1; $i < 13; $i++)
     });
 
     // sim d p
-    var dp = document.getElementsByClassName("barchart")[11].getContext('2d');
-    new Chart(dp, {
+    var slb1 = document.getElementsByClassName("barchart")[19].getContext('2d');
+    new Chart(slb1, {
         // The type of chart we want to create
         type: 'line',
 
@@ -558,7 +569,7 @@ for($i = 1; $i < 13; $i++)
                 // label: 'My First dataset',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: <?= json_encode($datasimDp) ?>
+                data: <?= json_encode($slb1) ?>
             }]
         },
 
@@ -567,8 +578,8 @@ for($i = 1; $i < 13; $i++)
     });
     
     // sim b1
-    var b1p = document.getElementsByClassName("barchart")[12].getContext('2d');
-    new Chart(b1p, {
+    var slb1u = document.getElementsByClassName("barchart")[20].getContext('2d');
+    new Chart(slb1u, {
         // The type of chart we want to create
         type: 'line',
 
@@ -581,7 +592,7 @@ for($i = 1; $i < 13; $i++)
                 // label: 'My First dataset',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: <?= json_encode($datasimB1p) ?>
+                data: <?= json_encode($slb1u) ?>
             }]
         },
 
@@ -590,8 +601,8 @@ for($i = 1; $i < 13; $i++)
     });
 
     // sim b1u
-    var b1up = document.getElementsByClassName("barchart")[13].getContext('2d');
-    new Chart(b1up, {
+    var slb2 = document.getElementsByClassName("barchart")[21].getContext('2d');
+    new Chart(slb2, {
         // The type of chart we want to create
         type: 'line',
 
@@ -604,7 +615,7 @@ for($i = 1; $i < 13; $i++)
                 // label: 'My First dataset',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: <?= json_encode($datasimB1up) ?>
+                data: <?= json_encode($slb2) ?>
             }]
         },
 
@@ -613,8 +624,8 @@ for($i = 1; $i < 13; $i++)
     });
     
     // sim b2
-    var b2p = document.getElementsByClassName("barchart")[14].getContext('2d');
-    new Chart(b2p, {
+    var slb2u = document.getElementsByClassName("barchart")[22].getContext('2d');
+    new Chart(slb2u, {
         // The type of chart we want to create
         type: 'line',
 
@@ -627,7 +638,7 @@ for($i = 1; $i < 13; $i++)
                 // label: 'My First dataset',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: <?= json_encode($datasimB2p) ?>
+                data: <?= json_encode($slb2u) ?>
             }]
         },
 
@@ -636,7 +647,7 @@ for($i = 1; $i < 13; $i++)
     });
 
     // sim b2u
-    var b2up = document.getElementsByClassName("barchart")[15].getContext('2d');
+    var b2up = document.getElementsByClassName("barchart")[23].getContext('2d');
     new Chart(b2up, {
         // The type of chart we want to create
         type: 'line',
@@ -659,7 +670,7 @@ for($i = 1; $i < 13; $i++)
     });
     
     // BIRO A
-    var pengantara = document.getElementsByClassName("barchart")[16].getContext('2d');
+    var pengantara = document.getElementsByClassName("barchart")[24].getContext('2d');
     new Chart(pengantara, {
         // The type of chart we want to create
         type: 'line',
@@ -682,7 +693,7 @@ for($i = 1; $i < 13; $i++)
     });
     
     // BIRO C
-    var pengantarc = document.getElementsByClassName("barchart")[17].getContext('2d');
+    var pengantarc = document.getElementsByClassName("barchart")[25].getContext('2d');
     new Chart(pengantarc, {
         // The type of chart we want to create
         type: 'line',
@@ -705,7 +716,7 @@ for($i = 1; $i < 13; $i++)
     });
     
     // BIRO AC
-    var pengantarac = document.getElementsByClassName("barchart")[18].getContext('2d');
+    var pengantarac = document.getElementsByClassName("barchart")[26].getContext('2d');
     new Chart(pengantarac, {
         // The type of chart we want to create
         type: 'line',
