@@ -25,60 +25,60 @@ class DataPolresController extends Controller
             $id = DB::table('tb_data_polres')->insertGetId([
                 'polres_id' => $r->polres_id,
                 'data_polres_tgl' => $r->data_polres_tgl,
-                'data_polres_sim_a_baru' => $r->data_polres_sim_a_baru,
-                'data_polres_sim_a_umum_baru' => $r->data_polres_sim_a_umum_baru,
-                'data_polres_sim_b1_baru' => $r->data_polres_sim_b1_baru,
-                'data_polres_sim_b2_baru' => $r->data_polres_sim_b2_baru,
-                'data_polres_sim_c_baru' => $r->data_polres_sim_c_baru,
-                'data_polres_sim_d_baru' => $r->data_polres_sim_d_baru,
-                'data_polres_sim_a_perpanjang' => $r->data_polres_sim_a_perpanjang,
-                'data_polres_sim_a_umum_perpanjang' => $r->data_polres_sim_a_umum_perpanjang,
-                'data_polres_sim_b1_perpanjang' => $r->data_polres_sim_b1_perpanjang,
-                'data_polres_sim_b2_perpanjang' => $r->data_polres_sim_b2_perpanjang,
-                'data_polres_sim_c_perpanjang' => $r->data_polres_sim_c_perpanjang,
-                'data_polres_sim_d_perpanjang' => $r->data_polres_sim_d_perpanjang,
-                'data_polres_sim_b1_umum' => $r->data_polres_sim_b1_umum,
-                'data_polres_sim_b2_umum' => $r->data_polres_sim_b2_umum,
-                'data_polres_sim_b1_umum_perpanjang' => $r->data_polres_sim_b1_umum_perpanjang,
-                'data_polres_sim_b2_umum_perpanjang' => $r->data_polres_sim_b2_umum_perpanjang,
-                'rusak' => $r->rusak,
+                'data_polres_sim_a_baru' => $r->data_polres_sim_a_baru != '' ? $r->data_polres_sim_a_baru : 0,
+                'data_polres_sim_a_umum_baru' => $r->data_polres_sim_a_umum_baru != '' ? $r->data_polres_sim_a_umum_baru : 0,
+                'data_polres_sim_b1_baru' => $r->data_polres_sim_b1_baru != '' ? $r->data_polres_sim_b1_baru : 0,
+                'data_polres_sim_b2_baru' => $r->data_polres_sim_b2_baru != '' ? $r->data_polres_sim_b2_baru : 0,
+                'data_polres_sim_c_baru' => $r->data_polres_sim_c_baru != '' ? $r->data_polres_sim_c_baru : 0,
+                'data_polres_sim_d_baru' => $r->data_polres_sim_d_baru != '' ? $r->data_polres_sim_d_baru : 0,
+                'data_polres_sim_a_perpanjang' => $r->data_polres_sim_a_perpanjang != '' ? $r->data_polres_sim_a_perpanjang : 0,
+                'data_polres_sim_a_umum_perpanjang' => $r->data_polres_sim_a_umum_perpanjang != '' ? $r->data_polres_sim_a_umum_perpanjang : 0,
+                'data_polres_sim_b1_perpanjang' => $r->data_polres_sim_b1_perpanjang != '' ? $r->data_polres_sim_b1_perpanjang : 0,
+                'data_polres_sim_b2_perpanjang' => $r->data_polres_sim_b2_perpanjang != '' ? $r->data_polres_sim_b2_perpanjang : 0,
+                'data_polres_sim_c_perpanjang' => $r->data_polres_sim_c_perpanjang != '' ? $r->data_polres_sim_c_perpanjang : 0,
+                'data_polres_sim_d_perpanjang' => $r->data_polres_sim_d_perpanjang != '' ? $r->data_polres_sim_d_perpanjang : 0,
+                'data_polres_sim_b1_umum' => $r->data_polres_sim_b1_umum != '' ? $r->data_polres_sim_b1_umum : 0,
+                'data_polres_sim_b2_umum' => $r->data_polres_sim_b2_umum != '' ? $r->data_polres_sim_b2_umum : 0,
+                'data_polres_sim_b1_umum_perpanjang' => $r->data_polres_sim_b1_umum_perpanjang != '' ? $r->data_polres_sim_b1_umum_perpanjang : 0,
+                'data_polres_sim_b2_umum_perpanjang' => $r->data_polres_sim_b2_umum_perpanjang != '' ? $r->data_polres_sim_b2_umum_perpanjang : 0,
+                'rusak' => $r->rusak != '' ? $r->rusak : 0,
             ]);
             $id_biro = $r->id_biro;
             
             // dd($id_biro);
             DB::table('tb_simlink')->insert([
                 'id_data' => $id, 
-                'simlink1_a' => $r->simlink1_a, 
-                'simlink1_au' => $r->simlink1_au,
-                'simlink1_c' => $r->simlink1_c,
-                'simlink1_d' => $r->simlink1_d,
-                'simlink1_b1' => $r->simlink1_b1,
-                'simlink1_b1u' => $r->simlink1_b1u,
-                'simlink1_b2' => $r->simlink1_b2,
-                'simlink1_b2u' => $r->simlink1_b2u,
-                'simlink1_rusak' => $r->simlink1_rusak,
-                'simlink2_a' => $r->simlink2_a,
-                'simlink2_au' => $r->simlink2_au,
-                'simlink2_c' => $r->simlink2_c,
-                'simlink2_d' => $r->simlink2_d,
-                'simlink2_b1' => $r->simlink2_b1,
-                'simlink2_b1u' => $r->simlink2_b1u,
-                'simlink2_b2' => $r->simlink2_b2,
-                'simlink2_b2u' => $r->simlink2_b2u,
-                'simlink2_rusak' => $r->simlink2_rusak,
+                'simlink1_a' => $r->simlink1_a != '' ? $r->simlink1_a : 0, 
+                'simlink1_au' => $r->simlink1_au != '' ? $r->simlink1_au : 0,
+                'simlink1_c' => $r->simlink1_c != '' ? $r->simlink1_c : 0,
+                'simlink1_d' => $r->simlink1_d != '' ? $r->simlink1_d : 0,
+                'simlink1_b1' => $r->simlink1_b1 != '' ? $r->simlink1_b1 : 0,
+                'simlink1_b1u' => $r->simlink1_b1u != '' ? $r->simlink1_b1u : 0,
+                'simlink1_b2' => $r->simlink1_b2 != '' ? $r->simlink1_b2 : 0,
+                'simlink1_b2u' => $r->simlink1_b2u != '' ? $r->simlink1_a : 0,
+                'simlink1_rusak' => $r->simlink1_rusak != '' ? $r->simlink1_rusak : 0,
+                'simlink2_a' => $r->simlink2_a != '' ? $r->simlink2_a : 0,
+                'simlink2_au' => $r->simlink2_au != '' ? $r->simlink2_au : 0,
+                'simlink2_c' => $r->simlink2_c != '' ? $r->simlink2_c : 0,
+                'simlink2_d' => $r->simlink2_d != '' ? $r->simlink2_d : 0,
+                'simlink2_b1' => $r->simlink2_b1 != '' ? $r->simlink2_b1 : 0,
+                'simlink2_b1u' => $r->simlink2_b1u != '' ? $r->simlink2_b1u : 0,
+                'simlink2_b2' => $r->simlink2_b2 != '' ? $r->simlink2_b2 : 0,
+                'simlink2_b2u' => $r->simlink2_b2u != '' ? $r->simlink2_b2u : 0,
+                'simlink2_rusak' => $r->simlink2_rusak != '' ? $r->simlink2_rusak : 0,
                 'tanggal' => date('Y-m-d')
             ]);
 
             DB::table('tb_bus')->insert([
-                'bus_a' => $r->bus_a,
-                'bus_au' => $r->bus_au,
-                'bus_c' => $r->bus_c,
-                'bus_d' => $r->bus_d,
-                'bus_b1' => $r->bus_b1,
-                'bus_b1u' => $r->bus_b1u,
-                'bus_b2' => $r->bus_b2,
-                'bus_b2u' => $r->bus_b2u,
-                'bus_rusak' => $r->bus_rusak,
+                'bus_a' => $r->bus_a != '' ? $r->bus_a : 0,
+                'bus_au' => $r->bus_au != '' ? $r->bus_au : 0,
+                'bus_c' => $r->bus_c != '' ? $r->bus_c : 0,
+                'bus_d' => $r->bus_d != '' ? $r->bus_d : 0,
+                'bus_b1' => $r->bus_b1 != '' ? $r->bus_b1 : 0,
+                'bus_b1u' => $r->bus_b1u != '' ? $r->bus_b1u : 0,
+                'bus_b2' => $r->bus_b2 != '' ? $r->bus_b2 : 0,
+                'bus_b2u' => $r->bus_b2u != '' ? $r->bus_b2u : 0,
+                'bus_rusak' => $r->bus_rusak != '' ? $r->bus_rusak : 0,
                 'id_data' => $id,
                 'tanggal' => date('Y-m-d'),
                 'id_polres' => $r->polres_id,
@@ -96,7 +96,7 @@ class DataPolresController extends Controller
                     'tanggal' => date('Y-m-d')
                     ]);
             }
-            return back()->with('pesan','Input Data Success');
+            return redirect('report-polres')->with('pesan','Input Data Success');
         }else{
             $up = DB::table('tb_data_polres')
                     ->where('data_polres_id',$r->data_polres_id)
@@ -118,7 +118,7 @@ class DataPolresController extends Controller
                     ]);
 
             if($up == TRUE){
-                return back()->with('pesan','Update Data Success');
+                return redirect('report-polres')->with('pesan','Update Data Success');
             }else{
                 return back()->with('error','Pastikan Format polres_foto Dengan Benar.');
             }
@@ -129,6 +129,9 @@ class DataPolresController extends Controller
     {
         $id = decrypt($idb);
         $del = DB::table('tb_data_polres')->where('data_polres_id',$id)->delete();
+        DB::table('tb_bus')->where('id_data',$id)->delete();
+        DB::table('tb_detail')->where('id_data',$id)->delete();
+        DB::table('tb_simlink')->where('id_data',$id)->delete();
         
         if($del == TRUE)
         {

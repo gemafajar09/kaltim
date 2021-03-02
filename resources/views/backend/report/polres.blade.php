@@ -12,7 +12,7 @@
             <label for="" style="color:white">Filter Data: </label>
             
             @if(session()->has('user_level') == 1)
-                <select name="cabang_id" id="cabang_id">
+                <select name="cabang_id" id="cabang_ids">
                     <option value="0">--Semua Polres--</option>
                     @foreach($polres as $no => $row)
                     <option value="{{ $row->cabang_id }}">{{ $row->cabang_nama }}</option>
@@ -154,7 +154,7 @@
 </div>
 <script>
     $(document).ready(function(){
-        var c = $('#cabang').val()
+        var c = $('#cabang_ids').val()
         var d = $('#dari').val()
         var s = $('#sampai').val()
         if(d == '')
@@ -172,16 +172,17 @@
 
     function caridata()
     {
-        var c = $('#cabang_id').val()
+        var cb = $('#cabang_ids').val()
         var d = $('#dari').val()
         var s = $('#sampai').val()
+        alert(cb)
         if(d == '')
         {
-            var cabang = c;
+            var cabang = cb;
             var dari = 0;
             var sampai = 0;
         }else{
-            var cabang = c;
+            var cabang = cb;
             var dari = d;
             var sampai = s;
         }
@@ -205,16 +206,16 @@
 
     function cetakexcel()
     {
-        var c = $('#cabang_id').val()
+        var cx = $('#cabang_ids').val()
         var d = $('#dari').val()
         var s = $('#sampai').val()
         if(d == '')
         {
-            var cabang = c;
+            var cabang = cx;
             var dari = 0;
             var sampai = 0;
         }else{
-            var cabang = c;
+            var cabang = cx;
             var dari = d;
             var sampai = s;
         }
