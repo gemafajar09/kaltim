@@ -47,8 +47,10 @@
             <td>{{ $row->data_polres_sim_b2_umum_perpanjang }}</td>
             <td style="text-align: center">
                 @if( Session::get('user_level') == 1)
-                <a onclick="detail('{{$row->data_polres_id}}')" class="btn btn-info btn-sm icon-info"></a>
+                <!-- <a onclick="detail('{{$row->data_polres_id}}')" class="btn btn-info btn-sm icon-info"></a> -->
                 
+                <a href="{{ route('report-polres-detail', encrypt($row->data_polres_id) ) }}" class="btn btn-info btn-sm icon-info"></a>
+
                 <a onclick="edit(
                 '{{$row->data_polres_id}}',
                 '{{$row->polres_id}}',

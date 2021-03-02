@@ -40,6 +40,7 @@ Route::get('/data-biro-delete/{id}', 'DataBiroController@delete')->name('data-bi
 // input dan report polres
 Route::get('/data-polres', 'DataPolresController@index')->name('data-polres')->middleware('Ceklogin');
 Route::get('/report-polres', 'DataPolresController@report_polres')->name('report-polres')->middleware('Ceklogin');
+Route::get('/report-polres-detail/{id}', 'DataPolresController@report_polres_detail')->name('report-polres-detail')->middleware('Ceklogin');
 Route::post('/data-polres-save', 'DataPolresController@save')->name('data-polres-save')->middleware('Ceklogin');
 Route::get('/data-polres-delete/{id}', 'DataPolresController@delete')->name('data-polres-delete')->middleware('Ceklogin');
 Route::get('/datatable/{cabang}/{dari}/{sampai}', 'DataPolresController@datatable');
