@@ -259,4 +259,57 @@ class DataPolresController extends Controller
         $data['biro'] = DB::table('tb_cabang')->where('cabang_kode',2)->get();
         return view('backend.report.export',$data);
     }
+
+    public function report_polres_detail(Request $r)
+    {
+        $id = decrypt($r->id);
+
+        $data['isi'] = DB::table('tb_detail')
+                        ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
+                        ->where('tb_detail.id_data',$id)
+                        ->get();
+
+
+        $data['sim'] = DB::table('tb_data_polres')
+                                ->where('data_polres_id',$id)
+                                ->first();
+
+        $data['simlink'] = DB::table('tb_simlink')
+                                ->where('tb_simlink.id_data',$id)
+                                ->first();
+
+        $data['bus'] = DB::table('tb_bus')
+                        ->where('tb_bus.id_data',$id)
+                        ->first();
+
+        // dd($data['isi']);
+        return view('backend.report.report_polres_detail',$data);
+    }
+
+    public function report_polres_edit(Request $r)
+    {
+        $id = decrypt($r->id);
+
+        $data['isi'] = DB::table('tb_detail')
+                        ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
+                        ->where('tb_detail.id_data',$id)
+                        ->get();
+
+
+        $data['sim'] = DB::table('tb_data_polres')
+                                ->where('data_polres_id',$id)
+                                ->first();
+
+        $data['simlink'] = DB::table('tb_simlink')
+                                ->where('tb_simlink.id_data',$id)
+                                ->first();
+
+        $data['bus'] = DB::table('tb_bus')
+                        ->where('tb_bus.id_data',$id)
+                        ->first();
+
+        // dd($data['isi']);
+        return view('backend.report.report_polres_edit',$data);
+    }
+
 }
