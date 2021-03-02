@@ -83,7 +83,7 @@ class LoginController extends Controller
                 $input->user_ulangi_password = $user_password;
                 $input->save();
     
-                return back()->with('pesan','Data Berhasil Di Inputkan.');
+                return back()->with('success','Data Berhasil Di Inputkan.');
             }else{
                 return back()->with('pesan','Data Gagal Di Inputkan.');
             }
@@ -106,7 +106,7 @@ class LoginController extends Controller
                     'user_ulangi_password' => $user_ulangi_password,
                 ]);
     
-                return back()->with('pesan','Data Berhasil Di Inputkan.');
+                return back()->with('success','Data Berhasil Di Inputkan.');
             }else{
                 return back()->with('error','Data Gagal Di Inputkan.');
             }

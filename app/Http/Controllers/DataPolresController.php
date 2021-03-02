@@ -66,6 +66,7 @@ class DataPolresController extends Controller
                 'simlink2_b2' => $r->simlink2_b2,
                 'simlink2_b2u' => $r->simlink2_b2u,
                 'simlink2_rusak' => $r->simlink2_rusak,
+                'tanggal' => date('Y-m-d')
             ]);
 
             DB::table('tb_bus')->insert([
