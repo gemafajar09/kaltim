@@ -34,8 +34,10 @@ Route::get('/polres-delete/{id}', 'PolresController@delete')->name('polres-delet
 // input dan report data biro 
 Route::get('/data-biro', 'DataBiroController@index')->name('data-biro')->middleware('Ceklogin');
 Route::get('/report-biro', 'DataBiroController@report_biro')->name('report-biro')->middleware('Ceklogin');
+Route::get('/report-biro-data/{cabang}/{dari}/{sampai}', 'DataBiroController@datatable');
 Route::post('/data-biro-save', 'DataBiroController@save')->name('data-biro-save')->middleware('Ceklogin');
 Route::get('/data-biro-delete/{id}', 'DataBiroController@delete')->name('data-biro-delete')->middleware('Ceklogin');
+Route::get('/exportexcelbiro/{cabang}/{dari}/{sampai}', 'DataBiroController@exportdetail');
 
 // input dan report polres
 Route::get('/data-polres', 'DataPolresController@index')->name('data-polres')->middleware('Ceklogin');
