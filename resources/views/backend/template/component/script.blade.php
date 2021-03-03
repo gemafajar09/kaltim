@@ -22,40 +22,63 @@
 
     setInterval(function(){ real() }, 3000);
 	});
+  @if(session('user_level') != 3)
+    function real()
+    {
+      var level = "{{session('user_level')}}";
+      var id_cabang = "{{session('cabang_id')}}";
+      $.ajax({
+        url: 'real-count/'+level+'/'+id_cabang,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function(data)
+        {
+          console.log(data);
+          $('#ab').html(data.abaru);
+          $('#aub').html(data.aumumbaru);
+          $('#b1b').html(data.b1baru);
+          $('#b2b').html(data.b2baru);
+          $('#b1ub').html(data.datasimb1u);
+          $('#b2ub').html(data.datasimb2u);
+          $('#b1up').html(data.datasimb1up);
+          $('#b2up').html(data.datasimb2up);
+          $('#cb').html(data.cbaru);
+          $('#db').html(data.dbaru);
+          // perpanjang
+          $('#ap').html(data.aperpanjang);
+          $('#aup').html(data.aumumperpanjang);
+          $('#b1p').html(data.b1perpanjang);
+          $('#b2p').html(data.b2perpanjang);
+          $('#cp').html(data.cperpanjang);
+          $('#dp').html(data.dperpanjang);
+          $('#dp').html(data.dperpanjang);
 
-  function real()
-  {
-    var level = "{{session('user_level')}}";
-    var id_cabang = "{{session('cabang_id')}}";
-    $.ajax({
-      url: 'real-count/'+level+'/'+id_cabang,
-      type: 'GET',
-      dataType: 'JSON',
-      success: function(data)
-      {
-        console.log(data);
-        $('#ab').html(data.abaru);
-        $('#aub').html(data.aumumbaru);
-        $('#b1b').html(data.b1baru);
-        $('#b2b').html(data.b2baru);
-        $('#b1ub').html(data.datasimb1u);
-        $('#b2ub').html(data.datasimb2u);
-        $('#b1up').html(data.datasimb1up);
-        $('#b2up').html(data.datasimb2up);
-        $('#cb').html(data.cbaru);
-        $('#db').html(data.dbaru);
-        // perpanjang
-        $('#ap').html(data.aperpanjang);
-        $('#aup').html(data.aumumperpanjang);
-        $('#b1p').html(data.b1perpanjang);
-        $('#b2p').html(data.b2perpanjang);
-        $('#cp').html(data.cperpanjang);
-        $('#dp').html(data.dperpanjang);
-        $('#dp').html(data.dperpanjang);
-
-      }
-    })
-  }
+        }
+      })
+    }
+  @else
+    function real()
+    {
+      var level = "{{session('user_level')}}";
+      var id_cabang = "{{session('cabang_id')}}";
+      $.ajax({
+        url: 'real-count/'+level+'/'+id_cabang,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function(data)
+        {
+          console.log(data);
+          $('#ab').html(data.abaru);
+          $('#cb').html(data.cbaru);
+          $('#acb').html(data.acbaru);
+          // perpanjang
+          $('#abp').html(data.abarup);
+          $('#cbp').html(data.cbarup);
+          $('#acbp').html(data.acbarup);
+        }
+      })
+    }
+  @endif
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-36251023-1']);
