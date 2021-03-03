@@ -4,9 +4,14 @@
 <div class="row">
     <div class="col-md-12">
         <div class="float-left">
-            <label for="" style="color:white">Print to:</label>
+        @if(session('user_level') == 1)
+            <label for="" style="color:white">Report Hari Ini :</label>
+            <button type="button" onclick="cetaksekarang()" class="btn "><img src="{{asset('/icon/excel.png')}}" style="width:20px" alt=""></button>
+        @endif
+        &nbsp;
+        &nbsp;
+            <label for="" style="color:white">Export to:</label>
             <button type="button" onclick="cetakexcel()" class="btn btn-success"><img src="{{asset('/icon/excel.png')}}" style="width:20px" alt=""></button>
-            <!-- <button type="button" class="btn "><img src="{{asset('/icon/word.png')}}" style="width:20px" alt=""></button> -->
         </div>
         <div class="float-right">
             @if(session('user_level') == 1)
@@ -28,7 +33,7 @@
             <input type="date" id="sampai" name="sampai" class="from-control">
             <button type="button" onclick="caridata()" class="btn btn-success btn-sm"><i class="icon-search"></i></button>
         </div>
-        <div class="widget">
+        <div class="widget py-2">
             <div class="widget-header widget-md">
                 <div class="float-left">
                     <i class="icon-bar-chart"></i>
@@ -221,6 +226,11 @@
             var sampai = s;
         }
         window.open(`{{ url('exportexcel') }}/`+ cabang +"/"+ dari +"/"+ sampai, '_blank');
+    }
+
+    function cetaksekarang()
+    {
+        window.open(`{{ url('reportharian') }}`);
     }
 
     function edit(

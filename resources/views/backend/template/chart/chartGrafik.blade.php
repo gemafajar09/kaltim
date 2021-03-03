@@ -50,7 +50,11 @@ for($i = 1; $i < 13; $i++)
             DB::raw('SUM(data_polres_sim_b1_umum) as simb1ubaruum'),
             DB::raw('SUM(data_polres_sim_b2_umum) as simb2ubaruum'),
             DB::raw('SUM(data_polres_sim_b1_umum_perpanjang) as simb1ubaruumper'),
-            DB::raw('SUM(data_polres_sim_b2_umum_perpanjang) as simb2ubaruumper')
+            DB::raw('SUM(data_polres_sim_b2_umum_perpanjang) as simb2ubaruumper'),
+            DB::raw('SUM(gerai_a) as geraia'),
+            DB::raw('SUM(gerai_c) as geraic'),
+            DB::raw('SUM(mpp_a) as mppa'),
+            DB::raw('SUM(mpp_c) as mppc')
         )
         ->first();
 
@@ -70,20 +74,8 @@ for($i = 1; $i < 13; $i++)
                 ->select(
                     DB::raw('SUM(simlink1_a) as sl1a'),
                     DB::raw('SUM(simlink2_a) as sl2a'),
-                    DB::raw('SUM(simlink1_au) as sl1au'),
-                    DB::raw('SUM(simlink2_au) as sl2au'),
                     DB::raw('SUM(simlink1_c) as sl1c'),
-                    DB::raw('SUM(simlink2_c) as sl2c'),
-                    DB::raw('SUM(simlink1_d) as sl1d'),
-                    DB::raw('SUM(simlink2_d) as sl2d'),
-                    DB::raw('SUM(simlink1_b1) as sl1b1'),
-                    DB::raw('SUM(simlink2_b1) as sl2b1'),
-                    DB::raw('SUM(simlink1_b1u) as sl1b1u'),
-                    DB::raw('SUM(simlink2_b1u) as sl2b1u'),
-                    DB::raw('SUM(simlink1_b2) as sl1b2'),
-                    DB::raw('SUM(simlink2_b2) as sl2b2'),
-                    DB::raw('SUM(simlink1_b2u) as sl1b2u'),
-                    DB::raw('SUM(simlink2_b2u) as sl2b2u'),
+                    DB::raw('SUM(simlink2_c) as sl2c')
                 )
                 ->first();
     }else{
@@ -130,20 +122,8 @@ for($i = 1; $i < 13; $i++)
                 ->select(
                     DB::raw('SUM(simlink1_a) as sl1a'),
                     DB::raw('SUM(simlink2_a) as sl2a'),
-                    DB::raw('SUM(simlink1_au) as sl1au'),
-                    DB::raw('SUM(simlink2_au) as sl2au'),
                     DB::raw('SUM(simlink1_c) as sl1c'),
-                    DB::raw('SUM(simlink2_c) as sl2c'),
-                    DB::raw('SUM(simlink1_d) as sl1d'),
-                    DB::raw('SUM(simlink2_d) as sl2d'),
-                    DB::raw('SUM(simlink1_b1) as sl1b1'),
-                    DB::raw('SUM(simlink2_b1) as sl2b1'),
-                    DB::raw('SUM(simlink1_b1u) as sl1b1u'),
-                    DB::raw('SUM(simlink2_b1u) as sl2b1u'),
-                    DB::raw('SUM(simlink1_b2) as sl1b2'),
-                    DB::raw('SUM(simlink2_b2) as sl2b2'),
-                    DB::raw('SUM(simlink1_b2u) as sl1b2u'),
-                    DB::raw('SUM(simlink2_b2u) as sl2b2u'),
+                    DB::raw('SUM(simlink2_c) as sl2c')
                 )
                 ->first();
     }
@@ -166,13 +146,7 @@ for($i = 1; $i < 13; $i++)
     $datasimB2up[] = $simAbaru->simb2ubaruumper != null ? $simAbaru->simb2ubaruumper : 0;
 
     $sla[] = ($simling->sl1a + $simling->sl2a) != null ?  ($simling->sl1a + $simling->sl2a) : 0; 
-    $slau[] = ($simling->sl1au + $simling->sl2au) != null ?  ($simling->sl1au + $simling->sl2au) : 0; 
     $slc[] = ($simling->sl1c + $simling->sl2c) != null ?  ($simling->sl1c + $simling->sl2c) : 0; 
-    $sld[] = ($simling->sl1d + $simling->sl2d) != null ?  ($simling->sl1d + $simling->sl2d) : 0; 
-    $slb1[] = ($simling->sl1b1 + $simling->sl2b1) != null ?  ($simling->sl1b1 + $simling->sl2b1) : 0; 
-    $slb1u[] = ($simling->sl1b1u + $simling->sl2b1u) != null ?  ($simling->sl1b1u + $simling->sl2b1u) : 0; 
-    $slb2[] = ($simling->sl1b2 + $simling->sl2b2) != null ?  ($simling->sl1b2 + $simling->sl2b2) : 0; 
-    $slb2u[] = ($simling->sl1b2u + $simling->sl2b2u) != null ?  ($simling->sl1b2u + $simling->sl2b2u) : 0; 
 
     $pengantara[] = $pengantar->pengantara != null ? $pengantar->pengantara : 0;
     $pengantarc[] = $pengantar->pengantarc != null ? $pengantar->pengantarc : 0;
