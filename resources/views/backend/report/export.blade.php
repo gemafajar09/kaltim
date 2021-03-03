@@ -9,8 +9,65 @@
 </head>
 <body>
 <?php
-header("Content-type: application/vnd-ms-excel");
-header("Content-Disposition: attachment; filename=laporan-".date('Y-m').".xls");
+    header("Content-type: application/vnd-ms-excel");
+    header("Content-Disposition: attachment; filename=laporan-".date('Y-m').".xls");
+
+    $baru = 0;
+    $perpanjang = 0;
+    $peningkatan = 0;
+    $rusaksimling = 0;
+    $rusaksimling2 = 0;
+    $rusakbus = 0;
+    $rusak = 0;
+    // total
+    $simlink1_total =0;
+    $simlink2_total =0;
+    $bus_total =0;
+    // baru
+    $sim_a =0;
+    $sim_c =0;
+    $sim_d =0;
+    // perpanjang
+    $sim_ap =0;
+    $sim_aup =0;
+    $sim_cp =0;
+    $sim_dp =0;
+    $sim_b1 =0;
+    $sim_b1u =0;
+    $sim_b2 =0;
+    $sim_b2u =0;
+    // peningkatan
+    $sim_p_au =0;
+    $sim_p_b1 =0;
+    $sim_p_b1u =0;
+    $sim_p_b2 =0;
+    $sim_p_b2u =0;
+    // simling
+    $simlinga = 0;
+    $simlingau = 0;
+    $simlingc = 0;
+    $simlingd = 0;
+    $simlingb1 = 0;
+    $simlingb1u = 0;
+    $simlingb2 = 0;
+    $simlingb2u = 0;
+    $simlinga2 = 0;
+    $simlingau2 = 0;
+    $simlingc2 = 0;
+    $simlingd2 = 0;
+    $simlingb12 = 0;
+    $simlingb1u2 = 0;
+    $simlingb22 = 0;
+    $simlingb2u2 = 0;
+    // sim bus
+    $busa = 0;
+    $busau = 0;
+    $busc = 0;
+    $busd = 0;
+    $busb1 = 0;
+    $busb1u = 0;
+    $busb2 = 0;
+    $busb2u = 0;
 ?>
     <table>
         <thead>
@@ -58,64 +115,6 @@ header("Content-Disposition: attachment; filename=laporan-".date('Y-m').".xls");
             </tr>
         </thead>
         <tbody>
-            <?php
-                $baru = 0;
-                $perpanjang = 0;
-                $peningkatan = 0;
-                $peningkatan = 0;
-                $rusaksimling = 0;
-                $rusaksimling2 = 0;
-                $rusakbus = 0;
-                $rusak = 0;
-                $sim_a =0;
-                $sim_c =0;
-                $sim_d =0;
-
-                $sim_ap =0;
-                $sim_aup =0;
-                $sim_c =0;
-                $sim_d =0;
-                $sim_b1 =0;
-                $sim_b1u =0;
-                $sim_b2 =0;
-                $sim_b2u =0;
-
-                $sim_p_au =0;
-                $sim_p_b1 =0;
-                $sim_p_b1u =0;
-                $sim_p_b2 =0;
-                $sim_p_b2u =0;
-
-                $simlink1_total =0;
-                $simlink2_total =0;
-                $bus_total =0;
-
-                $simlinga = 0;
-                $simlingau = 0;
-                $simlingc = 0;
-                $simlingd = 0;
-                $simlingb1 = 0;
-                $simlingb1u = 0;
-                $simlingb2 = 0;
-                $simlingb2u = 0;
-                $simlinga2 = 0;
-                $simlingau2 = 0;
-                $simlingc2 = 0;
-                $simlingd2 = 0;
-                $simlingb12 = 0;
-                $simlingb1u2 = 0;
-                $simlingb22 = 0;
-                $simlingb2u2 = 0;
-
-                $busa = 0;
-                $busau = 0;
-                $busc = 0;
-                $busd = 0;
-                $busb1 = 0;
-                $busb1u = 0;
-                $busb2 = 0;
-                $busb2u = 0;
-            ?>
             @foreach($isi as $i => $row)
             <?php 
             $cabang =  DB::table('tb_detail')
@@ -131,70 +130,138 @@ header("Content-Disposition: attachment; filename=laporan-".date('Y-m').".xls");
                         ->where('id_data',$row->data_polres_id)
                         ->first();
             
-            $baru += ($row->data_polres_sim_a_baru + $row->data_polres_sim_c_baru + $row->data_polres_sim_d_baru);
+            $simlink2_total += (
+                $simlink->simlink2_a + 
+                $simlink->simlink2_au + 
+                $simlink->simlink2_c + 
+                $simlink->simlink2_d + 
+                $simlink->simlink2_b1 + 
+                $simlink->simlink2_b1u + 
+                $simlink->simlink2_b2 + 
+                $simlink->simlink2_b2u 
+            ); 
+
+            $simlink1_total += (
+                $simlink->simlink1_a + 
+                $simlink->simlink1_au + 
+                $simlink->simlink1_c + 
+                $simlink->simlink1_d + 
+                $simlink->simlink1_b1 + 
+                $simlink->simlink1_b1u + 
+                $simlink->simlink1_b2 + 
+                $simlink->simlink1_b2u 
+            ); 
+
+            $bus_total      += (
+                $bus->bus_a + 
+                $bus->bus_au + 
+                $bus->bus_c + 
+                $bus->bus_d + 
+                $bus->bus_b1 + 
+                $bus->bus_b1u + 
+                $bus->bus_b2 + 
+                $bus->bus_b2u
+            );
+
+            $baru += (
+                $row->data_polres_sim_a_baru + 
+                $row->data_polres_sim_c_baru + 
+                $row->data_polres_sim_d_baru
+            );
 
             $perpanjang += (
-                            $row->data_polres_sim_a_perpanjang + $row->data_polres_sim_a_umum_perpanjang +  $row->data_polres_sim_c_perpanjang + $row->data_polres_sim_d_perpanjang +  $row->data_polres_sim_b1_baru + $row->data_polres_sim_b1_perpanjang + $row->data_polres_sim_b2_baru +  $row->data_polres_sim_b2_perpanjang );
+                $row->data_polres_sim_a_perpanjang + 
+                $row->data_polres_sim_a_umum_perpanjang +  
+                $row->data_polres_sim_c_perpanjang + 
+                $row->data_polres_sim_d_perpanjang +  
+                $row->data_polres_sim_b1_baru + 
+                $row->data_polres_sim_b1_perpanjang + 
+                $row->data_polres_sim_b2_baru +  
+                $row->data_polres_sim_b2_perpanjang +
+                $simlink->simlink2_a + 
+                $simlink->simlink2_au + 
+                $simlink->simlink2_c + 
+                $simlink->simlink2_d + 
+                $simlink->simlink2_b1 + 
+                $simlink->simlink2_b1u + 
+                $simlink->simlink2_b2 + 
+                $simlink->simlink2_b2u  +
+                $simlink->simlink1_a + 
+                $simlink->simlink1_au + 
+                $simlink->simlink1_c + 
+                $simlink->simlink1_d + 
+                $simlink->simlink1_b1 + 
+                $simlink->simlink1_b1u + 
+                $simlink->simlink1_b2 + 
+                $simlink->simlink1_b2u +
+                $bus->bus_a + 
+                $bus->bus_au + 
+                $bus->bus_c + 
+                $bus->bus_d + 
+                $bus->bus_b1 + 
+                $bus->bus_b1u + 
+                $bus->bus_b2 + 
+                $bus->bus_b2u
+            );
 
             $peningkatan += (
-                                $row->data_polres_sim_a_umum_baru +
-                                $row->data_polres_sim_b1_umum +
-                                $row->data_polres_sim_b1_umum_perpanjang +
-                                $row->data_polres_sim_b2_umum +
-                                $row->data_polres_sim_b2_umum_perpanjang
-                            );
-
-            $rusak += ($row->rusak); 
-            $rusaksimling += ($simlink->simlink1_rusak);
-            $rusaksimling2 += ($simlink->simlink2_rusak);
-            $rusakbus += ( $bus->bus_rusak);
-
-            $sim_a += $row->data_polres_sim_a_baru;
-            $sim_c += $row->data_polres_sim_c_baru;
-            $sim_d += $row->data_polres_sim_d_baru;
-
-            $sim_ap += $row->data_polres_sim_a_perpanjang;
-            $sim_aup += $row->data_polres_sim_a_umum_perpanjang;
-            $sim_c += $row->data_polres_sim_c_perpanjang;
-            $sim_d += $row->data_polres_sim_d_perpanjang;
-            $sim_b1 += $row->data_polres_sim_b1_baru;
-            $sim_b1u += $row->data_polres_sim_b1_perpanjang;
-            $sim_b2 += $row->data_polres_sim_b2_baru;
-            $sim_b2u += $row->data_polres_sim_b2_perpanjang;
-
-            $sim_p_au +=$row->data_polres_sim_a_umum_baru;
-            $sim_p_b1 +=$row->data_polres_sim_b1_umum;
-            $sim_p_b1u +=$row->data_polres_sim_b1_umum_perpanjang;
-            $sim_p_b2 +=$row->data_polres_sim_b2_umum;
-            $sim_p_b2u +=$row->data_polres_sim_b2_umum_perpanjang;
-
-            $simlink1_total += ($simlink->simlink1_a + $simlink->simlink1_au + $simlink->simlink1_c + $simlink->simlink1_d + $simlink->simlink1_b1 + $simlink->simlink1_b1u + $simlink->simlink1_b2 + $simlink->simlink1_b2u ); 
-            $simlinga += $simlink->simlink1_a;
-            $simlingau += $simlink->simlink1_au;
-            $simlingc += $simlink->simlink1_c;
-            $simlingd += $simlink->simlink1_d;
-            $simlingb1 += $simlink->simlink1_b1;
-            $simlingb1u += $simlink->simlink1_b1u;
-            $simlingb2 += $simlink->simlink1_b2;
-            $simlingb2u += $simlink->simlink1_b2u;
-            $simlink2_total += ($simlink->simlink2_a + $simlink->simlink2_au + $simlink->simlink2_c + $simlink->simlink2_d + $simlink->simlink2_b1 + $simlink->simlink2_b1u + $simlink->simlink2_b2 + $simlink->simlink2_b2u ); 
-            $simlinga2 += $simlink->simlink2_a;
-            $simlingau2 += $simlink->simlink2_au;
-            $simlingc2 += $simlink->simlink2_c;
-            $simlingd2 += $simlink->simlink2_d;
-            $simlingb12 += $simlink->simlink2_b1;
-            $simlingb1u2 += $simlink->simlink2_b1u;
-            $simlingb22 += $simlink->simlink2_b2;
-            $simlingb2u2 += $simlink->simlink2_b2u;
-            $bus_total += ($bus->bus_a + $bus->bus_au + $bus->bus_c + $bus->bus_d + $bus->bus_b1 + $bus->bus_b1u + $bus->bus_b2 + $bus->bus_b2u);
-            $busa += $bus->bus_a;
-            $busau += $bus->bus_au;
-            $busc += $bus->bus_c;
-            $busd += $bus->bus_d;
-            $busb1 += $bus->bus_b1;
-            $busb1u += $bus->bus_b1u;
-            $busb2 += $bus->bus_b2;
-            $busb2u += $bus->bus_b2u;
+                $row->data_polres_sim_a_umum_baru +
+                $row->data_polres_sim_b1_umum +
+                $row->data_polres_sim_b1_umum_perpanjang +
+                $row->data_polres_sim_b2_umum +
+                $row->data_polres_sim_b2_umum_perpanjang
+            );
+            
+            $rusak          += ($row->rusak); 
+            $rusaksimling   += ($simlink->simlink1_rusak);
+            $rusaksimling2  += ($simlink->simlink2_rusak);
+            $rusakbus       += ( $bus->bus_rusak);
+            // baru
+            $sim_a          += $row->data_polres_sim_a_baru;
+            $sim_c          += $row->data_polres_sim_c_baru;
+            $sim_d          += $row->data_polres_sim_d_baru;
+            // perpanjang
+            $sim_ap     += $row->data_polres_sim_a_perpanjang;
+            $sim_aup    += $row->data_polres_sim_a_umum_perpanjang;
+            $sim_cp     += $row->data_polres_sim_c_perpanjang;
+            $sim_dp     += $row->data_polres_sim_d_perpanjang;
+            $sim_b1     += $row->data_polres_sim_b1_baru;
+            $sim_b1u    += $row->data_polres_sim_b1_perpanjang;
+            $sim_b2     += $row->data_polres_sim_b2_baru;
+            $sim_b2u    += $row->data_polres_sim_b2_perpanjang;
+            // peningkatan
+            $sim_p_au   += $row->data_polres_sim_a_umum_baru;
+            $sim_p_b1   += $row->data_polres_sim_b1_umum;
+            $sim_p_b1u  += $row->data_polres_sim_b1_umum_perpanjang;
+            $sim_p_b2   += $row->data_polres_sim_b2_umum;
+            $sim_p_b2u  += $row->data_polres_sim_b2_umum_perpanjang;
+            // simling
+            $simlinga       += $simlink->simlink1_a;
+            $simlingau      += $simlink->simlink1_au;
+            $simlingc       += $simlink->simlink1_c;
+            $simlingd       += $simlink->simlink1_d;
+            $simlingb1      += $simlink->simlink1_b1;
+            $simlingb1u     += $simlink->simlink1_b1u;
+            $simlingb2      += $simlink->simlink1_b2;
+            $simlingb2u     += $simlink->simlink1_b2u;
+            // simling 2
+            $simlinga2      += $simlink->simlink2_a;
+            $simlingau2     += $simlink->simlink2_au;
+            $simlingc2      += $simlink->simlink2_c;
+            $simlingd2      += $simlink->simlink2_d;
+            $simlingb12     += $simlink->simlink2_b1;
+            $simlingb1u2    += $simlink->simlink2_b1u;
+            $simlingb22     += $simlink->simlink2_b2;
+            $simlingb2u2    += $simlink->simlink2_b2u;
+            // bus
+            $busa       += $bus->bus_a;
+            $busau      += $bus->bus_au;
+            $busc       += $bus->bus_c;
+            $busd       += $bus->bus_d;
+            $busb1      += $bus->bus_b1;
+            $busb1u     += $bus->bus_b1u;
+            $busb2      += $bus->bus_b2;
+            $busb2u     += $bus->bus_b2u;
             ?>
             <tr>
                 <td>{{ $i + 1 }}</td>
@@ -337,14 +404,14 @@ header("Content-Disposition: attachment; filename=laporan-".date('Y-m').".xls");
                 <th>{{ $sim_c }}</th>
                 <th>{{ $sim_d }}</th>
 
-                <th>{{ $sim_ap+$simlinga+$simlinga2+$busa }}</th>
-                <th>{{ $sim_aup+$simlingau+$simlingau2+$busau }}</th>
-                <th>{{ $sim_c+$simlingc+$simlingc2+$busc }}</th>
-                <th>{{ $sim_d+$simlingd+$simlingd2+$busd }}</th>
-                <th>{{ $sim_b1+$simlingb1+$simlingb12+$busb1 }}</th>
-                <th>{{ $sim_b1u+$simlingb1u+$simlingb1u2+$busb1u }}</th>
-                <th>{{ $sim_b2+$simlingb2+$simlingb22+$busb2 }}</th>
-                <th>{{ $sim_b2u+$simlingb2u+$simlingb2u2+$busb2u }}</th>
+                <th>{{ $sim_ap + $simlinga + $simlinga2 + $busa }}</th>
+                <th>{{ $sim_aup + $simlingau + $simlingau2 + $busau }}</th>
+                <th>{{ $sim_c + $simlingc + $simlingc2 + $busc }}</th>
+                <th>{{ $sim_d + $simlingd + $simlingd2 + $busd }}</th>
+                <th>{{ $sim_b1 + $simlingb1 + $simlingb12 + $busb1 }}</th>
+                <th>{{ $sim_b1u + $simlingb1u + $simlingb1u2 + $busb1u }}</th>
+                <th>{{ $sim_b2 + $simlingb2 + $simlingb22 + $busb2 }}</th>
+                <th>{{ $sim_b2u + $simlingb2u + $simlingb2u2 + $busb2u }}</th>
                 
                 <th>{{ $sim_p_au }}</th>
                 <th>{{ $sim_p_b1 }}</th>
@@ -354,20 +421,21 @@ header("Content-Disposition: attachment; filename=laporan-".date('Y-m').".xls");
                 
                 <th>
                     {{ 
-                        $baru + $perpanjang + $peningkatan + $simlink1_total + $simlink2_total + $bus_total
+                        $baru + $perpanjang + $peningkatan
                     }}
                 </th>
                 <th>{{ $rusak + $rusaksimling + $rusaksimling2 + $rusakbus }}</th>
             </tr>
+            <!-- total 2 -->
             <tr>
                 <th colspan="3">
                     {{ 
-                        $sim_a + $sim_c + $sim_d
+                        $baru
                     }}
                 </th>
                 <th colspan="8">
                     {{
-                        ($sim_ap+$simlinga+$simlinga2+$busa)+($sim_aup+$simlingau+$simlingau2+$busau)+($sim_c+$simlingc+$simlingc2+$busc)+($sim_d+$simlingd+$simlingd2+$busd)+($sim_b1+$simlingb1+$simlingb12+$busb1)+($sim_b1u+$simlingb1u+$simlingb1u2+$busb1u)+($sim_b2+$simlingb2+$simlingb22+$busb2)+($sim_b2u+$simlingb2u+$simlingb2u2+$busb2u)
+                        $perpanjang
                     }}
                 </th>
                 <th colspan="5">
@@ -377,10 +445,11 @@ header("Content-Disposition: attachment; filename=laporan-".date('Y-m').".xls");
                 </th>
                 <th colspan="2">&nbsp;</th>
             </tr>
+            <!-- grand total -->
             <tr>
                 <th colspan="16">
                     {{ 
-                        ($sim_a + $sim_c + $sim_d) + (($sim_ap+$simlinga+$simlinga2+$busa)+($sim_aup+$simlingau+$simlingau2+$busau)+($sim_c+$simlingc+$simlingc2+$busc)+($sim_d+$simlingd+$simlingd2+$busd)+($sim_b1+$simlingb1+$simlingb12+$busb1)+($sim_b1u+$simlingb1u+$simlingb1u2+$busb1u)+($sim_b2+$simlingb2+$simlingb22+$busb2)+($sim_b2u+$simlingb2u+$simlingb2u2+$busb2u)) + $peningkatan
+                        $baru + $perpanjang + $peningkatan
                     }}
                 </th>
                 <th colspan="2">&nbsp;</th>

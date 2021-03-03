@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/grafik-detail', 'TestController@grafik')->name('grafik-detail');
-Route::get('real-count','HomeController@realcount');
+Route::get('real-count/{level}/{cabang}','HomeController@realcount');
 // ========================backend=======================
 // Data User
 Route::get('/data-user','LoginController@datauser')->name('data-user')->middleware('Ceklogin');

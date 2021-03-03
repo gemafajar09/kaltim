@@ -9,15 +9,17 @@
             <!-- <button type="button" class="btn "><img src="{{asset('/icon/word.png')}}" style="width:20px" alt=""></button> -->
         </div>
         <div class="float-right">
+            @if(session('user_level') == 1)
             <label for="" style="color:white">Filter Data: </label>
             
-            @if(session()->has('user_level') == 1)
                 <select name="cabang_id" id="cabang_ids">
                     <option value="0">--Semua Polres--</option>
                     @foreach($polres as $no => $row)
                     <option value="{{ $row->cabang_id }}">{{ $row->cabang_nama }}</option>
                     @endforeach
                 </select>
+            @else
+            <input type="hidden" id="cabang_ids" value="{{session('cabang_id')}}">
             @endif
 
             <label for="" style="color:white">Dari:</label>
@@ -211,7 +213,7 @@
         var s = $('#sampai').val()
         if(d == '')
         {
-            var cabang = cx;
+            var cabang = cx != '' ? cx : 0;
             var dari = 0;
             var sampai = 0;
         }else{

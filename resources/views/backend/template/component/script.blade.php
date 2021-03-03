@@ -25,8 +25,10 @@
 
   function real()
   {
+    var level = "{{session('user_level')}}";
+    var id_cabang = "{{session('cabang_id')}}";
     $.ajax({
-      url: '<?= url('real-count') ?>',
+      url: 'real-count/'+level+'/'+id_cabang,
       type: 'GET',
       dataType: 'JSON',
       success: function(data)

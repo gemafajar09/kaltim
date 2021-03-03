@@ -46,35 +46,9 @@
             <td>{{ $row->data_polres_sim_b2_perpanjang }}</td>
             <td>{{ $row->data_polres_sim_b2_umum_perpanjang }}</td>
             <td style="text-align: center">
-                @if( Session::get('user_level') == 1)
-                <!-- <a onclick="detail('{{$row->data_polres_id}}')" class="btn btn-info btn-sm icon-info"></a> -->
-                
                 <a href="{{ route('report-polres-detail', encrypt($row->data_polres_id) ) }}" class="btn btn-info btn-sm icon-info"></a>
                 <a href="{{ route('report-polres-edit', encrypt($row->data_polres_id) ) }}" class="btn btn-warning btn-sm icon-edit"></a>
-
-                <!-- <a onclick="edit(
-                '{{$row->data_polres_id}}',
-                '{{$row->polres_id}}',
-                '{{$row->cabang_nama}}',
-                '{{$row->data_polres_tgl}}',
-                '{{$row->data_polres_sim_a_baru}}',
-                '{{$row->data_polres_sim_a_umum_baru}}',
-                '{{$row->data_polres_sim_b1_baru}}',
-                '{{$row->data_polres_sim_b2_baru}}',
-                '{{$row->data_polres_sim_c_baru}}',
-                '{{$row->data_polres_sim_d_baru}}',
-                '{{$row->data_polres_sim_a_perpanjang}}',
-                '{{$row->data_polres_sim_a_umum_perpanjang}}',
-                '{{$row->data_polres_sim_b1_perpanjang}}',
-                '{{$row->data_polres_sim_b2_perpanjang}}',
-                '{{$row->data_polres_sim_c_perpanjang}}',
-                '{{$row->data_polres_sim_d_perpanjang}}'
-                )" class="btn btn-warning btn-sm icon-edit"></a> -->
-
                 <a href="{{route('data-polres-delete', encrypt($row->data_polres_id))}}" class="btn btn-danger btn-sm icon-trash"></a>
-                @else
-                    -
-                @endif
             </td>
         </tr>
         @endforeach
