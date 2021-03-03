@@ -41,7 +41,7 @@ class DataBiroController extends Controller
                     'data_biro_sim_c_perpanjang' => $r->data_biro_sim_c_perpanjang,
                     'data_biro_sim_ac_perpanjang' => $r->data_biro_sim_ac_perpanjang
                 ]);
-                return back()->with('pesan','Input Data Success');
+                return redirect('report-biro')->with('pesan','Input Data Success');
             }else{
                 $up = DB::table('tb_data_biro')
                         ->where('data_biro_id',$r->data_biro_id)
@@ -56,11 +56,7 @@ class DataBiroController extends Controller
                             'data_biro_sim_ac_perpanjang' => $r->data_biro_sim_ac_perpanjang
                         ]);
 
-                if($up == TRUE){
-                    return back()->with('pesan','Update Data Success');
-                }else{
-                    return back()->with('error','Pastikan Format biro_foto Dengan Benar.');
-                }
+                    return redirect('report-biro')->with('pesan','Update Data Success');
             }
         }
     }
@@ -80,12 +76,95 @@ class DataBiroController extends Controller
 
     public function report_biro()
     {           
+        $data['biro'] = DB::table('tb_cabang')->where('cabang_kode',2)->get();
+        return view('backend.report.biro',$data);
+    }
+
+    public function datatable($cabang, $dari, $sampai)
+    {
         $bulan = date('m');
-        $data = DB::table('tb_data_biro')
-                ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
-                ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
-                ->where(DB::raw('MONTH(tb_data_biro.data_biro_tgl)'),$bulan)
-                ->get();
-        return view('backend.report.biro',compact('data'));
+        if($cabang == 0 && $dari == 0 && $sampai == 0)
+        {
+            if(session()->get('user_level')  == 1){
+                $data = DB::table('tb_data_biro')
+                        ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                        ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                        ->where(DB::raw('MONTH(tb_data_biro.data_biro_tgl)'),$bulan)
+                        ->get();
+            }else{
+                $data = DB::table('tb_data_biro')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                    ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                    ->where('biro_id',$cabang)
+                    ->where(DB::raw('MONTH(tb_data_biro.data_biro_tgl)'),$bulan)
+                    ->get();    
+            }
+        }elseif($cabang != 0 && $dari == 0 && $sampai == 0){
+            $data = DB::table('tb_data_biro')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                    ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                    ->where('tb_data_biro.biro_id','=', $cabang)
+                    ->get();
+
+        }elseif($cabang == 0 && $dari != 0 && $sampai != 0){
+            $data = DB::table('tb_data_biro')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                    ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                    ->whereBetween('tb_data_biro.data_biro_tgl',[$dari,$sampai])
+                    ->get();
+
+        }else{
+            $data = DB::table('tb_data_biro')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                    ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                    ->whereBetween('tb_data_biro.data_biro_tgl',[$dari,$sampai])
+                    ->where('tb_data_biro.biro_id','=', $cabang)
+                    ->get();
+        }
+        return view('backend.report.birotable',compact('data'));
+    }
+    
+    public function exportdetail($cabang, $dari, $sampai)
+    {
+        $bulan = date('m');
+        if($cabang == 0 && $dari == 0 && $sampai == 0)
+        {
+            if(session()->get('user_level')  == 1){
+                $data = DB::table('tb_data_biro')
+                        ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                        ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                        ->where(DB::raw('MONTH(tb_data_biro.data_biro_tgl)'),$bulan)
+                        ->get();
+            }else{
+                $data = DB::table('tb_data_biro')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                    ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                    ->where('biro_id',$cabang)
+                    ->where(DB::raw('MONTH(tb_data_biro.data_biro_tgl)'),$bulan)
+                    ->get();    
+            }
+        }elseif($cabang != 0 && $dari == 0 && $sampai == 0){
+            $data = DB::table('tb_data_biro')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                    ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                    ->where('tb_data_biro.biro_id','=', $cabang)
+                    ->get();
+
+        }elseif($cabang == 0 && $dari != 0 && $sampai != 0){
+            $data = DB::table('tb_data_biro')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                    ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                    ->whereBetween('tb_data_biro.data_biro_tgl',[$dari,$sampai])
+                    ->get();
+
+        }else{
+            $data = DB::table('tb_data_biro')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                    ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                    ->whereBetween('tb_data_biro.data_biro_tgl',[$dari,$sampai])
+                    ->where('tb_data_biro.biro_id','=', $cabang)
+                    ->get();
+        }
+        return view('backend.report.exportbiro',compact('data'));
     }
 }

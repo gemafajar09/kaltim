@@ -209,7 +209,7 @@ class DataPolresController extends Controller
                     ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
                     ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
                     ->where(DB::raw('MONTH(tb_data_polres.data_polres_tgl)'),$bulan)
-                    ->where('tb_data_polres.polres_id','=', session()->get('cabang_id'))
+                    ->where('tb_data_polres.polres_id','=', $cabang)
                     ->get();
                 
             }
