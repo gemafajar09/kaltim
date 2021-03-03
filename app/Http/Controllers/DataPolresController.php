@@ -335,4 +335,15 @@ class DataPolresController extends Controller
         return view('backend.report.report_polres_edit',$data);
     }
 
+    public function reportharian()
+    {
+        $tanggal = date('Y-m-d');
+        $data = DB::table('tb_data_polres')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
+                    ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
+                    ->where('tb_data_polres.data_polres_tgl',$tanggal)
+                    ->get();
+        return view('backend.report.reportharian',compact('data'));
+    }
+
 }
