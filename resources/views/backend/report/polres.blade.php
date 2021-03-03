@@ -177,7 +177,6 @@
         var cb = $('#cabang_ids').val()
         var d = $('#dari').val()
         var s = $('#sampai').val()
-        alert(cb)
         if(d == '')
         {
             var cabang = cb;
