@@ -224,7 +224,7 @@
                             <!-- .stat -->
 
                             <div class="stat"> 
-                                <i style="font-size: 12px">SIM AC</i> <span class="value"><strong id="acb"></strong></span>
+                                <i style="font-size: 12px">SIM A & C</i> <span class="value"><strong id="acb"></strong></span>
                             </div>
                             <!-- .stat -->
                         </div>
@@ -255,7 +255,7 @@
                             <!-- .stat -->
 
                             <div class="stat"> 
-                                <i style="font-size: 12px">SIM AC</i> <span class="value"><strong id="acbp"></strong></span>
+                                <i style="font-size: 12px">SIM A & C</i> <span class="value"><strong id="acbp"></strong></span>
                             </div>
                             <!-- .stat -->
                         </div>
