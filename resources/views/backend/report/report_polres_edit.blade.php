@@ -10,8 +10,9 @@
             </div>
             <div class="widget-content">
                 <a href="{{ route('report-polres') }}" class="btn btn-primary mb-3">Kembali</a>
-                <form action="" method="POST">
+                <form action="{{ route('data-polres-save') }}" method="POST" style="font-size:10px">
                     @csrf
+                    <input type="hidden" name="data_polres_id" value="{{ $sim->data_polres_id }}">
                     <div class="row">
                         <div class="col-md-3">
                             <div class="card">
@@ -20,15 +21,15 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label><b>SIM A BARU</b></label>
+                                        <label><b>SIM A</b></label>
                                         <input type="number" class="form-control" name="data_polres_sim_a_baru" value="{{ $sim->data_polres_sim_a_baru }}">
                                     </div>
                                     <div class="form-group">
-                                        <label><b>SIM C BARU</b></label>
+                                        <label><b>SIM C</b></label>
                                         <input type="number" class="form-control" name="data_polres_sim_c_baru" value="{{ $sim->data_polres_sim_c_baru }}">
                                     </div>
                                     <div class="form-group">
-                                        <label><b>SIM D BARU</b></label>
+                                        <label><b>SIM D</b></label>
                                         <input type="number" class="form-control" name="data_polres_sim_d_baru" value="{{ $sim->data_polres_sim_d_baru }}">
                                     </div>
                                 </div>
@@ -43,40 +44,40 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label><b>SIM A PERPANJANG</b></label>
+                                                <label><b>SIM A</b></label>
                                                 <input type="number" class="form-control" name="data_polres_sim_a_perpanjang" value="{{ $sim->data_polres_sim_a_perpanjang }}">
                                             </div>
                                             <div class="form-group">
-                                                <label><b>SIM AU PERPANJANG</b></label>
+                                                <label><b>SIM AU</b></label>
                                                 <input type="number" class="form-control" name="data_polres_sim_a_umum_perpanjang" value="{{ $sim->data_polres_sim_a_umum_perpanjang }}">
                                             </div>
                                             <div class="form-group">
-                                                <label><b>SIM C PERPANJANG</b></label>
+                                                <label><b>SIM C</b></label>
                                                 <input type="number" class="form-control" name="data_polres_sim_c_perpanjang" value="{{ $sim->data_polres_sim_c_perpanjang }}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label><b>SIM D PERPANJANG</b></label>
+                                                <label><b>SIM D</b></label>
                                                 <input type="number" class="form-control" name="data_polres_sim_d_perpanjang" value="{{ $sim->data_polres_sim_d_perpanjang }}">
                                             </div>
                                             <div class="form-group">
-                                                <label><b>SIM B1 PERPANJANG</b></label>
+                                                <label><b>SIM B1</b></label>
                                                 <input type="number" class="form-control" name="data_polres_sim_b1_perpanjang" value="{{ $sim->data_polres_sim_b1_perpanjang }}">
                                             </div>
                                             <div class="form-group">
-                                                <label><b>SIM B1U PERPANJANG</b></label>
+                                                <label><b>SIM B1U</b></label>
                                                 <input type="number" class="form-control" name="data_polres_sim_b1_umum_perpanjang" value="{{ $sim->data_polres_sim_b1_umum_perpanjang }}">
                                             </div>
                                             
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label><b>SIM B2 PERPANJANG</b></label>
+                                                <label><b>SIM B2</b></label>
                                                 <input type="number" class="form-control" name="data_polres_sim_b2_perpanjang" value="{{ $sim->data_polres_sim_b2_perpanjang }}">
                                             </div>
                                             <div class="form-group">
-                                                <label><b>SIM B2U PERPANJANG</b></label>
+                                                <label><b>SIM B2U</b></label>
                                                 <input type="number" class="form-control" name="data_polres_sim_b2_umum_perpanjang" value="{{ $sim->data_polres_sim_b2_umum_perpanjang }}">
                                             </div>
                                         </div>
@@ -93,26 +94,30 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label><b>SIM AU PENINGKATAN</b></label>
+                                            <label><b>SIM AU</b></label>
                                             <input type="number" class="form-control" name="data_polres_sim_a_umum_baru" value="{{ $sim->data_polres_sim_a_umum_baru }}">
                                         </div>
                                         <div class="form-group">
-                                            <label><b>SIM B1 PENINGKATAN</b></label>
+                                            <label><b>SIM B1</b></label>
                                             <input type="number" class="form-control" name="data_polres_sim_b1_umum" value="{{ $sim->data_polres_sim_b1_umum }}">
                                         </div>
                                         <div class="form-group">
-                                            <label><b>SIM B1U PENINGKATAN</b></label>
+                                            <label><b>SIM B1U</b></label>
                                             <input type="number" class="form-control" name="data_polres_sim_b1_umum_perpanjang" value="{{ $sim->data_polres_sim_b1_umum_perpanjang }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label><b>SIM B2 PENINGKATAN</b></label>
+                                            <label><b>SIM B2</b></label>
                                             <input type="number" class="form-control" name="data_polres_sim_b2_umum" value="{{ $sim->data_polres_sim_b2_umum }}">
                                         </div>
                                         <div class="form-group">
-                                            <label><b>SIM B2U PENINGKATAN</b></label>
+                                            <label><b>SIM B2U</b></label>
                                             <input type="number" class="form-control" name="data_polres_sim_b2_umum_perpanjang" value="{{ $sim->data_polres_sim_b2_umum_perpanjang }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label><b>DATA RUSAK</b></label>
+                                            <input type="number" class="form-control" name="rusak" value="{{ $sim->rusak }}">
                                         </div>
                                     </div>
                                 </div>
@@ -120,12 +125,13 @@
                                 </div>
                             </div>
                         </div>     
-                        <div class="col-md-3 py-2">
+                        <div class="col-md-4 py-2">
                             <div class="card">
                                 <div class="card-header">
                                     SIM LING I
                                 </div>
                                 <div class="card-body">
+                                <input type="hidden" name="simlink_id" value="{{ $simlink->simlink_id }}">
                                     <div class="form-group">
                                         <label><b>SIM LING I A</b></label>
                                         <input type="number" class="form-control" name="simlink1_a" value="{{ $simlink->simlink1_a }}">
@@ -165,7 +171,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 py-2">
+                        <div class="col-md-4 py-2">
                             <div class="card">
                                 <div class="card-header">
                                     SIM LING II
@@ -210,12 +216,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 py-2">
+                        <div class="col-md-4 py-2">
                             <div class="card">
                                 <div class="card-header">
                                     BUS MILENIAL
                                 </div>
                                 <div class="card-body">
+                                <input type="hidden" name="bus_id" value="{{ $bus->bus_id }}">
                                     <div class="form-group">
                                         <label><b>BUS MILENIAL A</b></label>
                                         <input type="number" class="form-control" name="bus_a" value="{{ $bus->bus_a }}">
@@ -255,15 +262,37 @@
                                 </div>
                             </div>
                         </div>
+                        @foreach($isi as $br)
                         <div class="col-md-3 py-2">
-                            <div class="form-group">
-                                <label><b>DATA RUSAK</b></label>
-                                <input type="number" class="form-control" name="rusak" value="{{ $sim->rusak }}">
+                            <div class="card">
+                                <div class="card-header" style="font-size:12px">
+                                    {{$br->cabang_nama}}
+                                    <input type="hidden" name="id_detail[]" value="{{$br->id_detail}}">
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label><b>SURAT KETERANGAN PSIKOLOGI SIM A</b></label>
+                                                <input value="{{$br->sim_a_baru}}" type="number" name="data_biro_sim_a_baru[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT KETERANGAN PSIKOLOGI SIM C</b></label>
+                                                <input value="{{$br->sim_c_baru}}" type="number" name="data_biro_sim_c_baru[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT KETERANGAN PSIKOLOGI SIM A DAN C</b></label>
+                                                <input value="{{$br->sim_ac_baru}}" type="number" name="data_biro_sim_ac_baru[]" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        @endforeach
                     
                     <div class="col-md-12 py-3" align="right">
-                        <button type="submit" class="btn btn-outline-success">Save</button>
+                        <button type="submit" class="btn btn-success btn-block">Save</button>
                     </div>
 
                     </div>

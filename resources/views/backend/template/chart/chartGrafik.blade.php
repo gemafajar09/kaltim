@@ -29,61 +29,124 @@ $pengantarac = array();
 for($i = 1; $i < 13; $i++)
 {
     $bulan = str_pad($i, 2 , "0", STR_PAD_LEFT);
-    $simAbaru = DB::table('tb_data_polres')
-    ->where(DB::raw('MONTH(data_polres_tgl)'),$bulan)
-    ->where(DB::raw('YEAR(data_polres_tgl)'),$tahun)
-    ->select(
-        DB::raw('SUM(data_polres_sim_a_baru) as simabaru'),
-        DB::raw('SUM(data_polres_sim_a_umum_baru) as simabaruumum'),
-        DB::raw('SUM(data_polres_sim_b1_baru) as simb1baru'),
-        DB::raw('SUM(data_polres_sim_b2_baru) as simb2baru'),
-        DB::raw('SUM(data_polres_sim_c_baru) as simcbaru'),
-        DB::raw('SUM(data_polres_sim_d_baru) as simdbaru'),
-        DB::raw('SUM(data_polres_sim_a_perpanjang) as simabarup'),
-        DB::raw('SUM(data_polres_sim_a_umum_perpanjang) as simabaruumump'),
-        DB::raw('SUM(data_polres_sim_b1_perpanjang) as simb1barup'),
-        DB::raw('SUM(data_polres_sim_b2_perpanjang) as simb2barup'),
-        DB::raw('SUM(data_polres_sim_c_perpanjang) as simcbarup'),
-        DB::raw('SUM(data_polres_sim_d_perpanjang) as simdbarup'),
-        DB::raw('SUM(data_polres_sim_b1_umum) as simb1ubaruum'),
-        DB::raw('SUM(data_polres_sim_b2_umum) as simb2ubaruum'),
-        DB::raw('SUM(data_polres_sim_b1_umum_perpanjang) as simb1ubaruumper'),
-        DB::raw('SUM(data_polres_sim_b2_umum_perpanjang) as simb2ubaruumper')
-    )
-    ->first();
+    if(session('user_level') == 1)
+    {
+        $simAbaru = DB::table('tb_data_polres')
+        ->where(DB::raw('MONTH(data_polres_tgl)'),$bulan)
+        ->where(DB::raw('YEAR(data_polres_tgl)'),$tahun)
+        ->select(
+            DB::raw('SUM(data_polres_sim_a_baru) as simabaru'),
+            DB::raw('SUM(data_polres_sim_a_umum_baru) as simabaruumum'),
+            DB::raw('SUM(data_polres_sim_b1_baru) as simb1baru'),
+            DB::raw('SUM(data_polres_sim_b2_baru) as simb2baru'),
+            DB::raw('SUM(data_polres_sim_c_baru) as simcbaru'),
+            DB::raw('SUM(data_polres_sim_d_baru) as simdbaru'),
+            DB::raw('SUM(data_polres_sim_a_perpanjang) as simabarup'),
+            DB::raw('SUM(data_polres_sim_a_umum_perpanjang) as simabaruumump'),
+            DB::raw('SUM(data_polres_sim_b1_perpanjang) as simb1barup'),
+            DB::raw('SUM(data_polres_sim_b2_perpanjang) as simb2barup'),
+            DB::raw('SUM(data_polres_sim_c_perpanjang) as simcbarup'),
+            DB::raw('SUM(data_polres_sim_d_perpanjang) as simdbarup'),
+            DB::raw('SUM(data_polres_sim_b1_umum) as simb1ubaruum'),
+            DB::raw('SUM(data_polres_sim_b2_umum) as simb2ubaruum'),
+            DB::raw('SUM(data_polres_sim_b1_umum_perpanjang) as simb1ubaruumper'),
+            DB::raw('SUM(data_polres_sim_b2_umum_perpanjang) as simb2ubaruumper')
+        )
+        ->first();
 
-    $pengantar = DB::table('tb_detail')
-            ->where(DB::raw('MONTH(tanggal)'),$bulan)
-            ->where(DB::raw('YEAR(tanggal)'),$tahun)
-            ->select(
-                DB::raw('SUM(sim_a_baru) as pengantara'),
-                DB::raw('SUM(sim_c_baru) as pengantarc'),
-                DB::raw('SUM(sim_ac_baru) as pengantarac')
-            )
-            ->first();
+        $pengantar = DB::table('tb_detail')
+                ->where(DB::raw('MONTH(tanggal)'),$bulan)
+                ->where(DB::raw('YEAR(tanggal)'),$tahun)
+                ->select(
+                    DB::raw('SUM(sim_a_baru) as pengantara'),
+                    DB::raw('SUM(sim_c_baru) as pengantarc'),
+                    DB::raw('SUM(sim_ac_baru) as pengantarac')
+                )
+                ->first();
 
-    $simling = DB::table('tb_simlink')
-            ->where(DB::raw('MONTH(tanggal)'),$bulan)
-            ->where(DB::raw('YEAR(tanggal)'),$tahun)
-            ->select(
-                DB::raw('SUM(simlink1_a) as sl1a'),
-                DB::raw('SUM(simlink2_a) as sl2a'),
-                DB::raw('SUM(simlink1_au) as sl1au'),
-                DB::raw('SUM(simlink2_au) as sl2au'),
-                DB::raw('SUM(simlink1_c) as sl1c'),
-                DB::raw('SUM(simlink2_c) as sl2c'),
-                DB::raw('SUM(simlink1_d) as sl1d'),
-                DB::raw('SUM(simlink2_d) as sl2d'),
-                DB::raw('SUM(simlink1_b1) as sl1b1'),
-                DB::raw('SUM(simlink2_b1) as sl2b1'),
-                DB::raw('SUM(simlink1_b1u) as sl1b1u'),
-                DB::raw('SUM(simlink2_b1u) as sl2b1u'),
-                DB::raw('SUM(simlink1_b2) as sl1b2'),
-                DB::raw('SUM(simlink2_b2) as sl2b2'),
-                DB::raw('SUM(simlink1_b2u) as sl1b2u'),
-                DB::raw('SUM(simlink2_b2u) as sl2b2u'),
-            )
-            ->first();
+        $simling = DB::table('tb_simlink')
+                ->where(DB::raw('MONTH(tanggal)'),$bulan)
+                ->where(DB::raw('YEAR(tanggal)'),$tahun)
+                ->select(
+                    DB::raw('SUM(simlink1_a) as sl1a'),
+                    DB::raw('SUM(simlink2_a) as sl2a'),
+                    DB::raw('SUM(simlink1_au) as sl1au'),
+                    DB::raw('SUM(simlink2_au) as sl2au'),
+                    DB::raw('SUM(simlink1_c) as sl1c'),
+                    DB::raw('SUM(simlink2_c) as sl2c'),
+                    DB::raw('SUM(simlink1_d) as sl1d'),
+                    DB::raw('SUM(simlink2_d) as sl2d'),
+                    DB::raw('SUM(simlink1_b1) as sl1b1'),
+                    DB::raw('SUM(simlink2_b1) as sl2b1'),
+                    DB::raw('SUM(simlink1_b1u) as sl1b1u'),
+                    DB::raw('SUM(simlink2_b1u) as sl2b1u'),
+                    DB::raw('SUM(simlink1_b2) as sl1b2'),
+                    DB::raw('SUM(simlink2_b2) as sl2b2'),
+                    DB::raw('SUM(simlink1_b2u) as sl1b2u'),
+                    DB::raw('SUM(simlink2_b2u) as sl2b2u'),
+                )
+                ->first();
+    }else{
+        $idcabang = session('cabang_id');
+        $simAbaru = DB::table('tb_data_polres')
+        ->where('polres_id',$idcabang)
+        ->where(DB::raw('MONTH(data_polres_tgl)'),$bulan)
+        ->where(DB::raw('YEAR(data_polres_tgl)'),$tahun)
+        ->select(
+            DB::raw('SUM(data_polres_sim_a_baru) as simabaru'),
+            DB::raw('SUM(data_polres_sim_a_umum_baru) as simabaruumum'),
+            DB::raw('SUM(data_polres_sim_b1_baru) as simb1baru'),
+            DB::raw('SUM(data_polres_sim_b2_baru) as simb2baru'),
+            DB::raw('SUM(data_polres_sim_c_baru) as simcbaru'),
+            DB::raw('SUM(data_polres_sim_d_baru) as simdbaru'),
+            DB::raw('SUM(data_polres_sim_a_perpanjang) as simabarup'),
+            DB::raw('SUM(data_polres_sim_a_umum_perpanjang) as simabaruumump'),
+            DB::raw('SUM(data_polres_sim_b1_perpanjang) as simb1barup'),
+            DB::raw('SUM(data_polres_sim_b2_perpanjang) as simb2barup'),
+            DB::raw('SUM(data_polres_sim_c_perpanjang) as simcbarup'),
+            DB::raw('SUM(data_polres_sim_d_perpanjang) as simdbarup'),
+            DB::raw('SUM(data_polres_sim_b1_umum) as simb1ubaruum'),
+            DB::raw('SUM(data_polres_sim_b2_umum) as simb2ubaruum'),
+            DB::raw('SUM(data_polres_sim_b1_umum_perpanjang) as simb1ubaruumper'),
+            DB::raw('SUM(data_polres_sim_b2_umum_perpanjang) as simb2ubaruumper')
+        )
+        ->first();
+
+        $pengantar = DB::table('tb_detail')
+                ->where('id_cabang',$idcabang)
+                ->where(DB::raw('MONTH(tanggal)'),$bulan)
+                ->where(DB::raw('YEAR(tanggal)'),$tahun)
+                ->select(
+                    DB::raw('SUM(sim_a_baru) as pengantara'),
+                    DB::raw('SUM(sim_c_baru) as pengantarc'),
+                    DB::raw('SUM(sim_ac_baru) as pengantarac')
+                )
+                ->first();
+
+        $simling = DB::table('tb_simlink')
+                ->where('id_cabang',$idcabang)
+                ->where(DB::raw('MONTH(tanggal)'),$bulan)
+                ->where(DB::raw('YEAR(tanggal)'),$tahun)
+                ->select(
+                    DB::raw('SUM(simlink1_a) as sl1a'),
+                    DB::raw('SUM(simlink2_a) as sl2a'),
+                    DB::raw('SUM(simlink1_au) as sl1au'),
+                    DB::raw('SUM(simlink2_au) as sl2au'),
+                    DB::raw('SUM(simlink1_c) as sl1c'),
+                    DB::raw('SUM(simlink2_c) as sl2c'),
+                    DB::raw('SUM(simlink1_d) as sl1d'),
+                    DB::raw('SUM(simlink2_d) as sl2d'),
+                    DB::raw('SUM(simlink1_b1) as sl1b1'),
+                    DB::raw('SUM(simlink2_b1) as sl2b1'),
+                    DB::raw('SUM(simlink1_b1u) as sl1b1u'),
+                    DB::raw('SUM(simlink2_b1u) as sl2b1u'),
+                    DB::raw('SUM(simlink1_b2) as sl1b2'),
+                    DB::raw('SUM(simlink2_b2) as sl2b2'),
+                    DB::raw('SUM(simlink1_b2u) as sl1b2u'),
+                    DB::raw('SUM(simlink2_b2u) as sl2b2u'),
+                )
+                ->first();
+    }
 
     $datasimA[] = $simAbaru->simabaru != null ? $simAbaru->simabaru : 0;
     $datasimC[] = $simAbaru->simcbaru != null ? $simAbaru->simcbaru : 0;

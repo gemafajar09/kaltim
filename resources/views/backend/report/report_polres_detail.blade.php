@@ -128,6 +128,11 @@
                                         <label>:</label>
                                         <label><b style="font-size: 14px; font-style:italic;">{{ $sim->data_polres_sim_b2_umum_perpanjang }}</b></label>
                                     </div>
+                                    <div class="form-group">
+                                        <label><b>DATA RUSAK</b></label>
+                                        <label>:</label>
+                                        <label><b style="font-size: 14px; font-style:italic;">{{ $sim->rusak }}</b></label>
+                                    </div>
                                 </div>
                             </div>
                                 
@@ -294,13 +299,6 @@
                                     <label><b style="font-size: 14px; font-style:italic;">{{ $bus->bus_rusak }}</b></label>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 py-2">
-                        <div class="form-group">
-                            <label><b>DATA RUSAK</b></label>
-                            <label>:</label>
-                            <label><b style="font-size: 14px; font-style:italic;">{{ $sim->rusak }}</b></label>
                         </div>
                     </div>
                 </div>
