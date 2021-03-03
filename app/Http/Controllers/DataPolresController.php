@@ -42,6 +42,12 @@ class DataPolresController extends Controller
                 'data_polres_sim_b1_umum_perpanjang' => $r->data_polres_sim_b1_umum_perpanjang != '' ? $r->data_polres_sim_b1_umum_perpanjang : 0,
                 'data_polres_sim_b2_umum_perpanjang' => $r->data_polres_sim_b2_umum_perpanjang != '' ? $r->data_polres_sim_b2_umum_perpanjang : 0,
                 'rusak' => $r->rusak != '' ? $r->rusak : 0,
+                'gerai_a' => $r->geraia != '' ? $r->geraia : 0,
+                'gerai_c' => $r->geraic != '' ? $r->geraic : 0,
+                'gerai_rusak' => $r->gerairusak != '' ? $r->gerairusak : 0,
+                'mpp_a' => $r->mppa != '' ? $r->mppa : 0,
+                'mpp_c' => $r->mppc != '' ? $r->mppc : 0,
+                'mpp_rusak' => $r->mpprusak != '' ? $r->mpprusak : 0
             ]);
             $id_biro = $r->id_biro;
             
@@ -49,22 +55,10 @@ class DataPolresController extends Controller
             DB::table('tb_simlink')->insert([
                 'id_data' => $id, 
                 'simlink1_a' => $r->simlink1_a != '' ? $r->simlink1_a : 0, 
-                'simlink1_au' => $r->simlink1_au != '' ? $r->simlink1_au : 0,
                 'simlink1_c' => $r->simlink1_c != '' ? $r->simlink1_c : 0,
-                'simlink1_d' => $r->simlink1_d != '' ? $r->simlink1_d : 0,
-                'simlink1_b1' => $r->simlink1_b1 != '' ? $r->simlink1_b1 : 0,
-                'simlink1_b1u' => $r->simlink1_b1u != '' ? $r->simlink1_b1u : 0,
-                'simlink1_b2' => $r->simlink1_b2 != '' ? $r->simlink1_b2 : 0,
-                'simlink1_b2u' => $r->simlink1_b2u != '' ? $r->simlink1_a : 0,
                 'simlink1_rusak' => $r->simlink1_rusak != '' ? $r->simlink1_rusak : 0,
                 'simlink2_a' => $r->simlink2_a != '' ? $r->simlink2_a : 0,
-                'simlink2_au' => $r->simlink2_au != '' ? $r->simlink2_au : 0,
                 'simlink2_c' => $r->simlink2_c != '' ? $r->simlink2_c : 0,
-                'simlink2_d' => $r->simlink2_d != '' ? $r->simlink2_d : 0,
-                'simlink2_b1' => $r->simlink2_b1 != '' ? $r->simlink2_b1 : 0,
-                'simlink2_b1u' => $r->simlink2_b1u != '' ? $r->simlink2_b1u : 0,
-                'simlink2_b2' => $r->simlink2_b2 != '' ? $r->simlink2_b2 : 0,
-                'simlink2_b2u' => $r->simlink2_b2u != '' ? $r->simlink2_b2u : 0,
                 'simlink2_rusak' => $r->simlink2_rusak != '' ? $r->simlink2_rusak : 0,
                 'id_cabang' => $r->polres_id,
                 'tanggal' => date('Y-m-d')
@@ -72,17 +66,11 @@ class DataPolresController extends Controller
 
             DB::table('tb_bus')->insert([
                 'bus_a' => $r->bus_a != '' ? $r->bus_a : 0,
-                'bus_au' => $r->bus_au != '' ? $r->bus_au : 0,
                 'bus_c' => $r->bus_c != '' ? $r->bus_c : 0,
-                'bus_d' => $r->bus_d != '' ? $r->bus_d : 0,
-                'bus_b1' => $r->bus_b1 != '' ? $r->bus_b1 : 0,
-                'bus_b1u' => $r->bus_b1u != '' ? $r->bus_b1u : 0,
-                'bus_b2' => $r->bus_b2 != '' ? $r->bus_b2 : 0,
-                'bus_b2u' => $r->bus_b2u != '' ? $r->bus_b2u : 0,
                 'bus_rusak' => $r->bus_rusak != '' ? $r->bus_rusak : 0,
                 'id_data' => $id,
                 'tanggal' => date('Y-m-d'),
-                'id_polres' => $r->polres_id,
+                'id_polres' => $r->polres_id
 
             ]);
 
@@ -118,39 +106,27 @@ class DataPolresController extends Controller
                 'data_polres_sim_b1_umum_perpanjang' => $r->data_polres_sim_b1_umum_perpanjang != '' ? $r->data_polres_sim_b1_umum_perpanjang : 0,
                 'data_polres_sim_b2_umum_perpanjang' => $r->data_polres_sim_b2_umum_perpanjang != '' ? $r->data_polres_sim_b2_umum_perpanjang : 0,
                 'rusak' => $r->rusak != '' ? $r->rusak : 0,
+                'gerai_a' => $r->geraia != '' ? $r->geraia : 0,
+                'gerai_c' => $r->geraic != '' ? $r->geraic : 0,
+                'gerai_rusak' => $r->gerairusak != '' ? $r->gerairusak : 0,
+                'mpp_a' => $r->mppa != '' ? $r->mppa : 0,
+                'mpp_c' => $r->mppc != '' ? $r->mppc : 0,
+                'mpp_rusak' => $r->mpprusak != '' ? $r->mpprusak : 0
             ]);
             
             // dd($id_biro);
             DB::table('tb_simlink')->where('simlink_id', $r->simlink_id)->update([
                 'simlink1_a' => $r->simlink1_a != '' ? $r->simlink1_a : 0, 
-                'simlink1_au' => $r->simlink1_au != '' ? $r->simlink1_au : 0,
                 'simlink1_c' => $r->simlink1_c != '' ? $r->simlink1_c : 0,
-                'simlink1_d' => $r->simlink1_d != '' ? $r->simlink1_d : 0,
-                'simlink1_b1' => $r->simlink1_b1 != '' ? $r->simlink1_b1 : 0,
-                'simlink1_b1u' => $r->simlink1_b1u != '' ? $r->simlink1_b1u : 0,
-                'simlink1_b2' => $r->simlink1_b2 != '' ? $r->simlink1_b2 : 0,
-                'simlink1_b2u' => $r->simlink1_b2u != '' ? $r->simlink1_a : 0,
                 'simlink1_rusak' => $r->simlink1_rusak != '' ? $r->simlink1_rusak : 0,
                 'simlink2_a' => $r->simlink2_a != '' ? $r->simlink2_a : 0,
-                'simlink2_au' => $r->simlink2_au != '' ? $r->simlink2_au : 0,
                 'simlink2_c' => $r->simlink2_c != '' ? $r->simlink2_c : 0,
-                'simlink2_d' => $r->simlink2_d != '' ? $r->simlink2_d : 0,
-                'simlink2_b1' => $r->simlink2_b1 != '' ? $r->simlink2_b1 : 0,
-                'simlink2_b1u' => $r->simlink2_b1u != '' ? $r->simlink2_b1u : 0,
-                'simlink2_b2' => $r->simlink2_b2 != '' ? $r->simlink2_b2 : 0,
-                'simlink2_b2u' => $r->simlink2_b2u != '' ? $r->simlink2_b2u : 0,
                 'simlink2_rusak' => $r->simlink2_rusak != '' ? $r->simlink2_rusak : 0
             ]);
 
             DB::table('tb_bus')->where('bus_id',$r->bus_id)->update([
                 'bus_a' => $r->bus_a != '' ? $r->bus_a : 0,
-                'bus_au' => $r->bus_au != '' ? $r->bus_au : 0,
                 'bus_c' => $r->bus_c != '' ? $r->bus_c : 0,
-                'bus_d' => $r->bus_d != '' ? $r->bus_d : 0,
-                'bus_b1' => $r->bus_b1 != '' ? $r->bus_b1 : 0,
-                'bus_b1u' => $r->bus_b1u != '' ? $r->bus_b1u : 0,
-                'bus_b2' => $r->bus_b2 != '' ? $r->bus_b2 : 0,
-                'bus_b2u' => $r->bus_b2u != '' ? $r->bus_b2u : 0,
                 'bus_rusak' => $r->bus_rusak != '' ? $r->bus_rusak : 0
 
             ]);

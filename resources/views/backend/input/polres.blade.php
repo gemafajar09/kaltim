@@ -157,32 +157,8 @@
                                     <input placeholder="0" type="number" name="simlink1_a" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label><b>SIMLING I AU</b></label>
-                                    <input placeholder="0" type="number" name="simlink1_au" class="form-control">
-                                </div>
-                                <div class="form-group">
                                     <label><b>SIMLING I C</b></label>
                                     <input placeholder="0" type="number" name="simlink1_c" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><b>SIMLING I D</b></label>
-                                    <input placeholder="0" type="number" name="simlink1_d" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><b>SIMLING I B1</b></label>
-                                    <input placeholder="0" type="number" name="simlink1_b1" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><b>SIMLING I B1U</b></label>
-                                    <input placeholder="0" type="number" name="simlink1_b1u" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><b>SIMLING I B2</b></label>
-                                    <input placeholder="0" type="number" name="simlink1_b2" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><b>SIMLING I B2U</b></label>
-                                    <input placeholder="0" type="number" name="simlink1_b2u" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label><b>SIMLING I RUSAK</b></label>
@@ -202,32 +178,8 @@
                                     <input placeholder="0" type="number" name="simlink2_a" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label><b>SIMLING II AU</b></label>
-                                    <input placeholder="0" type="number" name="simlink2_au" class="form-control">
-                                </div>
-                                <div class="form-group">
                                     <label><b>SIMLING II C</b></label>
                                     <input placeholder="0" type="number" name="simlink2_c" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><b>SIMLING II D</b></label>
-                                    <input placeholder="0" type="number" name="simlink2_d" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><b>SIMLING II B1</b></label>
-                                    <input placeholder="0" type="number" name="simlink2_b1" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><b>SIMLING II B1U</b></label>
-                                    <input placeholder="0" type="number" name="simlink2_b1u" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><b>SIMLING II B2</b></label>
-                                    <input placeholder="0" type="number" name="simlink2_b2" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><b>SIMLING II B2U</b></label>
-                                    <input placeholder="0" type="number" name="simlink2_b2u" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label><b>SIMLING II RUSAK</b></label>
@@ -247,32 +199,8 @@
                                     <input placeholder="0" type="number" name="bus_a" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label><b>BUS MILENIAL AU</b></label>
-                                    <input placeholder="0" type="number" name="bus_au" class="form-control">
-                                </div>
-                                <div class="form-group">
                                     <label><b>BUS MILENIAL C</b></label>
                                     <input placeholder="0" type="number" name="bus_c" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><b>BUS MILENIAL D</b></label>
-                                    <input placeholder="0" type="number" name="bus_d" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><b>BUS MILENIAL B1</b></label>
-                                    <input placeholder="0" type="number" name="bus_b1" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><b>BUS MILENIAL B1U</b></label>
-                                    <input placeholder="0" type="number" name="bus_b1u" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><b>BUS MILENIAL B2</b></label>
-                                    <input placeholder="0" type="number" name="bus_b2" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><b>BUS MILENIAL B2U</b></label>
-                                    <input placeholder="0" type="number" name="bus_b2u" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label><b>BUS MILENIAL RUSAK</b></label>
@@ -281,10 +209,52 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-4 py-2">
+                        <div class="card">
+                            <div class="card-header">
+                                GERAI
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label><b>SIM A</b></label>
+                                    <input placeholder="0" type="number" name="geraia" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM C</b></label>
+                                    <input placeholder="0" type="number" name="geraic" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>RUSAK</b></label>
+                                    <input placeholder="0" type="number" name="gerairusak" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 py-2">
+                        <div class="card">
+                            <div class="card-header">
+                                MPP
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label><b>SIM A</b></label>
+                                    <input placeholder="0" type="number" name="mppa" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>SIM C</b></label>
+                                    <input placeholder="0" type="number" name="mppc" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><b>RUSAK</b></label>
+                                    <input placeholder="0" type="number" name="mpprusak" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                         <!-- databiro -->
                         <?php $biros = DB::table('tb_cabang')->where('cabang_kode',2)->get(); ?>
                         @foreach($biros as $br)
-                        <div class="col-md-3 py-2">
+                        <div class="col-md-4 py-2">
                             <div class="card">
                                 <div class="card-header" style="font-size:12px">
                                     {{$br->cabang_nama}}

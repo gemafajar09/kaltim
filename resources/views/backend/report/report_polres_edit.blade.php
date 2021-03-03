@@ -137,32 +137,8 @@
                                         <input type="number" class="form-control" name="simlink1_a" value="{{ $simlink->simlink1_a }}">
                                     </div>
                                     <div class="form-group">
-                                        <label><b>SIM LING I AU</b></label>
-                                        <input type="number" class="form-control" name="simlink1_au" value="{{ $simlink->simlink1_au }}">
-                                    </div>
-                                    <div class="form-group">
                                         <label><b>SIM LING I C</b></label>
                                         <input type="number" class="form-control" name="simlink1_c" value="{{ $simlink->simlink1_c }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><b>SIM LING I D</b></label>
-                                        <input type="number" class="form-control" name="simlink1_d" value="{{ $simlink->simlink1_d }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><b>SIM LING I B1</b></label>
-                                        <input type="number" class="form-control" name="simlink1_b1" value="{{ $simlink->simlink1_b1 }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><b>SIM LING I B1U</b></label>
-                                        <input type="number" class="form-control" name="simlink1_b1u" value="{{ $simlink->simlink1_b1u }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><b>SIM LING I B2</b></label>
-                                        <input type="number" class="form-control" name="simlink1_b2" value="{{ $simlink->simlink1_b2 }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><b>SIM LING I B2U</b></label>
-                                        <input type="number" class="form-control" name="simlink1_b2u" value="{{ $simlink->simlink1_b2u }}">
                                     </div>
                                     <div class="form-group">
                                         <label><b>SIM LING I RUSAK</b></label>
@@ -182,32 +158,8 @@
                                         <input type="number" class="form-control" name="simlink2_a" value="{{ $simlink->simlink2_a }}">
                                     </div>
                                     <div class="form-group">
-                                        <label><b>SIM LING II AU</b></label>
-                                        <input type="number" class="form-control" name="simlink2_au" value="{{ $simlink->simlink2_au }}">
-                                    </div>
-                                    <div class="form-group">
                                         <label><b>SIM LING II C</b></label>
                                         <input type="number" class="form-control" name="simlink2_c" value="{{ $simlink->simlink2_c }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><b>SIM LING II D</b></label>
-                                        <input type="number" class="form-control" name="simlink2_d" value="{{ $simlink->simlink2_d }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><b>SIM LING II B1</b></label>
-                                        <input type="number" class="form-control" name="simlink2_b1" value="{{ $simlink->simlink2_b1 }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><b>SIM LING II B1U</b></label>
-                                        <input type="number" class="form-control" name="simlink2_b1u" value="{{ $simlink->simlink2_b1u }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><b>SIM LING II B2</b></label>
-                                        <input type="number" class="form-control" name="simlink2_b2" value="{{ $simlink->simlink2_b2 }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><b>SIM LING II B2U</b></label>
-                                        <input type="number" class="form-control" name="simlink2_b2u" value="{{ $simlink->simlink2_b2u }}">
                                     </div>
                                     <div class="form-group">
                                         <label><b>SIM LING II RUSAK</b></label>
@@ -228,32 +180,8 @@
                                         <input type="number" class="form-control" name="bus_a" value="{{ $bus->bus_a }}">
                                     </div>
                                     <div class="form-group">
-                                        <label><b>BUS MILENIAL AU</b></label>
-                                        <input type="number" class="form-control" name="bus_au" value="{{ $bus->bus_au }}">
-                                    </div>
-                                    <div class="form-group">
                                         <label><b>BUS MILENIAL C</b></label>
                                         <input type="number" class="form-control" name="bus_c" value="{{ $bus->bus_c }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><b>BUS MILENIAL D</b></label>
-                                        <input type="number" class="form-control" name="bus_d" value="{{ $bus->bus_d }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><b>BUS MILENIAL B1</b></label>
-                                        <input type="number" class="form-control" name="bus_b1" value="{{ $bus->bus_b1 }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><b>BUS MILENIAL B1U</b></label>
-                                        <input type="number" class="form-control" name="bus_b1u" value="{{ $bus->bus_b1u }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><b>BUS MILENIAL B2</b></label>
-                                        <input type="number" class="form-control" name="bus_b2" value="{{ $bus->bus_b2 }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><b>BUS MILENIAL B2U</b></label>
-                                        <input type="number" class="form-control" name="bus_b2u" value="{{ $bus->bus_b2u }}">
                                     </div>
                                     <div class="form-group">
                                         <label><b>BUS MILENIAL RUSAK</b></label>
@@ -262,10 +190,53 @@
                                 </div>
                             </div>
                         </div>
-                        @foreach($isi as $br)
-                        <div class="col-md-3 py-2">
+                        <div class="col-md-4 py-2">
                             <div class="card">
-                                <div class="card-header" style="font-size:12px">
+                                <div class="card-header">
+                                    GERAI
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label><b>SIM A</b></label>
+                                        <input type="number" class="form-control" name="geraia" value="{{ $sim->gerai_a }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><b>SIM C</b></label>
+                                        <input type="number" class="form-control" name="geraic" value="{{ $sim->gerai_c }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><b>SIM RUSAK</b></label>
+                                        <input type="number" class="form-control" name="gerairusak" value="{{ $sim->gerai_rusak }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 py-2">
+                            <div class="card">
+                                <div class="card-header">
+                                    MPP
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label><b>SIM A</b></label>
+                                        <input type="number" class="form-control" name="mppa" value="{{ $sim->mpp_a }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><b>SIM C</b></label>
+                                        <input type="number" class="form-control" name="mppc" value="{{ $sim->mpp_c }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><b>SIM RUSAK</b></label>
+                                        <input type="number" class="form-control" name="mpprusak" value="{{ $sim->mpp_rusak }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @foreach($isi as $br)
+                        <div class="col-md-4 py-2">
+                            <div class="card">
+                                <div class="card-header">
                                     {{$br->cabang_nama}}
                                     <input type="hidden" name="id_detail[]" value="{{$br->id_detail}}">
                                 </div>
