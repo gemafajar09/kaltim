@@ -13,14 +13,20 @@ $datasimB2P = array();
 $datasimCP = array();
 $datasimDP = array();
 
+$datasimac = array();
+$datasimacp = array();
+
 $sla = array();
-$slau = array();
 $slc = array();
-$sld = array();
-$slb1 = array();
-$slb1u = array();
-$slb2 = array();
-$slb2u = array();
+
+$sba = array();
+$sbc = array();
+
+$sga = array();
+$sgc = array();
+
+$sma = array();
+$smc = array();
 
 $pengantara = array();
 $pengantarc = array();
@@ -78,7 +84,16 @@ for($i = 1; $i < 13; $i++)
                     DB::raw('SUM(simlink2_c) as sl2c')
                 )
                 ->first();
-    }else{
+
+        $simbus = DB::table('tb_bus')
+                ->where(DB::raw('MONTH(tanggal)'),$bulan)
+                ->where(DB::raw('YEAR(tanggal)'),$tahun)
+                ->select(
+                    DB::raw('SUM(bus_a) as bus_a'),
+                    DB::raw('SUM(bus_c) as bus_c')
+                )
+                ->first();
+    }elseif(session('user_level') == 2){
         $idcabang = session('cabang_id');
         $simAbaru = DB::table('tb_data_polres')
         ->where('polres_id',$idcabang)
@@ -100,7 +115,11 @@ for($i = 1; $i < 13; $i++)
             DB::raw('SUM(data_polres_sim_b1_umum) as simb1ubaruum'),
             DB::raw('SUM(data_polres_sim_b2_umum) as simb2ubaruum'),
             DB::raw('SUM(data_polres_sim_b1_umum_perpanjang) as simb1ubaruumper'),
-            DB::raw('SUM(data_polres_sim_b2_umum_perpanjang) as simb2ubaruumper')
+            DB::raw('SUM(data_polres_sim_b2_umum_perpanjang) as simb2ubaruumper'),
+            DB::raw('SUM(gerai_a) as geraia'),
+            DB::raw('SUM(gerai_c) as geraic'),
+            DB::raw('SUM(mpp_a) as mppa'),
+            DB::raw('SUM(mpp_c) as mppc')
         )
         ->first();
 
@@ -126,33 +145,78 @@ for($i = 1; $i < 13; $i++)
                     DB::raw('SUM(simlink2_c) as sl2c')
                 )
                 ->first();
+        
+        $simbus = DB::table('tb_bus')
+                ->where(DB::raw('MONTH(tanggal)'),$bulan)
+                ->where(DB::raw('YEAR(tanggal)'),$tahun)
+                ->select(
+                    DB::raw('SUM(bus_a) as bus_a'),
+                    DB::raw('SUM(bus_c) as bus_c')
+                )
+                ->first();
+    }else{
+        $idcabang = session('cabang_id');
+        $bulan = str_pad($i, 2 , "0", STR_PAD_LEFT);
+        $simAbaru = DB::table('tb_data_biro')
+        ->where('biro_id',$idcabang)
+        ->where(DB::raw('MONTH(data_biro_tgl)'),$bulan)
+        ->where(DB::raw('YEAR(data_biro_tgl)'),$tahun)
+        ->select(
+            DB::raw('SUM(data_biro_sim_a_baru) as simabaru'),
+            DB::raw('SUM(data_biro_sim_c_baru) as simcbaru'),
+            DB::raw('SUM(data_biro_sim_ac_baru) as simacbaru'),
+            DB::raw('SUM(data_biro_sim_a_perpanjang) as simabarup'),
+            DB::raw('SUM(data_biro_sim_c_perpanjang) as simcbarup'),
+            DB::raw('SUM(data_biro_sim_ac_perpanjang) as simacbarup')
+        )->first();   
     }
 
-    $datasimA[] = $simAbaru->simabaru != null ? $simAbaru->simabaru : 0;
-    $datasimC[] = $simAbaru->simcbaru != null ? $simAbaru->simcbaru : 0;
-    $datasimD[] = $simAbaru->simdbaru != null ? $simAbaru->simdbaru : 0;
-    $datasimAu[] = $simAbaru->simabaruumum != null ? $simAbaru->simabaruumum : 0;
-    $datasimB1[] = $simAbaru->simb1baru != null ? $simAbaru->simb1baru : 0;
-    $datasimB1u[] = $simAbaru->simb1ubaruum != null ? $simAbaru->simb1ubaruum : 0;
-    $datasimB2[] = $simAbaru->simb2baru != null ? $simAbaru->simb2baru : 0;
-    $datasimB2u[] = $simAbaru->simb2ubaruum != null ? $simAbaru->simb2ubaruum : 0;
-    $datasimAp[] = $simAbaru->simabarup != null ? $simAbaru->simabaru : 0;
-    $datasimAup[] = $simAbaru->simabaruumump != null ? $simAbaru->simabaruumump : 0;
-    $datasimCp[] = $simAbaru->simcbarup != null ? $simAbaru->simcbarup : 0;
-    $datasimDp[] = $simAbaru->simdbarup != null ? $simAbaru->simdbarup : 0;
-    $datasimB1p[] = $simAbaru->simb1barup != null ? $simAbaru->simb1barup : 0;
-    $datasimB1up[] = $simAbaru->simb1ubaruumper != null ? $simAbaru->simb1ubaruumper : 0;
-    $datasimB2p[] = $simAbaru->simb2barup != null ? $simAbaru->simb2barup : 0;
-    $datasimB2up[] = $simAbaru->simb2ubaruumper != null ? $simAbaru->simb2ubaruumper : 0;
+    if(session('user_level') != 3)
+    {
+        $datasimA[] = $simAbaru->simabaru != null ? $simAbaru->simabaru : 0;
+        $datasimC[] = $simAbaru->simcbaru != null ? $simAbaru->simcbaru : 0;
+        $datasimD[] = $simAbaru->simdbaru != null ? $simAbaru->simdbaru : 0;
+        $datasimAu[] = $simAbaru->simabaruumum != null ? $simAbaru->simabaruumum : 0;
+        $datasimB1[] = $simAbaru->simb1baru != null ? $simAbaru->simb1baru : 0;
+        $datasimB1u[] = $simAbaru->simb1ubaruum != null ? $simAbaru->simb1ubaruum : 0;
+        $datasimB2[] = $simAbaru->simb2baru != null ? $simAbaru->simb2baru : 0;
+        $datasimB2u[] = $simAbaru->simb2ubaruum != null ? $simAbaru->simb2ubaruum : 0;
+        $datasimAp[] = $simAbaru->simabarup != null ? $simAbaru->simabaru : 0;
+        $datasimAup[] = $simAbaru->simabaruumump != null ? $simAbaru->simabaruumump : 0;
+        $datasimCp[] = $simAbaru->simcbarup != null ? $simAbaru->simcbarup : 0;
+        $datasimDp[] = $simAbaru->simdbarup != null ? $simAbaru->simdbarup : 0;
+        $datasimB1p[] = $simAbaru->simb1barup != null ? $simAbaru->simb1barup : 0;
+        $datasimB1up[] = $simAbaru->simb1ubaruumper != null ? $simAbaru->simb1ubaruumper : 0;
+        $datasimB2p[] = $simAbaru->simb2barup != null ? $simAbaru->simb2barup : 0;
+        $datasimB2up[] = $simAbaru->simb2ubaruumper != null ? $simAbaru->simb2ubaruumper : 0;
 
-    $sla[] = ($simling->sl1a + $simling->sl2a) != null ?  ($simling->sl1a + $simling->sl2a) : 0; 
-    $slc[] = ($simling->sl1c + $simling->sl2c) != null ?  ($simling->sl1c + $simling->sl2c) : 0; 
+        $sla[] = ($simling->sl1a + $simling->sl2a) != null ?  ($simling->sl1a + $simling->sl2a) : 0; 
+        $slc[] = ($simling->sl1c + $simling->sl2c) != null ?  ($simling->sl1c + $simling->sl2c) : 0; 
 
-    $pengantara[] = $pengantar->pengantara != null ? $pengantar->pengantara : 0;
-    $pengantarc[] = $pengantar->pengantarc != null ? $pengantar->pengantarc : 0;
-    $pengantarac[] = $pengantar->pengantarac != null ? $pengantar->pengantarac : 0;
+        $sba[] = $simbus->bus_a;
+        $sbc[] = $simbus->bus_c;
+        
+        $sga[] = $simAbaru->geraia;
+        $sgc[] = $simAbaru->geraic;
+        
+        $sma[] = $simAbaru->mppa;
+        $smc[] = $simAbaru->mppc;
+
+        $pengantara[] = $pengantar->pengantara != null ? $pengantar->pengantara : 0;
+        $pengantarc[] = $pengantar->pengantarc != null ? $pengantar->pengantarc : 0;
+        $pengantarac[] = $pengantar->pengantarac != null ? $pengantar->pengantarac : 0;
+
+    }else{
+            $datasimA[] = $simAbaru->simabaru != null ? $simAbaru->simabaru : 0;
+            $datasimC[] = $simAbaru->simcbaru != null ? $simAbaru->simcbaru : 0;
+            $datasimac[] = $simAbaru->simacbaru != null ? $simAbaru->simacbaru : 0;
+            $datasimAP[] = $simAbaru->simabarup != null ? $simAbaru->simabarup : 0;
+            $datasimCP[] = $simAbaru->simcbarup != null ? $simAbaru->simcbarup : 0;
+            $datasimacp[] = $simAbaru->simacbarup != null ? $simAbaru->simacbarup : 0;
+    }
 }
 @endphp
+@if(Session('user_level') != 3)
 <script>
     // sim a b
     var ab = document.getElementsByClassName("barchart")[0].getContext('2d');
@@ -546,8 +610,8 @@ for($i = 1; $i < 13; $i++)
     });
 
     // sim au p
-    var slau = document.getElementsByClassName("barchart")[17].getContext('2d');
-    new Chart(slau, {
+    var slc = document.getElementsByClassName("barchart")[17].getContext('2d');
+    new Chart(slc, {
         // The type of chart we want to create
         type: 'line',
 
@@ -560,7 +624,7 @@ for($i = 1; $i < 13; $i++)
                 // label: 'My First dataset',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: <?= json_encode($slau) ?>
+                data: <?= json_encode($slc) ?>
             }]
         },
 
@@ -569,8 +633,8 @@ for($i = 1; $i < 13; $i++)
     });
     
     // sim c p
-    var sld = document.getElementsByClassName("barchart")[18].getContext('2d');
-    new Chart(sld, {
+    var sba = document.getElementsByClassName("barchart")[18].getContext('2d');
+    new Chart(sba, {
         // The type of chart we want to create
         type: 'line',
 
@@ -583,7 +647,7 @@ for($i = 1; $i < 13; $i++)
                 // label: 'My First dataset',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: <?= json_encode($sld) ?>
+                data: <?= json_encode($sba) ?>
             }]
         },
 
@@ -591,9 +655,9 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
 
-    // sim d p
-    var slb1 = document.getElementsByClassName("barchart")[19].getContext('2d');
-    new Chart(slb1, {
+    // sim sga
+    var sbc = document.getElementsByClassName("barchart")[19].getContext('2d');
+    new Chart(sbc, {
         // The type of chart we want to create
         type: 'line',
 
@@ -606,53 +670,7 @@ for($i = 1; $i < 13; $i++)
                 // label: 'My First dataset',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: <?= json_encode($slb1) ?>
-            }]
-        },
-
-        // Configuration options go here
-        options: {}
-    });
-    
-    // sim b1
-    var slb1u = document.getElementsByClassName("barchart")[20].getContext('2d');
-    new Chart(slb1u, {
-        // The type of chart we want to create
-        type: 'line',
-
-        // The data for our dataset
-        data: {
-            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
-            "October", "November", "Desember"
-        ],
-            datasets: [{
-                // label: 'My First dataset',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: <?= json_encode($slb1u) ?>
-            }]
-        },
-
-        // Configuration options go here
-        options: {}
-    });
-
-    // sim b1u
-    var slb2 = document.getElementsByClassName("barchart")[21].getContext('2d');
-    new Chart(slb2, {
-        // The type of chart we want to create
-        type: 'line',
-
-        // The data for our dataset
-        data: {
-            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
-            "October", "November", "Desember"
-        ],
-            datasets: [{
-                // label: 'My First dataset',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: <?= json_encode($slb2) ?>
+                data: <?= json_encode($sbc) ?>
             }]
         },
 
@@ -660,9 +678,9 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
     
-    // sim b2
-    var slb2u = document.getElementsByClassName("barchart")[22].getContext('2d');
-    new Chart(slb2u, {
+    // sim sgc
+    var sga = document.getElementsByClassName("barchart")[20].getContext('2d');
+    new Chart(sga, {
         // The type of chart we want to create
         type: 'line',
 
@@ -675,7 +693,7 @@ for($i = 1; $i < 13; $i++)
                 // label: 'My First dataset',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: <?= json_encode($slb2u) ?>
+                data: <?= json_encode($sga) ?>
             }]
         },
 
@@ -683,9 +701,9 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
 
-    // sim b2u
-    var b2up = document.getElementsByClassName("barchart")[23].getContext('2d');
-    new Chart(b2up, {
+    // sim sma
+    var sgc = document.getElementsByClassName("barchart")[21].getContext('2d');
+    new Chart(sgc, {
         // The type of chart we want to create
         type: 'line',
 
@@ -698,7 +716,53 @@ for($i = 1; $i < 13; $i++)
                 // label: 'My First dataset',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: <?= json_encode($datasimB2up) ?>
+                data: <?= json_encode($sgc) ?>
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+    
+    // sim smc
+    var sma = document.getElementsByClassName("barchart")[22].getContext('2d');
+    new Chart(sma, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+            "October", "November", "Desember"
+        ],
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: <?= json_encode($sma) ?>
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+    
+    // sim smc
+    var smc = document.getElementsByClassName("barchart")[23].getContext('2d');
+    new Chart(smc, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+            "October", "November", "Desember"
+        ],
+            datasets: [{
+                // label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: <?= json_encode($smc) ?>
             }]
         },
 
@@ -775,4 +839,139 @@ for($i = 1; $i < 13; $i++)
         options: {}
     });
     
+</script>
+    @else
+    <script>
+        var ab = document.getElementsByClassName("birogrf")[0].getContext('2d');
+        new Chart(ab, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+                "October", "November", "Desember"
+            ],
+                datasets: [{
+                    // label: 'My First dataset',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: <?= json_encode($datasimA) ?>
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+        
+        var cb = document.getElementsByClassName("birogrf")[1].getContext('2d');
+        new Chart(cb, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+                "October", "November", "Desember"
+            ],
+                datasets: [{
+                    // label: 'My First dataset',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: <?= json_encode($datasimC) ?>
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+        
+        var acb = document.getElementsByClassName("birogrf")[2].getContext('2d');
+        new Chart(acb, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+                "October", "November", "Desember"
+            ],
+                datasets: [{
+                    // label: 'My First dataset',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: <?= json_encode($datasimac) ?>
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+        
+        var ap = document.getElementsByClassName("birogrf")[3].getContext('2d');
+        new Chart(ap, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+                "October", "November", "Desember"
+            ],
+                datasets: [{
+                    // label: 'My First dataset',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: <?= json_encode($datasimAP) ?>
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+        
+        var cp = document.getElementsByClassName("birogrf")[4].getContext('2d');
+        new Chart(cp, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+                "October", "November", "Desember"
+            ],
+                datasets: [{
+                    // label: 'My First dataset',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: <?= json_encode($datasimCP) ?>
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+        
+        var acp = document.getElementsByClassName("birogrf")[5].getContext('2d');
+        new Chart(acp, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: ["January", "Februari", "Maret", "April", "May", "Juni", "Juli", "Agustus", "September",
+                "October", "November", "Desember"
+            ],
+                datasets: [{
+                    // label: 'My First dataset',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: <?= json_encode($datasimacp) ?>
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
     </script>
+    @endif
