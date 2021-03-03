@@ -57,6 +57,32 @@ class HomeController extends Controller
             }
             $data['datasimbaru'] = [$datasimA,$datasimC,$datasimD,$datasimB1,$datasimb1u,$datasimB2,$datasimb2u,$datasimAumum];
             $data['datasimperpanjang'] = [$datasimAP,$datasimCP,$datasimDP,$datasimB1P,$datasimb1up,$datasimB2P,$datasimb2up,$datasimAumumP];
+        }elseif(session('user_level') == 3){
+            for($i = 1; $i < 13; $i++)
+            {
+                $bulan = str_pad($i, 2 , "0", STR_PAD_LEFT);
+                $simAbaru = DB::table('tb_data_biro')
+                ->where(DB::raw('YEAR(data_biro_tgl)'),$tahun)
+                ->select(
+                    DB::raw('SUM(data_biro_sim_a_baru) as simabaru'),
+                    DB::raw('SUM(data_biro_sim_c_baru) as simcbaru'),
+                    DB::raw('SUM(data_biro_sim_ac_baru) as simacbaru'),
+                    DB::raw('SUM(data_biro_sim_a_perpanjang) as simabarup'),
+                    DB::raw('SUM(data_biro_sim_c_perpanjang) as simcbarup'),
+                    DB::raw('SUM(data_biro_sim_ac_perpanjang) as simacbarup')
+                )->first();
+
+                $abaru = $simAbaru->simabaru != null ? $simAbaru->simabaru : 0;
+                $cbaru = $simAbaru->simcbaru != null ? $simAbaru->simcbaru : 0;
+                $acbaru = $simAbaru->simacbaru != null ? $simAbaru->simacbaru : 0;
+                $abarup = $simAbaru->simabarup != null ? $simAbaru->simabarup : 0;
+                $cbarup = $simAbaru->simcbarup != null ? $simAbaru->simcbarup : 0;
+                $acbarup = $simAbaru->simacbarup != null ? $simAbaru->simacbarup : 0;
+                
+            }
+
+            $data['datasimbaru'] = [$abaru,$cbaru,$acbaru];
+            $data['datasimperpanjang'] = [$abarup,$cbarup,$acbarup];
         }else{
             $cabang = session('cabang_id');
             for($i = 1; $i < 13; $i++)
@@ -157,6 +183,30 @@ class HomeController extends Controller
                 $data['datasimb2u'] = $simAbaru->simb2ubaruum != null ? $simAbaru->simb2ubaruum : 0;
                 $data['datasimb1up'] = $simAbaru->simb1ubaruumper != null ? $simAbaru->simb1ubaruumper : 0;
                 $data['datasimb2up'] = $simAbaru->simb2ubaruumper != null ? $simAbaru->simb2ubaruumper : 0;
+            }
+        }elseif($level == 3){
+            for($i = 1; $i < 13; $i++)
+            {
+                $bulan = str_pad($i, 2 , "0", STR_PAD_LEFT);
+                $simAbaru = DB::table('tb_data_biro')
+                ->where('biro_id',$cabang)
+                ->where(DB::raw('YEAR(data_biro_tgl)'),$tahun)
+                ->select(
+                    DB::raw('SUM(data_biro_sim_a_baru) as simabaru'),
+                    DB::raw('SUM(data_biro_sim_c_baru) as simcbaru'),
+                    DB::raw('SUM(data_biro_sim_ac_baru) as simacbaru'),
+                    DB::raw('SUM(data_biro_sim_a_perpanjang) as simabarup'),
+                    DB::raw('SUM(data_biro_sim_c_perpanjang) as simcbarup'),
+                    DB::raw('SUM(data_biro_sim_ac_perpanjang) as simacbarup')
+                )->first();
+
+                $data['abaru'] = $simAbaru->simabaru != null ? $simAbaru->simabaru : 0;
+                $data['cbaru'] = $simAbaru->simcbaru != null ? $simAbaru->simcbaru : 0;
+                $data['acbaru'] = $simAbaru->simacbaru != null ? $simAbaru->simacbaru : 0;
+                $data['abarup'] = $simAbaru->simabarup != null ? $simAbaru->simabarup : 0;
+                $data['cbarup'] = $simAbaru->simcbarup != null ? $simAbaru->simcbarup : 0;
+                $data['acbarup'] = $simAbaru->simacbarup != null ? $simAbaru->simacbarup : 0;
+                
             }
         }else{
             for($i = 1; $i < 13; $i++)
