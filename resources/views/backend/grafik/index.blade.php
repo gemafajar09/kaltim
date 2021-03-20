@@ -1,7 +1,7 @@
 @extends('backend.template.index')
 
 @section('content')
-@if(session('user_level') != 3)
+@if(session('user_level') == 1 || session('user_level') == 2)
 <div class="row">
     <div class="col-md-6">
         <div class="widget">

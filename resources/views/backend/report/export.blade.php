@@ -10,7 +10,7 @@
 <body>
 <?php
     // header("Content-type: application/vnd-ms-excel");
-    // header("Content-Disposition: attachment; filename=laporan-".date('Y-m').".xls");
+    // header("Content-Disposition: attachment; filename=laporan-".$type.".xls");
 
     $baru = 0;
     $perpanjang = 0;
@@ -65,7 +65,7 @@
     <table>
         <thead>
             <tr>
-                <th rowspan="2" colspan="13" style="font-size:22px">Laporan SIM Polda Kalimantan Timur Tanggal : <?= tanggal_indonesia(date('Y-m-d')) ?> </th>
+                <th rowspan="2" colspan="13" style="font-size:22px">Laporan SIM Polda Kalimantan Timur : <?= $type ?> </th>
             </tr>
         </thead>
     </table>
@@ -110,18 +110,60 @@
         <tbody>
             @foreach($isi as $i => $row)
             <?php 
-            $cabang =  DB::table('tb_detail')
-                        ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
-                        ->where('tb_detail.id_data',$row->data_polres_id)
-                        ->first();
+            $bulan = date('m');
+            if($type == 'Semua Data')
+            {
+                $cabang =  DB::table('tb_detail')
+                            ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
+                            ->groupBy('tb_detail.id_cabang')
+                            ->where(DB::raw('MONTH(tb_detail.tanggal)'),$bulan)
+                            ->where('tb_detail.id_cabang',$row->cabang_id)
+                            ->select(
+                                DB::raw('SUM(tb_detail.sim_a_baru) as sim_a_baru'),
+                                DB::raw('SUM(tb_detail.sim_a_baru) as sim_c_baru'),
+                                DB::raw('SUM(tb_detail.sim_a_baru) as sim_ac_baru')
+                            )
+                            ->first();
+                
+                $simlink = DB::table('tb_simlink')
+                            ->where(DB::raw('MONTH(tanggal)'),$bulan)
+                            ->where('id_cabang',$row->cabang_id)
+                            ->groupBy('tb_simlink.id_cabang')
+                            ->select(
+                                DB::raw('SUM(simlink1_a) as simlink1_a'),
+                                DB::raw('SUM(simlink1_c) as simlink1_c'),
+                                DB::raw('SUM(simlink1_rusak) as simlink1_rusak'),
+                                DB::raw('SUM(simlink2_a) as simlink2_a'),
+                                DB::raw('SUM(simlink2_c) as simlink2_c'),
+                                DB::raw('SUM(simlink2_rusak) as simlink2_rusak'),
+                            )
+                            ->first();
 
-            $simlink = DB::table('tb_simlink')
-                        ->where('id_data',$row->data_polres_id)
-                        ->first();
-            
-            $bus = DB::table('tb_bus')
-                        ->where('id_data',$row->data_polres_id)
-                        ->first();
+                $bus = DB::table('tb_bus')
+                            ->where(DB::raw('MONTH(tanggal)'),$bulan)
+                            ->where('id_polres',$row->cabang_id)
+                            ->groupBy('id_bus')
+                            ->select(
+                                DB::raw('SUM(bus_a) as bus_a'),
+                                DB::raw('SUM(bus_c) as bus_c'),
+                                DB::raw('SUM(bus_rusak) as bus_rusak'),
+                            )
+                            ->first();
+            }else{
+                $cabang =  DB::table('tb_detail')
+                            ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
+                            ->where('tb_detail.id_data',$row->data_polres_id)
+                            ->first();
+    
+                $simlink = DB::table('tb_simlink')
+                            ->where('id_data',$row->data_polres_id)
+                            ->first();
+                
+                $bus = DB::table('tb_bus')
+                            ->where('id_data',$row->data_polres_id)
+                            ->first();
+                
+            }
             
             $simlink2_total += (
                 $simlink->simlink2_a +  
@@ -277,7 +319,7 @@
                 <td></td>
                 <td></td>
 
-                <th>{{ $simlink1_total }}</th>
+                <th>{{ $simlink->simlink1_a + $simlink->simlink1_c }}</th>
                 <th>{{$simlink->simlink1_rusak}}</th>
                 
             </tr>
@@ -305,7 +347,7 @@
                 <td></td>
                 <td></td>
 
-                <th>{{ $simlink2_total }}</th>
+                <th>{{ $simlink->simlink2_a + $simlink->simlink2_c }}</th>
                 <th>{{$simlink->simlink2_rusak}}</th>
                 
             </tr>
@@ -333,7 +375,7 @@
                 <td></td>
                 <td></td>
 
-                <th>{{ $bus_total }}</th>
+                <th>{{ $bus->bus_a + $bus->bus_c }}</th>
                 <th>{{$bus->bus_rusak}}</th>
                 
             </tr>
@@ -348,7 +390,7 @@
 
                 <th>{{$row->gerai_a}}</th>
                 <th></th>
-                <th>{{$row->gerai_a}}</th>
+                <th>{{$row->gerai_c}}</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -361,7 +403,7 @@
                 <td></td>
                 <td></td>
 
-                <th>{{ $gerai_total }}</th>
+                <th>{{ $row->gerai_a + $row->gerai_c }}</th>
                 <th>{{$row->gerai_rusak}}</th>
                 
             </tr>
@@ -389,7 +431,7 @@
                 <td></td>
                 <td></td>
 
-                <th>{{ $mpp_total }}</th>
+                <th>{{ $row->mpp_a + $row->mpp_c }}</th>
                 <th>{{$row->mpp_rusak}}</th>
                 
             </tr>

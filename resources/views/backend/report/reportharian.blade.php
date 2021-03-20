@@ -9,8 +9,8 @@
 </head>
 <body>
 <?php
-    header("Content-type: application/vnd-ms-excel");
-    header("Content-Disposition: attachment; filename=laporan-harian-".date('Y-m-d').".xls");
+    // header("Content-type: application/vnd-ms-excel");
+    // header("Content-Disposition: attachment; filename=laporan-harian-".date('Y-m-d').".xls");
     $cb = 0;
     $ab = 0;
     $b1b = 0;
@@ -69,6 +69,9 @@
         <tbody>
             @foreach($data as $i => $a)
             <?php 
+            $datas = DB::table('tb_simlink')->where('id_data',$a->data_polres_id)->first();
+            // dd($datas);
+
             $cb += $a->data_polres_sim_c_baru;
             $ab += $a->data_polres_sim_a_baru;
             $b1b += $a->data_polres_sim_b1_baru;
@@ -77,8 +80,8 @@
             $b1ub += $a->data_polres_sim_b1_umum;
             $b2ub += $a->data_polres_sim_b2_umum;
 
-            $cp += $a->data_polres_sim_c_perpanjang;
-            $ap += $a->data_polres_sim_a_perpanjang;
+            $cp += ($a->data_polres_sim_c_perpanjang + $datas->simlink1_c +  $datas->simlink2_c);
+            $ap += ($a->data_polres_sim_a_perpanjang + $datas->simlink1_a +  $datas->simlink2_a);
             $b1p += $a->data_polres_sim_b1_perpanjang;
             $b2p += $a->data_polres_sim_b2_perpanjang;
             $aup += $a->data_polres_sim_a_umum_perpanjang;
@@ -98,7 +101,11 @@
                 $a->data_polres_sim_b2_perpanjang +
                 $a->data_polres_sim_a_umum_perpanjang +
                 $a->data_polres_sim_b1_umum_perpanjang +
-                $a->data_polres_sim_b2_umum_perpanjang
+                $a->data_polres_sim_b2_umum_perpanjang +
+                $datas->simlink1_c +  
+                $datas->simlink2_c +
+                $datas->simlink1_a +  
+                $datas->simlink2_a
             );
             $total += $jumlah;
             $rusak += $a->rusak;
@@ -113,8 +120,8 @@
                 <th style="border:1px solid black">{{$a->data_polres_sim_a_umum_baru}}</th>
                 <th style="border:1px solid black">{{$a->data_polres_sim_b1_umum}}</th>
                 <th style="border:1px solid black">{{$a->data_polres_sim_b2_umum}}</th>
-                <th style="border:1px solid black">{{$a->data_polres_sim_c_perpanjang}}</th>
-                <th style="border:1px solid black">{{$a->data_polres_sim_a_perpanjang}}</th>
+                <th style="border:1px solid black">{{$a->data_polres_sim_c_perpanjang + $datas->simlink1_c +  $datas->simlink2_c}}</th>
+                <th style="border:1px solid black">{{$a->data_polres_sim_a_perpanjang + $datas->simlink1_a +  $datas->simlink2_a}}</th>
                 <th style="border:1px solid black">{{$a->data_polres_sim_b1_perpanjang}}</th>
                 <th style="border:1px solid black">{{$a->data_polres_sim_b2_perpanjang}}</th>
                 <th style="border:1px solid black">{{$a->data_polres_sim_a_umum_perpanjang}}</th>

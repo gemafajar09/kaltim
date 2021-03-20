@@ -17,12 +17,16 @@ Route::get('real-count/{level}/{cabang}','HomeController@realcount');
 // Data User
 Route::get('/data-user','LoginController@datauser')->name('data-user')->middleware('Ceklogin');
 Route::post('/data-user-add','LoginController@register')->name('data-user-add')->middleware('Ceklogin');
+Route::post('/data-user-save','LoginController@registerr')->name('data-user-save')->middleware('Ceklogin');
 Route::get('/data-user-hapus/{id}','LoginController@deleteuser')->name('data-user-hapus')->middleware('Ceklogin');
 Route::post('/data-user-login','LoginController@login')->name('data-user-login');
 Route::get('/data-user-logout','LoginController@logout')->name('data-user-logout');
+Route::get('/data-akun-cabang','LoginController@addcabang')->name('data-akun-cabang');
 
 // biro
 Route::get('/biro-partner', 'BiroController@index')->name('biro-partner')->middleware('Ceklogin');
+Route::get('/data-biro-cabang', 'BiroController@indexx')->name('data-biro-cabang')->middleware('Ceklogin');
+Route::post('/data-biro-save-add', 'BiroController@saveadd')->name('data-biro-save-add')->middleware('Ceklogin');
 Route::post('/biro-partner-save', 'BiroController@save')->name('biro-partner-save')->middleware('Ceklogin');
 Route::get('/biro-partner-delete/{id}', 'BiroController@delete')->name('biro-partner-delete')->middleware('Ceklogin');
 
@@ -33,6 +37,7 @@ Route::get('/polres-delete/{id}', 'PolresController@delete')->name('polres-delet
 
 // input dan report data biro 
 Route::get('/data-biro', 'DataBiroController@index')->name('data-biro')->middleware('Ceklogin');
+Route::get('/data-biro-input', 'DataBiroController@indexx')->name('data-biro-input')->middleware('Ceklogin');
 Route::get('/report-biro', 'DataBiroController@report_biro')->name('report-biro')->middleware('Ceklogin');
 Route::get('/report-biro-data/{cabang}/{dari}/{sampai}', 'DataBiroController@datatable');
 Route::post('/data-biro-save', 'DataBiroController@save')->name('data-biro-save')->middleware('Ceklogin');
@@ -50,4 +55,4 @@ Route::post('/data-polres-save', 'DataPolresController@save')->name('data-polres
 Route::get('/data-polres-delete/{id}', 'DataPolresController@delete')->name('data-polres-delete')->middleware('Ceklogin');
 Route::get('/datatable/{cabang}/{dari}/{sampai}', 'DataPolresController@datatable');
 Route::get('/exportexcel/{cabang}/{dari}/{sampai}', 'DataPolresController@exportexcel');
-Route::get('/reportharian', 'DataPolresController@reportharian');
+Route::get('/reportharian/{id}', 'DataPolresController@reportharian');

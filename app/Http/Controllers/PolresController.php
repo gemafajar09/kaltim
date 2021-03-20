@@ -24,7 +24,8 @@ class PolresController extends Controller
             DB::table('tb_cabang')->insert([
                 'cabang_nama' => $r->cabang_nama,
                 'cabang_alamat' => $r->cabang_alamat,
-                'cabang_kode' => $r->cabang_kode
+                'cabang_kode' => $r->cabang_kode,
+                'turunan' => 0
             ]);
 
             return back()->with('pesan','Input Data Success');

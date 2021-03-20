@@ -1,17 +1,21 @@
 @php
 $tahun = date('Y');
 $datasimA = array();
-$datasimAumum = array();
+$datasimAu = array();
 $datasimB1 = array();
 $datasimB2 = array();
+$datasimB1u = array();
+$datasimB2u = array();
 $datasimC = array();
 $datasimD = array();
-$datasimAP = array();
-$datasimAumumP = array();
-$datasimB1P = array();
-$datasimB2P = array();
-$datasimCP = array();
-$datasimDP = array();
+$datasimAp = array();
+$datasimAup = array();
+$datasimB1p = array();
+$datasimB2p = array();
+$datasimB1up = array();
+$datasimB2up = array();
+$datasimCp = array();
+$datasimDp = array();
 
 $datasimac = array();
 $datasimacp = array();
@@ -171,7 +175,7 @@ for($i = 1; $i < 13; $i++)
         )->first();   
     }
 
-    if(session('user_level') != 3)
+    if(session('user_level') == 1 || session('user_level') == 2)
     {
         $datasimA[] = $simAbaru->simabaru != null ? $simAbaru->simabaru : 0;
         $datasimC[] = $simAbaru->simcbaru != null ? $simAbaru->simcbaru : 0;
@@ -216,7 +220,7 @@ for($i = 1; $i < 13; $i++)
     }
 }
 @endphp
-@if(Session('user_level') != 3)
+@if(Session('user_level') == 1 || Session('user_level') == 2)
 <script>
     // sim a b
     var ab = document.getElementsByClassName("barchart")[0].getContext('2d');
