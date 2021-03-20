@@ -46,9 +46,9 @@
     $gerai_c = 0;
     $gerai_rusak = 0;
     // mpp
-    $mp_a = 0;
-    $mp_c = 0;
-    $mp_rusak = 0;
+    $mpp_a = 0;
+    $mpp_c = 0;
+    $mpp_rusak = 0;
     // simling
     $simlinga = 0;
     $simlingc = 0;
@@ -165,20 +165,23 @@
                 
             }
             // dd($simlink);
+            
+            $simlink1_total += (
+                $simlink->simlink1_a + 
+                $simlink->simlink1_c
+            );
+            
             $simlink2_total += (
                 $simlink->simlink2_a +  
                 $simlink->simlink2_c 
             ); 
 
-            $simlink1_total += (
-                $simlink->simlink1_a + 
-                $simlink->simlink1_c
-            );
-
             $bus_total      += (
                 $bus->bus_a + 
                 $bus->bus_c
             );
+            $gerai_total += ($row->gerai_a + $row->gerai_c);
+            $mpp_total += ($row->mpp_a + $row->mpp_c);
 
             $baru += (
                 $row->data_polres_sim_a_baru + 
@@ -195,12 +198,17 @@
                 $row->data_polres_sim_b1_perpanjang + 
                 $row->data_polres_sim_b2_baru +  
                 $row->data_polres_sim_b2_perpanjang +
-                $simlink->simlink2_a +  
-                $simlink->simlink2_c + 
                 $simlink->simlink1_a + 
-                $simlink->simlink1_c + 
+                $simlink->simlink1_c +
+                $simlink->simlink2_a +  
+                $simlink->simlink2_c +
                 $bus->bus_a + 
-                $bus->bus_c 
+                $bus->bus_c +
+                $row->gerai_a + 
+                $row->gerai_c +
+                $row->mpp_a + 
+                $row->mpp_c
+
             );
 
             $peningkatan += (
@@ -210,14 +218,13 @@
                 $row->data_polres_sim_b2_umum +
                 $row->data_polres_sim_b2_umum_perpanjang
             );
-
-            $gerai_total += ($row->gerai_a + $row->gerai_c);
-            $mpp_total += ($row->mpp_a + $row->mpp_c);
             
             $rusak          += ($row->rusak); 
             $rusaksimling   += ($simlink->simlink1_rusak);
             $rusaksimling2  += ($simlink->simlink2_rusak);
             $rusakbus       += ( $bus->bus_rusak);
+            $mpp_rusak       += ( $row->mpp_rusak);
+            $gerai_rusak       += ( $row->gerai_rusak);
             // baru
             $sim_a          += $row->data_polres_sim_a_baru;
             $sim_c          += $row->data_polres_sim_c_baru;
@@ -246,6 +253,12 @@
             // bus
             $busa       += $bus->bus_a;
             $busc       += $bus->bus_c;
+            // gerai
+            $gerai_a += $row->gerai_a;
+            $gerai_c += $row->gerai_c;
+            // mpp
+            $mpp_a += $row->mpp_a;
+            $mpp_c += $row->mpp_c;
             ?>
             <tr>
                 <td>{{ $i + 1 }}</td>
@@ -448,9 +461,9 @@
                 <th>{{ $sim_c }}</th>
                 <th>{{ $sim_d }}</th>
 
-                <th>{{ $sim_ap + $simlinga + $simlinga2 + $busa }}</th>
+                <th>{{ $sim_ap + $simlinga + $simlinga2 + $busa  + $gerai_a + $mpp_a  }}</th>
                 <th>{{ $sim_aup}}</th>
-                <th>{{ $sim_c + $simlingc + $simlingc2 + $busc }}</th>
+                <th>{{ $sim_c + $simlingc + $simlingc2 + $busc + $mpp_c + $gerai_c}}</th>
                 <th>{{ $sim_d}}</th>
                 <th>{{ $sim_b1}}</th>
                 <th>{{ $sim_b1u}}</th>
@@ -465,10 +478,10 @@
                 
                 <th>
                     {{ 
-                        $baru + $perpanjang + $peningkatan
+                        $baru + $perpanjang + $peningkatan 
                     }}
                 </th>
-                <th>{{ $rusak + $rusaksimling + $rusaksimling2 + $rusakbus }}</th>
+                <th>{{ $rusak + $rusaksimling + $rusaksimling2 + $rusakbus + $gerai_rusak + $mpp_rusak }}</th>
             </tr>
             <!-- total 2 -->
             <tr>
