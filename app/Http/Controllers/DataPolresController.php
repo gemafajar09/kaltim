@@ -363,6 +363,7 @@ class DataPolresController extends Controller
                     ->whereBetween('tb_data_polres.data_polres_tgl',[$dari,$sampai])
                     ->get();
         }
+        // dd($data['isi']);
         $data['polres'] = DB::table('tb_cabang')->where('cabang_kode',1)->get();
         return view('backend.report.export',$data);
     }

@@ -164,7 +164,7 @@
                             ->first();
                 
             }
-            
+            // dd($simlink);
             $simlink2_total += (
                 $simlink->simlink2_a +  
                 $simlink->simlink2_c 
