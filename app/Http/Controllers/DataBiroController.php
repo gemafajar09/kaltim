@@ -21,6 +21,11 @@ class DataBiroController extends Controller
     {
         return view('backend.input.biro');
     }
+    
+    public function indexx()
+    {
+        return view('backend.input.birocabang');
+    }
 
     public function save(Request $r)
     {
@@ -39,7 +44,8 @@ class DataBiroController extends Controller
                     'data_biro_sim_ac_baru' => $r->data_biro_sim_ac_baru,
                     'data_biro_sim_a_perpanjang' => $r->data_biro_sim_a_perpanjang,
                     'data_biro_sim_c_perpanjang' => $r->data_biro_sim_c_perpanjang,
-                    'data_biro_sim_ac_perpanjang' => $r->data_biro_sim_ac_perpanjang
+                    'data_biro_sim_ac_perpanjang' => $r->data_biro_sim_ac_perpanjang,
+                    'cabang_utama' => $r->cabang_utama
                 ]);
                 return redirect('report-biro')->with('pesan','Input Data Success');
             }else{
@@ -81,7 +87,7 @@ class DataBiroController extends Controller
     }
 
     public function datatable($cabang, $dari, $sampai)
-    {
+    { 
         $bulan = date('m');
         if($cabang == 0 && $dari == 0 && $sampai == 0)
         {
@@ -91,7 +97,14 @@ class DataBiroController extends Controller
                         ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
                         ->where(DB::raw('MONTH(tb_data_biro.data_biro_tgl)'),$bulan)
                         ->get();
-            }else{
+            }elseif(session()->get('user_level')  == 3){
+                $data = DB::table('tb_data_biro')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                    ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                    ->where('tb_data_biro.cabang_utama',$cabang)
+                    ->where(DB::raw('MONTH(tb_data_biro.data_biro_tgl)'),$bulan)
+                    ->get();    
+            }elseif(session('user_level') == 4){
                 $data = DB::table('tb_data_biro')
                     ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
                     ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
@@ -100,11 +113,20 @@ class DataBiroController extends Controller
                     ->get();    
             }
         }elseif($cabang != 0 && $dari == 0 && $sampai == 0){
-            $data = DB::table('tb_data_biro')
-                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
-                    ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
-                    ->where('tb_data_biro.biro_id','=', $cabang)
-                    ->get();
+            if(session('user_level') == 3)
+            {
+                $data = DB::table('tb_data_biro')
+                        ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                        ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                        ->where('tb_data_biro.cabang_utama','=', $cabang)
+                        ->get();
+            }else{
+                $data = DB::table('tb_data_biro')
+                        ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                        ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                        ->where('tb_data_biro.biro_id','=', $cabang)
+                        ->get();
+            }
 
         }elseif($cabang == 0 && $dari != 0 && $sampai != 0){
             $data = DB::table('tb_data_biro')
@@ -135,7 +157,14 @@ class DataBiroController extends Controller
                         ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
                         ->where(DB::raw('MONTH(tb_data_biro.data_biro_tgl)'),$bulan)
                         ->get();
-            }else{
+            }elseif(session()->get('user_level')  == 3){
+                $data = DB::table('tb_data_biro')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                    ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                    ->where('tb_data_biro.cabang_utama',$cabang)
+                    ->where(DB::raw('MONTH(tb_data_biro.data_biro_tgl)'),$bulan)
+                    ->get();    
+            }elseif(session('user_level') == 4){
                 $data = DB::table('tb_data_biro')
                     ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
                     ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
@@ -144,11 +173,20 @@ class DataBiroController extends Controller
                     ->get();    
             }
         }elseif($cabang != 0 && $dari == 0 && $sampai == 0){
-            $data = DB::table('tb_data_biro')
-                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
-                    ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
-                    ->where('tb_data_biro.biro_id','=', $cabang)
-                    ->get();
+            if(session('user_level') == 3)
+            {
+                $data = DB::table('tb_data_biro')
+                        ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                        ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                        ->where('tb_data_biro.cabang_utama','=', $cabang)
+                        ->get();
+            }else{
+                $data = DB::table('tb_data_biro')
+                        ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
+                        ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                        ->where('tb_data_biro.biro_id','=', $cabang)
+                        ->get();
+            }
 
         }elseif($cabang == 0 && $dari != 0 && $sampai != 0){
             $data = DB::table('tb_data_biro')

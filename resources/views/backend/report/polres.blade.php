@@ -4,10 +4,9 @@
 <div class="row">
     <div class="col-md-12">
         <div class="float-left">
-        @if(session('user_level') == 1)
             <label for="" style="color:white">Report Hari Ini :</label>
             <button type="button" onclick="cetaksekarang()" class="btn "><img src="{{asset('/icon/excel.png')}}" style="width:20px" alt=""></button>
-        @endif
+ 
         &nbsp;
         &nbsp;
             <label for="" style="color:white">Export to:</label>
@@ -230,7 +229,9 @@
 
     function cetaksekarang()
     {
-        window.open(`{{ url('reportharian') }}`);
+        var cb = $('#cabang_ids').val()
+        var cabang = cb != '' ? cb : 0;
+        window.open(`{{ url('reportharian') }}/`+ cabang );
     }
 
     function edit(

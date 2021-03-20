@@ -1,8 +1,7 @@
 @extends('backend.template.index')
 
 @section('content')
-
-@if(session('user_level') != 3)
+@if(session('user_level') == 1 || session('user_level') == 2)
 <div id="das" class="row">
     {{-- Sim BAru --}}
     <div class="col-md-12">

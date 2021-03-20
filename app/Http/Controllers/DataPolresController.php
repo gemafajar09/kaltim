@@ -170,13 +170,13 @@ class DataPolresController extends Controller
     {
         if($cabang == 0 && $dari == 0 && $sampai == 0)
         {
-            $bulan = date('m');
+            $bulan = date('Y-m-d');
 
             if(session()->get('user_level')  == 1){
                 $data = DB::table('tb_data_polres')
                     ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
                     ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
-                    ->where(DB::raw('MONTH(tb_data_polres.data_polres_tgl)'),$bulan)
+                    ->where('tb_data_polres.data_polres_tgl',$bulan)
                     ->get();
             
             }else{
@@ -184,7 +184,7 @@ class DataPolresController extends Controller
                 $data = DB::table('tb_data_polres')
                     ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
                     ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
-                    ->where(DB::raw('MONTH(tb_data_polres.data_polres_tgl)'),$bulan)
+                    ->where('tb_data_polres.data_polres_tgl',$bulan)
                     ->where('tb_data_polres.polres_id','=', $cabang)
                     ->get();
                 
@@ -239,24 +239,82 @@ class DataPolresController extends Controller
             $bulan = date('m');
 
             if(session()->get('user_level')  == 1){
+                $data['type'] = 'Semua Data';
                 $data['isi'] = DB::table('tb_data_polres')
-                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
-                    ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
+                    ->join('tb_cabang','tb_cabang.cabang_id','tb_data_polres.polres_id')
+                    ->groupBy('tb_data_polres.polres_id')
                     ->where(DB::raw('MONTH(tb_data_polres.data_polres_tgl)'),$bulan)
+                    ->select(
+                        DB::raw('tb_cabang.*'),
+                        DB::raw('tb_data_polres.data_polres_id as data_polres_id'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_a_baru) as data_polres_sim_a_baru'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_a_umum_baru) as data_polres_sim_a_umum_baru'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_b1_baru) as data_polres_sim_b1_baru'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_b2_baru) as data_polres_sim_b2_baru'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_c_baru) as data_polres_sim_c_baru'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_d_baru) as data_polres_sim_d_baru'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_a_perpanjang) as data_polres_sim_a_perpanjang'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_a_umum_perpanjang) as data_polres_sim_a_umum_perpanjang'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_b1_perpanjang) as data_polres_sim_b1_perpanjang'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_b2_perpanjang) as data_polres_sim_b2_perpanjang'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_c_perpanjang) as data_polres_sim_c_perpanjang'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_d_perpanjang) as data_polres_sim_d_perpanjang'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_b1_umum) as data_polres_sim_b1_umum'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_b2_umum) as data_polres_sim_b2_umum'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_b1_umum_perpanjang) as data_polres_sim_b1_umum_perpanjang'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_b2_umum_perpanjang) as data_polres_sim_b2_umum_perpanjang'),
+                        DB::raw('SUM(tb_data_polres.rusak) as rusak'),
+                        DB::raw('SUM(tb_data_polres.gerai_a) as gerai_a'),
+                        DB::raw('SUM(tb_data_polres.gerai_c) as gerai_c'),
+                        DB::raw('SUM(tb_data_polres.gerai_rusak) as gerai_rusak'),
+                        DB::raw('SUM(tb_data_polres.mpp_a) as mpp_a'),
+                        DB::raw('SUM(tb_data_polres.mpp_c) as mpp_c'),
+                        DB::raw('SUM(tb_data_polres.mpp_rusak) as mpp_rusak'),
+                        // 'tb_cabang.*',
+                        // 'tb_data_polres.data_polres_id',
+                        )
                     ->get();
-            
             }else{
-
+                $data['type'] = 'Semua Data';
                 $data['isi'] = DB::table('tb_data_polres')
                     ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
-                    ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
                     ->where(DB::raw('MONTH(tb_data_polres.data_polres_tgl)'),$bulan)
                     ->where('tb_data_polres.polres_id','=', session()->get('cabang_id'))
+                    ->select(
+                        DB::raw('tb_cabang.cabang_nama as cabang_nama'),
+                        DB::raw('tb_data_polres.data_polres_id as data_polres_id'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_a_baru) as data_polres_sim_a_baru'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_a_umum_baru) as data_polres_sim_a_umum_baru'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_b1_baru) as data_polres_sim_b1_baru'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_b2_baru) as data_polres_sim_b2_baru'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_c_baru) as data_polres_sim_c_baru'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_d_baru) as data_polres_sim_d_baru'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_a_perpanjang) as data_polres_sim_a_perpanjang'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_a_umum_perpanjang) as data_polres_sim_a_umum_perpanjang'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_b1_perpanjang) as data_polres_sim_b1_perpanjang'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_b2_perpanjang) as data_polres_sim_b2_perpanjang'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_c_perpanjang) as data_polres_sim_c_perpanjang'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_d_perpanjang) as data_polres_sim_d_perpanjang'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_b1_umum) as data_polres_sim_b1_umum'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_b2_umum) as data_polres_sim_b2_umum'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_b1_umum_perpanjang) as data_polres_sim_b1_umum_perpanjang'),
+                        DB::raw('SUM(tb_data_polres.data_polres_sim_b2_umum_perpanjang) as data_polres_sim_b2_umum_perpanjang'),
+                        DB::raw('SUM(tb_data_polres.rusak) as rusak'),
+                        DB::raw('SUM(tb_data_polres.gerai_a) as gerai_a'),
+                        DB::raw('SUM(tb_data_polres.gerai_c) as gerai_c'),
+                        DB::raw('SUM(tb_data_polres.gerai_rusak) as gerai_rusak'),
+                        DB::raw('SUM(tb_data_polres.mpp_a) as mpp_a'),
+                        DB::raw('SUM(tb_data_polres.mpp_c) as mpp_c'),
+                        DB::raw('SUM(tb_data_polres.mpp_rusak) as mpp_rusak'),
+                        // 'tb_cabang.*',
+                        // 'tb_data_polres.data_polres_id',
+                        )
                     ->get();
                 
             }
 
         }elseif($cabang != 0 && $dari == 0 && $sampai == 0){
+            $data['type'] = 'Semua Data';
             $data['isi'] = DB::table('tb_data_polres')
                     ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
                     ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
@@ -264,6 +322,7 @@ class DataPolresController extends Controller
                     ->get();
 
         }elseif($cabang != 0 && $dari != 0 && $sampai != 0){
+            $data['type'] = bulantahun($dari)."  -  ".bulantahun($sampai);
             $data['isi'] = DB::table('tb_data_polres')
                     ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
                     ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
@@ -272,11 +331,11 @@ class DataPolresController extends Controller
                     ->get();
 
         }else{
+            $data['type'] = $dari.' s/d '.$sampai;
             $data['isi'] = DB::table('tb_data_polres')
                     ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
                     ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
                     ->whereBetween('tb_data_polres.data_polres_tgl',[$dari,$sampai])
-                    ->where('tb_data_polres.polres_id','=', $cabang)
                     ->get();
         }
         $data['biro'] = DB::table('tb_cabang')->where('cabang_kode',2)->get();
@@ -335,14 +394,33 @@ class DataPolresController extends Controller
         return view('backend.report.report_polres_edit',$data);
     }
 
-    public function reportharian()
+    public function reportharian($cabang)
     {
         $tanggal = date('Y-m-d');
-        $data = DB::table('tb_data_polres')
-                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
-                    ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
-                    ->where('tb_data_polres.data_polres_tgl',$tanggal)
-                    ->get();
+        if(session('user_level') != 1)
+        {
+            if($cabang == 0)
+            {
+                $data = DB::table('tb_data_polres')
+                            ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
+                            ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
+                            ->where('tb_data_polres.data_polres_tgl',$tanggal)
+                            ->get();
+            }else{
+                $data = DB::table('tb_data_polres')
+                            ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
+                            ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
+                            ->where('tb_data_polres.polres_id',$cabang)
+                            ->where('tb_data_polres.data_polres_tgl',$tanggal)
+                            ->get();
+            }
+        }else{
+            $data = DB::table('tb_data_polres')
+                            ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_polres.polres_id')
+                            ->select('tb_data_polres.*', 'tb_cabang.cabang_nama')
+                            ->where('tb_data_polres.data_polres_tgl',$tanggal)
+                            ->get();
+        }
         return view('backend.report.reportharian',compact('data'));
     }
 

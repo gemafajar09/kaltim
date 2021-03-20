@@ -63,7 +63,10 @@
                                 <input placeholder="0" type="number" name="data_biro_sim_ac_perpanjang"
                                     class="form-control">
                             </div>
-                            <input type="hidden" name="cabang_utama" value="{{session('cabang_id')}}">
+                            <?php
+                                $turunan = DB::table('tb_cabang')->where('cabang_id',session('cabang_id'))->first();
+                            ?>
+                            <input type="hidden" name="cabang_utama" value="{{$turunan->turunan}}">
                         </div>
                     </div>
 

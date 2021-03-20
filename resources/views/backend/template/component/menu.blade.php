@@ -78,7 +78,7 @@
                     </div>
                 </li>
             </ul>
-            @elseif(Session::get('user_level') == 3)
+            @elseif(Session::get('user_level') == 3 || Session::get('user_level') == 4)
             <ul class="mainnav">
                 <li><a style="color:white" href="{{route('home')}}"><i class="icon-dashboard"></i><span>Dashboard</span> </a>
                 </li>
@@ -103,12 +103,23 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-left shadow animated--grow-in"
                         aria-labelledby="userDropdown">
+                        @if(session('user_level') == 3)
                         <a class="dropdown-item" href="{{route('data-biro')}}">
                             <i class="icon-file text-gray-400"></i>
                             Data Biro
                         </a>
+                        @elseif(session('user_level') == 4)
+                            <a class="dropdown-item" href="{{route('data-biro-input')}}">
+                                <i class="icon-file text-gray-400"></i>
+                                Data Biro
+                            </a>
+                        @endif
                     </div>
                 </li>
+                @if(session('user_level') == 3)
+                <li><a style="color:white" href="data-biro-cabang"><i class="icon-sitemap"></i><span>Cabang</span> </a> </li>
+                <li><a style="color:white" href="data-akun-cabang"><i class="icon-user"></i><span>Tambah Akun</span> </a> </li>
+                @endif
             </ul>
             @endif
         </div>
