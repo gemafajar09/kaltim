@@ -80,13 +80,13 @@
             $b1ub += $a->data_polres_sim_b1_umum;
             $b2ub += $a->data_polres_sim_b2_umum;
 
-            $cp += ($a->data_polres_sim_c_perpanjang + $datas->simlink1_c +  $datas->simlink2_c);
-            $ap += ($a->data_polres_sim_a_perpanjang + $datas->simlink1_a +  $datas->simlink2_a);
-            $b1p += $a->data_polres_sim_b1_perpanjang;
-            $b2p += $a->data_polres_sim_b2_perpanjang;
-            $aup += $a->data_polres_sim_a_umum_perpanjang;
-            $b1up += $a->data_polres_sim_b1_umum_perpanjang;
-            $b2up += $a->data_polres_sim_b2_umum_perpanjang;
+            $cp += ($a->data_polres_sim_c_perpanjang + $datas->simlink1_c +  $datas->simlink2_c + $a->gerai_c + $a->mpp_c);
+            $ap += ($a->data_polres_sim_a_perpanjang + $datas->simlink1_a +  $datas->simlink2_a + $a->gerai_a + $a->mpp_a);
+            $b1p += ($a->data_polres_sim_b1_perpanjang + $a->data_polres_sim_b1_baru);
+            $b2p += ($a->data_polres_sim_b2_perpanjang + $a->data_polres_sim_b2_baru);
+            $aup += ($a->data_polres_sim_a_umum_perpanjang + $a->data_polres_sim_a_umum_baru);
+            $b1up += ($a->data_polres_sim_b1_umum_perpanjang + $a->data_polres_sim_b1_umum);
+            $b2up += ($a->data_polres_sim_b2_umum_perpanjang + $a->data_polres_sim_b2_umum);
             $jumlah = (
                 $a->data_polres_sim_c_baru +
                 $a->data_polres_sim_a_baru +
@@ -102,10 +102,14 @@
                 $a->data_polres_sim_a_umum_perpanjang +
                 $a->data_polres_sim_b1_umum_perpanjang +
                 $a->data_polres_sim_b2_umum_perpanjang +
+                $a->mpp_a +
+                $a->mpp_c +
+                $a->gerai_a +
+                $a->gerai_c +
                 $datas->simlink1_c +  
                 $datas->simlink2_c +
                 $datas->simlink1_a +  
-                $datas->simlink2_a
+                $datas->simlink2_a 
             );
             $total += $jumlah;
             $rusak += $a->rusak;
@@ -113,20 +117,24 @@
             <tr>
                 <th style="border:1px solid black">{{$i+1}}</th>
                 <th style="border:1px solid black">{{$a->cabang_nama}}</th>
+
                 <th style="border:1px solid black">{{$a->data_polres_sim_c_baru}}</th>
                 <th style="border:1px solid black">{{$a->data_polres_sim_a_baru}}</th>
-                <th style="border:1px solid black">{{$a->data_polres_sim_b1_baru}}</th>
-                <th style="border:1px solid black">{{$a->data_polres_sim_b2_baru}}</th>
-                <th style="border:1px solid black">{{$a->data_polres_sim_a_umum_baru}}</th>
-                <th style="border:1px solid black">{{$a->data_polres_sim_b1_umum}}</th>
-                <th style="border:1px solid black">{{$a->data_polres_sim_b2_umum}}</th>
-                <th style="border:1px solid black">{{$a->data_polres_sim_c_perpanjang + $datas->simlink1_c +  $datas->simlink2_c}}</th>
-                <th style="border:1px solid black">{{$a->data_polres_sim_a_perpanjang + $datas->simlink1_a +  $datas->simlink2_a}}</th>
-                <th style="border:1px solid black">{{$a->data_polres_sim_b1_perpanjang}}</th>
-                <th style="border:1px solid black">{{$a->data_polres_sim_b2_perpanjang}}</th>
-                <th style="border:1px solid black">{{$a->data_polres_sim_a_umum_perpanjang}}</th>
-                <th style="border:1px solid black">{{$a->data_polres_sim_b1_umum_perpanjang}}</th>
-                <th style="border:1px solid black">{{$a->data_polres_sim_b2_umum_perpanjang}}</th>
+                <th style="border:1px solid black">0</th>
+                <th style="border:1px solid black">0</th>
+                <th style="border:1px solid black">0</th>
+                <th style="border:1px solid black">0</th>
+                <th style="border:1px solid black">0</th>
+
+                <th style="border:1px solid black">{{$a->data_polres_sim_c_perpanjang + $datas->simlink1_c +  $datas->simlink2_c + $a->gerai_c + $a->mpp_c}}</th>
+                <th style="border:1px solid black">{{$a->data_polres_sim_a_perpanjang + $datas->simlink1_a +  $datas->simlink2_a + $a->gerai_a + $a->mpp_a }}</th>
+                
+                <th style="border:1px solid black">{{$a->data_polres_sim_b1_perpanjang + $a->data_polres_sim_b1_baru}}</th>
+                <th style="border:1px solid black">{{$a->data_polres_sim_b2_perpanjang + $a->data_polres_sim_b2_baru}}</th>
+                <th style="border:1px solid black">{{$a->data_polres_sim_a_umum_perpanjang + $a->data_polres_sim_a_umum_baru}}</th>
+                <th style="border:1px solid black">{{$a->data_polres_sim_b1_umum_perpanjang + $a->data_polres_sim_b1_umum}}</th>
+                <th style="border:1px solid black">{{$a->data_polres_sim_b2_umum_perpanjang + $a->data_polres_sim_b2_umum}}</th>
+                
                 <th style="border:1px solid black">{{$jumlah}}</th>
                 <th style="border:1px solid black">{{$a->rusak}}</th>
             </tr>
@@ -137,11 +145,11 @@
                 <th style="border:1px solid black" colspan="2">JUMLAH</th>
                 <th style="border:1px solid black">{{$cb}}</th>
                 <th style="border:1px solid black">{{$ab}}</th>
-                <th style="border:1px solid black">{{$b1b}}</th>
-                <th style="border:1px solid black">{{$b2b}}</th>
-                <th style="border:1px solid black">{{$aub}}</th>
-                <th style="border:1px solid black">{{$b1ub}}</th>
-                <th style="border:1px solid black">{{$b2ub}}</th>
+                <th style="border:1px solid black">0</th>
+                <th style="border:1px solid black">0</th>
+                <th style="border:1px solid black">0</th>
+                <th style="border:1px solid black">0</th>
+                <th style="border:1px solid black">0</th>
                 <th style="border:1px solid black">{{$cp}}</th>
                 <th style="border:1px solid black">{{$ap}}</th>
                 <th style="border:1px solid black">{{$b1p}}</th>
