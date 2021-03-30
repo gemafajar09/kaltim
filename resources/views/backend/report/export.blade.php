@@ -9,8 +9,8 @@
 </head> 
 <body>
 <?php
-    // header("Content-type: application/vnd-ms-excel");
-    // header("Content-Disposition: attachment; filename=laporan-".$type.".xls");
+    header("Content-type: application/vnd-ms-excel");
+    header("Content-Disposition: attachment; filename=laporan-bulan-".$type.".xls");
 
     $baru = 0;
     $perpanjang = 0;
@@ -22,45 +22,10 @@
     $gerai_total =0;
     $mpp_total =0;
     $bus_total =0;
-    // baru
-    $sim_a =0;
-    $sim_c =0;
-    $sim_d =0;
-    // perpanjang
+    // tambahan
     $sim_ap =0;
-    $sim_aup =0;
     $sim_cp =0;
-    $sim_dp =0;
-    $sim_b1 =0;
-    $sim_b1u =0;
-    $sim_b2 =0;
-    $sim_b2u =0;
-    // peningkatan
-    $sim_p_au =0;
-    $sim_p_b1 =0;
-    $sim_p_b1u =0;
-    $sim_p_b2 =0;
-    $sim_p_b2u =0;
-    // gerai
-    $gerai_a = 0;
-    $gerai_c = 0;
-    $gerai_rusak = 0;
-    // mpp
-    $mpp_a = 0;
-    $mpp_c = 0;
-    $mpp_rusak = 0;
-    // simling
-    $simlinga = 0;
-    $simlingc = 0;
-    $rusaksimling = 0;
 
-    $simlinga2 = 0;
-    $simlingc2 = 0;
-    $rusaksimling2 = 0;
-    // sim bus
-    $busa = 0;
-    $busc = 0;
-    $rusakbus = 0;
 ?>
     <table>
         <thead>
@@ -103,93 +68,80 @@
                 <th>B2</th>
                 <th>B2U</th>
 
-                <th>PENERBITAN</th>
-                <th>RUSAK</th>
+                <th width="100px">PENERBITAN</th>
+                <th width="100px">RUSAK</th>
             </tr>
         </thead>
         <tbody>
             @foreach($isi as $i => $row)
             <?php 
-            $bulan = date('m');
-            if($type == 'Semua Data')
-            {
-                $cabang =  DB::table('tb_detail')
-                            ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
-                            ->groupBy('tb_detail.id_cabang')
-                            ->where(DB::raw('MONTH(tb_detail.tanggal)'),$bulan)
-                            ->where('tb_detail.id_cabang',$row->cabang_id)
-                            ->select(
-                                DB::raw('SUM(tb_detail.sim_a_baru) as sim_a_baru'),
-                                DB::raw('SUM(tb_detail.sim_a_baru) as sim_c_baru'),
-                                DB::raw('SUM(tb_detail.sim_a_baru) as sim_ac_baru')
-                            )
-                            ->first();
-                
-                $simlink = DB::table('tb_simlink')
-                            ->where(DB::raw('MONTH(tanggal)'),$bulan)
-                            ->where('id_cabang',$row->cabang_id)
-                            ->groupBy('tb_simlink.id_cabang')
-                            ->select(
-                                DB::raw('SUM(simlink1_a) as simlink1_a'),
-                                DB::raw('SUM(simlink1_c) as simlink1_c'),
-                                DB::raw('SUM(simlink1_rusak) as simlink1_rusak'),
-                                DB::raw('SUM(simlink2_a) as simlink2_a'),
-                                DB::raw('SUM(simlink2_c) as simlink2_c'),
-                                DB::raw('SUM(simlink2_rusak) as simlink2_rusak'),
-                            )
-                            ->first();
 
-                $bus = DB::table('tb_bus')
-                            ->where(DB::raw('MONTH(tanggal)'),$bulan)
-                            ->where('id_polres',$row->cabang_id)
-                            ->groupBy('id_bus')
-                            ->select(
-                                DB::raw('SUM(bus_a) as bus_a'),
-                                DB::raw('SUM(bus_c) as bus_c'),
-                                DB::raw('SUM(bus_rusak) as bus_rusak'),
-                            )
-                            ->first();
-            }else{
-                $cabang =  DB::table('tb_detail')
-                            ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
-                            ->where('tb_detail.id_data',$row->data_polres_id)
-                            ->first();
-    
-                $simlink = DB::table('tb_simlink')
-                            ->where('id_data',$row->data_polres_id)
-                            ->first();
-                
-                $bus = DB::table('tb_bus')
-                            ->where('id_data',$row->data_polres_id)
-                            ->first();
-                
-            }
-            // dd($simlink);
-            
-            $simlink1_total += (
+            // pecah bulan
+            $pecah = explode("-",$bulan);
+            $bln = $pecah[1];
+            $thn = $pecah[0];
+
+            // data simling
+            $simlink = DB::table('tb_simlink')
+                        ->where('id_cabang',$row->cabang_id)
+                        ->where(DB::raw('MONTH(tb_simlink.tanggal)'),$bln)
+                        ->where(DB::raw('YEAR(tb_simlink.tanggal)'),$thn)
+                        ->select(
+                            DB::raw('SUM(tb_simlink.simlink1_a) as simlink1_a'),
+                            DB::raw('SUM(tb_simlink.simlink1_c) as simlink1_c'),
+                            DB::raw('SUM(tb_simlink.simlink1_rusak) as simlink1_rusak'),
+                            DB::raw('SUM(tb_simlink.simlink2_a) as simlink2_a'),
+                            DB::raw('SUM(tb_simlink.simlink2_c) as simlink2_c'),
+                            DB::raw('SUM(tb_simlink.simlink2_rusak) as simlink2_rusak'),
+                        )
+                        ->first();
+            // simling 1 total
+            $simlink1_total = (
                 $simlink->simlink1_a + 
                 $simlink->simlink1_c
             );
-            
-            $simlink2_total += (
+            // simling2 total
+            $simlink2_total = (
                 $simlink->simlink2_a +  
                 $simlink->simlink2_c 
-            ); 
-
-            $bus_total      += (
+            );
+            
+            // data bus
+            $bus = DB::table('tb_bus')
+                        ->where('id_polres',$row->cabang_id)
+                        ->where(DB::raw('MONTH(tb_bus.tanggal)'),$bln)
+                        ->where(DB::raw('YEAR(tb_bus.tanggal)'),$thn)
+                        ->select(
+                            DB::raw('SUM(tb_bus.bus_a) as bus_a'),
+                            DB::raw('SUM(tb_bus.bus_c) as bus_c'),
+                            DB::raw('SUM(tb_bus.bus_rusak) as bus_rusak')
+                        )
+                        ->first();
+            // bus total
+            $bus_total = (
                 $bus->bus_a + 
                 $bus->bus_c
             );
-            $gerai_total += ($row->gerai_a + $row->gerai_c);
-            $mpp_total += ($row->mpp_a + $row->mpp_c);
 
-            $baru += (
+            // data gerai
+            $gerai_total = (
+                $row->gerai_a + 
+                $row->gerai_c
+            );
+            // data mpp
+            $mpp_total = (
+                $row->mpp_a + 
+                $row->mpp_c
+            );
+            
+            // data sim baru
+            $baru = (
                 $row->data_polres_sim_a_baru + 
                 $row->data_polres_sim_c_baru + 
                 $row->data_polres_sim_d_baru
             );
-
-            $perpanjang += (
+            // data sim perpanjang
+            $perpanjang = (
                 $row->data_polres_sim_a_perpanjang + 
                 $row->data_polres_sim_a_umum_perpanjang +  
                 $row->data_polres_sim_c_perpanjang + 
@@ -208,57 +160,45 @@
                 $row->gerai_c +
                 $row->mpp_a + 
                 $row->mpp_c
-
             );
-
-            $peningkatan += (
+            // data sim peningkatan
+            $peningkatan = (
                 $row->data_polres_sim_a_umum_baru +
                 $row->data_polres_sim_b1_umum +
                 $row->data_polres_sim_b1_umum_perpanjang +
                 $row->data_polres_sim_b2_umum +
                 $row->data_polres_sim_b2_umum_perpanjang
             );
+            // data sim rusak
+            $rusak = (
+                $row->rusak + 
+                $row->mpp_rusak + 
+                $row->gerai_rusak + 
+                $bus->bus_rusak + 
+                $simlink->simlink2_rusak +  
+                $simlink->simlink1_rusak
+            ); 
+
+            // perpanjang a
+            $sim_ap = (
+                $row->data_polres_sim_a_perpanjang +
+                $row->mpp_a +
+                $row->gerai_a +
+                $bus->bus_a +
+                $simlink->simlink1_a + 
+                $simlink->simlink2_a 
+            );
+            // perpanjang c
+            $sim_cp  = (
+                $row->data_polres_sim_c_perpanjang +
+                $row->mpp_c +
+                $row->gerai_c +
+                $bus->bus_c +
+                $simlink->simlink1_c + 
+                $simlink->simlink2_c
+            );
             
-            $rusak          += ($row->rusak); 
-            $rusaksimling   += ($simlink->simlink1_rusak);
-            $rusaksimling2  += ($simlink->simlink2_rusak);
-            $rusakbus       += ( $bus->bus_rusak);
-            $mpp_rusak       += ( $row->mpp_rusak);
-            $gerai_rusak       += ( $row->gerai_rusak);
-            // baru
-            $sim_a          += $row->data_polres_sim_a_baru;
-            $sim_c          += $row->data_polres_sim_c_baru;
-            $sim_d          += $row->data_polres_sim_d_baru;
-            // perpanjang
-            $sim_ap     += $row->data_polres_sim_a_perpanjang;
-            $sim_aup    += $row->data_polres_sim_a_umum_perpanjang;
-            $sim_cp     += $row->data_polres_sim_c_perpanjang;
-            $sim_dp     += $row->data_polres_sim_d_perpanjang;
-            $sim_b1     += $row->data_polres_sim_b1_baru;
-            $sim_b1u    += $row->data_polres_sim_b1_perpanjang;
-            $sim_b2     += $row->data_polres_sim_b2_baru;
-            $sim_b2u    += $row->data_polres_sim_b2_perpanjang;
-            // peningkatan
-            $sim_p_au   += $row->data_polres_sim_a_umum_baru;
-            $sim_p_b1   += $row->data_polres_sim_b1_umum;
-            $sim_p_b1u  += $row->data_polres_sim_b1_umum_perpanjang;
-            $sim_p_b2   += $row->data_polres_sim_b2_umum;
-            $sim_p_b2u  += $row->data_polres_sim_b2_umum_perpanjang;
-            // simling
-            $simlinga       += $simlink->simlink1_a;
-            $simlingc       += $simlink->simlink1_c;
-            // simling 2
-            $simlinga2      += $simlink->simlink2_a;
-            $simlingc2      += $simlink->simlink2_c;
-            // bus
-            $busa       += $bus->bus_a;
-            $busc       += $bus->bus_c;
-            // gerai
-            $gerai_a += $row->gerai_a;
-            $gerai_c += $row->gerai_c;
-            // mpp
-            $mpp_a += $row->mpp_a;
-            $mpp_c += $row->mpp_c;
+            
             ?>
             <tr>
                 <td>{{ $i + 1 }}</td>
@@ -332,7 +272,7 @@
                 <td></td>
                 <td></td>
 
-                <th>{{ $simlink->simlink1_a + $simlink->simlink1_c }}</th>
+                <th>{{$simlink1_total}}</th>
                 <th>{{$simlink->simlink1_rusak}}</th>
                 
             </tr>
@@ -360,7 +300,7 @@
                 <td></td>
                 <td></td>
 
-                <th>{{ $simlink->simlink2_a + $simlink->simlink2_c }}</th>
+                <th>{{ $simlink2_total }}</th>
                 <th>{{$simlink->simlink2_rusak}}</th>
                 
             </tr>
@@ -388,7 +328,7 @@
                 <td></td>
                 <td></td>
 
-                <th>{{ $bus->bus_a + $bus->bus_c }}</th>
+                <th>{{ $bus_total }}</th>
                 <th>{{$bus->bus_rusak}}</th>
                 
             </tr>
@@ -416,8 +356,8 @@
                 <td></td>
                 <td></td>
 
-                <th>{{ $row->gerai_a + $row->gerai_c }}</th>
-                <th>{{$row->gerai_rusak}}</th>
+                <th>{{ $gerai_total }}</th>
+                <th>{{ $row->gerai_rusak }}</th>
                 
             </tr>
             
@@ -444,47 +384,44 @@
                 <td></td>
                 <td></td>
 
-                <th>{{ $row->mpp_a + $row->mpp_c }}</th>
+                <th>{{ $mpp_total }}</th>
                 <th>{{$row->mpp_rusak}}</th>
                 
-            </tr>
-
-            <tr>
-                    <td colspan="20">&nbsp;</td>
             </tr>
             @endforeach
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="2" rowspan="3">JUMLAH</th>
-                <th>{{ $sim_a }}</th>
-                <th>{{ $sim_c }}</th>
-                <th>{{ $sim_d }}</th>
+                <th colspan="2">JUMLAH</th>
+                <th>{{ $row->data_polres_sim_a_baru }}</th>
+                <th>{{ $row->data_polres_sim_c_baru }}</th>
+                <th>{{ $row->data_polres_sim_d_baru }}</th>
 
-                <th>{{ $sim_ap + $simlinga + $simlinga2 + $busa  + $gerai_a + $mpp_a  }}</th>
-                <th>{{ $sim_aup}}</th>
-                <th>{{ $sim_c + $simlingc + $simlingc2 + $busc + $mpp_c + $gerai_c}}</th>
-                <th>{{ $sim_d}}</th>
-                <th>{{ $sim_b1}}</th>
-                <th>{{ $sim_b1u}}</th>
-                <th>{{ $sim_b2}}</th>
-                <th>{{ $sim_b2u}}</th>
+                <th>{{ $sim_ap }}</th>
+                <th>{{ $row->data_polres_sim_a_umum_perpanjang }}</th>
+                <th>{{ $sim_cp }}</th>
+                <th>{{ $row->data_polres_sim_d_perpanjang }}</th>
+                <th>{{ $row->data_polres_sim_b1_baru }}</th>
+                <th>{{ $row->data_polres_sim_b1_perpanjang }}</th>
+                <th>{{ $row->data_polres_sim_b2_baru}}</th>
+                <th>{{ $row->data_polres_sim_b2_perpanjang}}</th>
                 
-                <th>{{ $sim_p_au }}</th>
-                <th>{{ $sim_p_b1 }}</th>
-                <th>{{ $sim_p_b1u }}</th>
-                <th>{{ $sim_p_b2 }}</th>
-                <th>{{ $sim_p_b2u  }}</th>
+                <th>{{ $row->data_polres_sim_a_umum_baru }}</th>
+                <th>{{ $row->data_polres_sim_b1_umum }}</th>
+                <th>{{ $row->data_polres_sim_b1_umum_perpanjang }}</th>
+                <th>{{ $row->data_polres_sim_b2_umum }}</th>
+                <th>{{ $row->data_polres_sim_b2_umum_perpanjang }}</th>
                 
                 <th>
                     {{ 
                         $baru + $perpanjang + $peningkatan 
                     }}
                 </th>
-                <th>{{ $rusak + $rusaksimling + $rusaksimling2 + $rusakbus + $gerai_rusak + $mpp_rusak }}</th>
+                <th>{{ $rusak }}</th>
             </tr>
             <!-- total 2 -->
             <tr>
+            <th colspan="2"  rowspan="2"></th>
                 <th colspan="3">
                     {{ 
                         $baru
@@ -504,16 +441,232 @@
             </tr>
             <!-- grand total -->
             <tr>
-                <th colspan="16">
+                <th colspan="18">
                     {{ 
                         $baru + $perpanjang + $peningkatan
                     }}
                 </th>
-                <th colspan="2">&nbsp;</th>
             </tr>
         </tfoot> 
     </table>
 
+<!-- detail inputan -->
+<br><br><br><br><br><br><br><br>
+<?php
+$ab = 0;
+$cb = 0;
+$db = 0;
+$ap = 0;
+$aup = 0;
+$cp = 0;
+$dp = 0;
+$b1p = 0;
+$b1up = 0;
+$b2p = 0;
+$b2up = 0;
+$pau = 0;
+$pb1 = 0;
+$pb1u = 0;
+$pb2 = 0;
+$pb2u = 0;
+$sl1a =0;
+$sl1c =0;
+$sl1r =0;
+$sl2a =0;
+$sl2c =0;
+$sl2r =0;
+$ba =0;
+$bc =0;
+$br =0;
+$ma =0;
+$mc =0;
+$mr =0;
+$ga =0;
+$gc =0;
+$gr =0;
+?>
+    <table border="2">
+        <thead style="background-color:grey">
+            <tr>
+                <th rowspan="2">No</th>
+                <th rowspan="2">SATPAS</th>
+                <th rowspan="2">TANGGAL</th>
+                <th colspan="3">BARU</th>
+                <th colspan="8">PERPANJANG</th>
+                <th colspan="5">PENINGKATAN</th>
+                <th colspan="3">SIMLING 1</th>
+                <th colspan="3">SIMLING 2</th>
+                <th colspan="3">GERAI</th>
+                <th colspan="3">BUS MILINEAL</th>
+                <th colspan="3">MPP</th>
+                
+            </tr>
+            <tr>
+                <th width="80px">A</th>
+                <th width="80px">C</th>
+                <th width="80px">D</th>
+                <th width="80px">A</th>
+                <th width="80px">AU</th>
+                <th width="80px">C</th>
+                <th width="80px">D</th>
+                <th width="80px">B1</th>
+                <th width="80px">B1U</th>
+                <th width="80px">B2</th>
+                <th width="80px">B2U</th>
+                <th width="80px">AU</th>
+                <th width="80px">B1</th>
+                <th width="80px">B1U</th>
+                <th width="80px">B2</th>
+                <th width="80px">B2U</th>
+                <th width="80px">A</th>
+                <th width="80px">C</th>
+                <th width="80px">RUSAK</th>
+                <th width="80px">A</th>
+                <th width="80px">C</th>
+                <th width="80px">RUSAK</th>
+                <th width="80px">A</th>
+                <th width="80px">C</th>
+                <th width="80px">RUSAK</th>
+                <th width="80px">A</th>
+                <th width="80px">C</th>
+                <th width="80px">RUSAK</th>
+                <th width="80px">A</th>
+                <th width="80px">C</th>
+                <th width="80px">RUSAK</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($detail as $i => $d)
+            <?php
+            // $simlinkk = DB::table('tb_simlink')
+            //             ->where('id_data',$row->data_polres_id)
+            //             ->where(DB::raw('MONTH(tb_simlink.tanggal)'),$bln)
+            //             ->where(DB::raw('YEAR(tb_simlink.tanggal)'),$thn)
+            //             ->first();
+            
+            // // data bus
+            // $buss = DB::table('tb_bus')
+            //             ->where('id_data',$row->data_polres_id)
+            //             ->where(DB::raw('MONTH(tb_bus.tanggal)'),$bln)
+            //             ->where(DB::raw('YEAR(tb_bus.tanggal)'),$thn)
+                        // ->first();
+
+            $ab += $d->data_polres_sim_a_baru;
+            $cb += $d->data_polres_sim_c_baru;
+            $db += $d->data_polres_sim_d_baru;
+            $ap += $d->data_polres_sim_a_perpanjang;
+            $aup += $d->data_polres_sim_a_umum_perpanjang;
+            $cp += $d->data_polres_sim_c_perpanjang;
+            $dp += $d->data_polres_sim_d_perpanjang;
+            $b1p += $d->data_polres_sim_b1_perpanjang;
+            $b1up += $d->data_polres_sim_b1_umum_perpanjang;
+            $b2p += $d->data_polres_sim_b2_perpanjang;
+            $b2up += $d->data_polres_sim_b2_umum_perpanjang;
+            $pau  += $d->data_polres_sim_a_umum_baru;
+            $pb1  += $d->data_polres_sim_b1_baru;
+            $pb1u  += $d->data_polres_sim_b1_umum;
+            $pb2  += $d->data_polres_sim_b2_baru;
+            $pb2u  += $d->data_polres_sim_b2_umum;
+            $sl1a  += $d->simlink1_a;
+            $sl1c  += $d->simlink1_c;
+            $sl1r  += $d->simlink1_rusak;
+            $sl2a  += $d->simlink2_a;
+            $sl2c  += $d->simlink2_c;
+            $sl2r  += $d->simlink2_rusak;
+            $ba  += $d->bus_a;
+            $bc  += $d->bus_c;
+            $br  += $d->bus_rusak;
+            $ma  += $d->mpp_a;
+            $mc  += $d->mpp_c;
+            $mr  += $d->mpp_rusak;
+            $ga  += $d->gerai_a;
+            $gc  += $d->gerai_c;
+            $gr  += $d->gerai_rusak;
+            
+            ?>
+                <tr>
+                    <td>{{$i+1}}</td>
+                    <td>{{$d->cabang_nama}}</td>
+                    <td>{{$d->data_polres_tgl}}</td>
+                    <td>{{$d->data_polres_sim_a_baru}}</td>
+                    <td>{{$d->data_polres_sim_c_baru}}</td>
+                    <td>{{$d->data_polres_sim_d_baru}}</td>
+                    <td>{{$d->data_polres_sim_a_perpanjang}}</td>
+                    <td>{{$d->data_polres_sim_a_umum_perpanjang}}</td>
+                    <td>{{$d->data_polres_sim_c_perpanjang}}</td>
+                    <td>{{$d->data_polres_sim_d_perpanjang}}</td>
+                    <td>{{$d->data_polres_sim_b1_perpanjang}}</td>
+                    <td>{{$d->data_polres_sim_b1_umum_perpanjang}}</td>
+                    <td>{{$d->data_polres_sim_b2_perpanjang}}</td>
+                    <td>{{$d->data_polres_sim_b2_umum_perpanjang}}</td>
+                    <td>{{$d->data_polres_sim_a_umum_baru}}</td>
+                    <td>{{$d->data_polres_sim_b1_baru}}</td>
+                    <td>{{$d->data_polres_sim_b1_umum}}</td>
+                    <td>{{$d->data_polres_sim_b2_baru}}</td>
+                    <td>{{$d->data_polres_sim_b2_umum}}</td>
+                    <td>{{$d->simlink1_a}}</td>
+                    <td>{{$d->simlink1_c}}</td>
+                    <td>{{$d->simlink1_rusak}}</td>
+                    <td>{{$d->simlink2_a}}</td>
+                    <td>{{$d->simlink2_c}}</td>
+                    <td>{{$d->simlink2_rusak}}</td>
+                    <td>{{$d->gerai_a}}</td>
+                    <td>{{$d->gerai_c}}</td>
+                    <td>{{$d->gerai_rusak}}</td>
+                    <td>{{$d->bus_a}}</td>
+                    <td>{{$d->bus_c}}</td>
+                    <td>{{$d->bus_rusak}}</td>
+                    <td>{{$d->mpp_a}}</td>
+                    <td>{{$d->mpp_c}}</td>
+                    <td>{{$d->mpp_rusak}}</td>
+
+                </tr>
+            @endforeach
+        </tbody>
+        <tfoot style="background-color:yellow">
+            <tr>
+                <td colspan="3">Jumlah</td>
+                <td>{{$ab}}</td>
+                <td>{{$cb}}</td>
+                <td>{{$db}}</td>
+                <!-- <td></td> -->
+                <td>{{$ap}}</td>
+                <td>{{$aup}}</td>
+                <td>{{$cp}}</td>
+                <td>{{$dp}}</td>
+                <td>{{$b1p}}</td>
+                <td>{{$b1up}}</td>
+                <td>{{$b2p}}</td>
+                <td>{{$b2up}}</td>
+                <!-- <td></td> -->
+                <td>{{$pau}}</td>
+                <td>{{$pb1}}</td>
+                <td>{{$pb1u}}</td>
+                <td>{{$pb2}}</td>
+                <td>{{$pb2u}}</td>
+                <!-- <td></td> -->
+                <td>{{$sl1a}}</td>
+                <td>{{$sl1c}}</td>
+                <td>{{$sl1r}}</td>
+                <!-- <td></td> -->
+                <td>{{$sl2a}}</td>
+                <td>{{$sl2c}}</td>
+                <td>{{$sl2r}}</td>
+                <!-- <td></td> -->
+                <td>{{$ga}}</td>
+                <td>{{$gc}}</td>
+                <td>{{$gr}}</td>
+                <!-- <td></td> -->
+                <td>{{$ba}}</td>
+                <td>{{$bc}}</td>
+                <td>{{$br}}</td>
+                <!-- <td></td> -->
+                <td>{{$ma}}</td>
+                <td>{{$mc}}</td>
+                <td>{{$mr}}</td>
+            </tr>
+        </tfoot>
+    </table>
 
 </body>
 </html>

@@ -1,7 +1,7 @@
 @foreach($data as $no => $row)
 <tr>
     <td>{{ $no + 1 }}</td>
-    <td>{{ bulantahun($row->data_biro_tgl) }}</td>
+    <td>{{ $row->data_biro_tgl }}</td>
     <td>{{ $row->cabang_nama }}</td>
     <td>{{ $row->data_biro_sim_a_baru }}</td>
     <td>{{ $row->data_biro_sim_c_baru }}</td>

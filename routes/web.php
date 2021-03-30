@@ -54,5 +54,5 @@ Route::get('/report-polres-edit/{id}', 'DataPolresController@report_polres_edit'
 Route::post('/data-polres-save', 'DataPolresController@save')->name('data-polres-save')->middleware('Ceklogin');
 Route::get('/data-polres-delete/{id}', 'DataPolresController@delete')->name('data-polres-delete')->middleware('Ceklogin');
 Route::get('/datatable/{cabang}/{dari}/{sampai}', 'DataPolresController@datatable');
-Route::get('/exportexcel/{cabang}/{dari}/{sampai}', 'DataPolresController@exportexcel');
-Route::get('/reportharian/{id}', 'DataPolresController@reportharian');
+Route::get('/exportexcel/{cabang}/{bulan}', 'DataPolresController@exportexcel');
+Route::get('/reportharian/{id}/{tgl}', 'DataPolresController@reportharian');

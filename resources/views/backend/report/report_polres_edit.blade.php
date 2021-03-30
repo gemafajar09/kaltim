@@ -174,7 +174,7 @@
                                     BUS MILENIAL
                                 </div>
                                 <div class="card-body">
-                                <input type="hidden" name="bus_id" value="{{ $bus->bus_id }}">
+                                <input type="hidden" name="bus_id" value="{{ $bus->id_bus }}">
                                     <div class="form-group">
                                         <label><b>BUS MILENIAL A</b></label>
                                         <input type="number" class="form-control" name="bus_a" value="{{ $bus->bus_a }}">
