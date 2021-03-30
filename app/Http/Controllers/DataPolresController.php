@@ -134,10 +134,12 @@ class DataPolresController extends Controller
             $id_detail = $r->id_detail;
             foreach($id_detail as $i => $a)
             {
-                DB::table('tb_detail')->where('id_detail',$id_detail)->update([
-                    'sim_a_baru' => $r->data_biro_sim_a_baru[$i] != '' ? $r->data_biro_sim_a_baru[$i] : 0,
-                    'sim_c_baru' => $r->data_biro_sim_c_baru[$i] != '' ? $r->data_biro_sim_c_baru[$i] : 0,
-                    'sim_ac_baru' => $r->data_biro_sim_ac_baru[$i] != '' ? $r->data_biro_sim_ac_baru[$i] : 0
+                DB::table('tb_detail')
+                    ->where('id_detail',$a)
+                    ->update([
+                        'sim_a_baru' => $r->data_biro_sim_a_baru[$i] != '' ? $r->data_biro_sim_a_baru[$i] : 0,
+                        'sim_c_baru' => $r->data_biro_sim_c_baru[$i] != '' ? $r->data_biro_sim_c_baru[$i] : 0,
+                        'sim_ac_baru' => $r->data_biro_sim_ac_baru[$i] != '' ? $r->data_biro_sim_ac_baru[$i] : 0
                     ]);
             }
             return redirect('report-polres')->with('pesan','Update Data Success');
