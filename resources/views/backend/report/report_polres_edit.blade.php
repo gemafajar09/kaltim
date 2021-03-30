@@ -245,15 +245,15 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label><b>SURAT KETERANGAN PSIKOLOGI SIM A</b></label>
-                                                <input value="{{$br->sim_a_baru}}" type="number" name="data_biro_sim_a_baru[]" class="form-control">
+                                                <input value="{{ ($br->sim_a_baru != '') ? $br->sim_a_baru : 0}}" type="number" name="data_biro_sim_a_baru[]" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label><b>SURAT KETERANGAN PSIKOLOGI SIM C</b></label>
-                                                <input value="{{$br->sim_c_baru}}" type="number" name="data_biro_sim_c_baru[]" class="form-control">
+                                                <input value="{{ ($br->sim_c_baru != '') ? $br->sim_c_baru : 0}}" type="number" name="data_biro_sim_c_baru[]" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label><b>SURAT KETERANGAN PSIKOLOGI SIM A DAN C</b></label>
-                                                <input value="{{$br->sim_ac_baru}}" type="number" name="data_biro_sim_ac_baru[]" class="form-control">
+                                                <input value="{{ ($br->sim_ac_baru != '') ? $br->sim_ac_baru : 0 }}" type="number" name="data_biro_sim_ac_baru[]" class="form-control">
                                             </div>
                                         </div>
                                     </div>
