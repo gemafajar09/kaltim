@@ -69,8 +69,7 @@
         <tbody>
             @foreach($data as $i => $a)
             <?php 
-            $datas = DB::table('tb_simlink')->where('id_data',$a->data_polres_id)->first();
-            // dd($datas);
+            // dd($a);
 
             $cb += $a->data_polres_sim_c_baru;
             $ab += $a->data_polres_sim_a_baru;
@@ -80,8 +79,8 @@
             $b1ub += $a->data_polres_sim_b1_umum;
             $b2ub += $a->data_polres_sim_b2_umum;
 
-            $cp += ($a->data_polres_sim_c_perpanjang + $datas->simlink1_c +  $datas->simlink2_c + $a->gerai_c + $a->mpp_c);
-            $ap += ($a->data_polres_sim_a_perpanjang + $datas->simlink1_a +  $datas->simlink2_a + $a->gerai_a + $a->mpp_a);
+            $cp += ($a->data_polres_sim_c_perpanjang + $a->simlink1_c +  $a->simlink2_c + $a->gerai_c + $a->mpp_c + $a->bus_c);
+            $ap += ($a->data_polres_sim_a_perpanjang + $a->simlink1_a +  $a->simlink2_a + $a->gerai_a + $a->mpp_a + $a->bus_a);
             $b1p += ($a->data_polres_sim_b1_perpanjang + $a->data_polres_sim_b1_baru);
             $b2p += ($a->data_polres_sim_b2_perpanjang + $a->data_polres_sim_b2_baru);
             $aup += ($a->data_polres_sim_a_umum_perpanjang + $a->data_polres_sim_a_umum_baru);
@@ -106,10 +105,12 @@
                 $a->mpp_c +
                 $a->gerai_a +
                 $a->gerai_c +
-                $datas->simlink1_c +  
-                $datas->simlink2_c +
-                $datas->simlink1_a +  
-                $datas->simlink2_a 
+                $a->bus_a +
+                $a->bus_c +
+                $a->simlink1_c +  
+                $a->simlink2_c +
+                $a->simlink1_a +  
+                $a->simlink2_a 
             );
             $total += $jumlah;
             $rusak += $a->rusak;
@@ -126,8 +127,8 @@
                 <th style="border:1px solid black">0</th>
                 <th style="border:1px solid black">0</th>
 
-                <th style="border:1px solid black">{{$a->data_polres_sim_c_perpanjang + $datas->simlink1_c +  $datas->simlink2_c + $a->gerai_c + $a->mpp_c}}</th>
-                <th style="border:1px solid black">{{$a->data_polres_sim_a_perpanjang + $datas->simlink1_a +  $datas->simlink2_a + $a->gerai_a + $a->mpp_a }}</th>
+                <th style="border:1px solid black">{{$a->data_polres_sim_c_perpanjang + $a->simlink1_c +  $a->simlink2_c + $a->gerai_c + $a->mpp_c + $a->bus_c}}</th>
+                <th style="border:1px solid black">{{$a->data_polres_sim_a_perpanjang + $a->simlink1_a +  $a->simlink2_a + $a->gerai_a + $a->mpp_a + $a->bus_a}}</th>
                 
                 <th style="border:1px solid black">{{$a->data_polres_sim_b1_perpanjang + $a->data_polres_sim_b1_baru}}</th>
                 <th style="border:1px solid black">{{$a->data_polres_sim_b2_perpanjang + $a->data_polres_sim_b2_baru}}</th>

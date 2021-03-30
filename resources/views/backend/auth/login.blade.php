@@ -12,7 +12,9 @@
 </head>
 <style>
 	body {
-	background-image: url("{{asset('/img/back/login.svg')}}");
+	background-image: url("{{asset('/img/poldakaltim.jpg')}}");
+	width: 100%;
+  height: auto;
 	/* background-repeat: repeat-y; */
 	}
 </style>
@@ -27,14 +29,11 @@
 	{{-- content form login  --}}
 	<div class="container">
 		<div class="row">
-		<div class="col-md-4">
-			<center>
-				<img src="{{asset('/img/Lambang_Polda_Kaltim.png')}}" style="width:100px; padding-top:30px" alt="">
-				<img src="{{asset('/img/LogoDIRLantasPolri.png')}}" style="width:140px; padding-top:30px" alt="">
-				<p>
-					<h4>Direktorat Lalu Lintas Polda Kalimantan Timur</h4>	
-				</p>
-			</center>
+		<div class="col-md-8"></div>
+		<div class="col-md-4 py-5" style="margin-top:10%">
+		<center>
+			<h3>Direktorat Lalulintas Polda Kalimantan Timur</h3>
+		</center>
 			<div class="card peach-gradient color-block mb-3 mx-auto">
 				<div class="card-body">
 					<form action="{{route('data-user-login')}}" method="post">
