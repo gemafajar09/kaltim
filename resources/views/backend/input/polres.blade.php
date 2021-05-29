@@ -149,19 +149,19 @@
                     <div class="col-md-4 py-2">
                         <div class="card">
                             <div class="card-header">
-                                SIMLING 1
+                                SATLING 1
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label><b>SIMLING I A</b></label>
+                                    <label><b>SATLING I A</b></label>
                                     <input placeholder="0" type="number" name="simlink1_a" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label><b>SIMLING I C</b></label>
+                                    <label><b>SATLING I C</b></label>
                                     <input placeholder="0" type="number" name="simlink1_c" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label><b>SIMLING I RUSAK</b></label>
+                                    <label><b>SATLING I RUSAK</b></label>
                                     <input placeholder="0" type="number" name="simlink1_rusak" class="form-control">
                                 </div>
                             </div>
@@ -170,19 +170,19 @@
                     <div class="col-md-4 py-2">
                         <div class="card">
                             <div class="card-header">
-                                SIMLING 2
+                                SATLING 2
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label><b>SIMLING II A</b></label>
+                                    <label><b>SATLING II A</b></label>
                                     <input placeholder="0" type="number" name="simlink2_a" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label><b>SIMLING II C</b></label>
+                                    <label><b>SATLING II C</b></label>
                                     <input placeholder="0" type="number" name="simlink2_c" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label><b>SIMLING II RUSAK</b></label>
+                                    <label><b>SATLING II RUSAK</b></label>
                                     <input placeholder="0" type="number" name="simlink2_rusak" class="form-control">
                                 </div>
                             </div>

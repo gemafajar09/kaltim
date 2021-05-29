@@ -154,8 +154,18 @@ class DataBiroController extends Controller
             if(session()->get('user_level')  == 1){
                 $data = DB::table('tb_data_biro')
                         ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
-                        ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
+                        ->select(
+                            'tb_data_biro.data_biro_id',
+                            DB::raw('SUM(tb_data_biro.data_biro_sim_a_baru) as data_biro_sim_a_baru'),                            
+                            DB::raw('SUM(tb_data_biro.data_biro_sim_c_baru) as data_biro_sim_c_baru'),                            
+                            DB::raw('SUM(tb_data_biro.data_biro_sim_ac_baru) as data_biro_sim_ac_baru'),                            
+                            DB::raw('SUM(tb_data_biro.data_biro_sim_a_perpanjang) as data_biro_sim_a_perpanjang'),                            
+                            DB::raw('SUM(tb_data_biro.data_biro_sim_c_perpanjang) as data_biro_sim_c_perpanjang'),                            
+                            DB::raw('SUM(tb_data_biro.data_biro_sim_ac_perpanjang) as data_biro_sim_ac_perpanjang'),                            
+                            'tb_cabang.cabang_nama'
+                            )
                         ->where(DB::raw('MONTH(tb_data_biro.data_biro_tgl)'),$bulan)
+                        ->groupBy('tb_data_biro.biro_id')
                         ->get();
             }elseif(session()->get('user_level')  == 3){
                 $data = DB::table('tb_data_biro')
@@ -165,7 +175,7 @@ class DataBiroController extends Controller
                     ->where(DB::raw('MONTH(tb_data_biro.data_biro_tgl)'),$bulan)
                     ->get();    
             }elseif(session('user_level') == 4){
-                $data = DB::table('tb_data_biro')
+                 $data = DB::table('tb_data_biro')
                     ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
                     ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
                     ->where('biro_id',$cabang)

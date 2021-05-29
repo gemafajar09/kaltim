@@ -21,7 +21,11 @@
 </head>
 <style>
     body{
-        background-image: url("{{asset('/img/back/homeds.svg')}}");
+        background-image: url("{{asset('/img/bg33.jpg')}}");
+        background-size:cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        width: 100%;
     }
 </style>
 <body>

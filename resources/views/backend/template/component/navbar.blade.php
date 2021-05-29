@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg" style="background-image: url('/img/back/homeds.svg'); color:white">
+<nav class="navbar navbar-expand-lg" style="background:transparent; color:white">
     <a class="navbar-brand" href="home">
         <img src="{{asset('/img/korl.png')}}" style="width:10%; color:white" alt="">
         <b style="font-size:25px; color:white">Sistem Laporan SIM Polda Kaltim</b> 
