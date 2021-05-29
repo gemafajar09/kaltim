@@ -12,7 +12,8 @@
 </head>
 <style>
 	body {
-	background-image: url("{{asset('/img/poldakaltim.jpg')}}");
+	background-image: url("{{asset('/img/final1.jpg')}}");
+	background-size:cover;
 	width: 100%;
   height: auto;
 	/* background-repeat: repeat-y; */
@@ -28,17 +29,15 @@
 
 	{{-- content form login  --}}
 	<div class="container">
-		<div class="row">
-		<div class="col-md-8"></div>
-		<div class="col-md-4 py-5" style="margin-top:10%">
-		<center>
+		<div class="row" style="margin-top: 13em; ">
+		<!-- <center>
 			<h3>Direktorat Lalulintas Polda Kalimantan Timur</h3>
-		</center>
-			<div class="card peach-gradient color-block mb-3 mx-auto">
+		</center> -->
+			<div class="card peach-gradient color-block mb-3 mx-auto" style="width: 350px;">
 				<div class="card-body">
 					<form action="{{route('data-user-login')}}" method="post">
 						@csrf
-						<h1 style="text-align:center">Form Login</h1>		
+						<h4 style="text-align:center">Form Login</h4>		
 						<div class="">
 							<div class="form-group">
 								<label for="username">Username</label>
@@ -55,7 +54,7 @@
 								<label class="choice" for="Field">Keep me signed in</label>
 							</span> -->
 							<div align="right">
-								<button type="submit" class="button btn btn-success btn-large">Sign In</button>
+								<button type="submit" class="button btn btn-info btn-block">Sign In</button>
 							</div>
 						</div> 
 					</form>

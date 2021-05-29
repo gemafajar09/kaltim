@@ -9,8 +9,8 @@
 </head> 
 <body>
 <?php
-    header("Content-type: application/vnd-ms-excel");
-    header("Content-Disposition: attachment; filename=laporan-bulan-".$type.".xls");
+    // header("Content-type: application/vnd-ms-excel");
+    // header("Content-Disposition: attachment; filename=laporan-bulan-".$type.".xls");
 
     $baru = 0;
     $perpanjang = 0;
@@ -81,7 +81,7 @@
             $bln = $pecah[1];
             $thn = $pecah[0];
 
-            // data simling
+            // data SATLING
             $simlink = DB::table('tb_simlink')
                         ->where('id_cabang',$row->cabang_id)
                         ->where(DB::raw('MONTH(tb_simlink.tanggal)'),$bln)
@@ -95,12 +95,12 @@
                             DB::raw('SUM(tb_simlink.simlink2_rusak) as simlink2_rusak'),
                         )
                         ->first();
-            // simling 1 total
+            // SATLING 1 total
             $simlink1_total = (
                 $simlink->simlink1_a + 
                 $simlink->simlink1_c
             );
-            // simling2 total
+            // SATLING2 total
             $simlink2_total = (
                 $simlink->simlink2_a +  
                 $simlink->simlink2_c 
@@ -142,41 +142,41 @@
             );
             // data sim perpanjang
             $perpanjang = (
-                $row->data_polres_sim_a_perpanjang + 
-                $row->data_polres_sim_a_umum_perpanjang +  
-                $row->data_polres_sim_c_perpanjang + 
-                $row->data_polres_sim_d_perpanjang +  
-                $row->data_polres_sim_b1_baru + 
-                $row->data_polres_sim_b1_perpanjang + 
-                $row->data_polres_sim_b2_baru +  
+                $row->data_polres_sim_a_perpanjang +
+                $row->data_polres_sim_a_umum_perpanjang +
+                $row->data_polres_sim_c_perpanjang +
+                $row->data_polres_sim_d_perpanjang +
+                $row->data_polres_sim_b1_perpanjang +
+                $row->data_polres_sim_b1_umum_perpanjang +
                 $row->data_polres_sim_b2_perpanjang +
-                $simlink->simlink1_a + 
+                $row->data_polres_sim_b2_umum_perpanjang +
+                $simlink->simlink1_a +
                 $simlink->simlink1_c +
-                $simlink->simlink2_a +  
+                $simlink->simlink2_a +
                 $simlink->simlink2_c +
-                $bus->bus_a + 
+                $bus->bus_a +
                 $bus->bus_c +
-                $row->gerai_a + 
+                $row->gerai_a +
                 $row->gerai_c +
-                $row->mpp_a + 
+                $row->mpp_a +
                 $row->mpp_c
             );
             // data sim peningkatan
             $peningkatan = (
                 $row->data_polres_sim_a_umum_baru +
+                $row->data_polres_sim_b1_baru +
                 $row->data_polres_sim_b1_umum +
-                $row->data_polres_sim_b1_umum_perpanjang +
-                $row->data_polres_sim_b2_umum +
-                $row->data_polres_sim_b2_umum_perpanjang
+                $row->data_polres_sim_b2_baru +
+                $row->data_polres_sim_b2_umum
             );
             // data sim rusak
             $rusak = (
-                $row->rusak + 
-                $row->mpp_rusak + 
-                $row->gerai_rusak + 
-                $bus->bus_rusak + 
-                $simlink->simlink2_rusak +  
-                $simlink->simlink1_rusak
+                $row->rusak +
+                $simlink->simlink1_rusak +
+                $simlink->simlink2_rusak +
+                $bus->bus_rusak +
+                $row->gerai_rusak +
+                $row->mpp_rusak 
             ); 
 
             // perpanjang a
@@ -212,16 +212,16 @@
                 <th>{{ $row->data_polres_sim_a_umum_perpanjang }}</th>
                 <th>{{ $row->data_polres_sim_c_perpanjang }}</th>
                 <th>{{ $row->data_polres_sim_d_perpanjang }}</th>
-                <th>{{ $row->data_polres_sim_b1_baru }}</th>
                 <th>{{ $row->data_polres_sim_b1_perpanjang }}</th>
-                <th>{{ $row->data_polres_sim_b2_baru }}</th>
+                <th>{{ $row->data_polres_sim_b1_umum_perpanjang }}</th>
                 <th>{{ $row->data_polres_sim_b2_perpanjang }}</th>
+                <th>{{ $row->data_polres_sim_b2_umum_perpanjang }}</th>
                 
                 <th>{{ $row->data_polres_sim_a_umum_baru }}</th>
+                <th>{{ $row->data_polres_sim_b1_baru }}</th>
                 <th>{{ $row->data_polres_sim_b1_umum }}</th>
-                <th>{{ $row->data_polres_sim_b1_umum_perpanjang }}</th>
+                <th>{{ $row->data_polres_sim_b2_baru }}</th>
                 <th>{{ $row->data_polres_sim_b2_umum }}</th>
-                <th>{{ $row->data_polres_sim_b2_umum_perpanjang }}</th>
                 
                 <th>
                     {{ 
@@ -251,7 +251,7 @@
             
             <tr>
                 <td></td>
-                <th>SIMLING I</th>
+                <th>SATLING I</th>
 
                 <td></td>
                 <td></td>
@@ -279,7 +279,7 @@
 
             <tr>
                 <td></td>
-                <th>SIMLING II</th>
+                <th>SATLING II</th>
 
                 <td></td>
                 <td></td>
@@ -401,16 +401,16 @@
                 <th>{{ $row->data_polres_sim_a_umum_perpanjang }}</th>
                 <th>{{ $sim_cp }}</th>
                 <th>{{ $row->data_polres_sim_d_perpanjang }}</th>
-                <th>{{ $row->data_polres_sim_b1_baru }}</th>
                 <th>{{ $row->data_polres_sim_b1_perpanjang }}</th>
-                <th>{{ $row->data_polres_sim_b2_baru}}</th>
+                <th>{{ $row->data_polres_sim_b1_umum_perpanjang }}</th>
                 <th>{{ $row->data_polres_sim_b2_perpanjang}}</th>
+                <th>{{ $row->data_polres_sim_b2_umum_perpanjang}}</th>
                 
                 <th>{{ $row->data_polres_sim_a_umum_baru }}</th>
+                <th>{{ $row->data_polres_sim_b1_baru }}</th>
                 <th>{{ $row->data_polres_sim_b1_umum }}</th>
-                <th>{{ $row->data_polres_sim_b1_umum_perpanjang }}</th>
+                <th>{{ $row->data_polres_sim_b2_baru }}</th>
                 <th>{{ $row->data_polres_sim_b2_umum }}</th>
-                <th>{{ $row->data_polres_sim_b2_umum_perpanjang }}</th>
                 
                 <th>
                     {{ 
@@ -494,8 +494,8 @@ $gr =0;
                 <th colspan="3">BARU</th>
                 <th colspan="8">PERPANJANG</th>
                 <th colspan="5">PENINGKATAN</th>
-                <th colspan="3">SIMLING 1</th>
-                <th colspan="3">SIMLING 2</th>
+                <th colspan="3">SATLING 1</th>
+                <th colspan="3">SATLING 2</th>
                 <th colspan="3">GERAI</th>
                 <th colspan="3">BUS MILINEAL</th>
                 <th colspan="3">MPP</th>
