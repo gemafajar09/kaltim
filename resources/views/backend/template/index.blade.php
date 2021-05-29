@@ -21,7 +21,7 @@
 </head>
 <style>
     body{
-        background-image: url("{{asset('/img/bg33.jpg')}}");
+        background-image: url("{{asset('/img/bgg.jpg')}}");
         background-size:cover;
         background-repeat: no-repeat;
         background-attachment: fixed; 

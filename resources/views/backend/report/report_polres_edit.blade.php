@@ -232,28 +232,84 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12"><hr></div>
 
                         @foreach($isi as $br)
-                        <div class="col-md-4 py-2">
+                        <div class="col-md-6 py-2">
                             <div class="card">
                                 <div class="card-header">
                                     {{$br->cabang_nama}}
                                     <input type="hidden" name="id_detail[]" value="{{$br->id_detail}}">
+                                    <input type="hidden" name="kesehatan_id[]" value="{{$br->kesehatan_id}}">
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
+                                            <b>SURAT LULUS KESEHATAN</b>
+                                            <hr>
                                             <div class="form-group">
-                                                <label><b>SURAT KETERANGAN PSIKOLOGI SIM A</b></label>
-                                                <input value="{{ ($br->sim_a_baru != '') ? $br->sim_a_baru : 0}}" type="number" name="data_biro_sim_a_baru[]" class="form-control">
+                                                <label><b>SURAT LULUS KESEHATAN SIM C</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_kesehatan_sim_c_baru[]" class="form-control" value="{{ ($br->kesehatan_sim_c_baru != '') ? $br->kesehatan_sim_c_baru : 0}}">
                                             </div>
                                             <div class="form-group">
-                                                <label><b>SURAT KETERANGAN PSIKOLOGI SIM C</b></label>
-                                                <input value="{{ ($br->sim_c_baru != '') ? $br->sim_c_baru : 0}}" type="number" name="data_biro_sim_c_baru[]" class="form-control">
+                                                <label><b>SURAT LULUS KESEHATAN SIM A</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_kesehatan_sim_a_baru[]" class="form-control" value="{{ ($br->kesehatan_sim_a_baru != '') ? $br->kesehatan_sim_a_baru : 0}}">
                                             </div>
                                             <div class="form-group">
-                                                <label><b>SURAT KETERANGAN PSIKOLOGI SIM A DAN C</b></label>
-                                                <input value="{{ ($br->sim_ac_baru != '') ? $br->sim_ac_baru : 0 }}" type="number" name="data_biro_sim_ac_baru[]" class="form-control">
+                                                <label><b>SURAT LULUS KESEHATAN SIM B1</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_kesehatan_sim_b1[]" class="form-control" value="{{ ($br->kesehatan_sim_b1 != '') ? $br->kesehatan_sim_b1 : 0}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS KESEHATAN SIM B2</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_kesehatan_sim_b2[]" class="form-control" value="{{ ($br->kesehatan_sim_b2 != '') ? $br->kesehatan_sim_b2 : 0}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS KESEHATAN SIM A UMUM</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_kesehatan_sim_a_umum[]" class="form-control" value="{{ ($br->kesehatan_sim_a_umum != '') ? $br->kesehatan_sim_a_umum : 0}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS KESEHATAN SIM B1 UMUM</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_kesehatan_sim_b1_umum[]" class="form-control" value="{{ ($br->kesehatan_sim_b1_umum != '') ? $br->kesehatan_sim_b1_umum : 0}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS KESEHATAN SIM B2 UMUM</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_kesehatan_sim_b2_umum[]" class="form-control" value="{{ ($br->kesehatan_sim_b2_umum != '') ? $br->kesehatan_sim_b2_umum : 0}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <b>SURAT LULUS UJI PSIKOLOGI</b>
+                                            <hr>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS UJI PSIKOLOGI SIM C</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_c_baru[]" class="form-control" value="{{ ($br->sim_c_baru != '') ? $br->sim_c_baru : 0}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS UJI PSIKOLOGI SIM A</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_a_baru[]" class="form-control" value="{{ ($br->sim_a_baru != '') ? $br->sim_a_baru : 0}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS UJI PSIKOLOGI SIM B1</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_b1[]" class="form-control" value="{{ ($br->sim_b1 != '') ? $br->sim_b1 : 0}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS UJI PSIKOLOGI SIM B2</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_b2[]" class="form-control" value="{{ ($br->sim_b2 != '') ? $br->sim_b2 : 0}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS UJI PSIKOLOGI SIM A UMUM</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_a_umum[]" class="form-control" value="{{ ($br->sim_a_umum != '') ? $br->sim_a_umum : 0}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS UJI PSIKOLOGI SIM B1 UMUM</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_b1_umum[]" class="form-control" value="{{ ($br->sim_b1_umum != '') ? $br->sim_b1_umum : 0}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS UJI PSIKOLOGI SIM B2 UMUM</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_b2_umum[]" class="form-control" value="{{ ($br->sim_b2_umum != '') ? $br->sim_b2_umum : 0}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS UJI PSIKOLOGI SIM A DAN C</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_ac_baru[]" class="form-control" value="{{ ($br->sim_ac_baru != '') ? $br->sim_ac_baru : 0}}">
                                             </div>
                                         </div>
                                     </div>

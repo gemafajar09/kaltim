@@ -9,8 +9,8 @@
 </head>
 <body>
 <?php
-    // header("Content-type: application/vnd-ms-excel");
-    // header("Content-Disposition: attachment; filename=laporan-harian-".date('Y-m-d').".xls");
+    header("Content-type: application/vnd-ms-excel");
+    header("Content-Disposition: attachment; filename=laporan-harian-".date('Y-m-d').".xls");
     $cb = 0;
     $ab = 0;
     $b1b = 0;
@@ -166,9 +166,9 @@
                 <th colspan="8">
                     Balikpapan, <?= tanggal_indonesia(date('Y-m-d')) ?> <br>
                     a.n KASUBDITREGIDENT DITLANTAS POLDA KALTIM <br>
-                    Ps. KASI SIM <br><br>
-                    <u>REZA PRATAMA RHAMDANI YUSUF.S.I.K.</u><br>
-                    AKP NRP 90030381
+                    KASI SIM <br><br>
+                    <u>RETNO ARIANI.,SH.,Sik.</u><br>
+                    AKP NRP 85042043
                 </th>
             </tr>
         </tfoot>

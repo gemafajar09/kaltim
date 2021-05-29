@@ -12,7 +12,7 @@
 </head>
 <style>
 	body {
-	background-image: url("{{asset('/img/final1.jpg')}}");
+	background-image: url("{{asset('/img/bg33.jpg')}}");
 	background-size:cover;
 	width: 100%;
   height: auto;
