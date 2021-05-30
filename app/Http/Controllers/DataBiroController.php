@@ -382,7 +382,6 @@ class DataBiroController extends Controller
             $data['bln'] = $pecah[1];
             $data['thn'] = $pecah[0];
             $data['cabang'] = $cabang;
-
         }
         
         return view('backend.report.reportbulananbiro',$data);
