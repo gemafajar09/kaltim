@@ -9,8 +9,8 @@
 </head>
 <body>
 <?php
-    header("Content-type: application/vnd-ms-excel");
-    header("Content-Disposition: attachment; filename=laporan-harian-".date('Y-m-d').".xls");
+    // header("Content-type: application/vnd-ms-excel");
+    // header("Content-Disposition: attachment; filename=laporan-harian-".date('Y-m-d').".xls");
     $c = 0;
     $aa = 0;
     $b1 = 0;
@@ -528,6 +528,7 @@
                 ?>
                 @foreach($table as $nt => $tb)
                 <?php 
+                $tgl;
                 if(isset($table2[$nt])){
                     $kkc = ($table2[$nt]->kesehatan_sim_c_baru != '') ? $table2[$nt]->kesehatan_sim_c_baru : 0 ;
                     $kka = ($table2[$nt]->kesehatan_sim_a_baru != '') ? $table2[$nt]->kesehatan_sim_a_baru : 0;

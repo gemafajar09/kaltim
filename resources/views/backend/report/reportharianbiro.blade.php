@@ -9,8 +9,8 @@
 </head>
 <body>
 <?php
-    header("Content-type: application/vnd-ms-excel");
-    header("Content-Disposition: attachment; filename=laporan-harian-".date('Y-m-d').".xls");
+    // header("Content-type: application/vnd-ms-excel");
+    // header("Content-Disposition: attachment; filename=laporan-harian-".date('Y-m-d').".xls");
     $c = 0;
     $aa = 0;
     $b1 = 0;
