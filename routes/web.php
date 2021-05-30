@@ -47,8 +47,8 @@ Route::get('/report-biro-data/{cabang}/{dari}/{sampai}', 'DataBiroController@dat
 Route::post('/data-biro-save', 'DataBiroController@save')->name('data-biro-save')->middleware('Ceklogin');
 Route::get('/data-biro-delete/{id}', 'DataBiroController@delete')->name('data-biro-delete')->middleware('Ceklogin');
 Route::get('/exportexcelbiro/{cabang}/{dari}/{sampai}', 'DataBiroController@exportdetail');
-Route::get('/reportharianbiro/{tgl}', 'DataBiroController@reportharian');
-Route::get('/reportbulananbiro/{tgl}', 'DataBiroController@reportbulanan');
+Route::get('/reportharianbiro/{id}/{tgl}', 'DataBiroController@reportharian');
+Route::get('/reportbulananbiro/{id}/{tgl}', 'DataBiroController@reportbulanan');
 
 // input dan report polres
 Route::get('/data-polres', 'DataPolresController@index')->name('data-polres')->middleware('Ceklogin');

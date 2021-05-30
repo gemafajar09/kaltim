@@ -82,7 +82,10 @@ class DataBiroController extends Controller
 
     public function report_biro()
     {           
+
         $data['biro'] = DB::table('tb_cabang')->where('cabang_kode',2)->get();
+        $data['polres'] = DB::table('tb_cabang')->where('cabang_kode', '=', 1)->get();
+
         return view('backend.report.biro',$data);
     }
 
@@ -206,7 +209,6 @@ class DataBiroController extends Controller
         return view('backend.report.exportbiro',compact('data'));
     }
 
-    // =================================================================
     public function report_polres_biro()
     {           
         $data['biro'] = DB::table('tb_cabang')->where('cabang_kode',1)->get();
@@ -297,63 +299,93 @@ class DataBiroController extends Controller
         return view('backend.report.report_biro_tabel',compact('data'));
     }
 
-    public function reportharian($tgl)
+    public function reportharian($cabang, $tgl)
+
     {
-
-        $data = DB::table('tb_detail')
-            ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
-            ->join('tb_lulus_kesehatan','tb_cabang.cabang_id','tb_lulus_kesehatan.id_biro')
-            ->where('tb_detail.tanggal',$tgl)
-            ->get();
-
-        return view('backend.report.reportharianbiro',compact('data'));
+        $data['cabang'] = $cabang;
+        $data['tgl'] = $tgl;
+        if($cabang == 0)
+        {
+            $data['satpat'] = DB::table('tb_cabang')->where('cabang_kode', '1')->get();
+            
+        }else{
+            $data['satpat'] = DB::table('tb_cabang')->where('cabang_id', $cabang)->first(); 
+            $data['data'] = DB::table('tb_detail')
+                            ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
+                            ->join('tb_lulus_kesehatan','tb_cabang.cabang_id','tb_lulus_kesehatan.id_biro')
+                            ->where('tb_detail.tanggal',$tgl)
+                            ->where('tb_detail.id_cabang',$cabang)
+                            ->get();
+        }
+        return view('backend.report.reportharianbiro', $data);
     }
 
-    public function reportbulanan($bulan)
+    public function reportbulanan($cabang, $bulan)
     {
-        $pecah = explode("-",$bulan);
-        $bln = $pecah[1];
-        $thn = $pecah[0];
-        $data['type'] = bulantahun($bulan);
-        $data['bulan'] = $bulan;
+        if($cabang == 0)
+        {
+            $pecah = explode("-",$bulan);
+            $bln = $pecah[1];
+            $thn = $pecah[0];
+            $data['type'] = bulantahun($bulan);
+            $data['bulan'] = $bulan;
 
-        $data['isi'] = DB::table('tb_detail')
-            ->select(
-                DB::raw('tb_cabang.*'),
-                DB::raw('tb_detail.id_data as id_data'),
-                DB::raw('tb_detail.id_biro as id_biro'),
-                DB::raw('tb_detail.id_biro as id_biro'),
-                DB::raw('tb_detail.id_cabang as id_cabang'),
-                DB::raw('tb_detail.tanggal as tanggal'),
 
-                DB::raw('SUM(tb_detail.sim_a_baru) as sim_a_baru'),
-                DB::raw('SUM(tb_detail.sim_c_baru) as sim_c_baru'),
-                DB::raw('SUM(tb_detail.sim_b1) as sim_b1'),
-                DB::raw('SUM(tb_detail.sim_b2) as sim_b2'),
-                DB::raw('SUM(tb_detail.sim_a_umum) as sim_a_umum'),
-                DB::raw('SUM(tb_detail.sim_b1_umum) as sim_b1_umum'),
-                DB::raw('SUM(tb_detail.sim_b2_umum) as sim_b2_umum'),
-                DB::raw('SUM(tb_detail.sim_ac_baru) as sim_ac_baru'),
+            $data['biro'] = DB::table('tb_cabang')->where('cabang_kode',2)->where('turunan',0)->get();
+            $data['satpat'] = DB::table('tb_cabang')->where('cabang_kode', '1')->get();
+            $data['bln'] = $pecah[1];
+            $data['thn'] = $pecah[0];
+            $data['cabang'] = $cabang;
+        }else{
+            $pecah = explode("-",$bulan);
+            $bln = $pecah[1];
+            $thn = $pecah[0];
+            $data['type'] = bulantahun($bulan);
+            $data['bulan'] = $bulan;
 
-                DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_a_baru) as kesehatan_sim_a_baru'),
-                DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_c_baru) as kesehatan_sim_c_baru'),
-                DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b1) as kesehatan_sim_b1'),
-                DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b2) as kesehatan_sim_b2'),
-                DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_a_umum) as kesehatan_sim_a_umum'),
-                DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b1_umum) as kesehatan_sim_b1_umum'),
-                DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b2_umum) as kesehatan_sim_b2_umum'),
+            $data['isi'] = DB::table('tb_detail')
+                ->select(
+                    DB::raw('tb_cabang.*'),
+                    DB::raw('tb_detail.id_data as id_data'),
+                    DB::raw('tb_detail.id_biro as id_biro'),
+                    DB::raw('tb_detail.id_biro as id_biro'),
+                    DB::raw('tb_detail.id_cabang as id_cabang'),
+                    DB::raw('tb_detail.tanggal as tanggal'),
 
-                )
-            ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
-            ->join('tb_lulus_kesehatan','tb_cabang.cabang_id','tb_lulus_kesehatan.id_biro')
-            ->where(DB::raw('MONTH(tb_detail.tanggal)'),$bln)
-            ->where(DB::raw('Year(tb_detail.tanggal)'),$thn)
-            ->groupBy('tb_detail.id_biro')
-            ->get();
+                    DB::raw('SUM(tb_detail.sim_a_baru) as sim_a_baru'),
+                    DB::raw('SUM(tb_detail.sim_c_baru) as sim_c_baru'),
+                    DB::raw('SUM(tb_detail.sim_b1) as sim_b1'),
+                    DB::raw('SUM(tb_detail.sim_b2) as sim_b2'),
+                    DB::raw('SUM(tb_detail.sim_a_umum) as sim_a_umum'),
+                    DB::raw('SUM(tb_detail.sim_b1_umum) as sim_b1_umum'),
+                    DB::raw('SUM(tb_detail.sim_b2_umum) as sim_b2_umum'),
+                    DB::raw('SUM(tb_detail.sim_ac_baru) as sim_ac_baru'),
 
-        $data['biro'] = DB::table('tb_cabang')->where('cabang_kode',2)->where('turunan',0)->get();
-        $data['bln'] = $pecah[1];
-        $data['thn'] = $pecah[0];
+                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_a_baru) as kesehatan_sim_a_baru'),
+                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_c_baru) as kesehatan_sim_c_baru'),
+                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b1) as kesehatan_sim_b1'),
+                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b2) as kesehatan_sim_b2'),
+                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_a_umum) as kesehatan_sim_a_umum'),
+                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b1_umum) as kesehatan_sim_b1_umum'),
+                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b2_umum) as kesehatan_sim_b2_umum'),
+
+                    )
+                ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
+                ->join('tb_lulus_kesehatan','tb_cabang.cabang_id','tb_lulus_kesehatan.id_biro')
+                ->where(DB::raw('MONTH(tb_detail.tanggal)'),$bln)
+                ->where(DB::raw('Year(tb_detail.tanggal)'),$thn)
+                ->where('tb_detail.id_cabang',$cabang)
+                ->groupBy('tb_detail.id_biro')
+                ->get();
+
+            $data['biro'] = DB::table('tb_cabang')->where('cabang_kode',2)->where('turunan',0)->get();
+            $data['satpat'] = DB::table('tb_cabang')->where('cabang_kode', '1')->where('cabang_id', $cabang)->get();
+            $data['bln'] = $pecah[1];
+            $data['thn'] = $pecah[0];
+            $data['cabang'] = $cabang;
+
+        }
+        
         return view('backend.report.reportbulananbiro',$data);
     }
 }
