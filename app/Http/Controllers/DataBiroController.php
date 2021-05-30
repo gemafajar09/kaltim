@@ -154,18 +154,8 @@ class DataBiroController extends Controller
             if(session()->get('user_level')  == 1){
                 $data = DB::table('tb_data_biro')
                         ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
-                        ->select(
-                            'tb_data_biro.data_biro_id',
-                            DB::raw('SUM(tb_data_biro.data_biro_sim_a_baru) as data_biro_sim_a_baru'),                            
-                            DB::raw('SUM(tb_data_biro.data_biro_sim_c_baru) as data_biro_sim_c_baru'),                            
-                            DB::raw('SUM(tb_data_biro.data_biro_sim_ac_baru) as data_biro_sim_ac_baru'),                            
-                            DB::raw('SUM(tb_data_biro.data_biro_sim_a_perpanjang) as data_biro_sim_a_perpanjang'),                            
-                            DB::raw('SUM(tb_data_biro.data_biro_sim_c_perpanjang) as data_biro_sim_c_perpanjang'),                            
-                            DB::raw('SUM(tb_data_biro.data_biro_sim_ac_perpanjang) as data_biro_sim_ac_perpanjang'),                            
-                            'tb_cabang.cabang_nama'
-                            )
+                        ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
                         ->where(DB::raw('MONTH(tb_data_biro.data_biro_tgl)'),$bulan)
-                        ->groupBy('tb_data_biro.biro_id')
                         ->get();
             }elseif(session()->get('user_level')  == 3){
                 $data = DB::table('tb_data_biro')
@@ -175,7 +165,7 @@ class DataBiroController extends Controller
                     ->where(DB::raw('MONTH(tb_data_biro.data_biro_tgl)'),$bulan)
                     ->get();    
             }elseif(session('user_level') == 4){
-                 $data = DB::table('tb_data_biro')
+                $data = DB::table('tb_data_biro')
                     ->join('tb_cabang','tb_cabang.cabang_id','=','tb_data_biro.biro_id')
                     ->select('tb_data_biro.*', 'tb_cabang.cabang_nama')
                     ->where('biro_id',$cabang)
@@ -214,5 +204,65 @@ class DataBiroController extends Controller
                     ->get();
         }
         return view('backend.report.exportbiro',compact('data'));
+    }
+
+    public function reportharian($tgl)
+    {
+
+        $data = DB::table('tb_detail')
+            ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
+            ->join('tb_lulus_kesehatan','tb_cabang.cabang_id','tb_lulus_kesehatan.id_biro')
+            ->where('tb_detail.tanggal',$tgl)
+            ->get();
+
+        return view('backend.report.reportharianbiro',compact('data'));
+    }
+
+    public function reportbulanan($bulan)
+    {
+        $pecah = explode("-",$bulan);
+        $bln = $pecah[1];
+        $thn = $pecah[0];
+        $data['type'] = bulantahun($bulan);
+        $data['bulan'] = $bulan;
+
+        $data['isi'] = DB::table('tb_detail')
+            ->select(
+                DB::raw('tb_cabang.*'),
+                DB::raw('tb_detail.id_data as id_data'),
+                DB::raw('tb_detail.id_biro as id_biro'),
+                DB::raw('tb_detail.id_biro as id_biro'),
+                DB::raw('tb_detail.id_cabang as id_cabang'),
+                DB::raw('tb_detail.tanggal as tanggal'),
+
+                DB::raw('SUM(tb_detail.sim_a_baru) as sim_a_baru'),
+                DB::raw('SUM(tb_detail.sim_c_baru) as sim_c_baru'),
+                DB::raw('SUM(tb_detail.sim_b1) as sim_b1'),
+                DB::raw('SUM(tb_detail.sim_b2) as sim_b2'),
+                DB::raw('SUM(tb_detail.sim_a_umum) as sim_a_umum'),
+                DB::raw('SUM(tb_detail.sim_b1_umum) as sim_b1_umum'),
+                DB::raw('SUM(tb_detail.sim_b2_umum) as sim_b2_umum'),
+                DB::raw('SUM(tb_detail.sim_ac_baru) as sim_ac_baru'),
+
+                DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_a_baru) as kesehatan_sim_a_baru'),
+                DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_c_baru) as kesehatan_sim_c_baru'),
+                DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b1) as kesehatan_sim_b1'),
+                DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b2) as kesehatan_sim_b2'),
+                DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_a_umum) as kesehatan_sim_a_umum'),
+                DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b1_umum) as kesehatan_sim_b1_umum'),
+                DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b2_umum) as kesehatan_sim_b2_umum'),
+
+                )
+            ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
+            ->join('tb_lulus_kesehatan','tb_cabang.cabang_id','tb_lulus_kesehatan.id_biro')
+            ->where(DB::raw('MONTH(tb_detail.tanggal)'),$bln)
+            ->where(DB::raw('Year(tb_detail.tanggal)'),$thn)
+            ->groupBy('tb_detail.id_biro')
+            ->get();
+
+        $data['biro'] = DB::table('tb_cabang')->where('cabang_kode',2)->where('turunan',0)->get();
+        $data['bln'] = $pecah[1];
+        $data['thn'] = $pecah[0];
+        return view('backend.report.reportbulananbiro',$data);
     }
 }

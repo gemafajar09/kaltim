@@ -9,8 +9,8 @@
 </head> 
 <body>
 <?php
-    // header("Content-type: application/vnd-ms-excel");
-    // header("Content-Disposition: attachment; filename=laporan-bulan-".$type.".xls");
+    header("Content-type: application/vnd-ms-excel");
+    header("Content-Disposition: attachment; filename=laporan-bulan-".$type.".xls");
 
     $baru = 0;
     $perpanjang = 0;
@@ -27,7 +27,7 @@
     $sim_cp =0;
 
 ?>
-    <table>
+        <table>
         <thead>
             <tr>
                 <th rowspan="2" colspan="13" style="font-size:22px">Laporan SIM Polda Kalimantan Timur : <?= $type ?> </th>
@@ -35,7 +35,7 @@
         </thead>
     </table>
 
-    <table border="2">
+        <table border="2">
         <thead style="background-color:grey">
             <tr>
                 <th rowspan="3">NO</th>
@@ -667,6 +667,7 @@ $gr =0;
             </tr>
         </tfoot>
     </table>
+
 
 </body>
 </html>

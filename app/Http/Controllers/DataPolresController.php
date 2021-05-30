@@ -81,10 +81,29 @@ class DataPolresController extends Controller
                     'id_biro' => $id_biro[$i],
                     'sim_a_baru' => $r->data_biro_sim_a_baru[$i],
                     'sim_c_baru' => $r->data_biro_sim_c_baru[$i],
+                    'sim_b1' => $r->data_biro_sim_b1[$i],
+                    'sim_b2' => $r->data_biro_sim_b2[$i],
+                    'sim_a_umum' => $r->data_biro_sim_a_umum[$i],
+                    'sim_b1_umum' => $r->data_biro_sim_b1_umum[$i],
+                    'sim_b2_umum' => $r->data_biro_sim_b2_umum[$i],
                     'sim_ac_baru' => $r->data_biro_sim_ac_baru[$i],
                     'id_cabang' => $r->polres_id,
                     'tanggal' => date('Y-m-d')
-                    ]);
+                ]);
+
+                DB::table('tb_lulus_kesehatan')->insert([
+                    'id_data' => $id,
+                    'id_biro' => $id_biro[$i],
+                    'kesehatan_sim_a_baru' => $r->data_biro_kesehatan_sim_a_baru[$i],
+                    'kesehatan_sim_c_baru' => $r->data_biro_kesehatan_sim_c_baru[$i],
+                    'kesehatan_sim_b1' => $r->data_biro_kesehatan_sim_b1[$i],
+                    'kesehatan_sim_b2' => $r->data_biro_kesehatan_sim_b2[$i],
+                    'kesehatan_sim_a_umum' => $r->data_biro_kesehatan_sim_a_umum[$i],
+                    'kesehatan_sim_b1_umum' => $r->data_biro_kesehatan_sim_b1_umum[$i],
+                    'kesehatan_sim_b2_umum' => $r->data_biro_kesehatan_sim_b2_umum[$i],
+                    'id_cabang' => $r->polres_id,
+                    'tanggal' => date('Y-m-d')
+                ]);
             }
             return redirect('report-polres')->with('pesan','Input Data Success');
         }else{
@@ -233,7 +252,7 @@ class DataPolresController extends Controller
         // dd($data['isi']);
         return view('backend.report.polresdetail',$data);
     }
- 
+
     public function exportexcel($cabang, $bulan)
     {
         $pecah = explode("-",$bulan);
@@ -322,8 +341,14 @@ class DataPolresController extends Controller
 
         $data['isi'] = DB::table('tb_detail')
                         ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
+                        ->join('tb_lulus_kesehatan','tb_cabang.cabang_id','tb_lulus_kesehatan.id_biro')
                         ->where('tb_detail.id_data',$id)
                         ->get();
+
+        // $data['kesehatan'] = DB::table('tb_lulus_kesehatan')
+        //                     ->join('tb_cabang','tb_cabang.cabang_id','tb_lulus_kesehatan.id_biro')
+        //                     ->where('tb_lulus_kesehatan.id_data',$id)
+        //                     ->get();
 
 
         $data['sim'] = DB::table('tb_data_polres')
