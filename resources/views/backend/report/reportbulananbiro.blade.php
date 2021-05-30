@@ -9,8 +9,8 @@
 </head>
 <body>
 <?php
-    // header("Content-type: application/vnd-ms-excel");
-    // header("Content-Disposition: attachment; filename=laporan-harian-".date('Y-m-d').".xls");
+    header("Content-type: application/vnd-ms-excel");
+    header("Content-Disposition: attachment; filename=laporan-harian-".date('Y-m-d').".xls");
     $c = 0;
     $aa = 0;
     $b1 = 0;
@@ -29,6 +29,7 @@
     $kb2u = 0;
     $jml = 0;
     $jumlah = 0;
+    $cabang_all = DB::table('tb_cabang')->where('cabang_kode','2')->where('turunan','0')->get();
 ?>
     <table>
         <thead>
@@ -69,185 +70,180 @@
                         <th style="border:1px solid black">{{ $st->cabang_nama }}</th>
                         <th style="border:1px solid black" colspan="17"></th>
                     </tr>
-                    <?php 
-                        $isi_table = DB::table('tb_detail')
-                                    ->select(
-                                        DB::raw('tb_cabang.*'),
-                                        DB::raw('tb_detail.id_data as id_data'),
-                                        DB::raw('tb_detail.id_biro as id_biro'),
-                                        DB::raw('tb_detail.id_biro as id_biro'),
-                                        DB::raw('tb_detail.id_cabang as id_cabang'),
-                                        DB::raw('tb_detail.tanggal as tanggal'),
+                    
+                    @foreach($cabang_all as $i => $a)
+                            <?php 
+                                $detail = DB::table('tb_detail')
+                                ->select(
+                                    DB::raw('SUM(tb_detail.sim_a_baru) as sim_a_baru'),
+                                    DB::raw('SUM(tb_detail.sim_c_baru) as sim_c_baru'),
+                                    DB::raw('SUM(tb_detail.sim_b1) as sim_b1'),
+                                    DB::raw('SUM(tb_detail.sim_b2) as sim_b2'),
+                                    DB::raw('SUM(tb_detail.sim_a_umum) as sim_a_umum'),
+                                    DB::raw('SUM(tb_detail.sim_b1_umum) as sim_b1_umum'),
+                                    DB::raw('SUM(tb_detail.sim_b2_umum) as sim_b2_umum'),
+                                    DB::raw('SUM(tb_detail.sim_ac_baru) as sim_ac_baru')
+                                )
+                                ->where(DB::raw('MONTH(tb_detail.tanggal)'),$bln)
+                                ->where(DB::raw('Year(tb_detail.tanggal)'),$thn)
+                                ->where('tb_detail.id_biro', $a->cabang_id)
+                                ->where('tb_detail.id_cabang', $st->cabang_id)
+                                ->first();
 
-                                        DB::raw('SUM(tb_detail.sim_a_baru) as sim_a_baru'),
-                                        DB::raw('SUM(tb_detail.sim_c_baru) as sim_c_baru'),
-                                        DB::raw('SUM(tb_detail.sim_b1) as sim_b1'),
-                                        DB::raw('SUM(tb_detail.sim_b2) as sim_b2'),
-                                        DB::raw('SUM(tb_detail.sim_a_umum) as sim_a_umum'),
-                                        DB::raw('SUM(tb_detail.sim_b1_umum) as sim_b1_umum'),
-                                        DB::raw('SUM(tb_detail.sim_b2_umum) as sim_b2_umum'),
-                                        DB::raw('SUM(tb_detail.sim_ac_baru) as sim_ac_baru'),
+                                $kesehatan = DB::table('tb_lulus_kesehatan')
+                                ->select(
+                                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_a_baru) as kesehatan_sim_a_baru'),
+                                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_c_baru) as kesehatan_sim_c_baru'),
+                                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b1) as kesehatan_sim_b1'),
+                                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b2) as kesehatan_sim_b2'),
+                                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_a_umum) as kesehatan_sim_a_umum'),
+                                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b1_umum) as kesehatan_sim_b1_umum'),
+                                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b2_umum) as kesehatan_sim_b2_umum')
+                                )
+                                ->where(DB::raw('MONTH(tb_lulus_kesehatan.tanggal)'),$bln)
+                                ->where(DB::raw('Year(tb_lulus_kesehatan.tanggal)'),$thn)
+                                ->where('tb_lulus_kesehatan.id_biro', $a->cabang_id)
+                                ->where('tb_lulus_kesehatan.id_cabang', $st->cabang_id)
+                                ->first();
 
-                                        DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_a_baru) as kesehatan_sim_a_baru'),
-                                        DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_c_baru) as kesehatan_sim_c_baru'),
-                                        DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b1) as kesehatan_sim_b1'),
-                                        DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b2) as kesehatan_sim_b2'),
-                                        DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_a_umum) as kesehatan_sim_a_umum'),
-                                        DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b1_umum) as kesehatan_sim_b1_umum'),
-                                        DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b2_umum) as kesehatan_sim_b2_umum'),
+                                $aa += $detail->sim_a_baru;
+                                $c += $detail->sim_c_baru;
+                                $b1 += $detail->sim_b1;
+                                $b2 += $detail->sim_b2;
+                                $au += $detail->sim_a_umum;
+                                $b1u += $detail->sim_b1_umum;
+                                $b2u += $detail->sim_b2_umum;
+                                $ac += $detail->sim_ac_baru;
 
-                                        )
-                                    ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
-                                    ->join('tb_lulus_kesehatan','tb_cabang.cabang_id','tb_lulus_kesehatan.id_biro')
-                                    ->where(DB::raw('MONTH(tb_detail.tanggal)'),$bln)
-                                    ->where(DB::raw('Year(tb_detail.tanggal)'),$thn)
-                                    ->where('tb_detail.id_cabang', $st->cabang_id)
-                                    ->groupBy('tb_detail.id_biro')
-                                    ->get();
-                    ?>
-                    @foreach($isi_table as $i => $a)
-                    <?php 
+                                $ka += $kesehatan->kesehatan_sim_a_baru;
+                                $kc += $kesehatan->kesehatan_sim_c_baru;
+                                $kb1 += $kesehatan->kesehatan_sim_b1;
+                                $kb2 += $kesehatan->kesehatan_sim_b2;
+                                $kau += $kesehatan->kesehatan_sim_a_umum;
+                                $kb1u += $kesehatan->kesehatan_sim_b1_umum;
+                                $kb2u += $kesehatan->kesehatan_sim_b2_umum;
 
-                    $aa += $a->sim_a_baru;
-                    $c += $a->sim_c_baru;
-                    $b1 += $a->sim_b1;
-                    $b2 += $a->sim_b2;
-                    $au += $a->sim_a_umum;
-                    $b1u += $a->sim_b1_umum;
-                    $b2u += $a->sim_b2_umum;
-                    $ac += $a->sim_ac_baru;
+                                $jml = $detail->sim_a_baru + $detail->sim_c_baru + $detail->sim_b1 + $detail->sim_b2 + $detail->sim_a_umum + $detail->sim_b1_umum + $detail->sim_b2_umum + $detail->sim_ac_baru + $kesehatan->kesehatan_sim_a_baru + $kesehatan->kesehatan_sim_c_baru + $kesehatan->kesehatan_sim_b1 + $kesehatan->kesehatan_sim_b2 + $kesehatan->kesehatan_sim_a_umum + $kesehatan->kesehatan_sim_b1_umum + $kesehatan->kesehatan_sim_b2_umum;
 
-                    $kc += $a->kesehatan_sim_a_baru;
-                    $ka += $a->kesehatan_sim_c_baru;
-                    $kb1 += $a->kesehatan_sim_b1;
-                    $kb2 += $a->kesehatan_sim_b2;
-                    $kau += $a->kesehatan_sim_a_umum;
-                    $kb1u += $a->kesehatan_sim_b1_umum;
-                    $kb2u += $a->kesehatan_sim_b2_umum;
+                                $jumlah += $jml;
+                            ?>
+                        <tr>
+                            <th style="border:1px solid black"></th>
+                            <th style="border:1px solid black; text-align:left">{{ $a->cabang_nama }}</th>
 
-                    $jml = $a->sim_a_baru + $a->sim_c_baru + $a->sim_b1 + $a->sim_b2 + $a->sim_a_umum + $a->sim_b1_umum + $a->sim_b2_umum + $a->sim_ac_baru + $a->kesehatan_sim_a_baru + $a->kesehatan_sim_c_baru + $a->kesehatan_sim_b1 + $a->kesehatan_sim_b2 + $a->kesehatan_sim_a_umum + $a->kesehatan_sim_b1_umum + $a->kesehatan_sim_b2_umum;
+                            <th style="border:1px solid black">{{ $kesehatan->kesehatan_sim_c_baru }}</th>
+                            <th style="border:1px solid black">{{ $kesehatan->kesehatan_sim_a_baru }}</th>
+                            <th style="border:1px solid black">{{ $kesehatan->kesehatan_sim_b1 }}</th>
+                            <th style="border:1px solid black">{{ $kesehatan->kesehatan_sim_b2 }}</th>
+                            <th style="border:1px solid black">{{ $kesehatan->kesehatan_sim_a_umum }}</th>
+                            <th style="border:1px solid black">{{ $kesehatan->kesehatan_sim_b1_umum }}</th>
+                            <th style="border:1px solid black">{{ $kesehatan->kesehatan_sim_b2_umum }}</th>
 
-                    $jumlah += $jml;
-                    ?>
-                    <tr>
-                        <th style="border:1px solid black">{{ $i+1 }}</th>
-                        <th style="border:1px solid black">{{ $a->cabang_nama }}</th>
+                            <th style="border:1px solid black">{{ $detail->sim_c_baru }}</th>
+                            <th style="border:1px solid black">{{ $detail->sim_a_baru }}</th>
+                            <th style="border:1px solid black">{{ $detail->sim_b1 }}</th>
+                            <th style="border:1px solid black">{{ $detail->sim_b2 }}</th>
+                            <th style="border:1px solid black">{{ $detail->sim_a_umum }}</th>
+                            <th style="border:1px solid black">{{ $detail->sim_b1_umum }}</th>
+                            <th style="border:1px solid black">{{ $detail->sim_b2_umum }}</th>
+                            <th style="border:1px solid black">{{ $detail->sim_ac_baru }}</th>
+                            
+                            <th style="border:1px solid black">{{ $jml }}</th>
+                        </tr>
                         
-                        <th style="border:1px solid black">{{ $a->kesehatan_sim_c_baru }}</th>
-                        <th style="border:1px solid black">{{ $a->kesehatan_sim_a_baru }}</th>
-                        <th style="border:1px solid black">{{ $a->kesehatan_sim_b1 }}</th>
-                        <th style="border:1px solid black">{{ $a->kesehatan_sim_b2 }}</th>
-                        <th style="border:1px solid black">{{ $a->kesehatan_sim_a_umum }}</th>
-                        <th style="border:1px solid black">{{ $a->kesehatan_sim_b1_umum }}</th>
-                        <th style="border:1px solid black">{{ $a->kesehatan_sim_b2_umum }}</th>
-
-                        <th style="border:1px solid black">{{ $a->sim_c_baru }}</th>
-                        <th style="border:1px solid black">{{ $a->sim_a_baru }}</th>
-                        <th style="border:1px solid black">{{ $a->sim_b1 }}</th>
-                        <th style="border:1px solid black">{{ $a->sim_b2 }}</th>
-                        <th style="border:1px solid black">{{ $a->sim_a_umum }}</th>
-                        <th style="border:1px solid black">{{ $a->sim_b1_umum }}</th>
-                        <th style="border:1px solid black">{{ $a->sim_b2_umum }}</th>
-                        <th style="border:1px solid black">{{ $a->sim_ac_baru }}</th>
-
-                        <th style="border:1px solid black">{{ $jml }}</th>
-
-                    </tr>
                     @endforeach
                 @endforeach
             @else
-                @foreach($satpat as $ii => $st)
+            <?php $cbg_nama = DB::table('tb_cabang')->where('cabang_id',$cabang)->first();
+            ?>
                     <tr style="background-color:#9ad0f5;">
-                        <th style="border:1px solid black">{{ $ii + 1 }}</th>
-                        <th style="border:1px solid black">{{ $st->cabang_nama }}</th>
+                        <th style="border:1px solid black">1</th>
+                        <th style="border:1px solid black; text-align:left">{{ $cbg_nama->cabang_nama }}</th>
                         <th style="border:1px solid black" colspan="17"></th>
                     </tr>
-                    <?php 
-                        $isi_table = DB::table('tb_detail')
-                                    ->select(
-                                        DB::raw('tb_cabang.*'),
-                                        DB::raw('tb_detail.id_data as id_data'),
-                                        DB::raw('tb_detail.id_biro as id_biro'),
-                                        DB::raw('tb_detail.id_biro as id_biro'),
-                                        DB::raw('tb_detail.id_cabang as id_cabang'),
-                                        DB::raw('tb_detail.tanggal as tanggal'),
+                    
+                    @foreach($cabang_all as $i => $a)
+                            <?php 
+                                $detail = DB::table('tb_detail')
+                                ->select(
+                                    DB::raw('SUM(tb_detail.sim_a_baru) as sim_a_baru'),
+                                    DB::raw('SUM(tb_detail.sim_c_baru) as sim_c_baru'),
+                                    DB::raw('SUM(tb_detail.sim_b1) as sim_b1'),
+                                    DB::raw('SUM(tb_detail.sim_b2) as sim_b2'),
+                                    DB::raw('SUM(tb_detail.sim_a_umum) as sim_a_umum'),
+                                    DB::raw('SUM(tb_detail.sim_b1_umum) as sim_b1_umum'),
+                                    DB::raw('SUM(tb_detail.sim_b2_umum) as sim_b2_umum'),
+                                    DB::raw('SUM(tb_detail.sim_ac_baru) as sim_ac_baru')
+                                )
+                                ->where(DB::raw('MONTH(tb_detail.tanggal)'),$bln)
+                                ->where(DB::raw('Year(tb_detail.tanggal)'),$thn)
+                                ->where('tb_detail.id_biro', $a->cabang_id)
+                                ->where('tb_detail.id_cabang', $cabang)
+                                ->first();
 
-                                        DB::raw('SUM(tb_detail.sim_a_baru) as sim_a_baru'),
-                                        DB::raw('SUM(tb_detail.sim_c_baru) as sim_c_baru'),
-                                        DB::raw('SUM(tb_detail.sim_b1) as sim_b1'),
-                                        DB::raw('SUM(tb_detail.sim_b2) as sim_b2'),
-                                        DB::raw('SUM(tb_detail.sim_a_umum) as sim_a_umum'),
-                                        DB::raw('SUM(tb_detail.sim_b1_umum) as sim_b1_umum'),
-                                        DB::raw('SUM(tb_detail.sim_b2_umum) as sim_b2_umum'),
-                                        DB::raw('SUM(tb_detail.sim_ac_baru) as sim_ac_baru'),
+                                $kesehatan = DB::table('tb_lulus_kesehatan')
+                                ->select(
+                                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_a_baru) as kesehatan_sim_a_baru'),
+                                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_c_baru) as kesehatan_sim_c_baru'),
+                                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b1) as kesehatan_sim_b1'),
+                                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b2) as kesehatan_sim_b2'),
+                                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_a_umum) as kesehatan_sim_a_umum'),
+                                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b1_umum) as kesehatan_sim_b1_umum'),
+                                    DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b2_umum) as kesehatan_sim_b2_umum')
+                                )
+                                ->where(DB::raw('MONTH(tb_lulus_kesehatan.tanggal)'),$bln)
+                                ->where(DB::raw('Year(tb_lulus_kesehatan.tanggal)'),$thn)
+                                ->where('tb_lulus_kesehatan.id_biro', $a->cabang_id)
+                                ->where('tb_lulus_kesehatan.id_cabang', $cabang)
+                                ->first();
 
-                                        DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_a_baru) as kesehatan_sim_a_baru'),
-                                        DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_c_baru) as kesehatan_sim_c_baru'),
-                                        DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b1) as kesehatan_sim_b1'),
-                                        DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b2) as kesehatan_sim_b2'),
-                                        DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_a_umum) as kesehatan_sim_a_umum'),
-                                        DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b1_umum) as kesehatan_sim_b1_umum'),
-                                        DB::raw('SUM(tb_lulus_kesehatan.kesehatan_sim_b2_umum) as kesehatan_sim_b2_umum'),
+                                $aa += $detail->sim_a_baru;
+                                $c += $detail->sim_c_baru;
+                                $b1 += $detail->sim_b1;
+                                $b2 += $detail->sim_b2;
+                                $au += $detail->sim_a_umum;
+                                $b1u += $detail->sim_b1_umum;
+                                $b2u += $detail->sim_b2_umum;
+                                $ac += $detail->sim_ac_baru;
 
-                                        )
-                                    ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
-                                    ->join('tb_lulus_kesehatan','tb_cabang.cabang_id','tb_lulus_kesehatan.id_biro')
-                                    ->where(DB::raw('MONTH(tb_detail.tanggal)'),$bln)
-                                    ->where(DB::raw('Year(tb_detail.tanggal)'),$thn)
-                                    ->where('tb_detail.id_cabang', $st->cabang_id)
-                                    ->groupBy('tb_detail.id_biro')
-                                    ->get();
-                    ?>
-                    @foreach($isi_table as $i => $a)
-                    <?php 
+                                $ka += $kesehatan->kesehatan_sim_a_baru;
+                                $kc += $kesehatan->kesehatan_sim_c_baru;
+                                $kb1 += $kesehatan->kesehatan_sim_b1;
+                                $kb2 += $kesehatan->kesehatan_sim_b2;
+                                $kau += $kesehatan->kesehatan_sim_a_umum;
+                                $kb1u += $kesehatan->kesehatan_sim_b1_umum;
+                                $kb2u += $kesehatan->kesehatan_sim_b2_umum;
 
-                    $aa += $a->sim_a_baru;
-                    $c += $a->sim_c_baru;
-                    $b1 += $a->sim_b1;
-                    $b2 += $a->sim_b2;
-                    $au += $a->sim_a_umum;
-                    $b1u += $a->sim_b1_umum;
-                    $b2u += $a->sim_b2_umum;
-                    $ac += $a->sim_ac_baru;
+                                $jml = $detail->sim_a_baru + $detail->sim_c_baru + $detail->sim_b1 + $detail->sim_b2 + $detail->sim_a_umum + $detail->sim_b1_umum + $detail->sim_b2_umum + $detail->sim_ac_baru + $kesehatan->kesehatan_sim_a_baru + $kesehatan->kesehatan_sim_c_baru + $kesehatan->kesehatan_sim_b1 + $kesehatan->kesehatan_sim_b2 + $kesehatan->kesehatan_sim_a_umum + $kesehatan->kesehatan_sim_b1_umum + $kesehatan->kesehatan_sim_b2_umum;
 
-                    $kc += $a->kesehatan_sim_a_baru;
-                    $ka += $a->kesehatan_sim_c_baru;
-                    $kb1 += $a->kesehatan_sim_b1;
-                    $kb2 += $a->kesehatan_sim_b2;
-                    $kau += $a->kesehatan_sim_a_umum;
-                    $kb1u += $a->kesehatan_sim_b1_umum;
-                    $kb2u += $a->kesehatan_sim_b2_umum;
+                                $jumlah += $jml;
+                            ?>
+                        <tr>
+                            <th style="border:1px solid black"></th>
+                            <th style="border:1px solid black; text-align:left">{{ $a->cabang_nama }}</th>
 
-                    $jml = $a->sim_a_baru + $a->sim_c_baru + $a->sim_b1 + $a->sim_b2 + $a->sim_a_umum + $a->sim_b1_umum + $a->sim_b2_umum + $a->sim_ac_baru + $a->kesehatan_sim_a_baru + $a->kesehatan_sim_c_baru + $a->kesehatan_sim_b1 + $a->kesehatan_sim_b2 + $a->kesehatan_sim_a_umum + $a->kesehatan_sim_b1_umum + $a->kesehatan_sim_b2_umum;
+                            <th style="border:1px solid black">{{ $kesehatan->kesehatan_sim_c_baru }}</th>
+                            <th style="border:1px solid black">{{ $kesehatan->kesehatan_sim_a_baru }}</th>
+                            <th style="border:1px solid black">{{ $kesehatan->kesehatan_sim_b1 }}</th>
+                            <th style="border:1px solid black">{{ $kesehatan->kesehatan_sim_b2 }}</th>
+                            <th style="border:1px solid black">{{ $kesehatan->kesehatan_sim_a_umum }}</th>
+                            <th style="border:1px solid black">{{ $kesehatan->kesehatan_sim_b1_umum }}</th>
+                            <th style="border:1px solid black">{{ $kesehatan->kesehatan_sim_b2_umum }}</th>
 
-                    $jumlah += $jml;
-                    ?>
-                    <tr>
-                        <th style="border:1px solid black">{{ $i+1 }}</th>
-                        <th style="border:1px solid black">{{ $a->cabang_nama }}</th>
+                            <th style="border:1px solid black">{{ $detail->sim_c_baru }}</th>
+                            <th style="border:1px solid black">{{ $detail->sim_a_baru }}</th>
+                            <th style="border:1px solid black">{{ $detail->sim_b1 }}</th>
+                            <th style="border:1px solid black">{{ $detail->sim_b2 }}</th>
+                            <th style="border:1px solid black">{{ $detail->sim_a_umum }}</th>
+                            <th style="border:1px solid black">{{ $detail->sim_b1_umum }}</th>
+                            <th style="border:1px solid black">{{ $detail->sim_b2_umum }}</th>
+                            <th style="border:1px solid black">{{ $detail->sim_ac_baru }}</th>
+                            
+                            <th style="border:1px solid black">{{ $jml }}</th>
+                        </tr>
                         
-                        <th style="border:1px solid black">{{ $a->kesehatan_sim_c_baru }}</th>
-                        <th style="border:1px solid black">{{ $a->kesehatan_sim_a_baru }}</th>
-                        <th style="border:1px solid black">{{ $a->kesehatan_sim_b1 }}</th>
-                        <th style="border:1px solid black">{{ $a->kesehatan_sim_b2 }}</th>
-                        <th style="border:1px solid black">{{ $a->kesehatan_sim_a_umum }}</th>
-                        <th style="border:1px solid black">{{ $a->kesehatan_sim_b1_umum }}</th>
-                        <th style="border:1px solid black">{{ $a->kesehatan_sim_b2_umum }}</th>
-
-                        <th style="border:1px solid black">{{ $a->sim_c_baru }}</th>
-                        <th style="border:1px solid black">{{ $a->sim_a_baru }}</th>
-                        <th style="border:1px solid black">{{ $a->sim_b1 }}</th>
-                        <th style="border:1px solid black">{{ $a->sim_b2 }}</th>
-                        <th style="border:1px solid black">{{ $a->sim_a_umum }}</th>
-                        <th style="border:1px solid black">{{ $a->sim_b1_umum }}</th>
-                        <th style="border:1px solid black">{{ $a->sim_b2_umum }}</th>
-                        <th style="border:1px solid black">{{ $a->sim_ac_baru }}</th>
-
-                        <th style="border:1px solid black">{{ $jml }}</th>
-
-                    </tr>
                     @endforeach
-                @endforeach 
+                
             @endif
         </tbody>
         <tfoot>
