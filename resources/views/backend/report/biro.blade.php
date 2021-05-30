@@ -146,6 +146,17 @@
                 <div class="row">
                     <div class="col-md-5">
                         <h6>Cetak Harian</h6><br>
+                        @if(session('user_level') == 1)
+                            <select name="cabang_id" id="cabang_ids2" class="form-control">
+                                <option value="0">--Semua Satpas--</option>
+                                @foreach($polres as $no => $row)
+                                    <option value="{{ $row->cabang_id }}">{{ $row->cabang_nama }}</option>
+                                @endforeach
+                            </select>
+                            <br>
+                        @else
+                            <input type="hidden" id="cabang_ids2" value="{{ session('cabang_id') }}">
+                        @endif
                         <div class="form-group">
                             <input type="date" name="tanggal" value="{{date('Y-m-d')}}" id="tanggals" class="form-control">
                         </div>
@@ -154,19 +165,17 @@
                     <div class="col-md-2"></div>
                     <div class="col-md-5">
                         <h6>Cetak Bulanan</h6><br>
-                        <!-- @if(session('user_level') == 1)
+                        @if(session('user_level') == 1)
                             <select name="cabang_id" id="cabang_ids1" class="form-control">
-                                <option value="0">--Semua Biro--</option>
-                                @foreach($biro as $no => $row)
-                                @if($row->cabang_nama != 'Polda Kaltim')
+                                <option value="0">--Semua Satpas--</option>
+                                @foreach($polres as $no => $row)
                                     <option value="{{ $row->cabang_id }}">{{ $row->cabang_nama }}</option>
-                                @endif
                                 @endforeach
                             </select>
                             <br>
                         @else
                             <input type="hidden" id="cabang_ids1" value="{{ session('cabang_id') }}">
-                        @endif -->
+                        @endif
                         <div class="form-group">
                         <!-- <select name="bulan" id="bulans" class="form-control">
                             <option value="0">--Pilih Bulan--</option>
@@ -268,13 +277,16 @@
 
 
     function cetaksekarang() {
+        var cb = $('#cabang_ids2').val()
         var tgl = $('#tanggals').val()
-        window.open(`{{ url('reportharianbiro') }}/` + tgl);
+        window.open(`{{ url('reportharianbiro') }}/` + cb +"/"+tgl);
     }
 
     function cetakexcelbulanan() { 
-        var tgl = $('#bulans').val()
-        window.open(`{{ url('reportbulananbiro') }}/` + tgl);
+        var cx = $('#cabang_ids1').val()
+        var bulan = $('#bulans').val()
+        var cabang = cx != '' ? cx : 0;
+        window.open(`{{ url('reportbulananbiro') }}/` + cabang + "/" + bulan, '_blank');
     }
 
     function cetakcari() {
