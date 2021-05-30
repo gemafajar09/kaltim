@@ -4,10 +4,10 @@
 <div class="row">
     <div class="col-md-12">
         <div class="float-left">
-            <!-- <label for="" style="color:white">Print to:</label>
-            <button type="button" onclick="cetakexcel()" class="btn btn-success"><img src="{{asset('/icon/excel.png')}}" style="width:20px" alt=""></button> -->
-            <button type="button" onclick="cetakcari()" class="btn btn-success btn-sm"><i class="icon-cogs"></i> Option
-                Cetak</button>
+            <label for="" style="color:white">Print to:</label>
+            <button type="button" onclick="cetakexcel()" class="btn btn-success"><img src="{{asset('/icon/excel.png')}}" style="width:20px" alt=""></button>
+            <!-- <button type="button" onclick="cetakcari()" class="btn btn-success btn-sm"><i class="icon-cogs"></i> Option
+                Cetak</button> -->
         </div>
         <div class="float-right">
             @if(session('user_level') == 1)
