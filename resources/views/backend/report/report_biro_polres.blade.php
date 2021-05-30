@@ -265,13 +265,13 @@
 
 
     function cetaksekarang() {
-        var cb = $('#cabang_ids2').val()
+        var cb = $('#cabang_ids').val()
         var tgl = $('#tanggals').val()
         window.open(`{{ url('reportharianbiro') }}/` + cb +"/"+tgl);
     }
 
     function cetakexcelbulanan() { 
-        var cx = $('#cabang_ids1').val()
+        var cx = $('#cabang_ids').val()
         var bulan = $('#bulans').val()
         var cabang = cx != '' ? cx : 0;
         window.open(`{{ url('reportbulananbiro') }}/` + cabang + "/" + bulan, '_blank');
