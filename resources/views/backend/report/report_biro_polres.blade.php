@@ -265,13 +265,16 @@
 
 
     function cetaksekarang() {
+        var cb = $('#cabang_ids2').val()
         var tgl = $('#tanggals').val()
-        window.open(`{{ url('reportharianbiro') }}/` + tgl);
+        window.open(`{{ url('reportharianbiro') }}/` + cb +"/"+tgl);
     }
 
     function cetakexcelbulanan() { 
-        var tgl = $('#bulans').val()
-        window.open(`{{ url('reportbulananbiro') }}/` + tgl);
+        var cx = $('#cabang_ids1').val()
+        var bulan = $('#bulans').val()
+        var cabang = cx != '' ? cx : 0;
+        window.open(`{{ url('reportbulananbiro') }}/` + cabang + "/" + bulan, '_blank');
     }
 
     function cetakcari() {
