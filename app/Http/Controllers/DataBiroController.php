@@ -206,6 +206,97 @@ class DataBiroController extends Controller
         return view('backend.report.exportbiro',compact('data'));
     }
 
+    // =================================================================
+    public function report_polres_biro()
+    {           
+        $data['biro'] = DB::table('tb_cabang')->where('cabang_kode',1)->get();
+        return view('backend.report.report_biro_polres',$data);
+    }
+
+    public function datatable_polres($cabang, $dari, $sampai)
+    { 
+        $bulan = date('m');
+        if($cabang == 0 && $dari == 0 && $sampai == 0){
+            if(session()->get('user_level') == 1){
+                $data = DB::table('tb_detail')
+                        ->join('tb_cabang','tb_cabang.cabang_id','=','tb_detail.id_cabang')
+                        ->select(
+                            'tb_cabang.cabang_nama',
+                            'tb_detail.tanggal',
+                            'tb_detail.id_detail',
+                            DB::raw('SUM(tb_detail.sim_a_baru) as sim_a'),
+                            DB::raw('SUM(tb_detail.sim_c_baru) as sim_c'),
+                            DB::raw('SUM(tb_detail.sim_ac_baru) as sim_ac'),
+                        )
+                        ->where(DB::raw('MONTH(tb_detail.tanggal)'),$bulan)
+                        ->groupBy('tb_detail.tanggal')
+                        ->get();
+            }elseif(session()->get('user_level') == 2){
+                $data = DB::table('tb_detail')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_detail.id_biro')
+                    ->select(
+                            'tb_cabang.cabang_nama',
+                            'tb_detail.tanggal',
+                            'tb_detail.id_detail',
+                            DB::raw('SUM(tb_detail.sim_a_baru) as sim_a'),
+                            DB::raw('SUM(tb_detail.sim_c_baru) as sim_c'),
+                            DB::raw('SUM(tb_detail.sim_ac_baru) as sim_ac'),
+                        )
+                    ->where('tb_detail.id_cabang',$cabang)
+                    ->where(DB::raw('MONTH(tb_detail.tanggal)'),$bulan)
+                    ->groupBy('tb_detail.tanggal')
+                    ->get();    
+            }
+        }elseif($cabang != 0 && $dari == 0 && $sampai == 0){
+                $data = DB::table('tb_detail')
+                        ->join('tb_cabang','tb_cabang.cabang_id','=','tb_detail.id_cabang')
+                        ->select(
+                            'tb_cabang.cabang_nama',
+                            'tb_detail.tanggal',
+                            'tb_detail.id_detail',
+                            DB::raw('SUM(tb_detail.sim_a_baru) as sim_a'),
+                            DB::raw('SUM(tb_detail.sim_c_baru) as sim_c'),
+                            DB::raw('SUM(tb_detail.sim_ac_baru) as sim_ac'),
+                        )
+                        ->where('tb_detail.id_cabang','=', $cabang)
+                        ->where(DB::raw('MONTH(tb_detail.tanggal)'),$bulan)
+                        ->groupBy('tb_detail.tanggal')
+                        ->get();
+            
+        }elseif($cabang == 0 && $dari != 0 && $sampai != 0){
+            $data = DB::table('tb_detail')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_detail.id_biro')
+                    ->select(
+                            'tb_cabang.cabang_nama',
+                            'tb_detail.tanggal',
+                            'tb_detail.id_detail',
+                            DB::raw('SUM(tb_detail.sim_a_baru) as sim_a'),
+                            DB::raw('SUM(tb_detail.sim_c_baru) as sim_c'),
+                            DB::raw('SUM(tb_detail.sim_ac_baru) as sim_ac'),
+                        )
+                    ->whereBetween('tb_detail.tanggal',[$dari,$sampai])
+                    ->groupBy('tb_detail.tanggal')
+                    ->get();
+
+        }else{
+            $data = DB::table('tb_detail')
+                    ->join('tb_cabang','tb_cabang.cabang_id','=','tb_detail.id_biro')
+                    ->select(
+                            'tb_cabang.cabang_nama',
+                            'tb_detail.tanggal',
+                            'tb_detail.id_detail',
+                            DB::raw('SUM(tb_detail.sim_a_baru) as sim_a'),
+                            DB::raw('SUM(tb_detail.sim_c_baru) as sim_c'),
+                            DB::raw('SUM(tb_detail.sim_ac_baru) as sim_ac'),
+                        )
+                    ->whereBetween('tb_detail.tanggal',[$dari,$sampai])
+                    ->where('tb_detail.id_cabang','=', $cabang)
+                    ->groupBy('tb_detail.tanggal')
+                    ->get();
+        }
+        return view('backend.report.report_biro_tabel',compact('data'));
+    }
+
     public function reportharian($tgl)
     {
 

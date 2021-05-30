@@ -17,6 +17,10 @@
                             <i class="icon-file text-gray-400"></i>
                             Report Polres
                         </a>
+                        <a class="dropdown-item" href="data-polres-biro">
+                            <i class="icon-file text-gray-400"></i>
+                            Report polres Biro
+                        </a>
                         <a class="dropdown-item" href="report-biro">
                             <i class="icon-file text-gray-400"></i>
                             Report Biro
@@ -60,6 +64,10 @@
                         <a class="dropdown-item" href="report-polres">
                             <i class="icon-file text-gray-400"></i>
                             Report Polres
+                        </a>
+                        <a class="dropdown-item" href="data-polres-biro">
+                            <i class="icon-file text-gray-400"></i>
+                            Report Polres Biro
                         </a>
                     </div>
                 </li>

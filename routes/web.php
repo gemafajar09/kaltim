@@ -35,6 +35,10 @@ Route::get('/kepolisian-resort', 'PolresController@index')->name('polres')->midd
 Route::post('/polres-save', 'PolresController@save')->name('polres-save')->middleware('Ceklogin');
 Route::get('/polres-delete/{id}', 'PolresController@delete')->name('polres-delete')->middleware('Ceklogin');
 
+// report polres detail
+Route::get('/data-polres-biro', 'DataBiroController@report_polres_biro')->name('data-polres-biro')->middleware('Ceklogin');
+Route::get('/report-polres-biro-data/{cabang}/{dari}/{sampai}', 'DataBiroController@datatable_polres');
+
 // input dan report data biro 
 Route::get('/data-biro', 'DataBiroController@index')->name('data-biro')->middleware('Ceklogin');
 Route::get('/data-biro-input', 'DataBiroController@indexx')->name('data-biro-input')->middleware('Ceklogin');
