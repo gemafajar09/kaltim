@@ -68,7 +68,7 @@
                     <tr style="background-color:#9ad0f5;">
                         <th style="border:1px solid black">{{ $ii + 1 }}</th>
                         <th style="border:1px solid black">{{ $st->cabang_nama }}</th>
-                        <th style="border:1px solid black" colspan="17"></th>
+                        <th style="border:1px solid black" colspan="16"></th>
                     </tr>
                     
                     @foreach($cabang_all as $i => $a)
@@ -159,7 +159,7 @@
                     <tr style="background-color:#9ad0f5;">
                         <th style="border:1px solid black">1</th>
                         <th style="border:1px solid black; text-align:left">{{ $cbg_nama->cabang_nama }}</th>
-                        <th style="border:1px solid black" colspan="17"></th>
+                        <th style="border:1px solid black" colspan="16"></th>
                     </tr>
                     
                     @foreach($cabang_all as $i => $a)
@@ -323,7 +323,7 @@
                                 DB::raw('(tb_detail.sim_a_umum) as sim_a_umum'),
                                 DB::raw('(tb_detail.sim_b1_umum) as sim_b1_umum'),
                                 DB::raw('(tb_detail.sim_b2_umum) as sim_b2_umum'),
-                                DB::raw('(tb_detail.sim_ac_baru) as sim_ac_baru'),
+                                DB::raw('(tb_detail.sim_ac_baru) as sim_ac_baru')
 
                                 )
                             ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
@@ -347,7 +347,7 @@
                                 DB::raw('(tb_lulus_kesehatan.kesehatan_sim_b2) as kesehatan_sim_b2'),
                                 DB::raw('(tb_lulus_kesehatan.kesehatan_sim_a_umum) as kesehatan_sim_a_umum'),
                                 DB::raw('(tb_lulus_kesehatan.kesehatan_sim_b1_umum) as kesehatan_sim_b1_umum'),
-                                DB::raw('(tb_lulus_kesehatan.kesehatan_sim_b2_umum) as kesehatan_sim_b2_umum'),
+                                DB::raw('(tb_lulus_kesehatan.kesehatan_sim_b2_umum) as kesehatan_sim_b2_umum')
 
                                 )
                             ->join('tb_cabang','tb_cabang.cabang_id','tb_lulus_kesehatan.id_biro')
@@ -487,7 +487,7 @@
                                 DB::raw('(tb_detail.sim_a_umum) as sim_a_umum'),
                                 DB::raw('(tb_detail.sim_b1_umum) as sim_b1_umum'),
                                 DB::raw('(tb_detail.sim_b2_umum) as sim_b2_umum'),
-                                DB::raw('(tb_detail.sim_ac_baru) as sim_ac_baru'),
+                                DB::raw('(tb_detail.sim_ac_baru) as sim_ac_baru')
 
                                 )
                             ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
@@ -511,7 +511,7 @@
                                 DB::raw('(tb_lulus_kesehatan.kesehatan_sim_b2) as kesehatan_sim_b2'),
                                 DB::raw('(tb_lulus_kesehatan.kesehatan_sim_a_umum) as kesehatan_sim_a_umum'),
                                 DB::raw('(tb_lulus_kesehatan.kesehatan_sim_b1_umum) as kesehatan_sim_b1_umum'),
-                                DB::raw('(tb_lulus_kesehatan.kesehatan_sim_b2_umum) as kesehatan_sim_b2_umum'),
+                                DB::raw('(tb_lulus_kesehatan.kesehatan_sim_b2_umum) as kesehatan_sim_b2_umum')
 
                                 )
                             ->join('tb_cabang','tb_cabang.cabang_id','tb_lulus_kesehatan.id_biro')

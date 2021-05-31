@@ -73,7 +73,7 @@
                     <tr style="background-color:#9ad0f5;">
                         <th style="border:1px solid black">{{ $ii + 1 }}</th>
                         <th style="border:1px solid black">{{ $st->cabang_nama }}</th>
-                        <th style="border:1px solid black" colspan="17"></th>
+                        <th style="border:1px solid black" colspan="16"></th>
                     </tr>
                     <?php 
                         $data = DB::table('tb_detail')
@@ -137,7 +137,7 @@
                 <tr style="background-color:#9ad0f5;">
                     <th style="border:1px solid black">{{ 1 }}</th>
                     <th style="border:1px solid black">{{ $satpat->cabang_nama }}</th>
-                    <th style="border:1px solid black" colspan="17"></th>
+                    <th style="border:1px solid black" colspan="16"></th>
                 </tr>
                 @foreach($data as $i => $a)
                 <?php 
