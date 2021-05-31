@@ -172,6 +172,8 @@ class DataPolresController extends Controller
         DB::table('tb_bus')->where('id_data',$id)->delete();
         DB::table('tb_detail')->where('id_data',$id)->delete();
         DB::table('tb_simlink')->where('id_data',$id)->delete();
+        DB::table('tb_detail')->where('id_data',$id)->delete();
+        DB::table('tb_lulus_kesehatan')->where('id_data',$id)->delete();
         
         if($del == TRUE)
         {

@@ -106,22 +106,22 @@
                                 ->where('tb_lulus_kesehatan.id_cabang', $st->cabang_id)
                                 ->first();
 
-                                $aa += $detail->sim_a_baru;
-                                $c += $detail->sim_c_baru;
-                                $b1 += $detail->sim_b1;
-                                $b2 += $detail->sim_b2;
-                                $au += $detail->sim_a_umum;
-                                $b1u += $detail->sim_b1_umum;
-                                $b2u += $detail->sim_b2_umum;
-                                $ac += $detail->sim_ac_baru;
+                                $aa += ($detail->sim_a_baru != '') ? $detail->sim_a_baru : 0;
+                                $c += ($detail->sim_c_baru != '') ? $detail->sim_c_baru : 0;
+                                $b1 += ($detail->sim_b1 != '') ? $detail->sim_b1 : 0;
+                                $b2 += ($detail->sim_b2 != '') ? $detail->sim_b2 : 0;
+                                $au += ($detail->sim_a_umum != '') ? $detail->sim_a_umum : 0;
+                                $b1u += ($detail->sim_b1_umum != '') ? $detail->sim_b1_umum : 0;
+                                $b2u += ($detail->sim_b2_umum != '') ? $detail->sim_b2_umum : 0;
+                                $ac += ($detail->sim_ac_baru != '') ? $detail->sim_ac_baru : 0;
 
-                                $ka += $kesehatan->kesehatan_sim_a_baru;
-                                $kc += $kesehatan->kesehatan_sim_c_baru;
-                                $kb1 += $kesehatan->kesehatan_sim_b1;
-                                $kb2 += $kesehatan->kesehatan_sim_b2;
-                                $kau += $kesehatan->kesehatan_sim_a_umum;
-                                $kb1u += $kesehatan->kesehatan_sim_b1_umum;
-                                $kb2u += $kesehatan->kesehatan_sim_b2_umum;
+                                $ka += ($kesehatan->kesehatan_sim_a_baru != '') ? $kesehatan->kesehatan_sim_a_baru : 0;
+                                $kc += ($kesehatan->kesehatan_sim_c_baru != '') ? $kesehatan->kesehatan_sim_c_baru : 0;
+                                $kb1 += ($kesehatan->kesehatan_sim_b1 != '') ? $kesehatan->kesehatan_sim_b1 : 0;
+                                $kb2 += ($kesehatan->kesehatan_sim_b2 != '') ? $kesehatan->kesehatan_sim_b2 : 0;
+                                $kau += ($kesehatan->kesehatan_sim_a_umum != '') ? $kesehatan->kesehatan_sim_a_umum : 0;
+                                $kb1u += ($kesehatan->kesehatan_sim_b1_umum != '') ? $kesehatan->kesehatan_sim_b1_umum : 0;
+                                $kb2u += ($kesehatan->kesehatan_sim_b2_umum != '') ? $kesehatan->kesehatan_sim_b2_umum : 0;
 
                                 $jml = $detail->sim_a_baru + $detail->sim_c_baru + $detail->sim_b1 + $detail->sim_b2 + $detail->sim_a_umum + $detail->sim_b1_umum + $detail->sim_b2_umum + $detail->sim_ac_baru + $kesehatan->kesehatan_sim_a_baru + $kesehatan->kesehatan_sim_c_baru + $kesehatan->kesehatan_sim_b1 + $kesehatan->kesehatan_sim_b2 + $kesehatan->kesehatan_sim_a_umum + $kesehatan->kesehatan_sim_b1_umum + $kesehatan->kesehatan_sim_b2_umum;
 
@@ -197,23 +197,23 @@
                                 ->where('tb_lulus_kesehatan.id_cabang', $cabang)
                                 ->first();
 
-                                $aa += $detail->sim_a_baru;
-                                $c += $detail->sim_c_baru;
-                                $b1 += $detail->sim_b1;
-                                $b2 += $detail->sim_b2;
-                                $au += $detail->sim_a_umum;
-                                $b1u += $detail->sim_b1_umum;
-                                $b2u += $detail->sim_b2_umum;
-                                $ac += $detail->sim_ac_baru;
+                                $aa += ($detail->sim_a_baru != '') ? $detail->sim_a_baru : 0;
+                                $c += ($detail->sim_c_baru != '') ? $detail->sim_c_baru : 0;
+                                $b1 += ($detail->sim_b1 != '') ? $detail->sim_b1 : 0;
+                                $b2 += ($detail->sim_b2 != '') ? $detail->sim_b2 : 0;
+                                $au += ($detail->sim_a_umum != '') ? $detail->sim_a_umum : 0;
+                                $b1u += ($detail->sim_b1_umum != '') ? $detail->sim_b1_umum : 0;
+                                $b2u += ($detail->sim_b2_umum != '') ? $detail->sim_b2_umum : 0;
+                                $ac += ($detail->sim_ac_baru != '') ? $detail->sim_ac_baru : 0;
 
-                                $ka += $kesehatan->kesehatan_sim_a_baru;
-                                $kc += $kesehatan->kesehatan_sim_c_baru;
-                                $kb1 += $kesehatan->kesehatan_sim_b1;
-                                $kb2 += $kesehatan->kesehatan_sim_b2;
-                                $kau += $kesehatan->kesehatan_sim_a_umum;
-                                $kb1u += $kesehatan->kesehatan_sim_b1_umum;
-                                $kb2u += $kesehatan->kesehatan_sim_b2_umum;
-
+                                $ka += ($kesehatan->kesehatan_sim_a_baru != '') ? $kesehatan->kesehatan_sim_a_baru : 0;
+                                $kc += ($kesehatan->kesehatan_sim_c_baru != '') ? $kesehatan->kesehatan_sim_c_baru : 0;
+                                $kb1 += ($kesehatan->kesehatan_sim_b1 != '') ? $kesehatan->kesehatan_sim_b1 : 0;
+                                $kb2 += ($kesehatan->kesehatan_sim_b2 != '') ? $kesehatan->kesehatan_sim_b2 : 0;
+                                $kau += ($kesehatan->kesehatan_sim_a_umum != '') ? $kesehatan->kesehatan_sim_a_umum : 0;
+                                $kb1u += ($kesehatan->kesehatan_sim_b1_umum != '') ? $kesehatan->kesehatan_sim_b1_umum : 0;
+                                $kb2u += ($kesehatan->kesehatan_sim_b2_umum != '') ? $kesehatan->kesehatan_sim_b2_umum : 0;
+                                
                                 $jml = $detail->sim_a_baru + $detail->sim_c_baru + $detail->sim_b1 + $detail->sim_b2 + $detail->sim_a_umum + $detail->sim_b1_umum + $detail->sim_b2_umum + $detail->sim_ac_baru + $kesehatan->kesehatan_sim_a_baru + $kesehatan->kesehatan_sim_c_baru + $kesehatan->kesehatan_sim_b1 + $kesehatan->kesehatan_sim_b2 + $kesehatan->kesehatan_sim_a_umum + $kesehatan->kesehatan_sim_b1_umum + $kesehatan->kesehatan_sim_b2_umum;
 
                                 $jumlah += $jml;
