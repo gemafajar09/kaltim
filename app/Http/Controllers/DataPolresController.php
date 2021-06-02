@@ -21,91 +21,98 @@ class DataPolresController extends Controller
     {
         if($r->data_polres_id == '')
         {
-            // input ke tb_data_polres
-            $id = DB::table('tb_data_polres')->insertGetId([
-                'polres_id' => $r->polres_id,
-                'data_polres_tgl' => $r->data_polres_tgl,
-                'data_polres_sim_a_baru' => $r->data_polres_sim_a_baru != '' ? $r->data_polres_sim_a_baru : 0,
-                'data_polres_sim_a_umum_baru' => $r->data_polres_sim_a_umum_baru != '' ? $r->data_polres_sim_a_umum_baru : 0,
-                'data_polres_sim_b1_baru' => $r->data_polres_sim_b1_baru != '' ? $r->data_polres_sim_b1_baru : 0,
-                'data_polres_sim_b2_baru' => $r->data_polres_sim_b2_baru != '' ? $r->data_polres_sim_b2_baru : 0,
-                'data_polres_sim_c_baru' => $r->data_polres_sim_c_baru != '' ? $r->data_polres_sim_c_baru : 0,
-                'data_polres_sim_d_baru' => $r->data_polres_sim_d_baru != '' ? $r->data_polres_sim_d_baru : 0,
-                'data_polres_sim_a_perpanjang' => $r->data_polres_sim_a_perpanjang != '' ? $r->data_polres_sim_a_perpanjang : 0,
-                'data_polres_sim_a_umum_perpanjang' => $r->data_polres_sim_a_umum_perpanjang != '' ? $r->data_polres_sim_a_umum_perpanjang : 0,
-                'data_polres_sim_b1_perpanjang' => $r->data_polres_sim_b1_perpanjang != '' ? $r->data_polres_sim_b1_perpanjang : 0,
-                'data_polres_sim_b2_perpanjang' => $r->data_polres_sim_b2_perpanjang != '' ? $r->data_polres_sim_b2_perpanjang : 0,
-                'data_polres_sim_c_perpanjang' => $r->data_polres_sim_c_perpanjang != '' ? $r->data_polres_sim_c_perpanjang : 0,
-                'data_polres_sim_d_perpanjang' => $r->data_polres_sim_d_perpanjang != '' ? $r->data_polres_sim_d_perpanjang : 0,
-                'data_polres_sim_b1_umum' => $r->data_polres_sim_b1_umum != '' ? $r->data_polres_sim_b1_umum : 0,
-                'data_polres_sim_b2_umum' => $r->data_polres_sim_b2_umum != '' ? $r->data_polres_sim_b2_umum : 0,
-                'data_polres_sim_b1_umum_perpanjang' => $r->data_polres_sim_b1_umum_perpanjang != '' ? $r->data_polres_sim_b1_umum_perpanjang : 0,
-                'data_polres_sim_b2_umum_perpanjang' => $r->data_polres_sim_b2_umum_perpanjang != '' ? $r->data_polres_sim_b2_umum_perpanjang : 0,
-                'rusak' => $r->rusak != '' ? $r->rusak : 0,
-                'gerai_a' => $r->geraia != '' ? $r->geraia : 0,
-                'gerai_c' => $r->geraic != '' ? $r->geraic : 0,
-                'gerai_rusak' => $r->gerairusak != '' ? $r->gerairusak : 0,
-                'mpp_a' => $r->mppa != '' ? $r->mppa : 0,
-                'mpp_c' => $r->mppc != '' ? $r->mppc : 0,
-                'mpp_rusak' => $r->mpprusak != '' ? $r->mpprusak : 0
-            ]);
-            $id_biro = $r->id_biro;
-            
-            // dd($id_biro);
-            DB::table('tb_simlink')->insert([
-                'id_data' => $id, 
-                'simlink1_a' => $r->simlink1_a != '' ? $r->simlink1_a : 0, 
-                'simlink1_c' => $r->simlink1_c != '' ? $r->simlink1_c : 0,
-                'simlink1_rusak' => $r->simlink1_rusak != '' ? $r->simlink1_rusak : 0,
-                'simlink2_a' => $r->simlink2_a != '' ? $r->simlink2_a : 0,
-                'simlink2_c' => $r->simlink2_c != '' ? $r->simlink2_c : 0,
-                'simlink2_rusak' => $r->simlink2_rusak != '' ? $r->simlink2_rusak : 0,
-                'id_cabang' => $r->polres_id,
-                'tanggal' => date('Y-m-d')
-            ]);
-
-            DB::table('tb_bus')->insert([
-                'bus_a' => $r->bus_a != '' ? $r->bus_a : 0,
-                'bus_c' => $r->bus_c != '' ? $r->bus_c : 0,
-                'bus_rusak' => $r->bus_rusak != '' ? $r->bus_rusak : 0,
-                'id_data' => $id,
-                'tanggal' => date('Y-m-d'),
-                'id_polres' => $r->polres_id
-
-            ]);
-
-            foreach($id_biro as $i => $a)
+            // cek data sudah ada atau tidak
+            $cek = DB::table('tb_data_polres')->where('data_polres_tgl',$r->data_polres_tgl)->where('polres_id',$r->polres_id)->first();
+            if($cek->polres_id == '' )
             {
-                DB::table('tb_detail')->insert([
-                    'id_data' => $id,
-                    'id_biro' => $id_biro[$i],
-                    'sim_a_baru' => $r->data_biro_sim_a_baru[$i],
-                    'sim_c_baru' => $r->data_biro_sim_c_baru[$i],
-                    'sim_b1' => $r->data_biro_sim_b1[$i],
-                    'sim_b2' => $r->data_biro_sim_b2[$i],
-                    'sim_a_umum' => $r->data_biro_sim_a_umum[$i],
-                    'sim_b1_umum' => $r->data_biro_sim_b1_umum[$i],
-                    'sim_b2_umum' => $r->data_biro_sim_b2_umum[$i],
-                    'sim_ac_baru' => $r->data_biro_sim_ac_baru[$i],
+                // input ke tb_data_polres
+                $id = DB::table('tb_data_polres')->insertGetId([
+                    'polres_id' => $r->polres_id,
+                    'data_polres_tgl' => $r->data_polres_tgl,
+                    'data_polres_sim_a_baru' => $r->data_polres_sim_a_baru != '' ? $r->data_polres_sim_a_baru : 0,
+                    'data_polres_sim_a_umum_baru' => $r->data_polres_sim_a_umum_baru != '' ? $r->data_polres_sim_a_umum_baru : 0,
+                    'data_polres_sim_b1_baru' => $r->data_polres_sim_b1_baru != '' ? $r->data_polres_sim_b1_baru : 0,
+                    'data_polres_sim_b2_baru' => $r->data_polres_sim_b2_baru != '' ? $r->data_polres_sim_b2_baru : 0,
+                    'data_polres_sim_c_baru' => $r->data_polres_sim_c_baru != '' ? $r->data_polres_sim_c_baru : 0,
+                    'data_polres_sim_d_baru' => $r->data_polres_sim_d_baru != '' ? $r->data_polres_sim_d_baru : 0,
+                    'data_polres_sim_a_perpanjang' => $r->data_polres_sim_a_perpanjang != '' ? $r->data_polres_sim_a_perpanjang : 0,
+                    'data_polres_sim_a_umum_perpanjang' => $r->data_polres_sim_a_umum_perpanjang != '' ? $r->data_polres_sim_a_umum_perpanjang : 0,
+                    'data_polres_sim_b1_perpanjang' => $r->data_polres_sim_b1_perpanjang != '' ? $r->data_polres_sim_b1_perpanjang : 0,
+                    'data_polres_sim_b2_perpanjang' => $r->data_polres_sim_b2_perpanjang != '' ? $r->data_polres_sim_b2_perpanjang : 0,
+                    'data_polres_sim_c_perpanjang' => $r->data_polres_sim_c_perpanjang != '' ? $r->data_polres_sim_c_perpanjang : 0,
+                    'data_polres_sim_d_perpanjang' => $r->data_polres_sim_d_perpanjang != '' ? $r->data_polres_sim_d_perpanjang : 0,
+                    'data_polres_sim_b1_umum' => $r->data_polres_sim_b1_umum != '' ? $r->data_polres_sim_b1_umum : 0,
+                    'data_polres_sim_b2_umum' => $r->data_polres_sim_b2_umum != '' ? $r->data_polres_sim_b2_umum : 0,
+                    'data_polres_sim_b1_umum_perpanjang' => $r->data_polres_sim_b1_umum_perpanjang != '' ? $r->data_polres_sim_b1_umum_perpanjang : 0,
+                    'data_polres_sim_b2_umum_perpanjang' => $r->data_polres_sim_b2_umum_perpanjang != '' ? $r->data_polres_sim_b2_umum_perpanjang : 0,
+                    'rusak' => $r->rusak != '' ? $r->rusak : 0,
+                    'gerai_a' => $r->geraia != '' ? $r->geraia : 0,
+                    'gerai_c' => $r->geraic != '' ? $r->geraic : 0,
+                    'gerai_rusak' => $r->gerairusak != '' ? $r->gerairusak : 0,
+                    'mpp_a' => $r->mppa != '' ? $r->mppa : 0,
+                    'mpp_c' => $r->mppc != '' ? $r->mppc : 0,
+                    'mpp_rusak' => $r->mpprusak != '' ? $r->mpprusak : 0
+                ]);
+                $id_biro = $r->id_biro;
+                
+                // dd($id_biro);
+                DB::table('tb_simlink')->insert([
+                    'id_data' => $id, 
+                    'simlink1_a' => $r->simlink1_a != '' ? $r->simlink1_a : 0, 
+                    'simlink1_c' => $r->simlink1_c != '' ? $r->simlink1_c : 0,
+                    'simlink1_rusak' => $r->simlink1_rusak != '' ? $r->simlink1_rusak : 0,
+                    'simlink2_a' => $r->simlink2_a != '' ? $r->simlink2_a : 0,
+                    'simlink2_c' => $r->simlink2_c != '' ? $r->simlink2_c : 0,
+                    'simlink2_rusak' => $r->simlink2_rusak != '' ? $r->simlink2_rusak : 0,
                     'id_cabang' => $r->polres_id,
                     'tanggal' => date('Y-m-d')
                 ]);
-
-                DB::table('tb_lulus_kesehatan')->insert([
+    
+                DB::table('tb_bus')->insert([
+                    'bus_a' => $r->bus_a != '' ? $r->bus_a : 0,
+                    'bus_c' => $r->bus_c != '' ? $r->bus_c : 0,
+                    'bus_rusak' => $r->bus_rusak != '' ? $r->bus_rusak : 0,
                     'id_data' => $id,
-                    'id_biro' => $id_biro[$i],
-                    'kesehatan_sim_a_baru' => $r->data_biro_kesehatan_sim_a_baru[$i],
-                    'kesehatan_sim_c_baru' => $r->data_biro_kesehatan_sim_c_baru[$i],
-                    'kesehatan_sim_b1' => $r->data_biro_kesehatan_sim_b1[$i],
-                    'kesehatan_sim_b2' => $r->data_biro_kesehatan_sim_b2[$i],
-                    'kesehatan_sim_a_umum' => $r->data_biro_kesehatan_sim_a_umum[$i],
-                    'kesehatan_sim_b1_umum' => $r->data_biro_kesehatan_sim_b1_umum[$i],
-                    'kesehatan_sim_b2_umum' => $r->data_biro_kesehatan_sim_b2_umum[$i],
-                    'id_cabang' => $r->polres_id,
-                    'tanggal' => date('Y-m-d')
+                    'tanggal' => date('Y-m-d'),
+                    'id_polres' => $r->polres_id
+    
                 ]);
+    
+                foreach($id_biro as $i => $a)
+                {
+                    DB::table('tb_detail')->insert([
+                        'id_data' => $id,
+                        'id_biro' => $id_biro[$i],
+                        'sim_a_baru' => $r->data_biro_sim_a_baru[$i],
+                        'sim_c_baru' => $r->data_biro_sim_c_baru[$i],
+                        'sim_b1' => $r->data_biro_sim_b1[$i],
+                        'sim_b2' => $r->data_biro_sim_b2[$i],
+                        'sim_a_umum' => $r->data_biro_sim_a_umum[$i],
+                        'sim_b1_umum' => $r->data_biro_sim_b1_umum[$i],
+                        'sim_b2_umum' => $r->data_biro_sim_b2_umum[$i],
+                        'sim_ac_baru' => $r->data_biro_sim_ac_baru[$i],
+                        'id_cabang' => $r->polres_id,
+                        'tanggal' => date('Y-m-d')
+                    ]);
+    
+                    DB::table('tb_lulus_kesehatan')->insert([
+                        'id_data' => $id,
+                        'id_biro' => $id_biro[$i],
+                        'kesehatan_sim_a_baru' => $r->data_biro_kesehatan_sim_a_baru[$i],
+                        'kesehatan_sim_c_baru' => $r->data_biro_kesehatan_sim_c_baru[$i],
+                        'kesehatan_sim_b1' => $r->data_biro_kesehatan_sim_b1[$i],
+                        'kesehatan_sim_b2' => $r->data_biro_kesehatan_sim_b2[$i],
+                        'kesehatan_sim_a_umum' => $r->data_biro_kesehatan_sim_a_umum[$i],
+                        'kesehatan_sim_b1_umum' => $r->data_biro_kesehatan_sim_b1_umum[$i],
+                        'kesehatan_sim_b2_umum' => $r->data_biro_kesehatan_sim_b2_umum[$i],
+                        'id_cabang' => $r->polres_id,
+                        'tanggal' => date('Y-m-d')
+                    ]);
+                }
+                return redirect('report-polres')->with('pesan','Input Data Success');
+            }else{
+                return redirect('report-polres')->with('pesan','Data Suda terinput');
             }
-            return redirect('report-polres')->with('pesan','Input Data Success');
         }else{
             $up = DB::table('tb_data_polres')->where('data_polres_id',$r->data_polres_id)->update([
                 'data_polres_sim_a_baru' => $r->data_polres_sim_a_baru != '' ? $r->data_polres_sim_a_baru : 0,

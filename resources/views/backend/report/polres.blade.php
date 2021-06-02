@@ -1,6 +1,16 @@
 @extends('backend.template.index')
 
 @section('content')
+@if(session('pesan'))
+<script>
+    alert('<?= session('pesan') ?>')
+</script>
+@endif
+@if(session('error'))
+<script>
+    alert('<?= session('error') ?>')
+</script>
+@endif
 <div class="row">
     <div class="col-md-12">
         <div class="float-left">
