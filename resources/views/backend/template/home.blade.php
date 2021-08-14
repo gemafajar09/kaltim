@@ -3,6 +3,26 @@
 @section('content')
 @if(session('user_level') == 1 || session('user_level') == 2)
 <div id="das" class="row">
+    <!-- filter -->
+    <div class="col-md-12">
+        
+                @if(session('user_level') == 1)
+                    <label style="color:white" for="">Satpas : </label>
+                    <select name="cabang_id" id="cabang_ids" style="height:28px">
+                        <option value="0">--Semua Satpas--</option>
+                        @foreach($polres as $no => $row)
+                            <option value="{{ $row->cabang_id }}">{{ $row->cabang_nama }}</option>
+                        @endforeach
+                    </select>
+                @else
+                    <input type="hidden" id="cabang_ids" value="{{ session('cabang_id') }}">
+                @endif
+                <label style="color:white" for="">Bulan : </label>
+                <input type="month" id="bulans" value="{{date('Y-m')}}" name="bulans" class="from-control">
+                <button type="button" onclick="real()" class="btn btn-success btn-sm"><i
+                        class="icon-search"></i></button>
+
+    </div>
     {{-- Sim BAru --}}
     <div class="col-md-12">
         <div class="widget widget-nopad">
@@ -33,6 +53,7 @@
             </div>
         </div>
     </div>
+    <!-- sim peningkatan -->
     <div class="col-md-12">
         <div class="widget widget-nopad">
             <div class="widget-header"> <i class="icon-list-alt"></i>
@@ -133,7 +154,7 @@
         <div class="widget">
             <div class="widget-header">
                 <i class="icon-bar-chart"></i>
-                <h3>Grafik Pengurusan SIM Baru Periode {{date('Y')}}</h3>
+                <h3>Grafik Pengurusan SIM Baru Periode <i id="periode1"></i></h3>
             </div>
             <div class="widget-content">
                 <canvas id="sim-data-baru" class="chart-holder" width="1100px" height="380px"></canvas>
@@ -146,7 +167,7 @@
         <div class="widget">
             <div class="widget-header">
                 <i class="icon-bar-chart"></i>
-                <h3>Grafik Pengurusan SIM Perpanjang Periode {{date('Y')}}</h3>
+                <h3>Grafik Pengurusan SIM Perpanjang Periode <i id="periode2"></i></h3>
             </div>
             <div class="widget-content">
                 <canvas id="sim-data-perpanjang" class="chart-holder" width="1100px" height="380px"></canvas>
@@ -154,51 +175,8 @@
         </div>
     </div>
 
-    {{-- col md 12 --}}
-    {{-- <div class="col-md-12">
-        <div class="widget">
-            <div class="widget-header"> <i class="icon-bookmark"></i>
-                <h3>Shortcuts Menu</h3>
-            </div>
-            <div class="widget-content">
-                <div class="shortcuts">
-                    <a href="javascript:;" class="shortcut">
-                        <i class="shortcut-icon icon-list-alt"></i>
-                        <span class="shortcut-label">Reports</span>
-                    </a>
-                    <a href="javascript:;" class="shortcut">
-                        <i class="shortcut-icon icon-bar-chart"></i>
-                        <span class="shortcut-label">Grafik</span>
-                    </a>
-                    <a href="javascript:;" class="shortcut">
-                        <i class="shortcut-icon icon-signal"></i>
-                        <span class="shortcut-label">Reports</span>
-                    </a><a href="javascript:;" class="shortcut">
-                        <i class="shortcut-icon icon-comment"></i>
-                        <span class="shortcut-label">Comments</span>
-                    </a>
-                    <a href="javascript:;" class="shortcut">
-                        <i class="shortcut-icon icon-user"></i>
-                        <span class="shortcut-label">Users</span>
-                    </a>
-                    <a href="javascript:;" class="shortcut">
-                        <i class="shortcut-icon icon-file"></i>
-                        <span class="shortcut-label">Notes</span>
-                    </a>
-                    <a href="javascript:;" class="shortcut">
-                        <i class="shortcut-icon icon-picture"></i>
-                        <span class="shortcut-label">Photos</span>
-                    </a>
-                    <a href="javascript:;" class="shortcut">
-                        <i class="shortcut-icon icon-tag"></i>
-                        <span class="shortcut-label">Tags</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div> --}}
 </div>
-@include('backend.template.chart.chartHome')
+<div id="grafikss"></div>
 
 @else
 <div id="das" class="row">
