@@ -12,7 +12,8 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/grafik-detail', 'TestController@grafik')->name('grafik-detail');
-Route::get('real-count/{level}/{cabang}','HomeController@realcount');
+Route::get('real-count/{level}/{cabang}/{bulan}','HomeController@realcount');
+Route::get('grafik-count/{level}/{cabang}/{bulan}','HomeController@grafik');
 // ========================backend=======================
 // Data User
 Route::get('/data-user','LoginController@datauser')->name('data-user')->middleware('Ceklogin');

@@ -20,39 +20,58 @@
 		calendar.diasResal = [{{date('d')}}]
 		calendar.createCalendar();
 
-    setInterval(function(){ real() }, 3000);
+    setInterval(function(){ real(),grafikss() }, 3000);
 	});
+
   @if(session('user_level') != 3)
     function real()
     {
       var level = "{{session('user_level')}}";
-      var id_cabang = "{{session('cabang_id')}}";
+      var id_cabang = $('#cabang_ids').val();
+      var bulan = $('#bulans').val();
       $.ajax({
-        url: 'real-count/'+level+'/'+id_cabang,
+        url: 'real-count/'+level+'/'+id_cabang+'/'+bulan,
         type: 'GET',
         dataType: 'JSON',
         success: function(data)
         {
-          console.log(data);
           $('#ab').html(data.abaru);
-          $('#aub').html(data.aumumbaru);
-          $('#b1b').html(data.b1baru);
-          $('#b2b').html(data.b2baru);
-          $('#b1ub').html(data.datasimb1u);
-          $('#b2ub').html(data.datasimb2u);
-          $('#b1up').html(data.datasimb1up);
-          $('#b2up').html(data.datasimb2up);
           $('#cb').html(data.cbaru);
           $('#db').html(data.dbaru);
+          // peningkatan
+          $('#aub').html(data.aumumbaru);
+          $('#b1b').html(data.b1baru);
+          $('#b1ub').html(data.datasimb1u);
+          $('#b2b').html(data.b2baru);
+          $('#b2ub').html(data.datasimb2u);
           // perpanjang
           $('#ap').html(data.aperpanjang);
           $('#aup').html(data.aumumperpanjang);
-          $('#b1p').html(data.b1perpanjang);
-          $('#b2p').html(data.b2perpanjang);
           $('#cp').html(data.cperpanjang);
           $('#dp').html(data.dperpanjang);
-          $('#dp').html(data.dperpanjang);
+          $('#b1p').html(data.b1perpanjang);
+          $('#b1up').html(data.datasimb1up);
+          $('#b2p').html(data.b2perpanjang);
+          $('#b2up').html(data.datasimb2up);
+          // periode
+          $('#periode1').html(data.periode);
+          $('#periode2').html(data.periode);
+        }
+      })
+    }
 
+    function grafikss()
+    {
+      var level = "{{session('user_level')}}";
+      var id_cabang = $('#cabang_ids').val();
+      var bulan = $('#bulans').val();
+      $.ajax({
+        url: 'grafik-count/'+level+'/'+id_cabang+'/'+bulan,
+        type: 'GET',
+        dataType: 'HTML',
+        success: function(data)
+        {
+          $('#grafikss').html(data)
         }
       })
     }
