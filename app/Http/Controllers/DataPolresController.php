@@ -340,13 +340,7 @@ class DataPolresController extends Controller
     public function report_polres_edit(Request $r)
     {
         $id = decrypt($r->id);
-
-        $data['isi'] = DB::table('tb_detail')
-                        ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
-                        ->join('tb_lulus_kesehatan','tb_cabang.cabang_id','tb_lulus_kesehatan.id_biro')
-                        ->where('tb_detail.id_data',$id)
-                        ->get();
-
+        $data['id_edit'] = $id;
         // $data['kesehatan'] = DB::table('tb_lulus_kesehatan')
         //                     ->join('tb_cabang','tb_cabang.cabang_id','tb_lulus_kesehatan.id_biro')
         //                     ->where('tb_lulus_kesehatan.id_data',$id)

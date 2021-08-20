@@ -310,14 +310,21 @@ class DataBiroController extends Controller
             
         }else{
             $data['satpat'] = DB::table('tb_cabang')->where('cabang_id', $cabang)->first(); 
-            $data['data'] = DB::table('tb_detail')
-                            ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
-                            ->join('tb_lulus_kesehatan','tb_cabang.cabang_id','tb_lulus_kesehatan.id_biro')
-                            ->where('tb_detail.tanggal',$tgl)
-                            ->where('tb_detail.id_cabang',$cabang)
-                            ->get();
+            // $data['data'] = DB::table('tb_detail')
+            //                 ->join('tb_cabang','tb_cabang.cabang_id','tb_detail.id_biro')
+            //                 ->join('tb_lulus_kesehatan','tb_cabang.cabang_id','tb_lulus_kesehatan.id_biro')
+            //                 ->where('tb_detail.tanggal',$tgl)
+            //                 ->where('tb_detail.id_cabang',$cabang)
+            //                 ->get();
         }
+        $data['penanda'] = $cabang;
+        $data['biros'] = DB::table('tb_cabang')->where('cabang_kode',2)->where('turunan',0)->get();
+        $data['tanggal'] = $tgl;
+        $data['cabang'] = DB::table('tb_cabang')->where('cabang_id',$cabang)->first();
         return view('backend.report.reportharianbiro', $data);
+
+
+
     }
 
     public function reportbulanan($cabang, $bulan)

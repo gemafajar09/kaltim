@@ -255,86 +255,86 @@
                     <!-- databiro -->
                     <?php $biros = DB::table('tb_cabang')->where('cabang_kode',2)->where('turunan',0)->get(); ?>
                     @foreach($biros as $br)
-                    <div class="col-md-6 py-2">
-                        <div class="card">
-                            <div class="card-header" style="font-size:12px">
-                                {{$br->cabang_nama}}
-                                <input type="hidden" name="id_biro[]" value="{{$br->cabang_id}}">
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <b>SURAT LULUS KESEHATAN</b>
-                                        <hr>
-                                        <div class="form-group">
-                                            <label><b>SURAT LULUS KESEHATAN SIM C</b></label>
-                                            <input placeholder="0" type="number" name="data_biro_kesehatan_sim_c_baru[]" class="form-control">
+                        <div class="col-md-6 py-2">
+                            <div class="card">
+                                <div class="card-header" style="font-size:12px">
+                                    {{$br->cabang_nama}}
+                                    <input type="hidden" name="id_biro[]" value="{{$br->cabang_id}}">
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <b>SURAT LULUS KESEHATAN</b>
+                                            <hr>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS KESEHATAN SIM C</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_kesehatan_sim_c_baru[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS KESEHATAN SIM A</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_kesehatan_sim_a_baru[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS KESEHATAN SIM B1</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_kesehatan_sim_b1[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS KESEHATAN SIM B2</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_kesehatan_sim_b2[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS KESEHATAN SIM A UMUM</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_kesehatan_sim_a_umum[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS KESEHATAN SIM B1 UMUM</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_kesehatan_sim_b1_umum[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS KESEHATAN SIM B2 UMUM</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_kesehatan_sim_b2_umum[]" class="form-control">
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label><b>SURAT LULUS KESEHATAN SIM A</b></label>
-                                            <input placeholder="0" type="number" name="data_biro_kesehatan_sim_a_baru[]" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><b>SURAT LULUS KESEHATAN SIM B1</b></label>
-                                            <input placeholder="0" type="number" name="data_biro_kesehatan_sim_b1[]" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><b>SURAT LULUS KESEHATAN SIM B2</b></label>
-                                            <input placeholder="0" type="number" name="data_biro_kesehatan_sim_b2[]" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><b>SURAT LULUS KESEHATAN SIM A UMUM</b></label>
-                                            <input placeholder="0" type="number" name="data_biro_kesehatan_sim_a_umum[]" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><b>SURAT LULUS KESEHATAN SIM B1 UMUM</b></label>
-                                            <input placeholder="0" type="number" name="data_biro_kesehatan_sim_b1_umum[]" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><b>SURAT LULUS KESEHATAN SIM B2 UMUM</b></label>
-                                            <input placeholder="0" type="number" name="data_biro_kesehatan_sim_b2_umum[]" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <b>SURAT LULUS UJI PSIKOLOGI</b>
-                                        <hr>
-                                        <div class="form-group">
-                                            <label><b>SURAT LULUS UJI PSIKOLOGI SIM C</b></label>
-                                            <input placeholder="0" type="number" name="data_biro_sim_c_baru[]" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><b>SURAT LULUS UJI PSIKOLOGI SIM A</b></label>
-                                            <input placeholder="0" type="number" name="data_biro_sim_a_baru[]" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><b>SURAT LULUS UJI PSIKOLOGI SIM B1</b></label>
-                                            <input placeholder="0" type="number" name="data_biro_sim_b1[]" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><b>SURAT LULUS UJI PSIKOLOGI SIM B2</b></label>
-                                            <input placeholder="0" type="number" name="data_biro_sim_b2[]" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><b>SURAT LULUS UJI PSIKOLOGI SIM A UMUM</b></label>
-                                            <input placeholder="0" type="number" name="data_biro_sim_a_umum[]" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><b>SURAT LULUS UJI PSIKOLOGI SIM B1 UMUM</b></label>
-                                            <input placeholder="0" type="number" name="data_biro_sim_b1_umum[]" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><b>SURAT LULUS UJI PSIKOLOGI SIM B2 UMUM</b></label>
-                                            <input placeholder="0" type="number" name="data_biro_sim_b2_umum[]" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><b>SURAT LULUS UJI PSIKOLOGI SIM A DAN C</b></label>
-                                            <input placeholder="0" type="number" name="data_biro_sim_ac_baru[]" class="form-control">
+                                        <div class="col-md-6">
+                                            <b>SURAT LULUS UJI PSIKOLOGI</b>
+                                            <hr>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS UJI PSIKOLOGI SIM C</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_c_baru[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS UJI PSIKOLOGI SIM A</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_a_baru[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS UJI PSIKOLOGI SIM B1</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_b1[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS UJI PSIKOLOGI SIM B2</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_b2[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS UJI PSIKOLOGI SIM A UMUM</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_a_umum[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS UJI PSIKOLOGI SIM B1 UMUM</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_b1_umum[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS UJI PSIKOLOGI SIM B2 UMUM</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_b2_umum[]" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>SURAT LULUS UJI PSIKOLOGI SIM A DAN C</b></label>
+                                                <input placeholder="0" type="number" name="data_biro_sim_ac_baru[]" class="form-control">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                     
                     
