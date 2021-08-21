@@ -333,7 +333,7 @@
 
                                     $tgl = $tb->tanggal;
                                 }
-                                $detail = DB::table('tb_detail')->where('id_data', $tb->data_polres_id)->first();
+                                $detail = DB::table('tb_detail')->where('id_data', $tb->data_polres_id)->where('id_biro', $tb->id_biro)->first();
                             ?>
                             <tr>
                                 <th style="border:1px solid black">{{ $nt + 1 }}</th>
@@ -461,7 +461,7 @@
 
                                     $tgl = $tb->tanggal;
                                 }
-                                $detail = DB::table('tb_detail')->where('id_data', $tb->data_polres_id)->first();
+                                $detail = DB::table('tb_detail')->where('id_data', $tb->data_polres_id)->where('id_biro', $tb->id_biro)->first();
                             ?>
                             <tr>
                                 <th style="border:1px solid black">{{ $nt + 1 }}</th>

@@ -4,10 +4,8 @@
 <div class="row">
     <div class="col-md-12">
         <div class="float-left">
-            <label for="" style="color:white">Print to:</label>
-            <button type="button" onclick="cetakexcel()" class="btn btn-success"><img src="{{asset('/icon/excel.png')}}" style="width:20px" alt=""></button>
-            <!-- <button type="button" onclick="cetakcari()" class="btn btn-success btn-sm"><i class="icon-cogs"></i> Option
-                Cetak</button> -->
+            <button type="button" onclick="cetakcari()" class="btn btn-success btn-sm"><i class="icon-cogs"></i> Option
+                Cetak</button>
         </div>
         <div class="float-right">
             @if(session('user_level') == 1)
@@ -74,67 +72,76 @@
             setInterval(function(){ $('#success').hide(); }, 5000);
         </script>
     @endif
-<div class="modal" id="formModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content ">
-        <div class="modal-header">
-            <h5 class="modal-title">Edit Biro</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <form action="{{ route('data-biro-save') }}" method="post" enctype="multipart/form-data">
-        @csrf
-            <div class="modal-body">
-                <input type="hidden" name="data_biro_id" id="data_biro_id">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label><b>Tanggal</b></label>
-                            <input readonly type="date" value="{{date('Y-m-d')}}" name="data_biro_tgl" class="form-control">
+    <div id="cetakcari" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h6>Cetak Harian</h6><br>
+                            @if(session('user_level') == 1)
+                                <select name="cabang_id" id="cabang_ids2" class="form-control">
+                                    <option value="0">--Semua Biro--</option>
+                                    @foreach($biro as $no => $row)
+                                        <option value="{{ $row->cabang_id }}">{{ $row->cabang_nama }}</option>
+                                    @endforeach
+                                </select>
+                                <br>
+                            @else
+                                <input type="hidden" id="cabang_ids2" value="{{ session('cabang_id') }}">
+                            @endif
+                            <div class="form-group">
+                                <input type="date" name="tanggal" value="{{date('Y-m-d')}}" id="tanggals" class="form-control">
+                            </div>
+                            <button type="button" onclick="cetaksekarang()" class="btn btn-block" style=""><img src="{{ asset('/icon/excel.png') }}" style="width:20px" alt=""></button>
                         </div>
-                        <div class="form-group">
-                            <label><b>SIM A BARU</b></label>
-                            <input placeholder="0" type="number" name="data_biro_sim_a_baru" id="data_biro_sim_a_baru" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><b>SIM C BARU</b></label>
-                            <input placeholder="0" type="number" name="data_biro_sim_c_baru" id="data_biro_sim_c_baru" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><b>SIM A & C BARU</b></label>
-                            <input placeholder="0" type="number" name="data_biro_sim_ac_baru" id="data_biro_sim_d_baru" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label><b>Biro</b></label>
-                            <input type="text" readonly class="form-control" id="cabang_nama">
-                            <input type="hidden" readonly class="form-control" name="biro_id" id="biro_id">
-                        </div>
-                        <div class="form-group">
-                            <label><b>SIM A PERPANJANG</b></label>
-                            <input placeholder="0" type="number" name="data_biro_sim_a_perpanjang" id="data_biro_sim_a_perpanjang" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><b>SIM C PERPANJANG</b></label>
-                            <input placeholder="0" type="number" name="data_biro_sim_c_perpanjang" id="data_biro_sim_c_perpanjang" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><b>SIM A & C PERPANJANG</b></label>
-                            <input placeholder="0" type="number" name="data_biro_sim_ac_perpanjang" id="data_biro_sim_d_perpanjang" class="form-control">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-5">
+                            <h6>Cetak Bulanan</h6><br>
+                            @if(session('user_level') == 1)
+                                <select name="cabang_id" id="cabang_ids1" class="form-control">
+                                    <option value="0">--Semua Biro--</option>
+                                    @foreach($biro as $no => $row)
+                                    @if($row->cabang_nama != 'Polda Kaltim')
+                                        <option value="{{ $row->cabang_id }}">{{ $row->cabang_nama }}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                <br>
+                            @else
+                                <input type="hidden" id="cabang_ids1" value="{{ session('cabang_id') }}">
+                            @endif
+                            <div class="form-group">
+                            <!-- <select name="bulan" id="bulans" class="form-control">
+                                <option value="0">--Pilih Bulan--</option>
+                                <option value="01">Januari</option>
+                                <option value="02">Februari</option>
+                                <option value="03">Maret</option>
+                                <option value="04">April</option>
+                                <option value="05">Mei</option>
+                                <option value="06">Juni</option>
+                                <option value="07">Juli</option>
+                                <option value="08">Agustus</option>
+                                <option value="09">September</option>
+                                <option value="10">Oktober</option>
+                                <option value="11">November</option>
+                                <option value="12">Desember</option>
+                            </select> -->
+                            <input type="month" id="bulans" class="form-control">
+                            </div>
+                            <button type="button" onclick="cetakexcel()" class="btn btn-success btn-block"><img src="{{ asset('/icon/excel.png') }}" style="width:20px" alt=""></button>
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-sm" style="background-color: #019943">Save</button>
-                <button type="reset" class="btn btn-sm btn-secondary">Reset</button>
-            </div>
-        </form>
+
         </div>
     </div>
-</div>
 
 <!-- Modal Cetak -->
 <div id="cetakcari" class="modal fade" role="dialog">
@@ -279,14 +286,14 @@
     function cetaksekarang() {
         var cb = $('#cabang_ids2').val()
         var tgl = $('#tanggals').val()
-        window.open(`{{ url('reportharianbiro') }}/` + cb +"/"+tgl);
+        window.open(`{{ url('reportbiroharian') }}/` + cb +"/"+tgl);
     }
 
     function cetakexcelbulanan() { 
         var cx = $('#cabang_ids1').val()
         var bulan = $('#bulans').val()
         var cabang = cx != '' ? cx : 0;
-        window.open(`{{ url('reportbulananbiro') }}/` + cabang + "/" + bulan, '_blank');
+        window.open(`{{ url('reportbirobulan') }}/` + cabang + "/" + bulan, '_blank');
     }
 
     function cetakcari() {

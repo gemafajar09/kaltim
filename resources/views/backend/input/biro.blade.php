@@ -68,7 +68,7 @@
                     </div>
 
                     <div class="col-md-12 py-3" align="right">
-                        <button type="submit" class="btn btn-outline-success">Save</button>
+                        <button type="submit" class="btn btn-outline-success btn-block">Save</button>
                     </div>
                 </form>
             </div>
@@ -114,9 +114,9 @@
     my_Clock.prototype.update = function () {
         this.updateTime(1);
         // buka aplikasi jam 8 pagi
-        if(this.hours >= 8 && this.hours <= 16 ){
+        if(this.hours >= 8 && this.hours <= 22 ){
             // console.log('buka');
-            if(this.hours <= 16 && this.minutes <= 59){
+            if(this.hours <= 22 && this.minutes <= 59){
                 // console.log('buka1');
                 $('#jam_buka').css('display', 'block');
                 $('#jam_tutup').css('display', 'none');

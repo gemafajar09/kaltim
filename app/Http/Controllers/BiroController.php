@@ -107,4 +107,18 @@ class BiroController extends Controller
             }
         }
     }
+
+    public function cetakharianbiro($cabang, $tgl)
+    {
+        $data['cabang'] = $cabang;
+        $data['tgl'] = $tgl;
+
+        return view('backend/report/cetakbiroharian',$data);
+    }
+    
+    public function cetakbulananbiro($cabang, $tgl)
+    {
+        $data['cabang'] = $cabang;
+        $data['tgl'] = $tgl;
+    }
 }

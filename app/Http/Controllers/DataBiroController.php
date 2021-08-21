@@ -83,7 +83,7 @@ class DataBiroController extends Controller
     public function report_biro()
     {           
 
-        $data['biro'] = DB::table('tb_cabang')->where('cabang_kode',2)->get();
+        $data['biro'] = DB::table('tb_cabang')->where('cabang_kode',2)->where('turunan',0)->get();
         $data['polres'] = DB::table('tb_cabang')->where('cabang_kode', '=', 1)->get();
 
         return view('backend.report.biro',$data);

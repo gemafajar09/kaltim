@@ -63,3 +63,6 @@ Route::get('/data-polres-delete/{id}', 'DataPolresController@delete')->name('dat
 Route::get('/datatable/{cabang}/{dari}/{sampai}', 'DataPolresController@datatable');
 Route::get('/exportexcel/{cabang}/{bulan}', 'DataPolresController@exportexcel');
 Route::get('/reportharian/{id}/{tgl}', 'DataPolresController@reportharian');
+
+Route::get('/reportbiroharian/{id}/{tgl}', 'BiroController@cetakharianbiro');
+Route::get('/reportbirobulan/{id}/{tgl}', 'BiroController@cetakbulananbiro');

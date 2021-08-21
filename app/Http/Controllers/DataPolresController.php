@@ -23,7 +23,7 @@ class DataPolresController extends Controller
         {
             // cek data sudah ada atau tidak
             $cek = DB::table('tb_data_polres')->where('data_polres_tgl',$r->data_polres_tgl)->where('polres_id',$r->polres_id)->first();
-            if($cek->polres_id == '' )
+            if($cek == null )
             {
                 // input ke tb_data_polres
                 $id = DB::table('tb_data_polres')->insertGetId([
